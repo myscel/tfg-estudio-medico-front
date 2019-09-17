@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserServiceService } from 'src/app/services/userService.service';
 
 @Component({
   selector: 'app-comp-http',
@@ -8,24 +9,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CompHTTPComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  dni: string = "47298046H";
+  password: string = "pass2";
+
+  constructor(private http: HttpClient, private userService: UserServiceService) { }
 
   ngOnInit() {
   }
 
   enviarPeticion(){
-    var postData = {
-        "dni": "4728046H",
-        "password" : "randomPass"
-    }
-
-    console.log(postData);
-
-    //Send HTTP Request
-    this.http.post('http://localhost:8080/user/login',  postData).subscribe(response =>{
-      console.log(response)
+    return this.userService.createAndStoreUserPostLogin(this.dni, this.password).subscribe(responseData =>{
+      console.log("Todo ha ido bien");
+      console.log(responseData)
+    }, err => {
+      console.log("Algo ha fallado");
+      console.log(err)
     });
-
   }
 
 }
