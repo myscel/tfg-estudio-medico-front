@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { Comp1Component } from './comp1/comp1.component';
-import { CompHTTPComponent } from './comp-http/comp-http.component';
+import { Comp1Component } from './components/comp1/comp1.component';
+import { CompHTTPComponent } from './components/comp-http/comp-http.component';
 import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
