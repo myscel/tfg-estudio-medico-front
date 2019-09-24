@@ -27,4 +27,14 @@ export class CompHTTPComponent implements OnInit {
     });
   }
 
+  enviarPeticion2(){
+    return this.userService.login().subscribe(responseData =>{
+      console.log("Todo ha ido bien");
+      console.log(responseData)
+    }, err => {
+      console.log("Algo ha fallado");
+      console.log(err)
+    });
+  }
+
 }

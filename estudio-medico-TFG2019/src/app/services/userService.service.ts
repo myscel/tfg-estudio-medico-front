@@ -7,10 +7,14 @@ import {Observable} from 'rxjs';
 })
 export class UserServiceService {
 
+  username: string = "paco";
+  password: string = "1234";
+
   userUrl: string = 'http://localhost:8080/user';
 
   userHeaders = new HttpHeaders ({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'authorization':'Basic ' +  btoa(this.username + ':' +  this.password)
   });
 
   options = {headers: this.userHeaders}
@@ -23,6 +27,10 @@ export class UserServiceService {
       dni: dni,
       password: password
     }, this.options);
+  }
+
+  public login(){
+    return this.http.get(`${this.userUrl}/login`, this.options);
   }
 
 }
