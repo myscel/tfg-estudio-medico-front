@@ -7,10 +7,10 @@ import {Observable} from 'rxjs';
 })
 export class UserServiceService {
 
-  username: string = "paco";
-  password: string = "1234";
+  username: string = "edu";
+  password: string = "encriptasao4";
 
-  userUrl: string = 'http://localhost:8080/user';
+  userUrl: string = 'http://localhost:8080/api/user';
 
   userHeaders = new HttpHeaders ({
     'Content-Type': 'application/json',
