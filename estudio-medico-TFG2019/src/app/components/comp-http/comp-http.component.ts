@@ -9,8 +9,8 @@ import { UserServiceService } from 'src/app/services/userService.service';
 })
 export class CompHTTPComponent implements OnInit {
 
-  dni: string = "47298046H";
-  password: string = "pass2";
+  dni: string = "alba";
+  password: string = "pass1";
 
   constructor(private http: HttpClient, private userService: UserServiceService) { }
 
@@ -18,23 +18,13 @@ export class CompHTTPComponent implements OnInit {
   }
 
   enviarPeticion(){
-    return this.userService.createAndStoreUserPostLogin(this.dni, this.password).subscribe(responseData =>{
+    return this.userService.login(this.dni, this.password).subscribe(responseData =>{
       console.log("Todo ha ido bien");
+      //Redirigimos 
       console.log(responseData)
     }, err => {
       console.log("Algo ha fallado");
       console.log(err)
     });
   }
-
-  enviarPeticion2(){
-    return this.userService.login().subscribe(responseData =>{
-      console.log("Todo ha ido bien");
-      console.log(responseData)
-    }, err => {
-      console.log("Algo ha fallado");
-      console.log(err)
-    });
-  }
-
 }
