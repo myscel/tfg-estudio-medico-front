@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 @Component({
   selector: 'app-comp-http',
   templateUrl: './comp-http.component.html',
@@ -10,11 +13,27 @@ import { UserServiceService } from 'src/app/services/userService.service';
 export class CompHTTPComponent implements OnInit {
 
   dni: string = "47298046H";
-  password: string = "pass2";
+  password: string = "pass1";
+  loginForm: FormGroup;
 
-  constructor(private http: HttpClient, private userService: UserServiceService) { }
+  constructor(
+    private http: HttpClient, 
+    private userService: UserServiceService,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      dni: ['', Validators.required],
+      password: ['', Validators.required]
+  });
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.dni = this.f.dni.value;
+    this.password = this.f.password.value;
+    this.enviarPeticion();
   }
 
   enviarPeticion(){
