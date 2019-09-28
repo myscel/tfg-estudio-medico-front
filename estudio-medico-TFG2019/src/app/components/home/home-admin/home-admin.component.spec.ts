@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompHTTPComponent } from './comp-http.component';
+import { HomeAdminComponent } from './home-admin.component';
 
-describe('CompHTTPComponent', () => {
-  let component: CompHTTPComponent;
-  let fixture: ComponentFixture<CompHTTPComponent>;
+describe('HomeAdminComponent', () => {
+  let component: HomeAdminComponent;
+  let fixture: ComponentFixture<HomeAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompHTTPComponent ]
+      declarations: [ HomeAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompHTTPComponent);
+    fixture = TestBed.createComponent(HomeAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

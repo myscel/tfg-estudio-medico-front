@@ -1,1 +1,36 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
 
+<body>
+<div class="form-box">
+<h2>Bienvenido</h2>
+<hr>
+
+<select [(ngModel)]="selectedOption">
+    <option *ngFor="let o of options">
+       {{o.name}}
+    </option>
+ </select>
+
+<div *ngIf="selectedOption == 'Administrador'">
+    <button  class="btn btn-primary" routerLink="/homeAdmin">Llevame al home de Administrador</button>
+</div>
+<div *ngIf="selectedOption == 'Investigador'">
+    <button  class="btn btn-primary" routerLink="/homeInvestigator">Llevame al home de Investigador</button>
+</div>
+
+<hr>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="dni">DNI</label>
+        <input type="text" placeholder="Enter DNI" formControlName="dni" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter password" formControlName="password" class="form-control" required/>
+    </div>
+        <button  class="btn btn-primary">Login</button>
+</form>
+</div>
+</body>
