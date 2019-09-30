@@ -12,6 +12,7 @@ import { HomeResearcherComponent } from './components/researcher/home-researcher
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'admin', component: HomeAdminComponent },
   { path: 'researcher', component: HomeResearcherComponent }
 ];

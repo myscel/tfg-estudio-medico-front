@@ -70,10 +70,11 @@ export class LoginComponent implements OnInit {
   }
 
   doLoginResearcher(){
-    return this.userService.loginResearcher(this.userToLog.dni, this.userToLog.password).subscribe(responseData =>{
+    this.userService.loginResearcher(this.userToLog.dni, this.userToLog.password).subscribe(responseData =>{
       console.log("Todo ha ido bien");
       console.log(responseData);
       localStorage.setItem('userLogged', JSON.stringify(responseData));
+      this.userService.userIsLogged = true;
       this.router.navigate(['/researcher']);
 
     }, err => {

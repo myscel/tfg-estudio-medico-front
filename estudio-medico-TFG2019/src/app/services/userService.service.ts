@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 export class UserServiceService {
 
   userUrl: string = 'http://localhost:8080/api/user';
+  userIsLogged: boolean;
 
   userHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'
@@ -18,6 +19,9 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) { }
 
+  ngOnInit() {
+    this.userIsLogged = false;
+  }
 
   public loginResearcher(username: string, password: string): Observable<any> {
     let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(username + ':' + password));
