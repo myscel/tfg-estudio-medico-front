@@ -7,13 +7,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HomeAdminComponent } from './components/home/home-admin/home-admin.component';
-import { HomeInvestigatorComponent } from './components/home/home-investigator/home-investigator.component';
+import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
-  { path: 'homeAdmin', component: HomeAdminComponent },
-  { path: 'homeInvestigator', component: HomeInvestigatorComponent }
+  { path: 'admin', component: HomeAdminComponent },
+  { path: 'researcher', component: HomeResearcherComponent }
 ];
 
 @NgModule({
@@ -21,7 +21,7 @@ const appRoutes : Routes = [
     AppComponent,
     LoginComponent,
     HomeAdminComponent,
-    HomeInvestigatorComponent
+    HomeResearcherComponent
   ],
   imports: [
     BrowserModule,

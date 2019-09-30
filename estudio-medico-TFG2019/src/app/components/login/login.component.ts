@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { unwrapResolvedMetadata, IfStmt } from '@angular/compiler';
+import { User } from 'src/app/models/User';
+import { Router } from '@angular/router';
 
 
 
@@ -13,8 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  dni: string = "47298046H";
-  password: string = "pass1";
+  userToLog: User = new User();
   loginForm: FormGroup;
   selectedOption: string;
     options = [
@@ -25,10 +27,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private userService: UserServiceService,
-    private formBuilder: FormBuilder,) {}
+    private formBuilder: FormBuilder,
+    private router: Router
+    ) {}
 
 
   ngOnInit() {
+    this.selectedOption = this.options[0].name;
+
     this.loginForm = this.formBuilder.group({
       dni: ['', Validators.required],
       password: ['', Validators.required]
@@ -38,28 +44,49 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    this.dni = this.f.dni.value;
-    this.password = this.f.password.value;
-    this.enviarPeticion();
+    this.userToLog.dni = this.f.dni.value;
+    this.userToLog.password = this.f.password.value;
+
+    if(this.selectedOption == this.options[0].name){
+      //Login Admin
+    }
+    else{
+      //Login investigador
+      this.doLoginResearcher();
+    }
   }
 
-  enviarPeticion(){
-    return this.userService.createAndStoreUserPostLogin(this.dni, this.password).subscribe(responseData =>{
+  doLoginAdmin(){
+    /*
+     return this.userService.login().subscribe(responseData =>{
       console.log("Todo ha ido bien");
       console.log(responseData)
     }, err => {
       console.log("Algo ha fallado");
       console.log(err)
     });
+     */
+   
   }
 
-  enviarPeticion2(){
-    return this.userService.login().subscribe(responseData =>{
+  doLoginResearcher(){
+    return this.userService.loginResearcher(this.userToLog.dni, this.userToLog.password).subscribe(responseData =>{
       console.log("Todo ha ido bien");
-      console.log(responseData)
+      console.log(responseData);
+      localStorage.setItem('userLogged', JSON.stringify(responseData));
+      this.router.navigate(['/researcher']);
+
     }, err => {
+      //Pacheco haz el Modal de error de login :D
+
       console.log("Algo ha fallado");
       console.log(err)
+      if(err.status === 401){
+        console.log("Error: usuario o contraseña incorrectos");
+      }
+      else{
+        console.log("Error Desconocido");
+      } 
     });
   }
 

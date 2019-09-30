@@ -7,14 +7,11 @@ import {Observable} from 'rxjs';
 })
 export class UserServiceService {
 
-  username: string = "edu";
-  password: string = "encriptasao4";
-
   userUrl: string = 'http://localhost:8080/api/user';
 
   userHeaders = new HttpHeaders ({
-    'Content-Type': 'application/json',
-    'authorization':'Basic ' +  btoa(this.username + ':' +  this.password)
+    'Content-Type': 'application/json'
+    /*'Authorization':'Basic ' +  btoa(this.username + ':' +  this.password)*/
   });
 
   options = {headers: this.userHeaders}
@@ -22,15 +19,14 @@ export class UserServiceService {
   constructor(private http: HttpClient) { }
 
 
-  public createAndStoreUserPostLogin(dni: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.userUrl}/login`, {
-      dni: dni,
-      password: password
-    }, this.options);
+  public loginResearcher(username: string, password: string): Observable<any> {
+    let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(username + ':' + password));
+
+    return this.http.get<any>(`${this.userUrl}/login`, {headers: headerLogin});
   }
 
-  public login(){
-    return this.http.get(`${this.userUrl}/login`, this.options);
+  public logOutResearcher(): Observable<any> {
+    return this.http.post(`${this.userUrl}/logout`, {});
   }
 
 }
