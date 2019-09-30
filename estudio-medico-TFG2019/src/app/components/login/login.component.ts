@@ -17,11 +17,7 @@ export class LoginComponent implements OnInit {
 
   userToLog: User = new User();
   loginForm: FormGroup;
-  selectedOption: string;
-    options = [
-      { name: "Administrador", value: 1 },
-      { name: "Investigador", value: 2 }
-    ]
+  
 
   constructor(
     private http: HttpClient, 
@@ -32,8 +28,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.selectedOption = this.options[0].name;
-
     this.loginForm = this.formBuilder.group({
       dni: ['', Validators.required],
       password: ['', Validators.required]
