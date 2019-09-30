@@ -1,4 +1,7 @@
 export class User {
-    dni: string;
+    id: string;
+    username: string;
     password: string;
+    role: string;
+    token: string;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import {Observable} from 'rxjs';
 export class UserServiceService {
 
   userUrl: string = 'http://localhost:8080/api/user';
-  userIsLogged: boolean;
+  userLogged: User;
 
   userHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'
@@ -20,16 +21,16 @@ export class UserServiceService {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.userIsLogged = false;
+    this.userLogged = null;
   }
 
-  public loginResearcher(username: string, password: string): Observable<any> {
+  public loginResearcherAndAdmin(username: string, password: string): Observable<any> {
     let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(username + ':' + password));
 
     return this.http.get<any>(`${this.userUrl}/login`, {headers: headerLogin});
   }
 
-  public logOutResearcher(): Observable<any> {
+  public logOutResearcherAndAdmin(): Observable<any> {
     return this.http.post(`${this.userUrl}/logout`, {});
   }
 

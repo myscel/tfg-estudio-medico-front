@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { unwrapResolvedMetadata, IfStmt } from '@angular/compiler';
 import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 
@@ -44,39 +43,29 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    this.userToLog.dni = this.f.dni.value;
+    this.userToLog.username = this.f.dni.value;
     this.userToLog.password = this.f.password.value;
 
-    if(this.selectedOption == this.options[0].name){
-      //Login Admin
-    }
-    else{
-      //Login investigador
-      this.doLoginResearcher();
-    }
+    this.doLogin();
   }
 
-  doLoginAdmin(){
-    /*
-     return this.userService.login().subscribe(responseData =>{
-      console.log("Todo ha ido bien");
-      console.log(responseData)
-    }, err => {
-      console.log("Algo ha fallado");
-      console.log(err)
-    });
-     */
-   
-  }
 
-  doLoginResearcher(){
-    this.userService.loginResearcher(this.userToLog.dni, this.userToLog.password).subscribe(responseData =>{
+  doLogin(){
+    this.userService.loginResearcherAndAdmin(this.userToLog.username, this.userToLog.password).subscribe(responseData =>{
       console.log("Todo ha ido bien");
-      console.log(responseData);
-      localStorage.setItem('userLogged', JSON.stringify(responseData));
-      this.userService.userIsLogged = true;
-      this.router.navigate(['/researcher']);
+      
+      this.userService.userLogged = responseData;
+      console.log(this.userService.userLogged);
 
+      localStorage.setItem("userLogged", JSON.stringify(this.userService.userLogged));
+
+      if(this.userService.userLogged.role === "ADMIN"){
+        this.router.navigate(['/admin']);
+      }
+
+      else{
+        this.router.navigate(['/researcher']);
+      }
     }, err => {
       //Pacheco haz el Modal de error de login :D
 

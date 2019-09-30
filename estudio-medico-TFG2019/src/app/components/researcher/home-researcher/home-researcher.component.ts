@@ -16,7 +16,7 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doLogOut(){
-    this.userService.logOutResearcher().subscribe(responseData =>{
+    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       console.log("Iniciando Log out");
       console.log(responseData);
       localStorage.removeItem('userLogged');
