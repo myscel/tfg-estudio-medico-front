@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url("./img/loginBackground.jpg");
+    background-image: url("../../../assets/img/loginBackground.jpg");
     background-size: cover;
    
 }
