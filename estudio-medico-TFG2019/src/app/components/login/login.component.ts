@@ -41,10 +41,17 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    this.userToLog.username = this.f.dni.value;
-    this.userToLog.password = this.f.password.value;
-
-    this.doLogin();
+    if(this.f.dni.value === undefined || this.f.dni.value === "" || this.f.password.value === undefined || this.f.password.value === ""){
+      this.errorMessage = "Dni y/o contraseña vacíos";
+      this.alertHidden = true;
+    }
+    else{
+      this.alertHidden = false;
+      this.userToLog.username = this.f.dni.value;
+      this.userToLog.password = this.f.password.value;
+  
+      this.doLogin();
+    }
   }
 
 
@@ -65,7 +72,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/researcher']);
       }
     }, err => {
-      console.log("Algo ha fallado");
       console.log(err)
       if(err.status === 401){
         this.errorMessage = "Usuario o contraseña incorrectos";
