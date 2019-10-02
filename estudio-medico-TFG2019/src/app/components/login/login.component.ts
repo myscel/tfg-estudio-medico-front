@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   inputDni: string;
   inputPassword: string;
+  alertHidden: boolean = false;
+  errorMessage: string;
   
 
   constructor(
@@ -63,19 +65,17 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/researcher']);
       }
     }, err => {
-      //Pacheco haz el Modal de error de login :D
-
       console.log("Algo ha fallado");
       console.log(err)
       if(err.status === 401){
-        console.log("Error: usuario o contraseña incorrectos");
+        this.errorMessage = "Usuario o contraseña incorrectos";
       }
       else{
-        console.log("Error Desconocido");
+        this.errorMessage = "Algo ha ido mal";
       } 
       this.inputDni = "";
       this.inputPassword = "";
+      this.alertHidden = true;
     });
   }
-
 }

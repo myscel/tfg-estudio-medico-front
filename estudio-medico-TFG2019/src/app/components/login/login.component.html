@@ -4,20 +4,25 @@
 
 <body>
 <div class="form-box">
-<h2>Bienvenido</h2>
-<hr>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="dni">DNI</label>
-        <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required/>
-    </div>
+    <h2>Bienvenido</h2>
     <hr>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" [(ngModel)]="inputPassword" placeholder="Enter password" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter password'" formControlName="password" class="form-control" required/>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="dni">DNI</label>
+            <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required/>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="inputPassword" placeholder="Enter password" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter password'" formControlName="password" class="form-control" required/>
+        </div>
+        <hr>
+            <button id="buttonLogin" class="btn btn-primary">Login</button>
+    </form>
+
+    <div class="alert alert-danger" [hidden]='!alertHidden'>
+        <strong>Error!</strong> {{errorMessage}}
     </div>
-    <hr>
-        <button  class="btn btn-primary">Login</button>
-</form>
+
 </div>
 </body>
