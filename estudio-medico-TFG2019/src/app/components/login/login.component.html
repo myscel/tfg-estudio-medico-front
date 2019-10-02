@@ -5,6 +5,7 @@
 <body>
 <div class="form-box">
     <h2>Bienvenido</h2>
+    <h4> El estudio médico relaciona el déficit de vitamina D y el control glucémico en pacientes con diabetes mellitus en atención primaria. </h4>
     <hr>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -20,7 +21,7 @@
             <button id="buttonLogin" class="btn btn-primary">Login</button>
     </form>
 
-    <div class="alert alert-danger" [hidden]='!alertHidden'>
+    <div id="modalAlert" class="alert alert-danger" [hidden]='!alertHidden'>
         <strong>Error!</strong> {{errorMessage}}
     </div>
 
