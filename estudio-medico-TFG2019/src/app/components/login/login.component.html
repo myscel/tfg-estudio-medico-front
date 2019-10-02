@@ -9,12 +9,12 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="dni">DNI</label>
-        <input type="text" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required/>
+        <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required/>
     </div>
     <hr>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" placeholder="Enter password" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter password'" formControlName="password" class="form-control" required/>
+        <input type="password" [(ngModel)]="inputPassword" placeholder="Enter password" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter password'" formControlName="password" class="form-control" required/>
     </div>
     <hr>
         <button  class="btn btn-primary">Login</button>

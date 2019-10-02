@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   userToLog: User = new User();
   loginForm: FormGroup;
+  inputDni: string;
+  inputPassword: string;
   
 
   constructor(
@@ -71,6 +73,8 @@ export class LoginComponent implements OnInit {
       else{
         console.log("Error Desconocido");
       } 
+      this.inputDni = "";
+      this.inputPassword = "";
     });
   }
 
