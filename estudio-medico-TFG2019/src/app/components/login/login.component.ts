@@ -41,17 +41,39 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
+    this.alertHidden = false;
+
     if(this.f.dni.value === undefined || this.f.dni.value === "" || this.f.password.value === undefined || this.f.password.value === ""){
       this.errorMessage = "Dni y/o contraseña vacíos";
       this.alertHidden = true;
+      this.inputDni = "";
+      this.inputPassword = "";
     }
     else{
-      this.alertHidden = false;
-      this.userToLog.username = this.f.dni.value;
-      this.userToLog.password = this.f.password.value;
-  
-      this.doLogin();
+      //Validate DNI
+      if(!this.validateDNI(this.f.dni.value)){
+        this.errorMessage = "DNI formato incorrecto";
+        this.alertHidden = true;
+        this.inputDni = "";
+        this.inputPassword = "";
+      }
+      else{
+        this.alertHidden = false;
+        this.userToLog.username = this.f.dni.value;
+        this.userToLog.password = this.f.password.value;
+    
+        this.doLogin();
+      }
     }
+  }
+
+  validateDNI(dni: string): boolean {
+    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
+    //Check length and format
+    if(dni.length !== 9 || !regExpresion.test(dni)){
+      return false;
+    }
+    return true;
   }
 
 
