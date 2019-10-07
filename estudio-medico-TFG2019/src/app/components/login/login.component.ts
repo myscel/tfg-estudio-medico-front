@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
       console.log("Todo ha ido bien");
       
       this.userService.userLogged = responseData;
-      console.log(this.userService.userLogged);
+      //console.log(this.userService.userLogged);
 
       localStorage.setItem("userLogged", JSON.stringify(this.userService.userLogged));
 

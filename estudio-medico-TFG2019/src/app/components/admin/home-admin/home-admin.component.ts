@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -10,9 +11,32 @@ import { UserServiceService } from 'src/app/services/userService.service';
 })
 export class HomeAdminComponent implements OnInit {
 
-  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService) { }
+  constructor(private router: Router,
+              private http: HttpClient,
+              private userService: UserServiceService,
+              private adminService: AdminServiceService) { 
+  }
 
   ngOnInit() {
+    let observable = this.adminService.getAllResearchers();
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+        console.log("Éxito al listar usuarios");
+        console.log(response);
+        //Mapear los usuarios
+      }, error =>{
+        //Debería mostrar un pop-up
+        console.log("Error al listar usuarios");
+        console.log(error);
+        this.router.navigate(['/login']);
+      });
+    }
+
   }
 
   doLogOut(){
