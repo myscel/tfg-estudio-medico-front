@@ -1,3 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+    <title>Estudio Médico</title>
+</head>
+<body>
+    <div id="page">
+            <div id="divTable" class="table-responsive">          
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>NOMBRE</th>
+                    <th>DNI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of researchers; let i = index"
+                    [ngStyle]="{'background-color': (i % 2) ? 'rgb(240, 240, 240)' : 'white'}">
+                    <td> {{user.username}}</td>
+                    <td>{{user.name.toUpperCase()}}</td>
+                  </tr>
+                </tbody>
+               </table>
+              </div>
+    </div>
+    
+</body>
+</html>
+
+
+
+
 <p>home-admin works!</p>
 <hr>
 <button  class="btn btn-primary" (click)="doLogOut()">Log Out</button>
