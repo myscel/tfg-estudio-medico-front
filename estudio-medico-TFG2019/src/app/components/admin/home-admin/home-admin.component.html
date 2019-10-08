@@ -1,3 +1,9 @@
 <p>home-admin works!</p>
 <hr>
 <button  class="btn btn-primary" (click)="doLogOut()">Log Out</button>
+
+
+
+<li *ngFor="let user of researchers">
+    {{user.username}}
+</li>

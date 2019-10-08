@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-home-admin',
@@ -10,6 +11,8 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent implements OnInit {
+
+  researchers: User[] = [];
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -27,8 +30,12 @@ export class HomeAdminComponent implements OnInit {
     else{
       observable.subscribe(response =>{
         console.log("Éxito al listar usuarios");
-        console.log(response);
-        //Mapear los usuarios
+        this.researchers = response.list;
+
+        this.researchers.forEach(elem =>{
+          console.log(elem)
+        });
+
       }, error =>{
         //Debería mostrar un pop-up
         console.log("Error al listar usuarios");
