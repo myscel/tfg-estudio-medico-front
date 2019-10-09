@@ -110,7 +110,7 @@ strong{
     flex-direction: column;
     background-color: rgb(245, 245, 245);
     width: 30%;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-top: 50px;
     margin-bottom: 100px;
   }
@@ -157,7 +157,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63b4ff', end
 }
 
 .textoEncimaInput{
-  color: rgb(112, 112, 112);
+  color: rgb(106, 106, 106);
   font-weight: bolder;
   font-size: 16px;
 }
@@ -189,7 +189,7 @@ input{
 }
 
 #camposObligatorios{
-  color: rgb(112, 112, 112);
+  color: rgb(106, 106, 106);
   font-size: 16px;
 }
 
