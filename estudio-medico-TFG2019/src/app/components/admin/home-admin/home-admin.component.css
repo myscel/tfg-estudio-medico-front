@@ -11,6 +11,7 @@
 #divTable{
     width: 60%;
     border-radius: 8px;
+    margin-top: 50px;
 }
 
 th, td{
@@ -37,3 +38,67 @@ th{
 td{
     font-size: 20px;
 }
+
+
+strong{
+    margin-right: 5px;
+  }
+
+  header{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-bottom: 4px solid rgb(26, 117, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #headerIzqa{
+    font-size: 40px;
+      color: rgb(102, 163, 255);
+      margin-left: 40px;
+  }
+
+  #headerUserName{
+    border-bottom: 3px solid rgba(255, 0, 0, 0); 
+  }
+
+  #headerDcha{
+      width: 30%;
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      height: 100%;
+      margin-right: 40px;
+      font-size: 20px;
+      font-weight: bolder;
+      color: rgb(102, 102, 102);
+  }
+  strong{
+    margin-left: 10px;
+  }
+  #divLogout{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding-left: 8px;
+    color: rgb(102, 163, 255);
+    border-bottom: 3px solid rgba(255, 0, 0, 0); 
+    height: 100%;
+  }
+
+  #divLogout:hover{
+    color: rgb(10, 108, 253);
+     border-bottom: 3px solid rgb(2, 89, 219); 
+  }
+
+  #imglogout{
+    margin-top: 4px;
+    margin-left: 5px;
+  }
+
+  #roleUser{
+    color: rgb(44, 44, 44);
+  }

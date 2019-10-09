@@ -14,6 +14,8 @@ export class HomeAdminComponent implements OnInit {
 
   researchers: User[] = [];
 
+  userLogged: User;
+
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserServiceService,
@@ -21,6 +23,8 @@ export class HomeAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+
     let observable = this.adminService.getAllResearchers();
 
     if(observable === null){

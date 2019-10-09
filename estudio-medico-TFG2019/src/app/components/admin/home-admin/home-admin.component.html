@@ -9,13 +9,33 @@
     <title>Estudio Médico</title>
 </head>
 <body>
+    <header>
+        <div id="headerIzqa">
+            Estudio <strong>Médico</strong>
+        </div>
+        <div id="headerDcha"> 
+          <div id="headerUserName">
+            <span id="roleUser">
+                Admin
+            </span>
+            <span>
+                | {{userLogged.name}}
+            </span>
+          </div>
+          <div id="divLogout" (click)="doLogOut()">
+            <div>Log Out</div>
+            <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
+          </div>
+        </div>
+
+    </header>
     <div id="page">
             <div id="divTable" class="table-responsive">          
               <table class="table">
                 <thead>
                   <tr>
-                    <th>NOMBRE</th>
                     <th>DNI</th>
+                    <th>NOMBRE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,17 +51,3 @@
     
 </body>
 </html>
-
-
-
-
-<p>home-admin works!</p>
-<hr>
-<button  class="btn btn-primary" (click)="doLogOut()">Log Out</button>
-
-
-
-<li *ngFor="let user of researchers">
-    {{user.username}}
-    {{user.name}}
-</li>
