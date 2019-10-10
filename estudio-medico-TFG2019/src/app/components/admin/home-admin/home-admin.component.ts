@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { User } from 'src/app/models/User';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-admin',
@@ -14,21 +13,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HomeAdminComponent implements OnInit {
 
   researchers: User[] = [];
-  loginForm: FormGroup;
 
   userLogged: User;
 
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserServiceService,
-              private adminService: AdminServiceService,
-              private formBuilder: FormBuilder) { 
+              private adminService: AdminServiceService) { 
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      name: ['', Validators.required]
-    });
+
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
@@ -55,12 +50,6 @@ export class HomeAdminComponent implements OnInit {
       });
     }
 
-  }
-
-  get f() { return this.loginForm.controls; }
-
-  onSubmit(){
-    console.log("Nombre" + this.f.name.value);
   }
 
   doLogOut(){

@@ -20,7 +20,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="dni">DNI</label>
-            <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required/>
+            <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required autofocus/>
         </div>
         <hr>
         <div class="form-group">
