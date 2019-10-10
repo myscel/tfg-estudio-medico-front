@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/User';
 import {Observable} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +21,25 @@ export class AdminServiceService {
   public getAllResearchers(): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-
-    console.log("Usuario sacado del localStorage: ");
-    console.log(userLogged);
-
     if(userLogged === null || userLogged.token === null || userLogged.token === ""){
       return null;
     }
-    
 
     let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
     return this.http.get(`${this.adminUrl}/users`, {headers: headerList});
+  }
+
+  public deleteResearcher(dni: string): Observable<any>{
+
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+    let params = new HttpParams().set("username", dni)
+
+    return this.http.delete(`${this.adminUrl}/deleteResearcher`, {headers: headerList, params: params});
   }
 }

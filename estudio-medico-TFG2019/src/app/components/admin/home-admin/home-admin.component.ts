@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
@@ -8,11 +8,13 @@ import { User } from 'src/app/models/User';
 @Component({
   selector: 'app-home-admin',
   templateUrl: './home-admin.component.html',
-  styleUrls: ['./home-admin.component.css']
+  styleUrls: ['./home-admin.component.css'
+]
 })
 export class HomeAdminComponent implements OnInit {
 
-  researchers: User[] = [];
+  @Input() researchers: User[] = [];
+
 
   userLogged: User;
 
@@ -22,8 +24,8 @@ export class HomeAdminComponent implements OnInit {
               private adminService: AdminServiceService) { 
   }
 
-  ngOnInit() {
 
+  ngOnInit() {
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
@@ -35,12 +37,8 @@ export class HomeAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-        console.log("Éxito al listar usuarios");
         this.researchers = response.list;
 
-        this.researchers.forEach(elem =>{
-          console.log(elem)
-        });
 
       }, error =>{
         //Debería mostrar un pop-up
@@ -52,8 +50,26 @@ export class HomeAdminComponent implements OnInit {
 
   }
 
+
+
+
+
   deleteResearcher(username: string){
     console.log("Borrando el investigador: " + username);
+
+    this.adminService.deleteResearcher(username).subscribe(responseData =>{
+      console.log("Investigador eliminado correctamente: " + responseData);
+
+      this.adminService.getAllResearchers().subscribe(response =>{
+        this.researchers = response.list;
+      });
+      
+      
+    }, err => {
+      console.log("Error en el eliminar investigador");
+      console.log(err);
+
+    });
   }
 
   doLogOut(){
