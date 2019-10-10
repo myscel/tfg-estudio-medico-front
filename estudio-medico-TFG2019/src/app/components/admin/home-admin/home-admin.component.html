@@ -122,7 +122,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of researchers; let i = index"
-                    [ngStyle]="{'background-color': (i % 2) ? 'rgb(240, 240, 240)' : 'white'}">
+                    [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                     <td> {{user.username}}</td>
                     <td>{{user.name.toUpperCase()}}</td>
                     <td>{{user.gender.toUpperCase()}}</td>
