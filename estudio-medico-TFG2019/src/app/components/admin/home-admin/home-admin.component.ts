@@ -52,6 +52,10 @@ export class HomeAdminComponent implements OnInit {
 
   }
 
+  deleteResearcher(username: string){
+    console.log("Borrando el investigador: " + username);
+  }
+
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       console.log("Iniciando Log out");

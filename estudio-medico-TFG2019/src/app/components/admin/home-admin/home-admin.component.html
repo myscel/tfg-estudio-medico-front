@@ -126,7 +126,7 @@
                     <td> {{user.username}}</td>
                     <td>{{user.name.toUpperCase()}}</td>
                     <td>{{user.gender.toUpperCase()}}</td>
-                    <td><button id="buttonDelete" type="button"><img id="imgCross" src="../../../../assets/icons/cross.png" height="20px"></button></td>
+                    <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross" src="../../../../assets/icons/cross.png" height="20px"></button></td>
                   </tr>
                 </tbody>
                </table>
