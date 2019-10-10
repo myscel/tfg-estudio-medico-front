@@ -30,16 +30,17 @@
 
     </header>
     <div id="page">
+
         <div id="divRegister">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div id="cabeceraRegistro">
             <div>Registrar Investigador</div>
             <div id="camposObligatorios">* Campos obligatorios</div>
           </div>
-
           <div class="registro" id="registroNombre">
               <div class="textoEncimaInput" >Nombre *</div>
               <div id="divInputNombre">
-                <input class="miInput" id="inputNombre" type="text">
+                <input class="miInput" id="inputNombre" type="text" formControlName="name" required>
               </div>
 
               <div class="gradienteInput"></div>
@@ -81,9 +82,34 @@
               <div class="gradienteInput"></div>
           </div>
 
+          <div class="registro" id="registroGenero">
+            <div class="textoEncimaInput">Género *</div>
+            <div id="generoGroup">
+              <div class="divGeneros">
+                <div>
+                    <input class="inputRadio" type="radio" name="gender" value="hombre" checked>
+                </div>
+                <div class="textoGenero">
+                    Hombre
+                </div>  
+              </div>  
+              <div class="divGeneros">
+                  <div>
+                      <input class="inputRadio"  type="radio" name="gender" value="mujer">
+                  </div>
+                  <div class="textoGenero">
+                      Mujer
+                  </div> 
+              </div>
+            </div>
+
+            <div class="gradienteInput"></div>
+        </div>
+
           <div id="divBotonLogin">
               <button id="botonLogin" type="button" class="btn btn-primary">Registrar</button>
           </div>
+        </form>
         </div>
 
             <div id="divTable" class="table-responsive">          

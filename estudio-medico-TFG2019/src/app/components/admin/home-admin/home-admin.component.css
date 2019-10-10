@@ -124,7 +124,7 @@ strong{
     color: rgb(10, 10, 10);
   }
 
-  #registroNombre, #registroApellidos, #registroDni, #registroContra, #registroContraRepetir{
+  #registroNombre, #registroApellidos, #registroDni, #registroContra, #registroContraRepetir, #registroGenero{
     display: flex;
     justify-content: center;
     align-items: initial;
@@ -191,5 +191,33 @@ input{
 #camposObligatorios{
   color: rgb(106, 106, 106);
   font-size: 16px;
+}
+
+#generoGroup{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.divGeneros{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 30px;
+}
+
+.textoGenero{
+  color: rgb(54, 54, 54);
+  font-weight: bolder;
+  font-size: 12px;
+  color: rgb(106, 106, 106)
+}
+
+.inputRadio{
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
