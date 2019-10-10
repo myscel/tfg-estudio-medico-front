@@ -92,6 +92,7 @@
                   <tr>
                     <th>DNI</th>
                     <th>NOMBRE</th>
+                    <th>GÉNERO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -99,6 +100,7 @@
                     [ngStyle]="{'background-color': (i % 2) ? 'rgb(240, 240, 240)' : 'white'}">
                     <td> {{user.username}}</td>
                     <td>{{user.name.toUpperCase()}}</td>
+                    <td>{{user.gender.toUpperCase()}}</td>
                   </tr>
                 </tbody>
                </table>
