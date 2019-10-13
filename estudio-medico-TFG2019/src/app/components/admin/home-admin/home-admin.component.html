@@ -1,137 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
 
-    <title>Estudio Médico</title>
+  <title>Estudio Médico</title>
 </head>
+
 <body>
-    <header>
-        <div id="headerIzqa">
-            Estudio <strong>Médico</strong>
+  <header>
+    <div id="headerIzqa">
+      Estudio <strong>Médico</strong>
+    </div>
+    <div id="headerDcha">
+      <div id="headerUserName">
+        <span id="roleUser">
+          Admin
+        </span>
+        <span>
+          | {{userLogged.name}}
+        </span>
+      </div>
+      <div id="divLogout" (click)="doLogOut()">
+        <div>Log Out</div>
+        <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
+      </div>
+    </div>
+
+  </header>
+  <div id="page">
+
+    <div id="divRegister">
+      <div id="cabeceraRegistro">
+        <div>Registrar Investigador</div>
+        <div id="camposObligatorios">* Campos obligatorios</div>
+      </div>
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="registro" id="registroNombre">
+          <div class="textoEncimaInput">Nombre *</div>
+          <div id="divInputNombre" class="form-group">
+            <input class="miInput" id="inputNombre" type="text" formControlName="name" class="form-control" required>
+          </div>
+
+          <div class="gradienteInput"></div>
         </div>
-        <div id="headerDcha"> 
-          <div id="headerUserName">
-            <span id="roleUser">
-                Admin
-            </span>
-            <span>
-                | {{userLogged.name}}
-            </span>
+        <div class="registro" id="registroApellidos">
+          <div class="textoEncimaInput">Apellidos *</div>
+          <div class="divInput form-group">
+            <input class="miInput" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
+              required>
           </div>
-          <div id="divLogout" (click)="doLogOut()">
-            <div>Log Out</div>
-            <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
-          </div>
+
+          <div class="gradienteInput"></div>
         </div>
-
-    </header>
-    <div id="page">
-
-        <div id="divRegister">
-          <div id="cabeceraRegistro">
-            <div>Registrar Investigador</div>
-            <div id="camposObligatorios">* Campos obligatorios</div>
+        <div class="registro" id="registroDni">
+          <div class="textoEncimaInput">DNI *</div>
+          <div class="divInput form-group">
+            <input class="miInput" id="inputDni" type="text" formControlName="dni" class="form-control" required>
           </div>
-          <div class="registro" id="registroNombre">
-              <div class="textoEncimaInput" >Nombre *</div>
-              <div id="divInputNombre">
-                <input class="miInput" id="inputNombre" type="text">
+
+          <div class="gradienteInput"></div>
+        </div>
+        <div class="registro" id="registroContra">
+          <div class="textoEncimaInput">Contraseña *</div>
+          <div class="divInput form-group">
+            <input class="miInput" id="inputContra" type="password" formControlName="password" class="form-control"
+              required>
+          </div>
+
+          <div class="gradienteInput"></div>
+        </div>
+        <div class="registro" id="registroContraRepetir">
+          <div class="textoEncimaInput">Confirmar Contraseña *</div>
+          <div class="divInput form-group">
+            <input class="miInput" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
+              class="form-control" required>
+          </div>
+
+          <div class="gradienteInput"></div>
+        </div>
+        <div class="registro" id="registroGenero">
+          <div class="textoEncimaInput">Género *</div>
+          <div id="generoGroup">
+            <div class="divGeneros">
+              <div class="form-group">
+                <input class="inputRadio" type="radio" formControlName="gender" value="hombre" required> 
               </div>
-
-              <div class="gradienteInput"></div>
-          </div>
-
-          <div class="registro" id="registroApellidos">
-              <div class="textoEncimaInput">Apellidos *</div>
-              <div class="divInput">
-                <input class="miInput" id="inputApellidos" type="text">
-              </div>
-
-              <div class="gradienteInput"></div>
-          </div>
-
-          <div class="registro" id="registroDni">
-              <div class="textoEncimaInput">DNI *</div>
-              <div class="divInput">
-                <input class="miInput" id="inputDni" type="text">
-              </div>
-
-              <div class="gradienteInput"></div>
-          </div>
-
-          <div class="registro" id="registroContra">
-              <div class="textoEncimaInput">Contraseña *</div>
-              <div class="divInput">
-                <input class="miInput" id="inputContra" type="password">
-              </div>
-
-              <div class="gradienteInput"></div>
-          </div>
-
-          <div class="registro" id="registroContraRepetir">
-              <div class="textoEncimaInput">Confirmar Contraseña *</div>
-              <div class="divInput">
-                <input class="miInput" id="inputContraRepetir" type="password">
-              </div>
-
-              <div class="gradienteInput"></div>
-          </div>
-
-          <div class="registro" id="registroGenero">
-            <div class="textoEncimaInput">Género *</div>
-            <div id="generoGroup">
-              <div class="divGeneros">
-                <div>
-                    <input class="inputRadio" type="radio" name="gender" value="hombre" checked>
-                </div>
-                <div class="textoGenero">
-                    Hombre
-                </div>  
-              </div>  
-              <div class="divGeneros">
-                  <div>
-                      <input class="inputRadio"  type="radio" name="gender" value="mujer">
-                  </div>
-                  <div class="textoGenero">
-                      Mujer
-                  </div> 
+              <div class="textoGenero">
+                Hombre
               </div>
             </div>
-
-            <div class="gradienteInput"></div>
-        </div>
-
-          <div id="divBotonLogin">
-              <button id="botonLogin" type="button" class="btn btn-primary">Registrar</button>
+            <div class="divGeneros">
+              <div class="form-group">
+                <input class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
+              </div>
+              <div class="textoGenero">
+                Mujer
+              </div>
+            </div>
           </div>
-        </div>
 
-            <div id="divTable" class="table-responsive">          
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>DNI</th>
-                    <th>NOMBRE</th>
-                    <th>GÉNERO</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of researchers; let i = index"
-                    [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
-                    <td> {{user.username}}</td>
-                    <td>{{user.name.toUpperCase()}}</td>
-                    <td>{{user.gender.toUpperCase()}}</td>
-                    <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross" src="../../../../assets/icons/cross.png" height="20px"></button></td>
-                  </tr>
-                </tbody>
-               </table>
-              </div>       
+          <div class="gradienteInput"></div>
+        </div>
+        <div id="divBotonLogin">
+          <button id="botonLogin" type="button" class="btn btn-primary" (click)="onSubmit()">Registrar</button>
+        </div>
+      </form>
     </div>
-    
+
+    <div id="divTable" class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>DNI</th>
+            <th>NOMBRE</th>
+            <th>GÉNERO</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of researchers; let i = index"
+            [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
+            <td> {{user.username}}</td>
+            <td>{{user.name.toUpperCase()}}</td>
+            <td>{{user.gender.toUpperCase()}}</td>
+            <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
+                  src="../../../../assets/icons/cross.png" height="20px"></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </body>
+
 </html>

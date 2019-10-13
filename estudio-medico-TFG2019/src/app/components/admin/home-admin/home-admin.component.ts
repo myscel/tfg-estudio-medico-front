@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { User } from 'src/app/models/User';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-admin',
@@ -17,11 +18,13 @@ export class HomeAdminComponent implements OnInit {
 
 
   userLogged: User;
+  registerForm: FormGroup;
 
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserServiceService,
-              private adminService: AdminServiceService) { 
+              private adminService: AdminServiceService,
+              private formBuilder: FormBuilder) { 
   }
 
 
@@ -48,10 +51,28 @@ export class HomeAdminComponent implements OnInit {
       });
     }
 
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      dni: ['', Validators.required],
+      password: ['', Validators.required],
+      passwordRepeat: ['', Validators.required],
+      gender: ['', Validators.required]
+  });
   }
 
+  get f() { return this.registerForm.controls; }
 
-
+  onSubmit() {
+    var userInfo = { 
+      name: this.f.name.value,
+      lastaname: this.f.lastname.value,  
+      dni: this.f.dni.value, 
+      password: this.f.password.value,
+      passwordRepeat: this.f.passwordRepeat.value,
+      gender:this.f.gender.value  
+   };
+  }
 
 
   deleteResearcher(username: string){
