@@ -85,6 +85,10 @@ export class HomeAdminComponent implements OnInit {
       this.alertHidden = true;
       this.errorMessage = "Rellena todos los campos";
     }
+    else if(this.f.password.value.trim() !== this.f.passwordRepeat.value.trim() ){
+      this.alertHidden = true;
+      this.errorMessage = "Las contraseñas no coinciden";
+    }
     else{
       var userInfo: User = new User();
       userInfo.username = this.f.dni.value;
@@ -105,7 +109,6 @@ export class HomeAdminComponent implements OnInit {
       this.f.gender.value.trim() === ""){
       return false;
     }
-
     return true;
   }
 
