@@ -28,6 +28,8 @@ export class HomeAdminComponent implements OnInit {
   inputPass: string;
   inputPassRepeat: string;
 
+  emptyList: boolean = false;
+
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserServiceService,
@@ -58,6 +60,13 @@ export class HomeAdminComponent implements OnInit {
 
 
         this.researchers = response.list;
+
+        if(this.researchers.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
 
 
       }, error =>{
@@ -140,6 +149,9 @@ export class HomeAdminComponent implements OnInit {
       observable.subscribe(responseData =>{
         let userRegistered: User = responseData;
         this.researchers.push(userRegistered);
+
+        this.emptyList = false;
+
         this.inputName = "";
         this.inputSurname= "";
         this.inputMyDni= "";
@@ -174,6 +186,13 @@ export class HomeAdminComponent implements OnInit {
       
       this.adminService.getAllResearchers().subscribe(response =>{
         this.researchers = response.list;
+
+        if(this.researchers.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
       });
       
       

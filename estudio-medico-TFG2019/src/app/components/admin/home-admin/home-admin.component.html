@@ -115,9 +115,14 @@
       </div>
     </div>
 
+    <div *ngIf="isLoggedIn; else loggedOut">
+      Welcome back, friend.
+    </div>
+    
+
     <div id="divRight">
       <div id="titleTableResearchers"> Lista Investigadores</div>
-      <div id="divTable" class="table-responsive">
+      <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
         <table class="table">
           <thead>
             <tr>
@@ -139,6 +144,9 @@
           </tbody>
         </table>
       </div>
+      <ng-template id="divEmptyList" #divEmptyList>
+          <label class="textEmptyList">Actualmente no hay investigadores registrados</label>
+      </ng-template>
   </div>
     </div>
 
