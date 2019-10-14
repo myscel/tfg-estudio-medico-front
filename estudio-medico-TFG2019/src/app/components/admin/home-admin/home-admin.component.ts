@@ -81,13 +81,32 @@ export class HomeAdminComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    var userInfo: User = new User();
-    userInfo.username = this.f.dni.value;
-    userInfo.password = this.f.password.value;
-    userInfo.name =  this.f.name.value + ' ' + this.f.lastname.value;
-    userInfo.gender = this.f.gender.value;
+    if(!this.checkEmptyFields()){
+      this.alertHidden = true;
+      this.errorMessage = "Rellena todos los campos";
+    }
+    else{
+      var userInfo: User = new User();
+      userInfo.username = this.f.dni.value;
+      userInfo.password = this.f.password.value;
+      userInfo.name =  this.f.name.value + ' ' + this.f.lastname.value;
+      userInfo.gender = this.f.gender.value;
+  
+      this.registerResearcher(userInfo);
+    }
+  }
 
-    this.registerResearcher(userInfo);
+  checkEmptyFields(): boolean{
+    if(this.f.dni.value.trim() === "" || 
+      this.f.password.value.trim() === "" ||
+      this.f.passwordRepeat.value.trim() === "" ||
+      this.f.name.value.trim() === "" ||
+      this.f.lastname.value.trim() === "" ||
+      this.f.gender.value.trim() === ""){
+      return false;
+    }
+
+    return true;
   }
 
   registerResearcher(user: User){
