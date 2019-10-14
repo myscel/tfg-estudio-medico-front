@@ -1,3 +1,32 @@
-<p>home-researcher works!</p>
-<hr>
-<button  class="btn btn-primary" (click)="doLogOut()">Log Out</button>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
+<header>
+
+    <div id="headerIzqa">
+        Estudio <strong>Médico</strong>
+    </div>
+    <div id="headerDcha">
+        <div id="buttonPerfil" class="btn btn-primary navButton">
+            <div>PERFIL</div>
+            <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
+        </div>
+        <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
+            <div>DESCONECTAR</div>
+            <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
+        </div>
+    </div>
+
+
+</header>
+
+<body>
+
+    <div id="navigationBar">
+        <button id="buttonPacientes" class="btn btn-primary navButton">PACIENTES</button>
+        <button id="buttonCitas" class="btn btn-primary navButton">CITAS</button>
+        <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
+    </div>
+
+</body>
