@@ -89,6 +89,10 @@ export class HomeAdminComponent implements OnInit {
       this.alertHidden = true;
       this.errorMessage = "Las contraseñas no coinciden";
     }
+    else if(!this.validateDNI(this.f.dni.value)){
+      this.alertHidden = true;
+      this.errorMessage = "DNI formato incorrecto";
+    }
     else{
       var userInfo: User = new User();
       userInfo.username = this.f.dni.value;
@@ -107,6 +111,15 @@ export class HomeAdminComponent implements OnInit {
       this.f.name.value.trim() === "" ||
       this.f.lastname.value.trim() === "" ||
       this.f.gender.value.trim() === ""){
+      return false;
+    }
+    return true;
+  }
+
+  validateDNI(dni: string): boolean {
+    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
+    //Check length and format
+    if(dni.length !== 9 || !regExpresion.test(dni)){
       return false;
     }
     return true;
