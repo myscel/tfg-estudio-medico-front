@@ -8,10 +8,26 @@
     align-items: flex-start;
 }
 
+#divRight{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 60%;
+  margin-top: 50px;
+}
+
+#titleTableResearchers{
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: rgb(10, 10, 10);
+}
+
 #divTable{
-    width: 60%;
+    width: 100%;
     border-radius: 8px;
-    margin-top: 50px;
+    
 }
 
 th, td{
@@ -112,6 +128,7 @@ strong{
     flex-direction: column;
     background-color: rgb(245, 245, 245);
     width: 30%;
+    height: 1100px;
     border-radius: 8px;
     margin-top: 50px;
     margin-bottom: 100px;
@@ -251,4 +268,11 @@ input{
   width: 100%;
   margin-left: 28%;
 }
+
+#modalAlert{
+  width: 90%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
 

@@ -19,6 +19,14 @@ export class HomeAdminComponent implements OnInit {
 
   userLogged: User;
   registerForm: FormGroup;
+  alertHidden: boolean = false;
+  errorMessage: string;
+
+  inputName: string;
+  inputSurname: string;
+  inputMyDni: string;
+  inputPass: string;
+  inputPassRepeat: string;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -30,6 +38,13 @@ export class HomeAdminComponent implements OnInit {
 
   ngOnInit() {
 
+    this.alertHidden = false;
+    this.inputName = "";
+    this.inputSurname= "";
+    this.inputMyDni= "";
+    this.inputPass= "";
+    this.inputPassRepeat= "";
+
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
     let observable = this.adminService.getAllResearchers();
@@ -40,6 +55,8 @@ export class HomeAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
+
+
         this.researchers = response.list;
 
 
@@ -64,23 +81,62 @@ export class HomeAdminComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    var userInfo = { 
-      name: this.f.name.value,
-      lastaname: this.f.lastname.value,  
-      dni: this.f.dni.value, 
-      password: this.f.password.value,
-      passwordRepeat: this.f.passwordRepeat.value,
-      gender:this.f.gender.value  
-   };
+    var userInfo: User = new User();
+    userInfo.username = this.f.dni.value;
+    userInfo.password = this.f.password.value;
+    userInfo.name =  this.f.name.value + ' ' + this.f.lastname.value;
+    userInfo.gender = this.f.gender.value;
+
+    this.registerResearcher(userInfo);
+  }
+
+  registerResearcher(user: User){
+      
+    console.log(user);
+
+    this.alertHidden = false;
+
+    let observable = this.adminService.registerResearcher(user);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+    else{
+      observable.subscribe(responseData =>{
+        let userRegistered: User = responseData;
+        this.researchers.push(userRegistered);
+        this.inputName = "";
+        this.inputSurname= "";
+        this.inputMyDni= "";
+        this.inputPass= "";
+        this.inputPassRepeat= "";
+
+      }, error =>{
+        this.alertHidden = true;
+        if(error.status === 409){
+          this.errorMessage = "Ya existe un usuario con el mismo dni";
+        }
+        else{
+          this.errorMessage = "Fallo en el servidor";
+        } 
+      });
+    }
   }
 
 
   deleteResearcher(username: string){
-    console.log("Borrando el investigador: " + username);
+
+    this.alertHidden = false;
+    this.inputName = "";
+    this.inputSurname= "";
+    this.inputMyDni= "";
+    this.inputPass= "";
+    this.inputPassRepeat= "";
 
     this.adminService.deleteResearcher(username).subscribe(responseData =>{
-      console.log("Investigador eliminado correctamente: " + responseData);
 
+      console.log("Investigador eliminado correctamente: " + username);
+      
       this.adminService.getAllResearchers().subscribe(response =>{
         this.researchers = response.list;
       });

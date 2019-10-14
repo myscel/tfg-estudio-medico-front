@@ -42,4 +42,15 @@ export class AdminServiceService {
 
     return this.http.delete(`${this.adminUrl}/deleteResearcher`, {headers: headerList, params: params});
   }
+
+  public registerResearcher(user: User): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.post(`${this.adminUrl}/registerResearcher`,user , {headers: headerList});
+  }
 }

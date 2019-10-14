@@ -42,7 +42,7 @@
         <div class="registro" id="registroNombre">
           <div class="textoEncimaInput">Nombre *</div>
           <div id="divInputNombre" class="form-group">
-            <input class="miInput" id="inputNombre" type="text" formControlName="name" class="form-control" required>
+            <input class="miInput" [(ngModel)]="inputName" id="inputNombre" type="text" formControlName="name" class="form-control" required>
           </div>
 
           <div class="gradienteInput"></div>
@@ -50,7 +50,7 @@
         <div class="registro" id="registroApellidos">
           <div class="textoEncimaInput">Apellidos *</div>
           <div class="divInput form-group">
-            <input class="miInput" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
+            <input class="miInput" [(ngModel)]="inputSurname" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
               required>
           </div>
 
@@ -59,7 +59,7 @@
         <div class="registro" id="registroDni">
           <div class="textoEncimaInput">DNI *</div>
           <div class="divInput form-group">
-            <input class="miInput" id="inputDni" type="text" formControlName="dni" class="form-control" required>
+            <input class="miInput" [(ngModel)]="inputMyDni" id="inputDni" type="text" formControlName="dni" class="form-control" required>
           </div>
 
           <div class="gradienteInput"></div>
@@ -67,7 +67,7 @@
         <div class="registro" id="registroContra">
           <div class="textoEncimaInput">Contraseña *</div>
           <div class="divInput form-group">
-            <input class="miInput" id="inputContra" type="password" formControlName="password" class="form-control"
+            <input class="miInput" [(ngModel)]="inputPass" id="inputContra" type="password" formControlName="password" class="form-control"
               required>
           </div>
 
@@ -76,7 +76,7 @@
         <div class="registro" id="registroContraRepetir">
           <div class="textoEncimaInput">Confirmar Contraseña *</div>
           <div class="divInput form-group">
-            <input class="miInput" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
+            <input class="miInput" [(ngModel)]="inputPassRepeat" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
               class="form-control" required>
           </div>
 
@@ -109,31 +109,39 @@
           <button id="botonLogin" type="button" class="btn btn-primary" (click)="onSubmit()">Registrar</button>
         </div>
       </form>
+
+      <div id="modalAlert" class="alert alert-danger" [hidden]='!alertHidden'>
+        <strong>Error! </strong> {{errorMessage}}
+      </div>
     </div>
 
-    <div id="divTable" class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>DNI</th>
-            <th>NOMBRE</th>
-            <th>GÉNERO</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of researchers; let i = index"
-            [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
-            <td> {{user.username}}</td>
-            <td>{{user.name.toUpperCase()}}</td>
-            <td>{{user.gender.toUpperCase()}}</td>
-            <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
-                  src="../../../../assets/icons/cross.png" height="20px"></button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div id="divRight">
+      <div id="titleTableResearchers"> Lista Investigadores</div>
+      <div id="divTable" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>DNI</th>
+              <th>NOMBRE</th>
+              <th>GÉNERO</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of researchers; let i = index"
+              [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
+              <td> {{user.username}}</td>
+              <td>{{user.name.toUpperCase()}}</td>
+              <td>{{user.gender.toUpperCase()}}</td>
+              <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
+                    src="../../../../assets/icons/cross.png" height="20px"></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
+    </div>
+
 
 </body>
 
