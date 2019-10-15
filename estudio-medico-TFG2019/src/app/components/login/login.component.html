@@ -9,7 +9,6 @@
         <div id="headerIzqa">
             Estudio <strong>Médico</strong>
         </div>
-        <div id="headerDcha"> Login</div>
 
     </header>
 
@@ -20,15 +19,15 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="dni">DNI</label>
-            <input type="text" [(ngModel)]="inputDni" placeholder="Enter DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter DNI'" formControlName="dni" class="form-control" required autofocus/>
+            <input type="text" [(ngModel)]="inputDni" placeholder="Introduce tu DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Introduce tu DNI'" formControlName="dni" class="form-control" required autofocus/>
         </div>
         <hr>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" [(ngModel)]="inputPassword" placeholder="Enter password" onfocus="placeholder = ''" onblur="this.placeholder = 'Enter password'" formControlName="password" class="form-control" required/>
+            <label for="password">Contraseña</label>
+            <input type="password" [(ngModel)]="inputPassword" placeholder="Introduce tu contraseña" onfocus="placeholder = ''" onblur="this.placeholder = 'Introduce tu contraseña'" formControlName="password" class="form-control" required/>
         </div>
         <hr>
-            <button id="buttonLogin" class="btn btn-primary">Login</button>
+            <button id="buttonLogin" class="btn btn-primary">ENTRAR</button>
     </form>
 
     <div id="modalAlert" class="alert alert-danger" [hidden]='!alertHidden'>
