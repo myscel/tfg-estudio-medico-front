@@ -51,14 +51,7 @@ button {
       margin-right: -50%;
       transform: translate(-50%, -50%);
          
-      background: rgba(205,252,252,1);
-      background: -moz-linear-gradient(top, rgb(179, 215, 248) 0%, rgba(247,255,254,1) 100%);
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, rgb(179, 215, 248)), color-stop(100%, rgba(247,255,254,1)));
-      background: -webkit-linear-gradient(top, rgb(179, 215, 248) 0%, rgba(247,255,254,1) 100%);
-      background: -o-linear-gradient(top, rgb(179, 215, 248) 0%, rgba(247,255,254,1) 100%);
-      background: -ms-linear-gradient(top, rgb(179, 215, 248) 0%, rgba(247,255,254,1) 100%);
-      background: linear-gradient(to bottom, rgb(179, 215, 248) 0%, rgba(247,255,254,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdfcfc', endColorstr='#f7fffe', GradientType=0 );
+      background-color: rgba(217, 236, 251, 0.9);
   }
 
   input{
