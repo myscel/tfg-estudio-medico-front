@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
-
   <title>Estudio Médico</title>
 </head>
 
@@ -110,8 +109,12 @@
         </div>
       </form>
 
-      <div id="modalAlert" class="alert alert-danger" [hidden]='!alertHidden'>
+      <div id="modalAlert" class="alert alert-danger" [hidden]='!alertRegisterHidden'>
         <strong>Error! </strong> {{errorMessage}}
+      </div>
+
+      <div id="modalSuccess" class="alert alert-success" [hidden]='!successRegisterHidden'>
+        <strong>Éxito! </strong> {{successMessage}}
       </div>
     </div>
 
@@ -147,10 +150,16 @@
       <ng-template id="divEmptyList" #divEmptyList>
           <label class="textEmptyList">Actualmente no hay investigadores registrados</label>
       </ng-template>
+
+      <div id="modalSuccessDelete" class="alert alert-success" [hidden]='!successDeleteHidden'>
+        <strong>Éxito! </strong> {{successDeleteMessage}}
+      </div>
+        
+      <div id="modalSuccessDelete" class="alert alert-danger" [hidden]='!alertDeleteHidden'>
+        <strong>Error! </strong> {{alertDeleteMessage}}
+      </div>
   </div>
-    </div>
-
-
+  </div>
 </body>
 
 </html>

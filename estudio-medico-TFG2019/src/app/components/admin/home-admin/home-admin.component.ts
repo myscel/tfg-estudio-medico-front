@@ -19,8 +19,17 @@ export class HomeAdminComponent implements OnInit {
 
   userLogged: User;
   registerForm: FormGroup;
-  alertHidden: boolean = false;
+  alertRegisterHidden: boolean = false;
+  successRegisterHidden: boolean = false;
   errorMessage: string;
+  successMessage: string;
+
+
+  successDeleteHidden: boolean = false;
+  successDeleteMessage: string;
+
+  alertDeleteHidden: boolean = false;
+  alertDeleteMessage: string;
 
   inputName: string;
   inputSurname: string;
@@ -40,7 +49,7 @@ export class HomeAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    this.alertHidden = false;
+    this.alertRegisterHidden = false;
     this.inputName = "";
     this.inputSurname= "";
     this.inputMyDni= "";
@@ -91,15 +100,18 @@ export class HomeAdminComponent implements OnInit {
 
   onSubmit() {
     if(!this.checkEmptyFields()){
-      this.alertHidden = true;
+      this.alertRegisterHidden = true;
+      this.successRegisterHidden = false;
       this.errorMessage = "Rellena todos los campos";
     }
     else if(this.f.password.value.trim() !== this.f.passwordRepeat.value.trim() ){
-      this.alertHidden = true;
+      this.alertRegisterHidden = true;
+      this.successRegisterHidden = false;
       this.errorMessage = "Las contraseñas no coinciden";
     }
     else if(!this.validateDNI(this.f.dni.value)){
-      this.alertHidden = true;
+      this.alertRegisterHidden = true;
+      this.successRegisterHidden = false;
       this.errorMessage = "DNI formato incorrecto";
     }
     else{
@@ -138,7 +150,7 @@ export class HomeAdminComponent implements OnInit {
       
     console.log(user);
 
-    this.alertHidden = false;
+    this.alertRegisterHidden = false;
 
     let observable = this.adminService.registerResearcher(user);
 
@@ -151,6 +163,9 @@ export class HomeAdminComponent implements OnInit {
         this.researchers.push(userRegistered);
 
         this.emptyList = false;
+        this.alertRegisterHidden = false;
+        this.successRegisterHidden = true;
+        this.successMessage = "Investigador registrado correctamente"
 
         this.inputName = "";
         this.inputSurname= "";
@@ -159,7 +174,8 @@ export class HomeAdminComponent implements OnInit {
         this.inputPassRepeat= "";
 
       }, error =>{
-        this.alertHidden = true;
+        this.alertRegisterHidden = true;
+        this.successRegisterHidden = false;
         if(error.status === 409){
           this.errorMessage = "Ya existe un usuario con el mismo dni";
         }
@@ -173,7 +189,8 @@ export class HomeAdminComponent implements OnInit {
 
   deleteResearcher(username: string){
 
-    this.alertHidden = false;
+    this.alertRegisterHidden = false;
+    this.successRegisterHidden = false;
     this.inputName = "";
     this.inputSurname= "";
     this.inputMyDni= "";
@@ -182,7 +199,12 @@ export class HomeAdminComponent implements OnInit {
 
     this.adminService.deleteResearcher(username).subscribe(responseData =>{
 
-      console.log("Investigador eliminado correctamente: " + username);
+      this.successDeleteHidden = true;
+      this.successDeleteMessage = "Investigador con DNI " + username +   " eliminado correctamente";
+
+      setTimeout( () =>{
+        this.successDeleteHidden = false;
+      }, 3000);
       
       this.adminService.getAllResearchers().subscribe(response =>{
         this.researchers = response.list;
@@ -195,11 +217,13 @@ export class HomeAdminComponent implements OnInit {
         }
       });
       
-      
     }, err => {
-      console.log("Error en el eliminar investigador");
-      console.log(err);
+      this.alertDeleteHidden = true;
+      this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username;
 
+      setTimeout( () =>{
+        this.alertDeleteHidden = false;
+      }, 3000);
     });
   }
 

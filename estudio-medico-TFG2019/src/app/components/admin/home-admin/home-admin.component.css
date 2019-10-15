@@ -269,15 +269,22 @@ input{
   margin-left: 28%;
 }
 
-#modalAlert{
+#modalAlert, #modalSuccess{
+  font-size: 18px;
   width: 90%;
   margin-bottom: 30px;
   text-align: center;
+}
+
+#modalSuccessDelete{
+  font-size: 18px;
+  width: 100%;
 }
 
 .textEmptyList{
   color: rgb(106, 106, 106);
   font-size: 20px;
 }
+
 
 
