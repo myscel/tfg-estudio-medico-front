@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
+import { User } from 'src/app/models/User';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 
 @Component({
   selector: 'app-home-researcher',
@@ -10,9 +12,19 @@ import { UserServiceService } from 'src/app/services/userService.service';
 })
 export class HomeResearcherComponent implements OnInit {
 
-  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService) { }
+  userLogged: User;
+
+  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService, private adminService: AdminServiceService,) { }
 
   ngOnInit() {
+
+    this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+
+    let observable = this.adminService.getAllResearchers();
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
   }
 
   doLogOut(){
