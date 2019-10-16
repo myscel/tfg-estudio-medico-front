@@ -227,6 +227,12 @@ input{
   height: 30px;
 }
 
+.groupGender{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .textoGenero{
   color: rgb(54, 54, 54);
   font-weight: bolder;

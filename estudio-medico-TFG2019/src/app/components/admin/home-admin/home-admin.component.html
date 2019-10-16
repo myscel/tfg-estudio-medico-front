@@ -85,19 +85,25 @@
           <div class="textoEncimaInput">Género *</div>
           <div id="generoGroup">
             <div class="divGeneros">
-              <div class="form-group">
-                <input class="inputRadio" type="radio" formControlName="gender" value="hombre" required> 
+              <div class="form-group groupGender">
+                <div>
+                    <input class="inputRadio" type="radio" formControlName="gender" value="hombre" required>
+                </div>
+                <div class="textoGenero">
+                    Hombre
+                </div> 
               </div>
-              <div class="textoGenero">
-                Hombre
-              </div>
+              
             </div>
             <div class="divGeneros">
-              <div class="form-group">
-                <input class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
-              </div>
-              <div class="textoGenero">
-                Mujer
+              <div class="form-group groupGender">
+
+                  <div>
+                      <input class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
+                    </div>
+                  <div class="textoGenero">
+                      Mujer
+                  </div>
               </div>
             </div>
           </div>
