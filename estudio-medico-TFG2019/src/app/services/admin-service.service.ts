@@ -53,4 +53,6 @@ export class AdminServiceService {
 
     return this.http.post(`${this.adminUrl}/registerResearcher`,user , {headers: headerList});
   }
+
+  
 }

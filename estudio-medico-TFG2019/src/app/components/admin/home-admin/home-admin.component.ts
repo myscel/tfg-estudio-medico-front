@@ -241,4 +241,76 @@ export class HomeAdminComponent implements OnInit {
     });
   }
 
+  sortUpDni(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.username.toUpperCase() > b.username.toUpperCase()) {
+        return 1;
+      }
+      if (a.username.toUpperCase() < b.username.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownDni(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.username.toUpperCase() < b.username.toUpperCase()) {
+        return 1;
+      }
+      if (a.username.toUpperCase() > b.username.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortUpName(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.name.toUpperCase() > b.name.toUpperCase()) {
+        return 1;
+      }
+      if (a.name.toUpperCase() < b.name.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownName(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.name.toUpperCase() < b.name.toUpperCase()) {
+        return 1;
+      }
+      if (a.name.toUpperCase() > b.name.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortUpGender(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
+        return 1;
+      }
+      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownGender(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
+        return 1;
+      }
+      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
 }
