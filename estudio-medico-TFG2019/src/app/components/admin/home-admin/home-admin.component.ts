@@ -218,8 +218,15 @@ export class HomeAdminComponent implements OnInit {
       });
       
     }, err => {
+
+      if(err.status === 409){
+        this.alertDeleteMessage = "El investigador con DNI: " + username + " tiene pacientes asociados.";
+
+      }
+      else{
+        this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username + ".";
+      }
       this.alertDeleteHidden = true;
-      this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username;
 
       setTimeout( () =>{
         this.alertDeleteHidden = false;
@@ -238,6 +245,78 @@ export class HomeAdminComponent implements OnInit {
       console.log("Error en el logout");
       console.log(err);
  
+    });
+  }
+
+  sortUpDni(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.username.toUpperCase() > b.username.toUpperCase()) {
+        return 1;
+      }
+      if (a.username.toUpperCase() < b.username.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownDni(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.username.toUpperCase() < b.username.toUpperCase()) {
+        return 1;
+      }
+      if (a.username.toUpperCase() > b.username.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortUpName(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.name.toUpperCase() > b.name.toUpperCase()) {
+        return 1;
+      }
+      if (a.name.toUpperCase() < b.name.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownName(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.name.toUpperCase() < b.name.toUpperCase()) {
+        return 1;
+      }
+      if (a.name.toUpperCase() > b.name.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortUpGender(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
+        return 1;
+      }
+      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownGender(){
+    this.researchers = this.researchers.sort(function (a, b) {
+      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
+        return 1;
+      }
+      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
+        return -1;
+      }
+      return 0;
     });
   }
 

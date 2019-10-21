@@ -27,7 +27,6 @@
 #divTable{
     width: 100%;
     border-radius: 8px;
-    
 }
 
 th, td{
@@ -54,6 +53,7 @@ th{
 td{
     font-size: 20px;
     text-align: center;
+    border-bottom: 1px solid gray;
 }
 
 
@@ -313,6 +313,28 @@ input{
   color: rgb(106, 106, 106);
   font-size: 20px;
 }
+
+.thSort{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonInvisible{
+  background: transparent;
+  border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  margin: 0px 4px;
+}
+
+.buttonInvisible:hover{
+  background: transparent;
+  border: none !important;
+}
+
 
 
 

@@ -9,11 +9,13 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
+import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: HomeAdminComponent },
+  { path: 'admin/researchers', component: HomeAdminComponent },
+  { path: 'admin/subjects', component: SubjectsAdminComponent },
   { path: 'researcher', component: HomeResearcherComponent }
 ];
 
@@ -22,7 +24,8 @@ const appRoutes : Routes = [
     AppComponent,
     LoginComponent,
     HomeAdminComponent,
-    HomeResearcherComponent
+    HomeResearcherComponent,
+    SubjectsAdminComponent
   ],
   imports: [
     BrowserModule,
