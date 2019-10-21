@@ -44,4 +44,90 @@
         <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
 
+
+    <div id="divRight">
+        <div id="titleTableResearchers"> Lista Investigadores</div>
+        <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <div class="thSort">
+                    <div class="thText">
+                        DNI
+                    </div>
+                    <div>
+                        <button class="buttonInvisible" type="button" (click)="sortUpDni()">
+                              <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                        </button> 
+                    </div>
+                    <div>
+                      <button class="buttonInvisible" type="button" (click)="sortDownDni()">
+                          <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                      </button>    
+                    </div>
+                  </div>
+                </th>
+                <th>
+                    <div class="thSort">
+                      <div class="thText">
+                          NOMBRE
+                      </div>
+                      <div>
+                          <button class="buttonInvisible" type="button" (click)="sortUpName()">
+                                <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                          </button> 
+                      </div>
+                      <div>
+                        <button class="buttonInvisible" type="button" (click)="sortDownName()">
+                            <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                        </button>    
+                      </div>
+                    </div>
+                  </th>
+                  <th>
+                      <div class="thSort">
+                        <div class="thText">
+                            GÉNERO
+                        </div>
+                        <div>
+                            <button class="buttonInvisible" type="button" (click)="sortUpGender()">
+                                  <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                            </button> 
+                        </div>
+                        <div>
+                          <button class="buttonInvisible" type="button" (click)="sortDownGender()">
+                              <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                          </button>    
+                        </div>
+                      </div>
+                    </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of researchers; let i = index"
+                [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
+                <td> {{user.username}}</td>
+                <td>{{user.name.toUpperCase()}}</td>
+                <td>{{user.gender.toUpperCase()}}</td>
+                <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
+                      src="../../../../assets/icons/cross.png" height="20px"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template id="divEmptyList" #divEmptyList>
+            <label class="textEmptyList">Actualmente no hay investigadores registrados</label>
+        </ng-template>
+  
+        <div id="modalSuccessDelete" class="alert alert-success" [hidden]='!successDeleteHidden'>
+          <strong>Éxito! </strong> {{successDeleteMessage}}
+        </div>
+          
+        <div id="modalSuccessDelete" class="alert alert-danger" [hidden]='!alertDeleteHidden'>
+          <strong>Error! </strong> {{alertDeleteMessage}}
+        </div>
+    </div>
+
 </body>

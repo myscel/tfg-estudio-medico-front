@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
-import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { ResearcherServiceService } from 'src/app/services/researcher-service.service';
+import { Component, OnInit, Input  } from '@angular/core';
 
 @Component({
   selector: 'app-home-researcher',
@@ -12,18 +12,44 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 })
 export class HomeResearcherComponent implements OnInit {
 
+  @Input() subjects: User[] = [];
+
   userLogged: User;
 
-  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService, private adminService: AdminServiceService,) { }
+  emptyList: boolean = false;
+
+  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService, private researcherService: ResearcherServiceService,) { }
 
   ngOnInit() {
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    let observable = this.adminService.getAllResearchers();
+    let observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
 
     if(observable === null){
       this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+
+
+        this.subjects = response.list;
+console.log(this.subjects);
+        if(this.subjects.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
+
+
+      }, error =>{
+        //Debería mostrar un pop-up
+        console.log("Error al listar usuarios");
+        console.log(error);
+        this.router.navigate(['/login']);
+      });
     }
   }
 
