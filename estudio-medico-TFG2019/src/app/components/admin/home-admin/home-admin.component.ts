@@ -230,7 +230,7 @@ export class HomeAdminComponent implements OnInit {
 
       setTimeout( () =>{
         this.alertDeleteHidden = false;
-      }, 3000);
+      }, 5000);
     });
   }
 

@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("userLogged", JSON.stringify(this.userService.userLogged));
 
       if(this.userService.userLogged.role === "ADMIN"){
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/researchers']);
       }
 
       else{
