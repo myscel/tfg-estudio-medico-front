@@ -218,8 +218,15 @@ export class HomeAdminComponent implements OnInit {
       });
       
     }, err => {
+
+      if(err.status === 409){
+        this.alertDeleteMessage = "El investigador con DNI: " + username + " tiene pacientes asociados.";
+
+      }
+      else{
+        this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username + ".";
+      }
       this.alertDeleteHidden = true;
-      this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username;
 
       setTimeout( () =>{
         this.alertDeleteHidden = false;
