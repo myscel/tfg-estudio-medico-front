@@ -35,7 +35,7 @@ export class HomeResearcherComponent implements OnInit {
 
 
         this.subjects = response.list;
-console.log(this.subjects);
+        console.log(this.subjects);
         if(this.subjects.length === 0){
           this.emptyList = true;
         }
