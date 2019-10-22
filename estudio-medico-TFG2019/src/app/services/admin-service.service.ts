@@ -78,5 +78,18 @@ export class AdminServiceService {
     return this.http.get(`${this.adminUrl}/${id}/subjects`, {headers: headerList});
   }
 
+  public deleteSubjectByIdentificationNumber(identificationNumber: string): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+    
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+    let params = new HttpParams().set("identificationNumber", identificationNumber)
+
+    return this.http.delete(`${this.adminUrl}/deleteSubject`, {headers: headerList, params: params});
+  }
+
   
 }

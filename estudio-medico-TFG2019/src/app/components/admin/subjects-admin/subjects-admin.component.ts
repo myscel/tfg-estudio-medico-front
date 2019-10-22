@@ -18,6 +18,11 @@ export class SubjectsAdminComponent implements OnInit {
   userLogged: User;
   emptyList: boolean = false;
 
+  successDeleteHidden: boolean = false;
+  alertDeleteHidden: boolean = false;
+  successDeleteMessage: string = "";
+  alertDeleteMessage: string = "";
+
   constructor(private router: Router,
     private http: HttpClient,
     private userService: UserServiceService,
@@ -125,6 +130,63 @@ export class SubjectsAdminComponent implements OnInit {
       console.log(err);
  
     });
+  }
+
+  deleteSubject(identificationNumber: string){
+    console.log("Vamos a borrar al paciente: " + identificationNumber);
+
+
+    let observable = this.adminService.deleteSubjectByIdentificationNumber(identificationNumber);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+
+        console.log("Éxito al borrar al paciente: " + identificationNumber);
+
+        this.adminService.getAllSubjects().subscribe(response =>{
+          this.subjects = response.list;
+  
+          if(this.subjects.length === 0){
+            this.emptyList = true;
+          }
+          else{
+            this.emptyList = false;
+          }
+        });
+
+        this.successDeleteHidden = true;
+        this.alertDeleteHidden = false;
+        this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
+
+        setTimeout(()=>{
+          this.successDeleteHidden = false;
+        }, 5000)
+      }, error =>{
+        this.successDeleteHidden = false;
+        this.alertDeleteHidden = true;
+
+        if(error.status === 500){
+          this.alertDeleteMessage = "Fallo en el servidor";
+        }
+        else if(error.status === 400){
+          this.alertDeleteMessage = "El número de identificación debe ser un número entero";
+        }
+        else if(error.status === 404){
+          this.alertDeleteMessage = "El paciente no existe";
+        }
+
+        setTimeout(()=>{
+          this.alertDeleteHidden = false;
+        }, 5000)
+
+        console.log("Error al borrar al paciente: " + identificationNumber);
+        console.log(error);
+      });
+    }
   }
 
 }

@@ -87,15 +87,22 @@
                   [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                   <td> {{subject.identificationNumber}}</td>
                   <td>{{subject.usernameResearcher.toUpperCase()}}</td>
-                  <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
+                  <td><button id="buttonDelete" type="button" (click)="deleteSubject(subject.identificationNumber)"><img id="imgCross"
                         src="../../../../assets/icons/cross.png" height="20px"></button></td>
                 </tr>
               </tbody>
             </table>
-          </div>
+        </div>
           <ng-template id="divEmptyList" #divEmptyList>
               <label class="textEmptyList">Actualmente no hay pacientes registrados</label>
           </ng-template>
+          <div id="modalSuccessDelete" class="alert alert-success" [hidden]='!successDeleteHidden'>
+            <strong>Éxito! </strong> {{successDeleteMessage}}
+          </div>
+            
+          <div id="modalErrorDelete" class="alert alert-danger" [hidden]='!alertDeleteHidden'>
+            <strong>Error! </strong> {{alertDeleteMessage}}
+          </div>
     </div>
   </div>
 </body>
