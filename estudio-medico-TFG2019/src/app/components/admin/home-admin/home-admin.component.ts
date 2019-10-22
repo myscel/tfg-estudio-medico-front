@@ -320,4 +320,13 @@ export class HomeAdminComponent implements OnInit {
     });
   }
 
+  goToResearcherList(){
+    this.router.navigate(['/admin/researchers']);
+
+  }
+
+  goToSubjectList(){
+    this.router.navigate(['/admin/subjects']);
+  }
+
 }

@@ -104,6 +104,15 @@ export class SubjectsAdminComponent implements OnInit {
     });
   }
 
+  goToResearcherList(){
+    this.router.navigate(['/admin/researchers']);
+
+  }
+
+  goToSubjectList(){
+    this.router.navigate(['/admin/subjects']);
+  }
+
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       console.log("Iniciando Log out");

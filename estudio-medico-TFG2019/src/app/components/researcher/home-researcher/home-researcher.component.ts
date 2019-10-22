@@ -4,6 +4,7 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
 import { ResearcherServiceService } from 'src/app/services/researcher-service.service';
 import { Component, OnInit, Input  } from '@angular/core';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 
 @Component({
   selector: 'app-home-researcher',
@@ -18,13 +19,29 @@ export class HomeResearcherComponent implements OnInit {
 
   emptyList: boolean = false;
 
-  constructor(private router: Router,private http: HttpClient, private userService: UserServiceService, private researcherService: ResearcherServiceService,) { }
+  constructor(private router: Router,
+    private http: HttpClient,
+     private userService: UserServiceService,
+      private researcherService: ResearcherServiceService,
+      private adminServiceService: AdminServiceService) { }
 
   ngOnInit() {
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    let observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
+    console.log("ID del investigador solicitado: " + this.userLogged.id);
+    let observable = null;
+    
+    
+
+    if(this.userLogged.role === "ADMIN"){
+      console.log("ACCEDIENDO DESDE ADMIN...");
+      observable = this.adminServiceService.getSubjectsAndInvestigationsFromIdAdmin(this.userLogged.id);
+    }
+    else{
+      console.log("ACCEDIENDO DESDE RESEARCHER...");
+      observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
+    }
 
     if(observable === null){
       this.router.navigate(['/login']);

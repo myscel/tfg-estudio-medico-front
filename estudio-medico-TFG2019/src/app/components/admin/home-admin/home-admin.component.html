@@ -32,8 +32,8 @@
   </header>
 
   <div id="navigationBar">
-      <button id="buttonPacientes" class="btn btn-primary navButton">INVESTIGADORES</button>
-      <button id="buttonCitas" class="btn btn-primary navButton">PACIENTES</button>
+      <button id="buttonPacientes" (click)="goToResearcherList()" class="btn btn-primary navButton">INVESTIGADORES</button>
+      <button id="buttonCitas" (click)="goToSubjectList()" class="btn btn-primary navButton">PACIENTES</button>
   </div>
 
   <div id="page">
