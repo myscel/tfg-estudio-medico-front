@@ -197,6 +197,12 @@ strong{
   width: 100%;
 }
 
+
+
+#roleUser{
+  color: rgb(44, 44, 44);
+}
+
 .textEmptyList{
   color: rgb(106, 106, 106);
   font-size: 20px;
