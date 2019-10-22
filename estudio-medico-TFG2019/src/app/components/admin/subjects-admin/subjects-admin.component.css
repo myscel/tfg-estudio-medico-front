@@ -94,7 +94,6 @@ strong{
   #titleTableSubjects{
     font-size: 30px;
     font-weight: bold;
-    margin-top: 20px;
     margin-bottom: 10px;
     color: rgb(10, 10, 10);
     align-self: flex-start;
@@ -190,9 +189,10 @@ strong{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 30px;
 }
 
-#modalSuccessDelete, #modalErrorDelete{
+#modalSuccessDelete, #modalErrorDelete, #modalWarningDelete{
   font-size: 18px;
   width: 100%;
 }
@@ -207,6 +207,12 @@ strong{
   color: rgb(106, 106, 106);
   font-size: 20px;
   align-self: flex-start;
+}
+
+#modalInvisible{
+  border:0px solid transparent;
+  color: transparent;
+  height: 78px;
 }
 
 

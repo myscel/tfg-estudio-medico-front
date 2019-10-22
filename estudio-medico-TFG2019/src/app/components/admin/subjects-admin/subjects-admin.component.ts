@@ -20,8 +20,11 @@ export class SubjectsAdminComponent implements OnInit {
 
   successDeleteHidden: boolean = false;
   alertDeleteHidden: boolean = false;
+  alertWarningHidden: boolean = false;
+  alertInvisibleHidden: boolean = true;
   successDeleteMessage: string = "";
   alertDeleteMessage: string = "";
+  alertWarningMessage: string = "";
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -147,6 +150,8 @@ export class SubjectsAdminComponent implements OnInit {
 
         console.log("Éxito al borrar al paciente: " + identificationNumber);
 
+        window.scroll(0,0);
+
         this.adminService.getAllSubjects().subscribe(response =>{
           this.subjects = response.list;
   
@@ -159,15 +164,18 @@ export class SubjectsAdminComponent implements OnInit {
         });
 
         this.successDeleteHidden = true;
+        this.alertInvisibleHidden = false;
         this.alertDeleteHidden = false;
         this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
 
         setTimeout(()=>{
           this.successDeleteHidden = false;
+          this.alertInvisibleHidden = true;
         }, 5000)
       }, error =>{
         this.successDeleteHidden = false;
         this.alertDeleteHidden = true;
+        this.alertInvisibleHidden = false;
 
         if(error.status === 500){
           this.alertDeleteMessage = "Fallo en el servidor";
@@ -181,6 +189,7 @@ export class SubjectsAdminComponent implements OnInit {
 
         setTimeout(()=>{
           this.alertDeleteHidden = false;
+          this.alertInvisibleHidden = true;
         }, 5000)
 
         console.log("Error al borrar al paciente: " + identificationNumber);
