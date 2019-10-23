@@ -50,7 +50,17 @@
 
           <div id="modalWarningDelete" class="miModal alert alert-warning" [hidden]='!alertWarningHidden'>
             <strong>Aviso! </strong> {{alertWarningMessage}}
-            <p>¿Desea eliminar al paciente y sus citas realizas?<p>
+            <div id="divConfirmDelete">
+              <div id="divConfirmDeleteLeft"> 
+                <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
+              </div>
+              <div id="divConfirmDeleteRight">
+                  <button type="button" (click)="confirmDelete()" class="buttonConfirmDelete btn btn-success">SÍ</button>
+                  <button type="button" class="buttonConfirmDelete btn btn-danger">NO</button>
+              </div>
+               
+               
+            </div>   
           </div>
 
           <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>

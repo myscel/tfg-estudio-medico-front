@@ -25,6 +25,7 @@ export class SubjectsAdminComponent implements OnInit {
   successDeleteMessage: string = "";
   alertDeleteMessage: string = "";
   alertWarningMessage: string = "";
+  subjectToDelete: string;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -161,6 +162,7 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertInvisibleHidden = false;
 
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
+          this.subjectToDelete = identificationNumber;
         }
 
         else{
@@ -194,11 +196,7 @@ export class SubjectsAdminComponent implements OnInit {
               this.alertWarningHidden = false;
 
               this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
-      
-              setTimeout(()=>{
-                this.successDeleteHidden = false;
-                this.alertInvisibleHidden = true;
-              }, 5000)
+
             }, error =>{
               this.alertWarningHidden = false;
               this.successDeleteHidden = false;
@@ -215,10 +213,6 @@ export class SubjectsAdminComponent implements OnInit {
                 this.alertDeleteMessage = "El paciente no existe";
               }
       
-              setTimeout(()=>{
-                this.alertDeleteHidden = false;
-                this.alertInvisibleHidden = true;
-              }, 5000)
       
               console.log("Error al borrar al paciente: " + identificationNumber);
               console.log(error);
@@ -241,10 +235,61 @@ export class SubjectsAdminComponent implements OnInit {
         console.log(error);
       });
     }
-
-
-
-    
   }
+
+
+  confirmDelete(){
+    console.log("Vamos a borrar al paciente con citas: " + this.subjectToDelete);
+      let observable = this.adminService.deleteSubjectByIdentificationNumber(this.subjectToDelete);
+
+      if(observable === null){
+        this.router.navigate(['/login']);
+      }
+  
+      else{
+        observable.subscribe(response =>{
+          console.log("Éxito al borrar al paciente: " + this.subjectToDelete +  " y sus citas");
+  
+          this.adminService.getAllSubjects().subscribe(response =>{
+            this.subjects = response.list;
+    
+            if(this.subjects.length === 0){
+              this.emptyList = true;
+            }
+            else{
+              this.emptyList = false;
+            }
+          });
+  
+          this.successDeleteHidden = true;
+          this.alertInvisibleHidden = false;
+          this.alertDeleteHidden = false;
+          this.alertWarningHidden = false;
+
+          this.successDeleteMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
+
+        }, error =>{
+          this.alertWarningHidden = false;
+          this.successDeleteHidden = false;
+          this.alertDeleteHidden = true;
+          this.alertInvisibleHidden = false;
+  
+          if(error.status === 500){
+            this.alertDeleteMessage = "Fallo en el servidor";
+          }
+          else if(error.status === 400){
+            this.alertDeleteMessage = "El número de identificación debe ser un número entero";
+          }
+          else if(error.status === 404){
+            this.alertDeleteMessage = "El paciente no existe";
+          }
+  
+  
+          console.log("Error al borrar al paciente: " + this.subjectToDelete);
+          console.log(error);
+        });
+      }
+  }
+  
 
 }

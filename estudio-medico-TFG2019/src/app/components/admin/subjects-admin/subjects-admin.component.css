@@ -212,13 +212,44 @@ strong{
 #modalInvisible{
   border:0px solid transparent;
   color: transparent;
-  height: 100px;
+  height: 110px;
   
 }
 
 .miModal{
-  height: 80px;
+  height: 90px;
+  align-items: center;
 }
+
+#divConfirmDelete{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  margin-top: 3px;
+}
+
+.buttonConfirmDelete{
+  text-align: center;
+  margin: 0px 10px;
+  width: 70px;
+}
+
+#textConfirmDelete{
+  margin-left: 8px;
+}
+
+#divConfirmDeleteLeft{
+  width: 70%;
+}
+
+#divConfirmDeleteRight{
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 
 
   
