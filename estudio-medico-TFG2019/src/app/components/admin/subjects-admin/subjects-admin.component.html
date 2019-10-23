@@ -40,16 +40,17 @@
 
   <div id="page">
     <div id="divListSubjects">
-        <div id="modalSuccessDelete" class="alert alert-success" [hidden]='!successDeleteHidden'>
+        <div id="modalSuccessDelete" class="miModal alert alert-success" [hidden]='!successDeleteHidden'>
             <strong>Éxito! </strong> {{successDeleteMessage}}
           </div>
             
-          <div id="modalErrorDelete" class="alert alert-danger" [hidden]='!alertDeleteHidden'>
+          <div id="modalErrorDelete" class="miModal alert alert-danger" [hidden]='!alertDeleteHidden'>
             <strong>Error! </strong> {{alertDeleteMessage}}
           </div>
 
-          <div id="modalWarningDelete" class="alert alert-warning" [hidden]='!alertWarningHidden'>
+          <div id="modalWarningDelete" class="miModal alert alert-warning" [hidden]='!alertWarningHidden'>
             <strong>Aviso! </strong> {{alertWarningMessage}}
+            <p>¿Desea eliminar al paciente y sus citas realizas?<p>
           </div>
 
           <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>

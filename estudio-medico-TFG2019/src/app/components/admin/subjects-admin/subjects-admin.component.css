@@ -212,7 +212,12 @@ strong{
 #modalInvisible{
   border:0px solid transparent;
   color: transparent;
-  height: 78px;
+  height: 100px;
+  
+}
+
+.miModal{
+  height: 80px;
 }
 
 

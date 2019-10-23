@@ -138,8 +138,7 @@ export class SubjectsAdminComponent implements OnInit {
   deleteSubject(identificationNumber: string){
     console.log("Vamos a borrar al paciente: " + identificationNumber);
 
-
-    let observable = this.adminService.deleteSubjectByIdentificationNumber(identificationNumber);
+    let observable = this.adminService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
 
     if(observable === null){
       this.router.navigate(['/login']);
@@ -148,34 +147,90 @@ export class SubjectsAdminComponent implements OnInit {
     else{
       observable.subscribe(response =>{
 
-        console.log("Éxito al borrar al paciente: " + identificationNumber);
+        let investigationsCompleted: number = response.numberInvestigationsCompleted;
 
-        window.scroll(0,0);
+        console.log("El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)");
 
-        this.adminService.getAllSubjects().subscribe(response =>{
-          this.subjects = response.list;
-  
-          if(this.subjects.length === 0){
-            this.emptyList = true;
-          }
-          else{
-            this.emptyList = false;
-          }
-        });
+        if(investigationsCompleted !== 0){
 
-        this.successDeleteHidden = true;
-        this.alertInvisibleHidden = false;
-        this.alertDeleteHidden = false;
-        this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
+          window.scroll(0,0);
 
-        setTimeout(()=>{
           this.successDeleteHidden = false;
-          this.alertInvisibleHidden = true;
-        }, 5000)
+          this.alertDeleteHidden = false;
+          this.alertWarningHidden = true;
+          this.alertInvisibleHidden = false;
+
+          this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
+        }
+
+        else{
+          let observable = this.adminService.deleteSubjectByIdentificationNumber(identificationNumber);
+
+          if(observable === null){
+            this.router.navigate(['/login']);
+          }
+      
+          else{
+            observable.subscribe(response =>{
+      
+              console.log("Éxito al borrar al paciente: " + identificationNumber);
+      
+              window.scroll(0,0);
+      
+              this.adminService.getAllSubjects().subscribe(response =>{
+                this.subjects = response.list;
+        
+                if(this.subjects.length === 0){
+                  this.emptyList = true;
+                }
+                else{
+                  this.emptyList = false;
+                }
+              });
+      
+              this.successDeleteHidden = true;
+              this.alertInvisibleHidden = false;
+              this.alertDeleteHidden = false;
+              this.alertWarningHidden = false;
+
+              this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
+      
+              setTimeout(()=>{
+                this.successDeleteHidden = false;
+                this.alertInvisibleHidden = true;
+              }, 5000)
+            }, error =>{
+              this.alertWarningHidden = false;
+              this.successDeleteHidden = false;
+              this.alertDeleteHidden = true;
+              this.alertInvisibleHidden = false;
+      
+              if(error.status === 500){
+                this.alertDeleteMessage = "Fallo en el servidor";
+              }
+              else if(error.status === 400){
+                this.alertDeleteMessage = "El número de identificación debe ser un número entero";
+              }
+              else if(error.status === 404){
+                this.alertDeleteMessage = "El paciente no existe";
+              }
+      
+              setTimeout(()=>{
+                this.alertDeleteHidden = false;
+                this.alertInvisibleHidden = true;
+              }, 5000)
+      
+              console.log("Error al borrar al paciente: " + identificationNumber);
+              console.log(error);
+            });
+          }
+        }
+
       }, error =>{
         this.successDeleteHidden = false;
         this.alertDeleteHidden = true;
         this.alertInvisibleHidden = false;
+        this.alertWarningHidden = false;
 
         if(error.status === 500){
           this.alertDeleteMessage = "Fallo en el servidor";
@@ -183,19 +238,13 @@ export class SubjectsAdminComponent implements OnInit {
         else if(error.status === 400){
           this.alertDeleteMessage = "El número de identificación debe ser un número entero";
         }
-        else if(error.status === 404){
-          this.alertDeleteMessage = "El paciente no existe";
-        }
-
-        setTimeout(()=>{
-          this.alertDeleteHidden = false;
-          this.alertInvisibleHidden = true;
-        }, 5000)
-
-        console.log("Error al borrar al paciente: " + identificationNumber);
         console.log(error);
       });
     }
+
+
+
+    
   }
 
 }

@@ -91,5 +91,17 @@ export class AdminServiceService {
     return this.http.delete(`${this.adminUrl}/deleteSubject`, {headers: headerList, params: params});
   }
 
+  public getNumberInvestigationsCompletedFromSubject(identificationNumber: string): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+    
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.get(`${this.adminUrl}/investigationsCompletedSubject/${identificationNumber}`, {headers: headerList});
+  }
+
   
 }
