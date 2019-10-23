@@ -290,6 +290,13 @@ export class SubjectsAdminComponent implements OnInit {
         });
       }
   }
+
+  cancelDelete(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertInvisibleHidden = true;
+    this.alertWarningHidden = false;
+  }
   
 
 }
