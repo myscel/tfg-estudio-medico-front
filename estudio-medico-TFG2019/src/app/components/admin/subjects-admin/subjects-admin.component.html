@@ -39,6 +39,38 @@
   </div>
 
   <div id="page">
+    <div id="divFilters">
+      <div id="filterByResearcher">
+          <form>
+            <div id="textDNIFilter">
+              DNI Investigador
+            </div>
+            <div id="divFlexFilterResearcher">
+              <div id="divInputFilterResearcher">
+                    <input id="inputFilterResearcher" type="text" class="form-control" id="usr">
+              </div>
+              <div id="divInputButtonSubject">
+                    <button type="button" class="btn btn-primary">Buscar</button>
+              </div>
+            </div>
+          </form>
+      </div>
+      <div id="filterBySubject">
+          <form>
+            <div id="textNumberInvestigationFilter">
+              Nº Identificación Paciente
+            </div>
+            <div id="divFlexFilterSubject">
+              <div id="divInputFilterSubject">
+                <input id="inputFilterSubject" type="text" class="form-control" id="usr">
+              </div>
+              <div id="divInputButtonResearcher">
+                <button type="button" class="btn btn-primary">Buscar</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
     <div id="divListSubjects">
         <div id="modalSuccessDelete" class="miModal alert alert-success" [hidden]='!successDeleteHidden'>
             <strong>Éxito! </strong> {{successDeleteMessage}}
