@@ -377,6 +377,7 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertDeleteHidden = false;
         this.alertWarningHidden = false;
         this.alertInvisibleHidden = true;
+        this.alertFilterHidden = false;
 
 
         this.subjects = response.list;

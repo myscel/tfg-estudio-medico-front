@@ -124,7 +124,7 @@ export class AdminServiceService {
     
     let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.get(`${this.adminUrl}/${username}/subjects`, {headers: headerList});
+    return this.http.get(`${this.adminUrl}/${username}/subject`, {headers: headerList});
   }
 
   
