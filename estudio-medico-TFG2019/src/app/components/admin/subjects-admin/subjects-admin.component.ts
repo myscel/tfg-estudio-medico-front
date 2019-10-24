@@ -22,9 +22,11 @@ export class SubjectsAdminComponent implements OnInit {
   alertDeleteHidden: boolean = false;
   alertWarningHidden: boolean = false;
   alertInvisibleHidden: boolean = true;
+  alertFilterHidden: boolean = false;
   successDeleteMessage: string = "";
   alertDeleteMessage: string = "";
   alertWarningMessage: string = "";
+  alertFilterMessage: string = "";
   subjectToDelete: string;
 
   constructor(private router: Router,
@@ -160,6 +162,7 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertDeleteHidden = false;
           this.alertWarningHidden = true;
           this.alertInvisibleHidden = false;
+          this.alertFilterHidden = false;
 
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
           this.subjectToDelete = identificationNumber;
@@ -194,6 +197,7 @@ export class SubjectsAdminComponent implements OnInit {
               this.alertInvisibleHidden = false;
               this.alertDeleteHidden = false;
               this.alertWarningHidden = false;
+              this.alertFilterHidden = false;
 
               this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
 
@@ -202,6 +206,7 @@ export class SubjectsAdminComponent implements OnInit {
               this.successDeleteHidden = false;
               this.alertDeleteHidden = true;
               this.alertInvisibleHidden = false;
+              this.alertFilterHidden = false;
       
               if(error.status === 500){
                 this.alertDeleteMessage = "Fallo en el servidor";
@@ -225,6 +230,7 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertDeleteHidden = true;
         this.alertInvisibleHidden = false;
         this.alertWarningHidden = false;
+        this.alertFilterHidden = false;
 
         if(error.status === 500){
           this.alertDeleteMessage = "Fallo en el servidor";
@@ -296,6 +302,109 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertDeleteHidden = false;
     this.alertInvisibleHidden = true;
     this.alertWarningHidden = false;
+  }
+
+  filterSubjectsByIdentificationNumber(identificationNumber: string){
+    console.log(identificationNumber);
+
+    let observable = this.adminService.getSubjectByIdentificationNumber(identificationNumber);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+        
+        console.log("Éxito al filtrar por id paciente");
+
+        this.successDeleteHidden = false;
+        this.alertDeleteHidden = false;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = true;
+
+        let subject: Subject = response;
+
+        let subjectsAux: Subject[] = [];
+        subjectsAux.push(subject);
+
+        this.subjects = subjectsAux;
+
+        if(this.subjects.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
+      }, error =>{
+        //Debería mostrar un pop-up
+
+        this.successDeleteHidden = false;
+        this.alertDeleteHidden = false;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = true;
+        this.alertFilterHidden = true;
+
+        if(error.status === 400){
+          this.alertFilterMessage = "Introduce un número";
+        }
+        else if(error.status === 404){
+          this.alertFilterMessage = "El paciente solicitado no existe";
+        }
+        else{
+          console.log("ERROR, fallo en el servidor");
+          this.alertFilterMessage = "Fallo en el servidor";
+        }
+      });
+    }
+  }
+
+  filterSubjectsByResearcherDNI(username: string){
+    console.log(username);
+
+    let observable = this.adminService.getSubjectsByResearcherDNI(username);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+        
+        console.log("Éxito al filtrar por investigador");
+
+        this.successDeleteHidden = false;
+        this.alertDeleteHidden = false;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = true;
+
+
+        this.subjects = response.list;
+
+        if(this.subjects.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
+      }, error =>{
+        //Debería mostrar un pop-up
+
+        this.successDeleteHidden = false;
+        this.alertDeleteHidden = false;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = true;
+        this.alertFilterHidden = true;
+
+        if(error.status === 404){
+          this.alertFilterMessage = "El investigador solicitado no existe";
+        }
+        else{
+          console.log("ERROR, fallo en el servidor");
+          this.alertFilterMessage = "Fallo en el servidor";
+        }
+      });
+    }
   }
   
 

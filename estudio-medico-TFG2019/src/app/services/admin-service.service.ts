@@ -103,5 +103,29 @@ export class AdminServiceService {
     return this.http.get(`${this.adminUrl}/investigationsCompletedSubject/${identificationNumber}`, {headers: headerList});
   }
 
+  public getSubjectByIdentificationNumber(identificationNumber: string): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+    
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.get(`${this.adminUrl}/subjects/${identificationNumber}`, {headers: headerList});
+  }
+
+  public getSubjectsByResearcherDNI(username: string): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+    
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.get(`${this.adminUrl}/${username}/subjects`, {headers: headerList});
+  }
+
   
 }

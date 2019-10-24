@@ -47,10 +47,10 @@
             </div>
             <div id="divFlexFilterResearcher">
               <div id="divInputFilterResearcher">
-                    <input id="inputFilterResearcher" type="text" class="form-control" id="usr">
+                    <input id="inputFilterResearcher" type="text" class="form-control">
               </div>
               <div id="divInputButtonSubject">
-                    <button type="button" class="btn btn-primary">Buscar</button>
+                    <button type="button" (click)="filterSubjectsByResearcherDNI('12345678A')" class="btn btn-primary">Buscar</button>
               </div>
             </div>
           </form>
@@ -62,13 +62,16 @@
             </div>
             <div id="divFlexFilterSubject">
               <div id="divInputFilterSubject">
-                <input id="inputFilterSubject" type="text" class="form-control" id="usr">
+                <input id="inputFilterSubject" type="text" class="form-control">
               </div>
               <div id="divInputButtonResearcher">
-                <button type="button" class="btn btn-primary">Buscar</button>
+                <button type="button" (click)="filterSubjectsByIdentificationNumber(947)" class="btn btn-primary">Buscar</button>
               </div>
             </div>
           </form>
+      </div>
+      <div id="modalFilter" class="alert alert-danger" [hidden]='!alertFilterHidden'>
+          <strong>Error! </strong> {{alertFilterMessage}}
       </div>
     </div>
     <div id="divListSubjects">
