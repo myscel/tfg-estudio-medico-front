@@ -101,7 +101,10 @@
           <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
           </div>
 
-        <div id="titleTableSubjects"> Lista Pacientes</div>
+        <div id="titleTableSubjects"> 
+          Lista Pacientes 
+          <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">Actualizar Lista</button>
+        </div>
         <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
             <table class="table">
               <thead>

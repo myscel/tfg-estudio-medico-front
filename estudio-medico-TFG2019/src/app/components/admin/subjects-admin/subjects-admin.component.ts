@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-subjects-admin',
@@ -45,12 +46,7 @@ export class SubjectsAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-
-        console.log("Éxito al listar los pacientes");
-
         this.subjects = response.list;
-
-        console.log(this.subjects);
 
         if(this.subjects.length === 0){
           this.emptyList = true;
@@ -59,10 +55,12 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        //Debería mostrar un pop-up
-        console.log("Error al listar pacientes");
-        console.log(error);
-        this.router.navigate(['/login']);
+        this.successDeleteHidden = false;
+        this.alertDeleteMessage = "No se pudo cargar la lista de pacientes"
+        this.alertDeleteHidden = true;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = false;
+        this.alertFilterHidden = false;
       });
     }
   }
@@ -126,15 +124,9 @@ export class SubjectsAdminComponent implements OnInit {
 
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      console.log("Iniciando Log out");
-      console.log(responseData);
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
 
-    }, err => {
-      console.log("Error en el logout");
-      console.log(err);
- 
     });
   }
 
@@ -271,6 +263,8 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertInvisibleHidden = false;
           this.alertDeleteHidden = false;
           this.alertWarningHidden = false;
+          this.alertFilterHidden = false;
+
 
           this.successDeleteMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
 
@@ -279,6 +273,8 @@ export class SubjectsAdminComponent implements OnInit {
           this.successDeleteHidden = false;
           this.alertDeleteHidden = true;
           this.alertInvisibleHidden = false;
+          this.alertFilterHidden = false;
+
   
           if(error.status === 500){
             this.alertDeleteMessage = "Fallo en el servidor";
@@ -302,11 +298,10 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertDeleteHidden = false;
     this.alertInvisibleHidden = true;
     this.alertWarningHidden = false;
+    this.alertFilterHidden = false;
   }
 
   filterSubjectsByIdentificationNumber(identificationNumber: string){
-    console.log(identificationNumber);
-
     let observable = this.adminService.getSubjectByIdentificationNumber(identificationNumber);
 
     if(observable === null){
@@ -315,13 +310,12 @@ export class SubjectsAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-        
-        console.log("Éxito al filtrar por id paciente");
-
         this.successDeleteHidden = false;
         this.alertDeleteHidden = false;
         this.alertWarningHidden = false;
         this.alertInvisibleHidden = true;
+        this.alertFilterHidden = false;
+
 
         let subject: Subject = response;
 
@@ -337,8 +331,6 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        //Debería mostrar un pop-up
-
         this.successDeleteHidden = false;
         this.alertDeleteHidden = false;
         this.alertWarningHidden = false;
@@ -352,7 +344,6 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertFilterMessage = "El paciente solicitado no existe";
         }
         else{
-          console.log("ERROR, fallo en el servidor");
           this.alertFilterMessage = "Fallo en el servidor";
         }
       });
@@ -370,15 +361,11 @@ export class SubjectsAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-        
-        console.log("Éxito al filtrar por investigador");
-
         this.successDeleteHidden = false;
         this.alertDeleteHidden = false;
         this.alertWarningHidden = false;
         this.alertInvisibleHidden = true;
         this.alertFilterHidden = false;
-
 
         this.subjects = response.list;
 
@@ -389,8 +376,6 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        //Debería mostrar un pop-up
-
         this.successDeleteHidden = false;
         this.alertDeleteHidden = false;
         this.alertWarningHidden = false;
@@ -401,9 +386,48 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertFilterMessage = "El investigador solicitado no existe";
         }
         else{
-          console.log("ERROR, fallo en el servidor");
           this.alertFilterMessage = "Fallo en el servidor";
         }
+      });
+    }
+  }
+
+  updateListSubjects(){
+    let observable = this.adminService.getAllSubjects();
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+
+        this.successDeleteHidden = true;
+        this.successDeleteMessage = "Lista Pacientes actualizada"
+        this.alertDeleteHidden = false;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = false;
+        this.alertFilterHidden = false;
+
+        console.log("Éxito al listar los pacientes");
+
+        this.subjects = response.list;
+
+        console.log(this.subjects);
+
+        if(this.subjects.length === 0){
+          this.emptyList = true;
+        }
+        else{
+          this.emptyList = false;
+        }
+      }, error =>{     
+        this.successDeleteHidden = false;
+        this.successDeleteMessage = "No se pudo actualizar la lista de pacientes"
+        this.alertDeleteHidden = true;
+        this.alertWarningHidden = false;
+        this.alertInvisibleHidden = false;
+        this.alertFilterHidden = false;
       });
     }
   }
