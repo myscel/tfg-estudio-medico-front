@@ -405,7 +405,7 @@ export class SubjectsAdminComponent implements OnInit {
         }
       }, error =>{     
         this.successDeleteHidden = false;
-        this.successDeleteMessage = "No se pudo actualizar la lista de pacientes"
+        this.alertDeleteMessage = "No se pudo actualizar la lista de pacientes"
         this.alertDeleteHidden = true;
         this.alertWarningHidden = false;
         this.alertInvisibleHidden = false;
