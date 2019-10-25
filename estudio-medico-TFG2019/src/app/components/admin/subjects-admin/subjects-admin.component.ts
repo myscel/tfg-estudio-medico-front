@@ -131,7 +131,6 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   deleteSubject(identificationNumber: string){
-    console.log("Vamos a borrar al paciente: " + identificationNumber);
 
     let observable = this.adminService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
 
@@ -143,8 +142,6 @@ export class SubjectsAdminComponent implements OnInit {
       observable.subscribe(response =>{
 
         let investigationsCompleted: number = response.numberInvestigationsCompleted;
-
-        console.log("El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)");
 
         if(investigationsCompleted !== 0){
 
@@ -169,9 +166,7 @@ export class SubjectsAdminComponent implements OnInit {
       
           else{
             observable.subscribe(response =>{
-      
-              console.log("Éxito al borrar al paciente: " + identificationNumber);
-      
+            
               window.scroll(0,0);
       
               this.adminService.getAllSubjects().subscribe(response =>{
@@ -209,10 +204,6 @@ export class SubjectsAdminComponent implements OnInit {
               else if(error.status === 404){
                 this.alertDeleteMessage = "El paciente no existe";
               }
-      
-      
-              console.log("Error al borrar al paciente: " + identificationNumber);
-              console.log(error);
             });
           }
         }
@@ -230,14 +221,12 @@ export class SubjectsAdminComponent implements OnInit {
         else if(error.status === 400){
           this.alertDeleteMessage = "El número de identificación debe ser un número entero";
         }
-        console.log(error);
       });
     }
   }
 
 
   confirmDelete(){
-    console.log("Vamos a borrar al paciente con citas: " + this.subjectToDelete);
       let observable = this.adminService.deleteSubjectByIdentificationNumber(this.subjectToDelete);
 
       if(observable === null){
@@ -245,9 +234,7 @@ export class SubjectsAdminComponent implements OnInit {
       }
   
       else{
-        observable.subscribe(response =>{
-          console.log("Éxito al borrar al paciente: " + this.subjectToDelete +  " y sus citas");
-  
+        observable.subscribe(response =>{  
           this.adminService.getAllSubjects().subscribe(response =>{
             this.subjects = response.list;
     
@@ -285,10 +272,6 @@ export class SubjectsAdminComponent implements OnInit {
           else if(error.status === 404){
             this.alertDeleteMessage = "El paciente no existe";
           }
-  
-  
-          console.log("Error al borrar al paciente: " + this.subjectToDelete);
-          console.log(error);
         });
       }
   }
@@ -316,6 +299,7 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertInvisibleHidden = true;
         this.alertFilterHidden = false;
 
+        window.scroll(0,0);
 
         let subject: Subject = response;
 
@@ -351,8 +335,6 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   filterSubjectsByResearcherDNI(username: string){
-    console.log(username);
-
     let observable = this.adminService.getSubjectsByResearcherDNI(username);
 
     if(observable === null){
@@ -366,6 +348,8 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertWarningHidden = false;
         this.alertInvisibleHidden = true;
         this.alertFilterHidden = false;
+
+        window.scroll(0,0);
 
         this.subjects = response.list;
 
@@ -409,11 +393,9 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertInvisibleHidden = false;
         this.alertFilterHidden = false;
 
-        console.log("Éxito al listar los pacientes");
+        window.scroll(0,0);
 
         this.subjects = response.list;
-
-        console.log(this.subjects);
 
         if(this.subjects.length === 0){
           this.emptyList = true;
