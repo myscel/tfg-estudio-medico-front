@@ -41,31 +41,31 @@
   <div id="page">
     <div id="divFilters">
       <div id="filterByResearcher">
-          <form>
+          <form class="form" [formGroup]="researcherFilterForm" (ngSubmit)="onSubmit()">
             <div id="textDNIFilter">
               DNI Investigador
             </div>
             <div id="divFlexFilterResearcher">
               <div id="divInputFilterResearcher">
-                    <input id="inputFilterResearcher" type="text" class="form-control">
+                    <input id="inputFilterResearcher" type="text" formControlName="researcherFilterDNI" class="form-control">
               </div>
               <div id="divInputButtonSubject">
-                    <button type="button" (click)="filterSubjectsByResearcherDNI('47298046H')" class="btn btn-primary">Buscar</button>
+                    <button type="button" (click)="filterSubjectsByResearcherDNI()" class="btn btn-primary">Buscar</button>
               </div>
             </div>
           </form>
       </div>
       <div id="filterBySubject">
-          <form>
+          <form class="form" [formGroup]="subjectsFilterForm" (ngSubmit)="onSubmit()">
             <div id="textNumberInvestigationFilter">
               Nº Identificación Paciente
             </div>
             <div id="divFlexFilterSubject">
               <div id="divInputFilterSubject">
-                <input id="inputFilterSubject" type="text" class="form-control">
+                <input id="inputFilterSubject" type="text"  formControlName="subjectFilterID" class="form-control">
               </div>
               <div id="divInputButtonResearcher">
-                <button type="button" (click)="filterSubjectsByIdentificationNumber(666)" class="btn btn-primary">Buscar</button>
+                <button type="button" (click)="filterSubjectsByIdentificationNumber()" class="btn btn-primary">Buscar</button>
               </div>
             </div>
           </form>

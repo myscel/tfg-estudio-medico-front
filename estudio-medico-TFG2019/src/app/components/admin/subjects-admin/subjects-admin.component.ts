@@ -6,6 +6,7 @@ import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
 import { TouchSequence } from 'selenium-webdriver';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-subjects-admin',
@@ -18,6 +19,8 @@ export class SubjectsAdminComponent implements OnInit {
   
   userLogged: User;
   emptyList: boolean = false;
+  researcherFilterForm: FormGroup;
+  subjectsFilterForm: FormGroup;
 
   successDeleteHidden: boolean = false;
   alertDeleteHidden: boolean = false;
@@ -33,7 +36,8 @@ export class SubjectsAdminComponent implements OnInit {
   constructor(private router: Router,
     private http: HttpClient,
     private userService: UserServiceService,
-    private adminService: AdminServiceService) { }
+    private adminService: AdminServiceService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -63,7 +67,18 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertFilterHidden = false;
       });
     }
+
+    this.researcherFilterForm = this.formBuilder.group({
+      researcherFilterDNI: ['', Validators.required]
+  });
+
+  this.subjectsFilterForm = this.formBuilder.group({
+    subjectFilterID: ['', Validators.required]
+});
   }
+
+  get researcherFilterDataForm() { return this.researcherFilterForm.controls; }
+  get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
 
   sortUpIdentificationNumber(){
     this.subjects = this.subjects.sort(function (a, b) {
@@ -284,8 +299,9 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertFilterHidden = false;
   }
 
-  filterSubjectsByIdentificationNumber(identificationNumber: string){
-    let observable = this.adminService.getSubjectByIdentificationNumber(identificationNumber);
+  filterSubjectsByIdentificationNumber(){
+
+    let observable = this.adminService.getSubjectByIdentificationNumber(this.subjectsFilterDataForm.subjectFilterID.value);
 
     if(observable === null){
       this.router.navigate(['/login']);
@@ -334,8 +350,9 @@ export class SubjectsAdminComponent implements OnInit {
     }
   }
 
-  filterSubjectsByResearcherDNI(username: string){
-    let observable = this.adminService.getSubjectsByResearcherDNI(username);
+  filterSubjectsByResearcherDNI(){ 
+    
+    let observable = this.adminService.getSubjectsByResearcherDNI(this.researcherFilterDataForm.researcherFilterDNI.value);
 
     if(observable === null){
       this.router.navigate(['/login']);

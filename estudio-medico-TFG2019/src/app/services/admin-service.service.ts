@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/User';
 import {Observable} from 'rxjs';
@@ -123,7 +123,7 @@ export class AdminServiceService {
     }
     
     let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
-
+    console.log(`${this.adminUrl}/${username}/subjects`);
     return this.http.get(`${this.adminUrl}/${username}/subject`, {headers: headerList});
   }
 
