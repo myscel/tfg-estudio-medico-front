@@ -64,14 +64,15 @@ export class SubjectsAdminComponent implements OnInit {
       });
     }
 
-    this.researcherFilterForm = this.formBuilder.group({
-      researcherFilterDNI: ['', Validators.required]
+  this.researcherFilterForm = this.formBuilder.group({
+    researcherFilterDNI: ['', Validators.required]
   });
 
   this.subjectsFilterForm = this.formBuilder.group({
     subjectFilterID: ['', Validators.required]
-});
-  }
+  });
+
+}
 
   get researcherFilterDataForm() { return this.researcherFilterForm.controls; }
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
@@ -336,7 +337,7 @@ export class SubjectsAdminComponent implements OnInit {
 
     if(!this.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
       this.setAlertFilterModal()
-      this.alertFilterMessage = "Introduce un DNI  Válido";
+      this.alertFilterMessage = "Introduce un DNI Válido";
       return;
     }
     
@@ -403,12 +404,10 @@ export class SubjectsAdminComponent implements OnInit {
     }
   }
 
-
   checkEmptyFieldsInFilter(inputField: string): boolean{
     return inputField !== "";
   }
 
-  
   validateDNI(dni: string): boolean {
     var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
     //Check length and format

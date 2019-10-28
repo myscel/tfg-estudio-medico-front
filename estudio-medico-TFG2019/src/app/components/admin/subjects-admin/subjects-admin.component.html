@@ -12,10 +12,10 @@
 
 <body>
   <header>
-    <div id="headerIzqa">
+    <div id="headerLeft">
       Estudio <strong>Médico</strong>
     </div>
-    <div id="headerDcha">
+    <div id="headerRight">
       <div id="headerUserName">
         <span id="roleUser">
           Admin
@@ -75,15 +75,15 @@
       </div>
     </div>
     <div id="divListSubjects">
-        <div id="modalSuccessDelete" class="miModal alert alert-success" [hidden]='!successDeleteHidden'>
+        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successDeleteHidden'>
             <strong>Éxito! </strong> {{successDeleteMessage}}
           </div>
             
-          <div id="modalErrorDelete" class="miModal alert alert-danger" [hidden]='!alertDeleteHidden'>
+          <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertDeleteHidden'>
             <strong>Error! </strong> {{alertDeleteMessage}}
           </div>
 
-          <div id="modalWarningDelete" class="miModal alert alert-warning" [hidden]='!alertWarningHidden'>
+          <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
             <strong>Aviso! </strong> {{alertWarningMessage}}
             <div id="divConfirmDelete">
               <div id="divConfirmDeleteLeft"> 

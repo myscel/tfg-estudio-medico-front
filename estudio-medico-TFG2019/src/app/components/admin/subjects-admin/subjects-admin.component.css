@@ -26,7 +26,7 @@ strong{
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
   }
 
-  #headerIzqa{
+  #headerLeft{
     font-size: 40px;
       color: rgb(102, 163, 255);
       margin-left: 40px;
@@ -36,7 +36,7 @@ strong{
     border-bottom: 3px solid rgba(255, 0, 0, 0); 
   }
 
-  #headerDcha{
+  #headerRight{
       width: 30%;
       display: flex;
       justify-content:space-between;
@@ -215,7 +215,7 @@ strong{
   
 }
 
-.miModal{
+.myModal{
   height: 90px;
   align-items: center;
 }
