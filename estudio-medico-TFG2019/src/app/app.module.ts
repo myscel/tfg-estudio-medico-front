@@ -10,13 +10,17 @@ import { FormsModule } from '@angular/forms';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
+import { FormComponent } from './components/form/form.component';
+import { ProfileComponent } from './components/researcher/profile/profile.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/researchers', component: HomeAdminComponent },
   { path: 'admin/subjects', component: SubjectsAdminComponent },
-  { path: 'researcher', component: HomeResearcherComponent }
+  { path: 'researcher', component: HomeResearcherComponent },
+  { path: 'researcher/subjectForm', component: FormComponent },
+  { path: 'researcher/profile', component: ProfileComponent }
 ];
 
 @NgModule({
@@ -25,7 +29,9 @@ const appRoutes : Routes = [
     LoginComponent,
     HomeAdminComponent,
     HomeResearcherComponent,
-    SubjectsAdminComponent
+    SubjectsAdminComponent,
+    FormComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -73,7 +73,7 @@ header{
 }
 
 .navButton{
-    min-width: 120px;
+    min-width: 150px;
     margin-left: 20px;
     text-shadow: 1px 1px 2px #000000;
     font-weight: bold;
@@ -95,19 +95,15 @@ header{
   }
   
   #divTable{
-      width: 95%;
+      width: 80%;
       border-radius: 8px;
       margin: 0;
       margin-top: 35px;
       position: absolute; 
       top: 40%;
       left: 50%;
-      margin-right: 5%;
+      margin-right: 10%;
       transform: translate(-50%, -50%);
-  }
-  
-  th, td{
-      text-align: center;
   }
   
   thead{
@@ -132,8 +128,6 @@ header{
   }
 
   tr{
-      display: flex;
-      justify-content: space-between;
       border-bottom: 1px solid gray;
   }
 

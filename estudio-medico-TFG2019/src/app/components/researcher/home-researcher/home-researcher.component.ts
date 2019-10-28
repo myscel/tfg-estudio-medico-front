@@ -84,4 +84,15 @@ export class HomeResearcherComponent implements OnInit {
     });
   }
 
+  doNewForm(){
+        this.router.navigate(['/researcher/subjectForm']);
+  }
+
+  doProfile(){
+        this.router.navigate(['/researcher/profile']);
+  }
+
+  doHome(){
+    this.router.navigate(['/researcher']);
+  }
 }

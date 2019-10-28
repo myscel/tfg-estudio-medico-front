@@ -23,7 +23,7 @@
         </span>
     </div>
     <div id="headerDcha">
-        <div id="buttonPerfil" class="btn btn-primary navButton">
+        <div id="buttonPerfil" class="btn btn-primary navButton" (click)="doProfile()">
             <div>PERFIL</div>
             <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
         </div>
@@ -39,8 +39,8 @@
 <body>
 
     <div id="navigationBar">
-        <button id="buttonPacientes" class="btn btn-primary navButton">PACIENTES</button>
-        <button id="buttonCitas" class="btn btn-primary navButton">CITAS</button>
+        <button id="buttonPacientes" class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
+        <button id="buttonCitas" class="btn btn-primary navButton">DOCUMENTACIÓN</button>
         <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
 
@@ -80,9 +80,9 @@
                 [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                 <td> {{user.identificationNumber}}</td>
                 <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">COMPLETADA</td>
-                <ng-template #buttonFromSubject1> <td><button class="btn btn-primary formButton">CITA 1</button></td></ng-template>
+                <ng-template #buttonFromSubject1> <td><button class="btn btn-primary formButton" (click)="doNewForm()">CITA 1</button></td></ng-template>
                 <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">COMPLETADA</td>
-                <ng-template #buttonFromSubject2> <td><button class="btn btn-primary formButton">CITA 2</button></td></ng-template>
+                <ng-template #buttonFromSubject2> <td><button class="btn btn-primary formButton" (click)="doNewForm()">CITA 2</button></td></ng-template>
                 <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
                       src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>
