@@ -75,7 +75,7 @@ strong{
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
   }
 
-  #headerIzqa{
+  #headerLeft{
     font-size: 40px;
       color: rgb(102, 163, 255);
       margin-left: 40px;
@@ -85,7 +85,7 @@ strong{
     border-bottom: 3px solid rgba(255, 0, 0, 0); 
   }
 
-  #headerDcha{
+  #headerRight{
       width: 30%;
       display: flex;
       justify-content:space-between;
@@ -158,7 +158,7 @@ strong{
     margin-bottom: 100px;
   }
 
-  #cabeceraRegistro{
+  #headerRegister{
     width: 70%;
     font-size: 30px;
     font-weight: bold;
@@ -167,7 +167,7 @@ strong{
     color: rgb(10, 10, 10);
   }
 
-  #registroNombre, #registroApellidos, #registroDni, #registroContra, #registroContraRepetir, #registroGenero{
+  #registerName, #registerSurname, #registerDni, #registerPass, #registerPassRepeat, #registerGender{
     display: flex;
     justify-content: center;
     align-items: initial;
@@ -180,13 +180,13 @@ strong{
   width: 100%;
 }
 
-.miInput{
+.myInput{
   width: 100%;
   border:0px solid transparent;
   background-color: rgb(245, 245, 245);
 }
 
-.gradienteInput{
+.gradientInput{
   width: 100%;
   height: 4px;
   background: rgba(99,180,255,1);
@@ -199,13 +199,13 @@ background: linear-gradient(to right, rgba(99,180,255,1) 0%, rgba(181,220,255,0.
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63b4ff', endColorstr='#e8f4ff', GradientType=1 );
 }
 
-.textoEncimaInput{
+.textInput{
   color: rgb(106, 106, 106);
   font-weight: bolder;
   font-size: 16px;
 }
 
-.registro{
+.register{
   margin-bottom: 40px;
 }
 
@@ -220,30 +220,30 @@ input{
   margin-bottom: 20px,
 }
 
-#divBotonLogin{
+#divButtonLogin{
   margin-top: 20px;
   margin-bottom: 70px;
   width: 70%;
 }
-#botonLogin{
+#buttonLogin{
   border-radius: 15px;
   font-size: 23px;
   width: 100%;
 }
 
-#camposObligatorios{
+#mandatoryFields{
   color: rgb(106, 106, 106);
   font-size: 16px;
 }
 
-#generoGroup{
+#genderGroup{
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.divGeneros{
+.divGenders{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -256,7 +256,7 @@ input{
   align-items: center;
 }
 
-.textoGenero{
+.textGender{
   color: rgb(54, 54, 54);
   font-weight: bolder;
   font-size: 12px;

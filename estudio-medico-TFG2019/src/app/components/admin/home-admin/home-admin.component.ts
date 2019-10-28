@@ -79,9 +79,6 @@ export class HomeAdminComponent implements OnInit {
 
 
       }, error =>{
-        //Debería mostrar un pop-up
-        console.log("Error al listar usuarios");
-        console.log(error);
         this.router.navigate(['/login']);
       });
     }
@@ -148,8 +145,6 @@ export class HomeAdminComponent implements OnInit {
 
   registerResearcher(user: User){
       
-    console.log(user);
-
     this.alertRegisterHidden = false;
 
     let observable = this.adminService.registerResearcher(user);
@@ -185,7 +180,6 @@ export class HomeAdminComponent implements OnInit {
       });
     }
   }
-
 
   deleteResearcher(username: string){
 
@@ -236,15 +230,9 @@ export class HomeAdminComponent implements OnInit {
 
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      console.log("Iniciando Log out");
-      console.log(responseData);
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
 
-    }, err => {
-      console.log("Error en el logout");
-      console.log(err);
- 
     });
   }
 

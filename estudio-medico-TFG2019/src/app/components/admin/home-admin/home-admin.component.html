@@ -11,10 +11,10 @@
 
 <body>
   <header>
-    <div id="headerIzqa">
+    <div id="headerLeft">
       Estudio <strong>Médico</strong>
     </div>
-    <div id="headerDcha">
+    <div id="headerRight">
       <div id="headerUserName">
         <span id="roleUser">
           Admin
@@ -39,63 +39,63 @@
   <div id="page">
 
     <div id="divRegister">
-      <div id="cabeceraRegistro">
+      <div id="headerRegister">
         <div>Registrar Investigador</div>
-        <div id="camposObligatorios">* Campos obligatorios</div>
+        <div id="mandatoryFields">* Campos obligatorios</div>
       </div>
       <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="registro" id="registroNombre">
-          <div class="textoEncimaInput">Nombre *</div>
+        <div class="register" id="registerName">
+          <div class="textInput">Nombre *</div>
           <div id="divInputNombre" class="form-group">
-            <input class="miInput" [(ngModel)]="inputName" id="inputNombre" type="text" formControlName="name" class="form-control" required>
+            <input class="myInput" [(ngModel)]="inputName" id="inputNombre" type="text" formControlName="name" class="form-control" required>
           </div>
 
-          <div class="gradienteInput"></div>
+          <div class="gradientInput"></div>
         </div>
-        <div class="registro" id="registroApellidos">
-          <div class="textoEncimaInput">Apellidos *</div>
+        <div class="register" id="registerSurname">
+          <div class="textInput">Apellidos *</div>
           <div class="divInput form-group">
-            <input class="miInput" [(ngModel)]="inputSurname" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
+            <input class="myInput" [(ngModel)]="inputSurname" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
               required>
           </div>
 
           <div class="gradienteInput"></div>
         </div>
-        <div class="registro" id="registroDni">
-          <div class="textoEncimaInput">DNI *</div>
+        <div class="register" id="registerDni">
+          <div class="textInput">DNI *</div>
           <div class="divInput form-group">
-            <input class="miInput" [(ngModel)]="inputMyDni" id="inputDni" type="text" formControlName="dni" class="form-control" required>
+            <input class="myInput" [(ngModel)]="inputMyDni" id="inputDni" type="text" formControlName="dni" class="form-control" required>
           </div>
 
           <div class="gradienteInput"></div>
         </div>
-        <div class="registro" id="registroContra">
-          <div class="textoEncimaInput">Contraseña *</div>
+        <div class="register" id="registerPass">
+          <div class="textInput">Contraseña *</div>
           <div class="divInput form-group">
-            <input class="miInput" [(ngModel)]="inputPass" id="inputContra" type="password" formControlName="password" class="form-control"
+            <input class="myInput" [(ngModel)]="inputPass" id="inputContra" type="password" formControlName="password" class="form-control"
               required>
           </div>
 
           <div class="gradienteInput"></div>
         </div>
-        <div class="registro" id="registroContraRepetir">
-          <div class="textoEncimaInput">Confirmar Contraseña *</div>
+        <div class="register" id="registerPassRepeat">
+          <div class="textInput">Confirmar Contraseña *</div>
           <div class="divInput form-group">
-            <input class="miInput" [(ngModel)]="inputPassRepeat" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
+            <input class="myInput" [(ngModel)]="inputPassRepeat" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
               class="form-control" required>
           </div>
 
           <div class="gradienteInput"></div>
         </div>
-        <div class="registro" id="registroGenero">
-          <div class="textoEncimaInput">Género *</div>
-          <div id="generoGroup">
-            <div class="divGeneros">
+        <div class="register" id="registerGender">
+          <div class="textInput">Género *</div>
+          <div id="genderGroup">
+            <div class="divGenders">
               <div class="form-group groupGender">
                 <div>
                     <input class="inputRadio" type="radio" formControlName="gender" value="hombre" required>
                 </div>
-                <div class="textoGenero">
+                <div class="textGender">
                     Hombre
                 </div> 
               </div>
@@ -107,7 +107,7 @@
                   <div>
                       <input class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
                     </div>
-                  <div class="textoGenero">
+                  <div class="textGender">
                       Mujer
                   </div>
               </div>
@@ -116,8 +116,8 @@
 
           <div class="gradienteInput"></div>
         </div>
-        <div id="divBotonLogin">
-          <button id="botonLogin" type="button" class="btn btn-primary" (click)="onSubmit()">Registrar</button>
+        <div id="divButtonLogin">
+          <button id="buttonLogin" type="button" class="btn btn-primary" (click)="onSubmit()">Registrar</button>
         </div>
       </form>
 
