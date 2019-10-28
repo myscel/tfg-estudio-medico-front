@@ -59,12 +59,9 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        this.successDeleteHidden = false;
+        this.setAlertDeleteModal()
         this.alertDeleteMessage = "No se pudo cargar la lista de pacientes"
-        this.alertDeleteHidden = true;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = false;
-        this.alertFilterHidden = false;
+
       });
     }
 
@@ -162,11 +159,7 @@ export class SubjectsAdminComponent implements OnInit {
 
           window.scroll(0,0);
 
-          this.successDeleteHidden = false;
-          this.alertDeleteHidden = false;
-          this.alertWarningHidden = true;
-          this.alertInvisibleHidden = false;
-          this.alertFilterHidden = false;
+          this.setWarningDeleteModal()
 
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
           this.subjectToDelete = identificationNumber;
@@ -195,21 +188,13 @@ export class SubjectsAdminComponent implements OnInit {
                 }
               });
       
-              this.successDeleteHidden = true;
-              this.alertInvisibleHidden = false;
-              this.alertDeleteHidden = false;
-              this.alertWarningHidden = false;
-              this.alertFilterHidden = false;
+              this.setSuccessDeleteModal()
 
               this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
 
             }, error =>{
-              this.alertWarningHidden = false;
-              this.successDeleteHidden = false;
-              this.alertDeleteHidden = true;
-              this.alertInvisibleHidden = false;
-              this.alertFilterHidden = false;
-      
+              this.setAlertDeleteModal()
+
               if(error.status === 500){
                 this.alertDeleteMessage = "Fallo en el servidor";
               }
@@ -224,11 +209,7 @@ export class SubjectsAdminComponent implements OnInit {
         }
 
       }, error =>{
-        this.successDeleteHidden = false;
-        this.alertDeleteHidden = true;
-        this.alertInvisibleHidden = false;
-        this.alertWarningHidden = false;
-        this.alertFilterHidden = false;
+        this.setAlertDeleteModal()
 
         if(error.status === 500){
           this.alertDeleteMessage = "Fallo en el servidor";
@@ -259,24 +240,13 @@ export class SubjectsAdminComponent implements OnInit {
               this.emptyList = false;
             }
           });
-  
-          this.successDeleteHidden = true;
-          this.alertInvisibleHidden = false;
-          this.alertDeleteHidden = false;
-          this.alertWarningHidden = false;
-          this.alertFilterHidden = false;
-
+          this.setSuccessDeleteModal();
 
           this.successDeleteMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
 
         }, error =>{
-          this.alertWarningHidden = false;
-          this.successDeleteHidden = false;
-          this.alertDeleteHidden = true;
-          this.alertInvisibleHidden = false;
-          this.alertFilterHidden = false;
+          this.setAlertDeleteModal();
 
-  
           if(error.status === 500){
             this.alertDeleteMessage = "Fallo en el servidor";
           }
@@ -301,21 +271,13 @@ export class SubjectsAdminComponent implements OnInit {
   filterSubjectsByIdentificationNumber(){
 
     if(!this.checkEmptyFieldsInFilter(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
-      this.successDeleteHidden = false;
-      this.alertDeleteHidden = false;
-      this.alertWarningHidden = false;
-      this.alertInvisibleHidden = true;
-      this.alertFilterHidden = true;
+      this.setAlertFilterModal();
       this.alertFilterMessage = "Campo Vacío";
       return;
     }
 
     if(isNaN(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
-      this.successDeleteHidden = false;
-      this.alertDeleteHidden = false;
-      this.alertWarningHidden = false;
-      this.alertInvisibleHidden = true;
-      this.alertFilterHidden = true;
+      this.setAlertFilterModal();
       this.alertFilterMessage = "Introduce un número como identificación del paciente";
       return;
     }
@@ -328,11 +290,7 @@ export class SubjectsAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-        this.successDeleteHidden = false;
-        this.alertDeleteHidden = false;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = true;
-        this.alertFilterHidden = false;
+        this.cancelDelete();
 
         window.scroll(0,0);
 
@@ -350,11 +308,7 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        this.successDeleteHidden = false;
-        this.alertDeleteHidden = false;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = true;
-        this.alertFilterHidden = true;
+        this.setAlertFilterModal();
 
         if(error.status === 400){
           this.alertFilterMessage = "Introduce un número";
@@ -382,11 +336,7 @@ export class SubjectsAdminComponent implements OnInit {
     }
 
     if(!this.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
-      this.successDeleteHidden = false;
-      this.alertDeleteHidden = false;
-      this.alertWarningHidden = false;
-      this.alertInvisibleHidden = true;
-      this.alertFilterHidden = true;
+      this.setAlertFilterModal()
       this.alertFilterMessage = "Introduce un DNI  Válido";
       return;
     }
@@ -399,11 +349,7 @@ export class SubjectsAdminComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-        this.successDeleteHidden = false;
-        this.alertDeleteHidden = false;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = true;
-        this.alertFilterHidden = false;
+        this.cancelDelete();
 
         window.scroll(0,0);
 
@@ -416,11 +362,7 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{
-        this.successDeleteHidden = false;
-        this.alertDeleteHidden = false;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = true;
-        this.alertFilterHidden = true;
+        this.setAlertFilterModal();
 
         if(error.status === 404){
           this.alertFilterMessage = "El investigador con DNI " + this.researcherFilterDataForm.researcherFilterDNI.value + " no existe";
@@ -442,12 +384,8 @@ export class SubjectsAdminComponent implements OnInit {
     else{
       observable.subscribe(response =>{
 
-        this.successDeleteHidden = true;
+        this.setSuccessDeleteModal();
         this.successDeleteMessage = "Lista Pacientes actualizada"
-        this.alertDeleteHidden = false;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = false;
-        this.alertFilterHidden = false;
 
         window.scroll(0,0);
 
@@ -460,12 +398,8 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{     
-        this.successDeleteHidden = false;
+        this.setAlertDeleteModal();
         this.alertDeleteMessage = "No se pudo actualizar la lista de pacientes"
-        this.alertDeleteHidden = true;
-        this.alertWarningHidden = false;
-        this.alertInvisibleHidden = false;
-        this.alertFilterHidden = false;
       });
     }
   }
@@ -484,5 +418,36 @@ export class SubjectsAdminComponent implements OnInit {
     }
     return true;
   }
+
+  setSuccessDeleteModal(){
+    this.successDeleteHidden = true;
+    this.alertInvisibleHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertWarningHidden = false;
+    this.alertFilterHidden = false;
+  }
+
+  setAlertDeleteModal(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = true;
+    this.alertWarningHidden = false;
+    this.alertInvisibleHidden = false;
+    this.alertFilterHidden = false;
+  }
   
+  setWarningDeleteModal(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertWarningHidden = true;
+    this.alertInvisibleHidden = false;
+    this.alertFilterHidden = false;
+  }
+
+  setAlertFilterModal(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertWarningHidden = false;
+    this.alertInvisibleHidden = true;
+    this.alertFilterHidden = true;
+  }
 }
