@@ -240,7 +240,6 @@ export class SubjectsAdminComponent implements OnInit {
     }
   }
 
-
   confirmDelete(){
       let observable = this.adminService.deleteSubjectByIdentificationNumber(this.subjectToDelete);
 
@@ -301,7 +300,27 @@ export class SubjectsAdminComponent implements OnInit {
 
   filterSubjectsByIdentificationNumber(){
 
-    let observable = this.adminService.getSubjectByIdentificationNumber(this.subjectsFilterDataForm.subjectFilterID.value);
+    if(!this.checkEmptyFieldsInFilter(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
+      this.successDeleteHidden = false;
+      this.alertDeleteHidden = false;
+      this.alertWarningHidden = false;
+      this.alertInvisibleHidden = true;
+      this.alertFilterHidden = true;
+      this.alertFilterMessage = "Campo Vacío";
+      return;
+    }
+
+    if(isNaN(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
+      this.successDeleteHidden = false;
+      this.alertDeleteHidden = false;
+      this.alertWarningHidden = false;
+      this.alertInvisibleHidden = true;
+      this.alertFilterHidden = true;
+      this.alertFilterMessage = "Introduce un número como identificación del paciente";
+      return;
+    }
+
+    let observable = this.adminService.getSubjectByIdentificationNumber(this.subjectsFilterDataForm.subjectFilterID.value.trim());
 
     if(observable === null){
       this.router.navigate(['/login']);
@@ -341,7 +360,7 @@ export class SubjectsAdminComponent implements OnInit {
           this.alertFilterMessage = "Introduce un número";
         }
         else if(error.status === 404){
-          this.alertFilterMessage = "El paciente solicitado no existe";
+          this.alertFilterMessage = "El paciente con identificación " + this.subjectsFilterDataForm.subjectFilterID.value + " no existe";
         }
         else{
           this.alertFilterMessage = "Fallo en el servidor";
@@ -351,6 +370,26 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   filterSubjectsByResearcherDNI(){ 
+
+    if(!this.checkEmptyFieldsInFilter(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
+      this.successDeleteHidden = false;
+      this.alertDeleteHidden = false;
+      this.alertWarningHidden = false;
+      this.alertInvisibleHidden = true;
+      this.alertFilterHidden = true;
+      this.alertFilterMessage = "Campo Vacío";
+      return;
+    }
+
+    if(!this.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
+      this.successDeleteHidden = false;
+      this.alertDeleteHidden = false;
+      this.alertWarningHidden = false;
+      this.alertInvisibleHidden = true;
+      this.alertFilterHidden = true;
+      this.alertFilterMessage = "Introduce un DNI  Válido";
+      return;
+    }
     
     let observable = this.adminService.getSubjectsByResearcherDNI(this.researcherFilterDataForm.researcherFilterDNI.value);
 
@@ -384,7 +423,7 @@ export class SubjectsAdminComponent implements OnInit {
         this.alertFilterHidden = true;
 
         if(error.status === 404){
-          this.alertFilterMessage = "El investigador solicitado no existe";
+          this.alertFilterMessage = "El investigador con DNI " + this.researcherFilterDataForm.researcherFilterDNI.value + " no existe";
         }
         else{
           this.alertFilterMessage = "Fallo en el servidor";
@@ -430,6 +469,20 @@ export class SubjectsAdminComponent implements OnInit {
       });
     }
   }
-  
 
+
+  checkEmptyFieldsInFilter(inputField: string): boolean{
+    return inputField !== "";
+  }
+
+  
+  validateDNI(dni: string): boolean {
+    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
+    //Check length and format
+    if(dni.length !== 9 || !regExpresion.test(dni)){
+      return false;
+    }
+    return true;
+  }
+  
 }
