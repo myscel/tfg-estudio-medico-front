@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
-import { TouchSequence } from 'selenium-webdriver';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -434,7 +433,7 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertInvisibleHidden = false;
     this.alertFilterHidden = false;
   }
-  
+
   setWarningDeleteModal(){
     this.successDeleteHidden = false;
     this.alertDeleteHidden = false;
