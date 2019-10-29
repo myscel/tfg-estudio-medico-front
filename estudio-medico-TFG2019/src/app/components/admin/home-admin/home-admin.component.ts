@@ -113,7 +113,7 @@ export class HomeAdminComponent implements OnInit {
     }
     else{
       var userInfo: User = new User();
-      userInfo.username = this.f.dni.value;
+      userInfo.username = this.f.dni.value.toUpperCase();
       userInfo.password = this.f.password.value;
       userInfo.name = this.f.name.value.toUpperCase();
       userInfo.surname = this.f.lastname.value.toUpperCase();

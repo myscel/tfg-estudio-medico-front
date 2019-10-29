@@ -149,3 +149,22 @@
     font-size: 40px;
     color: rgb(102, 163, 255);
   }
+
+  #buttonLogout{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+  }
+
+  #imglogout{
+    margin-top: 4px;
+    margin-left: 5px;
+  }
+
+  .navButton{
+    min-width: 120px;
+    margin-left: 20px;
+    text-shadow: 1px 1px 2px #000000;
+    font-weight: bold;
+}
