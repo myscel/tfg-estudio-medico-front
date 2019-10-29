@@ -317,4 +317,8 @@ export class HomeAdminComponent implements OnInit {
     this.router.navigate(['/admin/subjects']);
   }
 
+  modifyResearcher(id: string){
+    this.router.navigate(['/admin/researchers/edit/' + id]);
+  }
+
 }

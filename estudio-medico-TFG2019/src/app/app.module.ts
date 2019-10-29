@@ -12,12 +12,14 @@ import { HomeResearcherComponent } from './components/researcher/home-researcher
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
 import { FormComponent } from './components/form/form.component';
 import { ProfileComponent } from './components/researcher/profile/profile.component';
+import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/researchers', component: HomeAdminComponent },
   { path: 'admin/subjects', component: SubjectsAdminComponent },
+  { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent},
   { path: 'researcher', component: HomeResearcherComponent },
   { path: 'researcher/subjectForm', component: FormComponent },
   { path: 'researcher/profile', component: ProfileComponent }
@@ -31,7 +33,8 @@ const appRoutes : Routes = [
     HomeResearcherComponent,
     SubjectsAdminComponent,
     FormComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditResearcherAdminComponent
   ],
   imports: [
     BrowserModule,
