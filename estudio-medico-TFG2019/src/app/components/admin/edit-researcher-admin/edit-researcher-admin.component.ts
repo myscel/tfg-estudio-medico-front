@@ -16,8 +16,13 @@ export class EditResearcherAdminComponent implements OnInit {
 
   @Input() researcher: User = new User();
   userLogged: User;
-
-  public id: string;
+  id: string;
+  passIsChecked: boolean = false;
+  passRepeatIsChecked: boolean = false;
+  alertModifyHidden:boolean = false;
+  successModifyHidden:boolean = true;
+  errorMessage:string = "";
+  successMessage:string = "";
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -30,7 +35,6 @@ export class EditResearcherAdminComponent implements OnInit {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log("El id de la ruta es: " + this.id);
 
     let observable = this.adminService.getResearcherByID(this.id);
 
@@ -41,18 +45,28 @@ export class EditResearcherAdminComponent implements OnInit {
     else{
       observable.subscribe(response =>{
         this.researcher = response;
-        console.log("Investigador cargado correctamente");
-        console.log(this.researcher);
 
       }, error =>{
-        console.log("Error al cargar el investigador");
-        //CAMBIAR
-        //this.router.navigate(['/login']);
+        if(error.status === 404){
+          console.log("El investigador no existe");
+        }
+
+        else if(error.status === 500){
+          console.log("Fallo en el servidor");
+        }
       });
     }
     
 
     
+  }
+
+  changeShowPass(){
+    this.passIsChecked = !this.passIsChecked;
+  }
+
+  changeShowPassRepeat(){
+    this.passRepeatIsChecked = !this.passRepeatIsChecked;
   }
 
   doLogOut(){

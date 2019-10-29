@@ -46,8 +46,8 @@
       <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="register" id="registerName">
           <div class="textInput">Nombre *</div>
-          <div id="divInputNombre" class="form-group">
-            <input class="myInput" [(ngModel)]="inputName" id="inputNombre" type="text" formControlName="name" class="form-control" required>
+          <div class="divInput form-group">
+            <input class="myInput" [(ngModel)]="inputName" type="text" formControlName="name" class="form-control" required>
           </div>
 
           <div class="gradientInput"></div>
@@ -55,7 +55,7 @@
         <div class="register" id="registerSurname">
           <div class="textInput">Apellidos *</div>
           <div class="divInput form-group">
-            <input class="myInput" [(ngModel)]="inputSurname" id="inputApellidos" type="text" formControlName="lastname" class="form-control"
+            <input class="myInput" [(ngModel)]="inputSurname" type="text" formControlName="lastname" class="form-control"
               required>
           </div>
 
@@ -64,7 +64,7 @@
         <div class="register" id="registerDni">
           <div class="textInput">DNI *</div>
           <div class="divInput form-group">
-            <input class="myInput" [(ngModel)]="inputMyDni" id="inputDni" type="text" formControlName="dni" class="form-control" required>
+            <input class="myInput" [(ngModel)]="inputMyDni" type="text" formControlName="dni" class="form-control" required>
           </div>
 
           <div class="gradientInput"></div>
@@ -72,7 +72,7 @@
         <div class="register" id="registerPass">
           <div class="textInput">Contraseña *</div>
           <div class="divInput form-group">
-            <input class="myInput" [(ngModel)]="inputPass" id="inputContra" type="password" formControlName="password" class="form-control"
+            <input class="myInput" [(ngModel)]="inputPass" type="password" formControlName="password" class="form-control"
               required>
           </div>
 
@@ -81,7 +81,7 @@
         <div class="register" id="registerPassRepeat">
           <div class="textInput">Confirmar Contraseña *</div>
           <div class="divInput form-group">
-            <input class="myInput" [(ngModel)]="inputPassRepeat" id="inputContraRepetir" type="password" formControlName="passwordRepeat"
+            <input class="myInput" [(ngModel)]="inputPassRepeat" type="password" formControlName="passwordRepeat"
               class="form-control" required>
           </div>
 
@@ -199,7 +199,7 @@
             <tr *ngFor="let user of researchers; let i = index"
               [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
               <td> {{user.username}}</td>
-              <td >{{user.name.toUpperCase()}}{{user.surname.toUpperCase()}}</td>
+              <td >{{user.name.toUpperCase()}} {{user.surname.toUpperCase()}}</td>
               <td>{{user.gender.toUpperCase()}}</td>
               <td>
                 <button id="buttonModify" type="button" (click)="modifyResearcher(user.id)"><img id="imgEdit"

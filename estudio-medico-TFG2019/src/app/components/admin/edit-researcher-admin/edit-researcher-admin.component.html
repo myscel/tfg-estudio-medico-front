@@ -11,7 +11,7 @@
 <body>
     <header>
         <div id="headerLeft">
-            Estudio <strong>Médico</strong>
+            Estudio <strong  class="blueText">Médico</strong>
         </div>
         <div id="headerRight">
             <div id="headerUserName">
@@ -19,7 +19,7 @@
                     Admin
                 </span>
                 <span>
-                  | {{userLogged.name}}
+                  | {{this.userLogged.name}}
                 </span>
             </div>
             <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
@@ -28,5 +28,67 @@
             </div>
         </div>
     </header>
+
+    <div id="content">
+        <div id="divUpdateResearcher">
+            <div id="textUpdateResearcher">
+                    <span id="textModify">Modificar Investigador</span> <strong> {{this.researcher.name}} {{this.researcher.surname}}</strong>
+            </div>
+            <div id="boxUpdateResearcher">
+                <form id="form1">
+                    <div class="modify" id="modifyName">
+                        <div class="textInput">Nombre </div>
+                        <div>
+                            <input class="myInput form-control" type="text" value="{{this.researcher.name}}">
+                        </div>
+                      
+                        <div class="gradientInput"></div>
+                    </div>
+                    <div class="modify" id="modifySurname">
+                        <div class="textInput">Apellidos </div>
+                        <div>
+                            <input class="myInput form-control" type="text" value="{{this.researcher.surname}}">
+                        </div>
+         
+                        <div class="gradientInput"></div>
+                    </div>
+                    <div class="modify" id="modifyPass">
+                        <div>
+                        <div class="textInput">Nueva Contraseña </div>
+                        <input class="myInput form-control " [type]="!passIsChecked ? 'password' : 'text'">
+                        </div>
+
+                        <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1" [(ngModel)]="passIsChecked" (click)="changeShowPass()"> Mostrar contraseña<br>
+             
+                        <div class="gradientInput"></div>
+                    </div>
+                    <div class="modify" id="modifyPass">
+                        <div>
+                        <div class="textInput">Repetir Contraseña </div>
+                        <input class="myInputC form-control " [type]="!passRepeatIsChecked ? 'password' : 'text'">
+                        </div>
+                        <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2" [(ngModel)]="passRepeatIsChecked" (click)="changeShowPassRepeat()"> Mostrar contraseña<br>
+
+                 
+                        <div class="gradientInput"></div>
+                    </div>
+
+                    <div>
+                        <button id="buttonModify" type="button" class="btn btn-primary">Modificar</button>
+                    </div>
+                </form>
+
+                 
+                <div id="modalAlert" class="modalDynamic alert alert-danger" [hidden]='!alertModifyHidden'>
+                        <strong>Error! </strong> {{errorMessage}}
+                </div>
+                    
+                 <div id="modalSuccess" class="modalDynamic alert alert-success" [hidden]='!successModifyHidden'>
+                        <strong>Éxito! </strong> {{successMessage}}
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </body>
 </html>
