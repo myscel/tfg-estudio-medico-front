@@ -74,11 +74,11 @@
                     </div>
 
                     <div>
-                        <button id="buttonModify" type="button" class="btn btn-primary">Modificar</button>
+                        <button id="buttonExit" type="button" class="btn btn-success" (click)="leaveUpdateResearcher()">Salir</button>
+                        <button id="buttonModify" type="button" class="btn btn-primary" >Modificar</button>
                     </div>
                 </form>
 
-                 
                 <div id="modalAlert" class="modalDynamic alert alert-danger" [hidden]='!alertModifyHidden'>
                         <strong>Error! </strong> {{errorMessage}}
                 </div>

@@ -69,6 +69,10 @@ export class EditResearcherAdminComponent implements OnInit {
     this.passRepeatIsChecked = !this.passRepeatIsChecked;
   }
 
+  leaveUpdateResearcher(){
+    this.router.navigate(['/admin/researchers']);
+  }
+
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       localStorage.removeItem('userLogged');
