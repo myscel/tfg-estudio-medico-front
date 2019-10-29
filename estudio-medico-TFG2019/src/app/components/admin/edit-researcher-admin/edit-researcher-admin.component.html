@@ -1,1 +1,32 @@
-<p>edit-researcher-admin works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <title>Estudio Médico</title>
+</head>
+
+<body>
+    <header>
+        <div id="headerLeft">
+            Estudio <strong>Médico</strong>
+        </div>
+        <div id="headerRight">
+            <div id="headerUserName">
+                <span id="roleUser">
+                    Admin
+                </span>
+                <span>
+                  | {{userLogged.name}}
+                </span>
+            </div>
+            <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
+                <div>DESCONECTAR</div>
+                <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
+            </div>
+        </div>
+    </header>
+</body>
+</html>

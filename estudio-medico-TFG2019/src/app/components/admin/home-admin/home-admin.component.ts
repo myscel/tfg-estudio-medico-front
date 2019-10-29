@@ -115,7 +115,8 @@ export class HomeAdminComponent implements OnInit {
       var userInfo: User = new User();
       userInfo.username = this.f.dni.value;
       userInfo.password = this.f.password.value;
-      userInfo.name =  this.f.name.value + ' ' + this.f.lastname.value;
+      userInfo.name = this.f.name.value;
+      userInfo.surname = this.f.lastname.value;
       userInfo.gender = this.f.gender.value;
   
       this.registerResearcher(userInfo);
