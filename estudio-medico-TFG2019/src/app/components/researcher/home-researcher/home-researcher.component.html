@@ -44,9 +44,18 @@
         <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
 
-
     <div id="divRight">
+      <div class="headerBar">
         <div id="titleTableResearchers"><strong>PACIENTES</strong></div>
+        <div class="addSubject">
+            <b>AÑADIR NUEVO PACIENTE</b>         
+            <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">
+              Identificador:
+              <input type="text" formControlName="identificationNumber" class="form-control" required>
+              <button id="buttonNewSubject" type="button" class="btn btn-primary" (click)="registerSubject()">Añadir</button>
+            </form>
+        </div> 
+      </div>
         <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
           <table class="table">
             <thead>
@@ -80,15 +89,17 @@
                 [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                 <td> {{user.identificationNumber}}</td>
                 <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">COMPLETADA</td>
-                <ng-template #buttonFromSubject1> <td><button class="btn btn-primary formButton" (click)="doNewForm()">CITA 1</button></td></ng-template>
+                <ng-template #buttonFromSubject1> <td><button class="btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 1)">CITA 1</button></td></ng-template>
                 <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">COMPLETADA</td>
-                <ng-template #buttonFromSubject2> <td><button class="btn btn-primary formButton" (click)="doNewForm()">CITA 2</button></td></ng-template>
+                <ng-template #buttonFromSubject2> <td><button class="btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 2)">CITA 2</button></td></ng-template>
                 <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
                       src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>    
     </div>
+
+    
 
 </body>

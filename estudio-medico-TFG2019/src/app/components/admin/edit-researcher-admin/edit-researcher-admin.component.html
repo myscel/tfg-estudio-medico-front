@@ -35,11 +35,11 @@
                     <span id="textModify">Modificar Investigador</span> <strong> {{this.researcher.name}} {{this.researcher.surname}}</strong>
             </div>
             <div id="boxUpdateResearcher">
-                <form id="form1">
+                <form [formGroup]="updateForm" id="form1" (ngSubmit)="onSubmit()">
                     <div class="modify" id="modifyName">
                         <div class="textInput">Nombre </div>
                         <div>
-                            <input class="myInput form-control" type="text" value="{{this.researcher.name}}">
+                            <input class="myInput form-control" type="text" formControlName="name" value="{{this.researcher.name}}">
                         </div>
                       
                         <div class="gradientInput"></div>
@@ -47,7 +47,7 @@
                     <div class="modify" id="modifySurname">
                         <div class="textInput">Apellidos </div>
                         <div>
-                            <input class="myInput form-control" type="text" value="{{this.researcher.surname}}">
+                            <input class="myInput form-control" type="text" formControlName="surname" value="{{this.researcher.surname}}">
                         </div>
          
                         <div class="gradientInput"></div>
@@ -55,19 +55,19 @@
                     <div class="modify" id="modifyPass">
                         <div>
                         <div class="textInput">Nueva Contraseña </div>
-                        <input class="myInput form-control " [type]="!passIsChecked ? 'password' : 'text'">
+                        <input class="myInput form-control " [type]="!passIsChecked ? 'password' : 'text'" formControlName="password">
                         </div>
 
-                        <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1" [(ngModel)]="passIsChecked" (click)="changeShowPass()"> Mostrar contraseña<br>
+                        <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1" [(ngModel)]="passIsChecked" (click)="changeShowPass()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
              
                         <div class="gradientInput"></div>
                     </div>
                     <div class="modify" id="modifyPass">
                         <div>
                         <div class="textInput">Repetir Contraseña </div>
-                        <input class="myInputC form-control " [type]="!passRepeatIsChecked ? 'password' : 'text'">
+                        <input class="myInputC form-control " [type]="!passRepeatIsChecked ? 'password' : 'text'" formControlName="repeatedPassword">
                         </div>
-                        <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2" [(ngModel)]="passRepeatIsChecked" (click)="changeShowPassRepeat()"> Mostrar contraseña<br>
+                        <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2" [(ngModel)]="passRepeatIsChecked" (click)="changeShowPassRepeat()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
 
                  
                         <div class="gradientInput"></div>
@@ -75,7 +75,7 @@
 
                     <div>
                         <button id="buttonExit" type="button" class="btn btn-success" (click)="leaveUpdateResearcher()">Salir</button>
-                        <button id="buttonModify" type="button" class="btn btn-primary" >Modificar</button>
+                        <button id="buttonModify" type="button" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
                     </div>
                 </form>
 

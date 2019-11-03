@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
-import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/User';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-researcher-admin',
@@ -23,6 +23,7 @@ export class EditResearcherAdminComponent implements OnInit {
   successModifyHidden:boolean = true;
   errorMessage:string = "";
   successMessage:string = "";
+  updateForm: FormGroup;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -57,9 +58,15 @@ export class EditResearcherAdminComponent implements OnInit {
       });
     }
     
-
-    
+    this.updateForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      password: ['', Validators.required],
+      repeatedPassword: ['', Validators.required]
+  }); 
   }
+
+  get updateFields() { return this.updateForm.controls; }
 
   changeShowPass(){
     this.passIsChecked = !this.passIsChecked;
@@ -79,6 +86,14 @@ export class EditResearcherAdminComponent implements OnInit {
       this.router.navigate(['/login']);
 
     });
+  }
+
+  doUpdate(){
+    
+    console.log(this.updateFields.name.value);
+    console.log(this.updateFields.surname.value);
+    console.log(this.updateFields.password.value);
+
   }
 
 }

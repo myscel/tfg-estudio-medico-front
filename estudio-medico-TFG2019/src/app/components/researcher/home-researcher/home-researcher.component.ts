@@ -2,9 +2,11 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
+import { Subject } from 'src/app/models/Subject';
 import { ResearcherServiceService } from 'src/app/services/researcher-service.service';
 import { Component, OnInit, Input  } from '@angular/core';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-researcher',
@@ -16,6 +18,7 @@ export class HomeResearcherComponent implements OnInit {
   @Input() subjects: User[] = [];
 
   userLogged: User;
+  newSubjectForm: FormGroup;
 
   emptyList: boolean = false;
 
@@ -23,7 +26,8 @@ export class HomeResearcherComponent implements OnInit {
     private http: HttpClient,
      private userService: UserServiceService,
       private researcherService: ResearcherServiceService,
-      private adminServiceService: AdminServiceService) { }
+      private adminServiceService: AdminServiceService,
+      private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
@@ -68,7 +72,13 @@ export class HomeResearcherComponent implements OnInit {
         this.router.navigate(['/login']);
       });
     }
+
+    this.newSubjectForm = this.formBuilder.group({
+      identificationNumber: ['', Validators.required]
+  });
   }
+
+  get f() { return this.newSubjectForm.controls; }
 
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
@@ -84,15 +94,37 @@ export class HomeResearcherComponent implements OnInit {
     });
   }
 
-  doNewForm(){
-        this.router.navigate(['/researcher/subjectForm']);
+  doNewForm(idSubject: string, appointment: string){
+    this.router.navigate(['/researcher/subjectForm/' + idSubject + "/" + appointment]);
   }
 
   doProfile(){
-        this.router.navigate(['/researcher/profile']);
+    this.router.navigate(['/researcher/profile/' + this.userLogged.id]);
   }
 
   doHome(){
     this.router.navigate(['/researcher']);
+  }
+
+  registerSubject(){
+    if(this.f.identificationNumber.value.typeOf != undefined){
+      var subjectInfo: Subject = new Subject();
+      subjectInfo.identificationNumber = this.f.identificationNumber.value;
+      subjectInfo.usernameResearcher = this.userLogged.username;
+
+      let observable = this.researcherService.registerSubject(subjectInfo);
+  
+      if(observable === null){
+        this.router.navigate(['/login']);
+      }
+      else{
+        observable.subscribe(responseData =>{
+          let subjectRegistered: User = responseData;
+          console.log("chachi");
+        }, error =>{
+          console.log("nada de chachi");
+        });
+      }
+    }
   }
 }

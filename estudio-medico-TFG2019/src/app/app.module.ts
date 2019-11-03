@@ -21,8 +21,8 @@ const appRoutes : Routes = [
   { path: 'admin/subjects', component: SubjectsAdminComponent },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent},
   { path: 'researcher', component: HomeResearcherComponent },
-  { path: 'researcher/subjectForm', component: FormComponent },
-  { path: 'researcher/profile', component: ProfileComponent }
+  { path: 'researcher/subjectForm/:idSubject/:appointment', component: FormComponent },
+  { path: 'researcher/profile/:id', component: ProfileComponent }
 ];
 
 @NgModule({
