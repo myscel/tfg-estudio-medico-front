@@ -5,6 +5,8 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
+import { PasswordInputServiceService } from 'src/app/services/password-input-service.service';
+import { DniInputServiceService } from 'src/app/services/dni-input-service.service';
 
 
 
@@ -27,7 +29,9 @@ export class LoginComponent implements OnInit {
     private http: HttpClient, 
     private userService: UserServiceService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private passwordInputServiceService: PasswordInputServiceService,
+    private dniInputServiceService: DniInputServiceService
     ) {}
 
 
@@ -43,16 +47,24 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.alertHidden = false;
 
-    if(this.f.dni.value === undefined || this.f.dni.value === "" || this.f.password.value === undefined || this.f.password.value === ""){
+    if(!this.passwordInputServiceService.validateEmptyField(this.f.password.value) ||
+       !this.dniInputServiceService.validateEmptyField(this.f.dni.value)){
       this.errorMessage = "Dni y/o contraseña vacíos";
       this.alertHidden = true;
       this.inputDni = "";
       this.inputPassword = "";
     }
+
+ 
     else{
-      //Validate DNI
-      if(!this.validateDNI(this.f.dni.value)){
+      if(!this.dniInputServiceService.validateDNI(this.f.dni.value)){
         this.errorMessage = "DNI formato incorrecto";
+        this.alertHidden = true;
+        this.inputDni = "";
+        this.inputPassword = "";
+      }
+      else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
+        this.errorMessage = "La contraseña debe tener al menos 5 caracteres";
         this.alertHidden = true;
         this.inputDni = "";
         this.inputPassword = "";
@@ -67,39 +79,28 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  validateDNI(dni: string): boolean {
-    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
-    //Check length and format
-    if(dni.length !== 9 || !regExpresion.test(dni)){
-      return false;
-    }
-    return true;
-  }
-
 
   doLogin(){
     this.userService.loginResearcherAndAdmin(this.userToLog.username, this.userToLog.password).subscribe(responseData =>{
-      console.log("Todo ha ido bien");
       
       this.userService.userLogged = responseData;
-      //console.log(this.userService.userLogged);
 
       localStorage.setItem("userLogged", JSON.stringify(this.userService.userLogged));
 
       if(this.userService.userLogged.role === "ADMIN"){
         this.router.navigate(['/admin/researchers']);
       }
-
       else{
         this.router.navigate(['/researcher']);
       }
     }, err => {
-      console.log(err)
-      if(err.status === 401){
-        this.errorMessage = "Usuario o contraseña incorrectos";
+      console.log(err.status);
+
+      if(err.status === 500){
+        this.errorMessage = "Fallo en el servidor";
       }
       else{
-        this.errorMessage = "Algo ha ido mal";
+        this.errorMessage = "Usuario o contraseña incorrectos";
       } 
       this.inputDni = "";
       this.inputPassword = "";
