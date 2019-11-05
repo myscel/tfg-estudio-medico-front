@@ -5,6 +5,11 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { User } from 'src/app/models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DniInputServiceService } from 'src/app/services/dni-input-service.service';
+import { PasswordInputServiceService } from 'src/app/services/password-input-service.service';
+import { GenderInputServiceService } from 'src/app/services/gender-input-service.service';
+import { NameInputServiceService } from 'src/app/services/name-input-service.service';
+import { SurnameInputServiceService } from 'src/app/services/surname-input-service.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -43,7 +48,12 @@ export class HomeAdminComponent implements OnInit {
               private http: HttpClient,
               private userService: UserServiceService,
               private adminService: AdminServiceService,
-              private formBuilder: FormBuilder) { 
+              private formBuilder: FormBuilder,
+              private dniInputServiceService: DniInputServiceService,
+              private passwordInputServiceService: PasswordInputServiceService,
+              private genderInputServiceService: GenderInputServiceService,
+              private nameInputServiceService: NameInputServiceService,
+              private surnameInputServiceService: SurnameInputServiceService) { 
   }
 
 
@@ -101,15 +111,20 @@ export class HomeAdminComponent implements OnInit {
       this.successRegisterHidden = false;
       this.errorMessage = "Rellena todos los campos";
     }
-    else if(this.f.password.value.trim() !== this.f.passwordRepeat.value.trim() ){
-      this.alertRegisterHidden = true;
-      this.successRegisterHidden = false;
-      this.errorMessage = "Las contraseñas no coinciden";
-    }
-    else if(!this.validateDNI(this.f.dni.value)){
+    else if(!this.dniInputServiceService.validateDNI(this.f.dni.value)){
       this.alertRegisterHidden = true;
       this.successRegisterHidden = false;
       this.errorMessage = "DNI formato incorrecto";
+    }
+    else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
+      this.alertRegisterHidden = true;
+      this.successRegisterHidden = false;
+      this.errorMessage = "Las contraseñas deben de tener al menos 5 caracteres";
+    }
+    else if(!this.passwordInputServiceService.validatePassAndPassRepeat(this.f.password.value, this.f.passwordRepeat.value )){
+      this.alertRegisterHidden = true;
+      this.successRegisterHidden = false;
+      this.errorMessage = "Las contraseñas no coinciden";
     }
     else{
       var userInfo: User = new User();
@@ -124,14 +139,16 @@ export class HomeAdminComponent implements OnInit {
   }
 
   checkEmptyFields(): boolean{
-    if(this.f.dni.value.trim() === "" || 
-      this.f.password.value.trim() === "" ||
-      this.f.passwordRepeat.value.trim() === "" ||
-      this.f.name.value.trim() === "" ||
-      this.f.lastname.value.trim() === "" ||
-      this.f.gender.value.trim() === ""){
+    if(!this.dniInputServiceService.validateEmptyField(this.f.dni.value) || 
+        !this.passwordInputServiceService.validateEmptyField(this.f.password.value) ||   
+        !this.passwordInputServiceService.validateEmptyField(this.f.passwordRepeat.value) || 
+        !this.nameInputServiceService.validateEmptyField(this.f.name.value) ||
+        !this.surnameInputServiceService.validateEmptyField(this.f.lastname.value) ||
+        !this.genderInputServiceService.validateEmptyField(this.f.gender.value)
+    ){
       return false;
     }
+
     return true;
   }
 

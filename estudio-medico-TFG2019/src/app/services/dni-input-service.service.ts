@@ -8,7 +8,7 @@ export class DniInputServiceService {
   constructor() { }
 
   validateEmptyField(dni: string): boolean {
-    return !(dni === undefined || dni === "");
+    return !(dni === undefined || dni.trim() === "");
   }
 
   validateDNI(dni: string): boolean {
