@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/User';
-import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SortSubjectsServiceService } from 'src/app/services/sort-subjects-service.service';
+import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 import { DniInputServiceService } from 'src/app/services/researcher/dni-input-service.service';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 

@@ -1,6 +1,6 @@
 import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from '../models/User';
+import { User } from '../../models/User';
 import {Observable} from 'rxjs';
 
 

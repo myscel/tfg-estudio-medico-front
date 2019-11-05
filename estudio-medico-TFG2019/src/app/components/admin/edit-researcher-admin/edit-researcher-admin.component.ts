@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { User } from 'src/app/models/User';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { ActivatedRoute } from '@angular/router';

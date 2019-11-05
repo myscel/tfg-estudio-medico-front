@@ -5,7 +5,7 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
-import { PasswordInputServiceService } from 'src/app/services/password-input-service.service';
+import { PasswordInputServiceService } from 'src/app/services/researcher/password-input-service.service';
 import { DniInputServiceService } from 'src/app/services/researcher/dni-input-service.service';
 
 
