@@ -6,6 +6,9 @@ import { User } from 'src/app/models/User';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PasswordInputServiceService } from 'src/app/services/researcher/password-input-service.service';
+import { NameInputServiceService } from 'src/app/services/researcher/name-input-service.service';
+import { SurnameInputServiceService } from 'src/app/services/researcher/surname-input-service.service';
 
 @Component({
   selector: 'app-edit-researcher-admin',
@@ -20,7 +23,7 @@ export class EditResearcherAdminComponent implements OnInit {
   passIsChecked: boolean = false;
   passRepeatIsChecked: boolean = false;
   alertModifyHidden:boolean = false;
-  successModifyHidden:boolean = true;
+  successModifyHidden:boolean = false;
   errorMessage:string = "";
   successMessage:string = "";
   updateForm: FormGroup;
@@ -30,7 +33,11 @@ export class EditResearcherAdminComponent implements OnInit {
     private adminService: AdminServiceService,
     private userService: UserServiceService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private passwordInputServiceService: PasswordInputServiceService,
+    private nameInputServiceService: NameInputServiceService,
+    private surnameInputServiceService: SurnameInputServiceService,
+    private adminServiceService: AdminServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -89,10 +96,62 @@ export class EditResearcherAdminComponent implements OnInit {
   }
 
   doUpdate(){
-    
-    console.log(this.updateFields.name.value);
-    console.log(this.updateFields.surname.value);
-    console.log(this.updateFields.password.value);
+
+    if(!this.passwordInputServiceService.validatePassAndPassRepeat(
+      this.updateFields.password.value,
+      this.updateFields.repeatedPassword.value
+    )
+    ){
+      this.alertModifyHidden= true;
+      this.successModifyHidden = false;
+      this.errorMessage= "Las contraseñas no coinciden";
+      return;
+    }
+    if(
+      this.updateFields.name.value.toUpperCase() === this.researcher.name &&
+      this.updateFields.surname.value.toUpperCase() === this.researcher.surname &&
+      !this.passwordInputServiceService.validateEmptyField(this.updateFields.password.value) &&
+      !this.passwordInputServiceService.validateEmptyField(this.updateFields.repeatedPassword.value)
+    ){
+        this.alertModifyHidden= true;
+        this.successModifyHidden = false;
+        this.errorMessage= "No has modificado ningún campo";
+        return;
+    }
+
+    let userToUpdate: User = new User();
+
+    userToUpdate.name = this.updateFields.name.value.toUpperCase().trim()
+    userToUpdate.surname = this.updateFields.surname.value.toUpperCase().trim();
+    userToUpdate.password = this.updateFields.password.value.trim();
+    userToUpdate.id = this.id;
+
+    let observable = this.adminService.updateResearcher(userToUpdate);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+    else{
+      observable.subscribe(responseData =>{
+        this.alertModifyHidden = false;
+        this.successModifyHidden = true;
+        this.researcher = responseData;
+        this.successMessage = "Usuario modificado con éxito";
+
+      }, error =>{
+        this.alertModifyHidden = true;
+        this.successModifyHidden = false;
+
+        if(error.status === 404){
+          this.errorMessage = "Usario no encontrado";
+        }
+        else{
+          this.errorMessage = "Fallo en el servidor";
+        } 
+      });
+    }
+
+
 
   }
 

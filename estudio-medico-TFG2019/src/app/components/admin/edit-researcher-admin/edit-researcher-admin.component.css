@@ -40,7 +40,6 @@
   }
   strong{
     margin-left: 10px;
-    color: rgb(44, 44, 44);
   }
   #buttonLogout{
     text-align: center;
@@ -75,6 +74,7 @@
   #boxUpdateResearcher{ 
     background-color: rgb(245, 245, 245);
     width: 60%;
+    height: 740px;
     border-radius: 8px;
     margin-bottom: 30px;
     

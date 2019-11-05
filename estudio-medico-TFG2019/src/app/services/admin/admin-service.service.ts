@@ -139,5 +139,16 @@ export class AdminServiceService {
     return this.http.get(`${this.adminUrl}/researchers/${id}`, {headers: headerList});
   }
 
+  public updateResearcher(user: User): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+
+    let headerList: HttpHeaders = this.adminHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.post(`${this.adminUrl}/updateResearcher`,user , {headers: headerList});
+  }
+
   
 }
