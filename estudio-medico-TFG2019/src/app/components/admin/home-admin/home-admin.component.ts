@@ -5,12 +5,12 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { User } from 'src/app/models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DniInputServiceService } from 'src/app/services/dni-input-service.service';
+import { DniInputServiceService } from 'src/app/services/researcher/dni-input-service.service';
 import { PasswordInputServiceService } from 'src/app/services/password-input-service.service';
-import { GenderInputServiceService } from 'src/app/services/gender-input-service.service';
-import { NameInputServiceService } from 'src/app/services/name-input-service.service';
-import { SurnameInputServiceService } from 'src/app/services/surname-input-service.service';
-import { SortResearchersServiceService } from 'src/app/services/sort-researchers-service.service';
+import { GenderInputServiceService } from 'src/app/services/researcher/gender-input-service.service';
+import { NameInputServiceService } from 'src/app/services/researcher/name-input-service.service';
+import { SurnameInputServiceService } from 'src/app/services/researcher/surname-input-service.service';
+import { SortResearchersServiceService } from 'src/app/services/researcher/sort-researchers-service.service';
 
 @Component({
   selector: 'app-home-admin',

@@ -6,6 +6,9 @@ import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SortSubjectsServiceService } from 'src/app/services/sort-subjects-service.service';
+import { DniInputServiceService } from 'src/app/services/researcher/dni-input-service.service';
+import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 
 @Component({
   selector: 'app-subjects-admin',
@@ -36,7 +39,10 @@ export class SubjectsAdminComponent implements OnInit {
     private http: HttpClient,
     private userService: UserServiceService,
     private adminService: AdminServiceService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private sortSubjectsServiceService: SortSubjectsServiceService,
+    private dniInputServiceService: DniInputServiceService,
+    private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -78,56 +84,23 @@ export class SubjectsAdminComponent implements OnInit {
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
 
   sortUpIdentificationNumber(){
-    this.subjects = this.subjects.sort(function (a, b) {
-      if (a.identificationNumber > b.identificationNumber) {
-        return 1;
-      }
-      if (a.identificationNumber < b.identificationNumber) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortSubjectsServiceService.sortUpIdentificationNumber(this.subjects);
   }
 
   sortDownIdentificationNumber(){
-    this.subjects = this.subjects.sort(function (a, b) {
-      if (a.identificationNumber < b.identificationNumber) {
-        return 1;
-      }
-      if (a.identificationNumber > b.identificationNumber) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortSubjectsServiceService.sortDownIdentificationNumber(this.subjects);
   }
 
   sortUpDniResearcher(){
-    this.subjects = this.subjects.sort(function (a, b) {
-      if (a.usernameResearcher.toUpperCase() > b.usernameResearcher.toUpperCase()) {
-        return 1;
-      }
-      if (a.usernameResearcher.toUpperCase() < b.usernameResearcher.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortSubjectsServiceService.sortUpDniResearcher(this.subjects);
   }
 
   sortDownDniResearcher(){
-    this.subjects = this.subjects.sort(function (a, b) {
-      if (a.usernameResearcher.toUpperCase() < b.usernameResearcher.toUpperCase()) {
-        return 1;
-      }
-      if (a.usernameResearcher.toUpperCase() > b.usernameResearcher.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortSubjectsServiceService.sortDownDniResearcher(this.subjects);
   }
 
   goToResearcherList(){
     this.router.navigate(['/admin/researchers']);
-
   }
 
   goToSubjectList(){
@@ -138,7 +111,6 @@ export class SubjectsAdminComponent implements OnInit {
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
-
     });
   }
 
@@ -270,15 +242,21 @@ export class SubjectsAdminComponent implements OnInit {
 
   filterSubjectsByIdentificationNumber(){
 
-    if(!this.checkEmptyFieldsInFilter(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
+    if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
-      this.alertFilterMessage = "Campo Vacío";
+      this.alertFilterMessage = "Campo Número Identificación Vacío";
       return;
     }
 
     if(isNaN(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Introduce un número como identificación del paciente";
+      return;
+    }
+
+    if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.subjectsFilterDataForm.subjectFilterID.value)){
+      this.setAlertFilterModal();
+      this.alertFilterMessage = "El número de identificación debe tener 8 dígitos";
       return;
     }
 
@@ -325,17 +303,18 @@ export class SubjectsAdminComponent implements OnInit {
 
   filterSubjectsByResearcherDNI(){ 
 
-    if(!this.checkEmptyFieldsInFilter(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
+    
+    if(!this.dniInputServiceService.validateEmptyField(this.researcherFilterDataForm.researcherFilterDNI.value)){
       this.successDeleteHidden = false;
       this.alertDeleteHidden = false;
       this.alertWarningHidden = false;
       this.alertInvisibleHidden = true;
       this.alertFilterHidden = true;
-      this.alertFilterMessage = "Campo Vacío";
+      this.alertFilterMessage = "Campo DNI Vacío";
       return;
     }
 
-    if(!this.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
+    if(! this.dniInputServiceService.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
       this.setAlertFilterModal()
       this.alertFilterMessage = "Introduce un DNI Válido";
       return;
@@ -404,18 +383,7 @@ export class SubjectsAdminComponent implements OnInit {
     }
   }
 
-  checkEmptyFieldsInFilter(inputField: string): boolean{
-    return inputField !== "";
-  }
 
-  validateDNI(dni: string): boolean {
-    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
-    //Check length and format
-    if(dni.length !== 9 || !regExpresion.test(dni)){
-      return false;
-    }
-    return true;
-  }
 
   setSuccessDeleteModal(){
     this.successDeleteHidden = true;

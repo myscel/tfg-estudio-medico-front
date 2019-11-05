@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
 import { Subject } from 'src/app/models/Subject';
-import { ResearcherServiceService } from 'src/app/services/researcher-service.service';
+import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
 import { Component, OnInit, Input  } from '@angular/core';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
