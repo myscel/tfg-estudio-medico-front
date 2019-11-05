@@ -10,6 +10,7 @@ import { PasswordInputServiceService } from 'src/app/services/password-input-ser
 import { GenderInputServiceService } from 'src/app/services/gender-input-service.service';
 import { NameInputServiceService } from 'src/app/services/name-input-service.service';
 import { SurnameInputServiceService } from 'src/app/services/surname-input-service.service';
+import { SortResearchersServiceService } from 'src/app/services/sort-researchers-service.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -28,7 +29,6 @@ export class HomeAdminComponent implements OnInit {
   successRegisterHidden: boolean = false;
   errorMessage: string;
   successMessage: string;
-
 
   successDeleteHidden: boolean = false;
   successDeleteMessage: string;
@@ -53,7 +53,8 @@ export class HomeAdminComponent implements OnInit {
               private passwordInputServiceService: PasswordInputServiceService,
               private genderInputServiceService: GenderInputServiceService,
               private nameInputServiceService: NameInputServiceService,
-              private surnameInputServiceService: SurnameInputServiceService) { 
+              private surnameInputServiceService: SurnameInputServiceService,
+              private sortResearchersServiceService: SortResearchersServiceService) { 
   }
 
 
@@ -152,15 +153,6 @@ export class HomeAdminComponent implements OnInit {
     return true;
   }
 
-  validateDNI(dni: string): boolean {
-    var regExpresion = /^[0-9]{8,8}[A-Za-z]$/;
-    //Check length and format
-    if(dni.length !== 9 || !regExpresion.test(dni)){
-      return false;
-    }
-    return true;
-  }
-
   registerResearcher(user: User){
       
     this.alertRegisterHidden = false;
@@ -250,92 +242,42 @@ export class HomeAdminComponent implements OnInit {
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
-
     });
   }
 
   sortUpDni(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.username.toUpperCase() > b.username.toUpperCase()) {
-        return 1;
-      }
-      if (a.username.toUpperCase() < b.username.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortUpDni(this.researchers);
   }
 
   sortDownDni(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.username.toUpperCase() < b.username.toUpperCase()) {
-        return 1;
-      }
-      if (a.username.toUpperCase() > b.username.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortDownDni(this.researchers);
   }
 
   sortUpName(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.name.toUpperCase() > b.name.toUpperCase()) {
-        return 1;
-      }
-      if (a.name.toUpperCase() < b.name.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortUpName(this.researchers);
   }
 
   sortDownName(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.name.toUpperCase() < b.name.toUpperCase()) {
-        return 1;
-      }
-      if (a.name.toUpperCase() > b.name.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortDownName(this.researchers);
   }
 
   sortUpGender(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
-        return 1;
-      }
-      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortUpGender(this.researchers);
   }
 
   sortDownGender(){
-    this.researchers = this.researchers.sort(function (a, b) {
-      if (a.gender.toUpperCase() < b.gender.toUpperCase()) {
-        return 1;
-      }
-      if (a.gender.toUpperCase() > b.gender.toUpperCase()) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortResearchersServiceService.sortDownGender(this.researchers);
   }
 
   goToResearcherList(){
     this.router.navigate(['/admin/researchers']);
-
   }
 
   goToSubjectList(){
     this.router.navigate(['/admin/subjects']);
   }
 
-  modifyResearcher(id: string){
+  goToModifyResearcher(id: string){
     this.router.navigate(['/admin/researchers/edit/' + id]);
   }
 
