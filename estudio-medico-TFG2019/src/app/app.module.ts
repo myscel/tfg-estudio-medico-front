@@ -13,16 +13,17 @@ import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjec
 import { FormComponent } from './components/form/form.component';
 import { ProfileComponent } from './components/researcher/profile/profile.component';
 import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
+import { GuardServiceService } from './services/guard/guard-service.service';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin/researchers', component: HomeAdminComponent },
-  { path: 'admin/subjects', component: SubjectsAdminComponent },
-  { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent},
-  { path: 'researcher', component: HomeResearcherComponent },
-  { path: 'researcher/subjectForm/:idSubject/:appointment', component: FormComponent },
-  { path: 'researcher/profile/:id', component: ProfileComponent }
+  { path: 'admin/researchers', component: HomeAdminComponent, canActivate: [GuardServiceService] },
+  { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
+  { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
+  { path: 'researcher', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
+  { path: 'researcher/subjectForm/:idSubject/:appointment', component: FormComponent, canActivate: [GuardServiceService] },
+  { path: 'researcher/profile/:id', component: ProfileComponent, canActivate: [GuardServiceService] }
 ];
 
 @NgModule({
@@ -43,7 +44,7 @@ const appRoutes : Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes) 
   ],
-  providers: [],
+  providers: [GuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
