@@ -47,28 +47,20 @@ export class SubjectsAdminComponent implements OnInit {
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    let observable = this.adminService.getAllSubjects();
 
-    if(observable === null){
-      this.router.navigate(['/login']);
-    }
+    this.adminService.getAllSubjects().subscribe(response =>{
+      this.subjects = response.list;
 
-    else{
-      observable.subscribe(response =>{
-        this.subjects = response.list;
-
-        if(this.subjects.length === 0){
-          this.emptyList = true;
-        }
-        else{
-          this.emptyList = false;
-        }
-      }, error =>{
-        this.setAlertDeleteModal()
-        this.alertDeleteMessage = "No se pudo cargar la lista de pacientes"
-
-      });
-    }
+      if(this.subjects.length === 0){
+        this.emptyList = true;
+      }
+      else{
+        this.emptyList = false;
+      }
+    }, error =>{
+      this.setAlertDeleteModal()
+      this.alertDeleteMessage = "No se pudo cargar la lista de pacientes"
+    });
 
   this.researcherFilterForm = this.formBuilder.group({
     researcherFilterDNI: ['', Validators.required]

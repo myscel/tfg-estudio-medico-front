@@ -75,7 +75,7 @@
 
                     <div>
                         <button id="buttonExit" type="button" class="btn btn-success" (click)="leaveUpdateResearcher()">Salir</button>
-                        <button id="buttonModify" type="button" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
+                        <button id="buttonModify" type="button" [disabled]="!researcherFound" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
                     </div>
                 </form>
 

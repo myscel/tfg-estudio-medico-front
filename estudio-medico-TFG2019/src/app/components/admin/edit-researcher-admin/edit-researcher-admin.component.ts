@@ -27,6 +27,7 @@ export class EditResearcherAdminComponent implements OnInit {
   errorMessage:string = "";
   successMessage:string = "";
   updateForm: FormGroup;
+  researcherFound: boolean = true;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -44,26 +45,22 @@ export class EditResearcherAdminComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
 
-    let observable = this.adminService.getResearcherByID(this.id);
 
-    if(observable === null){
-      this.router.navigate(['/login']);
-    }
+    this.adminService.getResearcherByID(this.id).subscribe(response =>{
+      this.researcher = response;
+    }, error =>{
+      this.alertModifyHidden= true;
+      this.successModifyHidden = false;
+      this.researcherFound = false;
+      
+      if(error.status === 404){
+        this.errorMessage= "El investigador no existe";
+      }
 
-    else{
-      observable.subscribe(response =>{
-        this.researcher = response;
-
-      }, error =>{
-        if(error.status === 404){
-          console.log("El investigador no existe");
-        }
-
-        else if(error.status === 500){
-          console.log("Fallo en el servidor");
-        }
-      });
-    }
+      else if(error.status === 500){
+        this.errorMessage= "Fallo en el servidor";
+      }
+    });
     
     this.updateForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -91,7 +88,6 @@ export class EditResearcherAdminComponent implements OnInit {
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
-
     });
   }
 

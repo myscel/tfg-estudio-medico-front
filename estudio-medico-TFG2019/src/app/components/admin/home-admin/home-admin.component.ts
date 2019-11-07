@@ -69,30 +69,19 @@ export class HomeAdminComponent implements OnInit {
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    let observable = this.adminService.getAllResearchers();
 
-    if(observable === null){
+    this.adminService.getAllResearchers().subscribe(response =>{
+      this.researchers = response.list;
+
+      if(this.researchers.length === 0){
+        this.emptyList = true;
+      }
+      else{
+        this.emptyList = false;
+      }
+    }, error =>{
       this.router.navigate(['/login']);
-    }
-
-    else{
-      observable.subscribe(response =>{
-
-
-        this.researchers = response.list;
-
-        if(this.researchers.length === 0){
-          this.emptyList = true;
-        }
-        else{
-          this.emptyList = false;
-        }
-
-
-      }, error =>{
-        this.router.navigate(['/login']);
-      });
-    }
+    });
 
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
