@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit {
 
 
   doLogin(){
-    console.log(this.userToLog.username + " " +  this.userToLog.password);
     this.userService.loginResearcherAndAdmin(this.userToLog.username, this.userToLog.password).subscribe(responseData =>{
       
       this.userService.userLogged = responseData;
@@ -95,13 +94,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/researcher']);
       }
     }, err => {
-      console.log(err.status);
-
-      if(err.status === 500){
-        this.errorMessage = "Fallo en el servidor";
+      if(err.status === 401){
+        this.errorMessage = "Usuario o contraseña incorrectos";
       }
       else{
-        this.errorMessage = "Usuario o contraseña incorrectos";
+        this.errorMessage = "Fallo en el servidor";
       } 
       this.inputDni = "";
       this.inputPassword = "";
