@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
 
 
   doLogin(){
+    console.log(this.userToLog.username + " " +  this.userToLog.password);
     this.userService.loginResearcherAndAdmin(this.userToLog.username, this.userToLog.password).subscribe(responseData =>{
       
       this.userService.userLogged = responseData;
