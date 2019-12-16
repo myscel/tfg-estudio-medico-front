@@ -63,12 +63,12 @@ export class LoginComponent implements OnInit {
         this.inputDni = "";
         this.inputPassword = "";
       }
-      else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
-        this.errorMessage = "La contraseña debe tener al menos 5 caracteres";
-        this.alertHidden = true;
-        this.inputDni = "";
-        this.inputPassword = "";
-      }
+      // else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
+      //   this.errorMessage = "La contraseña debe tener al menos 5 caracteres";
+      //   this.alertHidden = true;
+      //   this.inputDni = "";
+      //   this.inputPassword = "";
+      // }
       else{
         this.alertHidden = false;
         this.userToLog.username = this.f.dni.value;

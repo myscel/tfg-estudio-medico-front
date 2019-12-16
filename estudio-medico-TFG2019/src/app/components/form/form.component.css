@@ -78,3 +78,79 @@ header{
     text-shadow: 1px 1px 2px #000000;
     font-weight: bold;
 }
+
+.form{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    border-radius: 8px;
+    padding-bottom: 1%;
+    background-color: rgb(225, 238, 248);
+}
+
+.formSection{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 3%;
+    padding: 0 2% 0 2%;
+  }
+
+  .textInput{
+    color: rgb(106, 106, 106);
+    font-weight: bolder;
+    font-size: 16px;
+  }
+
+.sectionTitle{
+    margin-bottom: 2%;
+    font-size: 30px;
+}
+
+.sectionContent{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+}
+
+.form-group{
+    min-width: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgb(203, 229, 253);
+}
+
+#yesNoGroup{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .yesNoRadio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .textYesNo{
+    color: rgb(54, 54, 54);
+    font-weight: bolder;
+    font-size: 12px;
+    color: rgb(106, 106, 106);
+  }
+  
+  .inputRadio{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .lineSeparator{
+      height: 2px;
+      width: 90%;
+      margin-left: 5%;
+      margin-bottom: 4px;
+      background-color: rgb(151, 205, 255);
+  }

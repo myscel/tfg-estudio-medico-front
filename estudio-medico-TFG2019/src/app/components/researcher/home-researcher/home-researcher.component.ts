@@ -103,11 +103,10 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   registerSubject(){
-    if(this.f.identificationNumber.value.typeOf != undefined){
+    if(this.f.identificationNumber.value != ""){
       var subjectInfo: Subject = new Subject();
       subjectInfo.identificationNumber = this.f.identificationNumber.value;
       subjectInfo.usernameResearcher = this.userLogged.username;
-
       let observable = this.researcherService.registerSubject(subjectInfo);
   
       if(observable === null){
