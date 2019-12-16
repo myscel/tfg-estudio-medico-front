@@ -21,7 +21,7 @@ const appRoutes : Routes = [
   { path: 'admin/researchers', component: HomeAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
-  { path: 'researcher', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
+  { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/subjectForm/:idSubject/:appointment', component: FormComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/profile/:id', component: ProfileComponent, canActivate: [GuardServiceService] }
 ];

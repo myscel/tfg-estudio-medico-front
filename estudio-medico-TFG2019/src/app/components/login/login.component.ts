@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/admin/researchers']);
       }
       else{
-        this.router.navigate(['/researcher']);
+        this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
       }
     }, err => {
       if(err.status === 401){

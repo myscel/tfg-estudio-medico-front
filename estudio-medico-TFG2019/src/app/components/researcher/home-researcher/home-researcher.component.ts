@@ -33,11 +33,8 @@ export class HomeResearcherComponent implements OnInit {
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    console.log("ID del investigador solicitado: " + this.userLogged.id);
     let observable = null;
     
-    
-
     if(this.userLogged.role === "ADMIN"){
       console.log("ACCEDIENDO DESDE ADMIN...");
       observable = this.adminServiceService.getSubjectsAndInvestigationsFromIdAdmin(this.userLogged.id);
@@ -53,7 +50,6 @@ export class HomeResearcherComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-
 
         this.subjects = response.list;
         console.log(this.subjects);

@@ -18,7 +18,7 @@
         <span>
           Investigador
         </span>
-        <span>
+        <span id="spanGrey">
           | {{userLogged.name}}
         </span>
     </div>
@@ -46,9 +46,9 @@
 
     <div id="divRight">
       <div class="headerBar">
-        <div id="titleTableResearchers"><strong>PACIENTES</strong></div>
+        <div id="titleTableResearchers"><strong>LISTA PACIENTES</strong></div>
         <div class="addSubject">
-            <b>AÑADIR NUEVO PACIENTE</b>         
+            <b>AÑADIR PACIENTE</b>         
             <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">
               Identificador:
               <input type="text" formControlName="identificationNumber" class="form-control" required>
@@ -56,7 +56,7 @@
             </form>
         </div> 
       </div>
-        <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
+      <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
           <table class="table">
             <thead>
               <tr>
@@ -97,7 +97,7 @@
               </tr>
             </tbody>
           </table>
-        </div>    
+      </div>    
     </div>
 
     

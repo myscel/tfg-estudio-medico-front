@@ -52,6 +52,10 @@ header{
     align-items: center;
 }
 
+#buttonNewSubject{
+    font-size: 16px;
+}
+
 #imglogout{
     margin-left: 5px;
 }
@@ -98,7 +102,7 @@ header{
       width: 80%;
       border-radius: 8px;
       margin: 0;
-      margin-top: 35px;
+      margin-top: 50px;
       position: absolute; 
       top: 40%;
       left: 50%;
@@ -187,4 +191,8 @@ header{
 
 input[type=text] {
     margin: 0 15px 0 15px;
+}
+
+#spanGrey{
+    color: rgb(102, 102, 102);
 }
