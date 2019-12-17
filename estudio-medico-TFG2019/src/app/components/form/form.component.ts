@@ -62,7 +62,8 @@ export class FormComponent implements OnInit {
     console.log(this.form);
   }
 
-  doHome() {
-    this.router.navigate(['/researcher']);
+  doHome(){
+    console.log("Vamos a pacientes");
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 }

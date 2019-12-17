@@ -80,15 +80,8 @@ export class HomeResearcherComponent implements OnInit {
 
   doLogOut(){
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      console.log("Iniciando Log out");
-      console.log(responseData);
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
-
-    }, err => {
-      console.log("Error en el logout");
-      console.log(err);
- 
     });
   }
 
@@ -101,7 +94,8 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doHome(){
-    this.router.navigate(['/researcher']);
+    console.log("Vamos a pacientes");
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
   registerSubject(){
