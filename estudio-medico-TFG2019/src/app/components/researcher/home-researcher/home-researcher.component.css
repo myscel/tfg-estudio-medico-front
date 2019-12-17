@@ -87,7 +87,7 @@ header{
 
 
 #divRight{
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -191,4 +191,20 @@ input[type=text] {
 
 #spanGrey{
     color: rgb(102, 102, 102);
+}
+
+#modalSuccessDelete, #modalErrorDelete, #modalWarningDelete{
+    font-size: 18px;
+    width: 80%;
+}
+
+.myModal{
+    height: 60px;
+    align-items: center;
+}
+
+#modalInvisible{
+    border:0px solid transparent;
+    color: transparent;
+    height: 80px; 
 }

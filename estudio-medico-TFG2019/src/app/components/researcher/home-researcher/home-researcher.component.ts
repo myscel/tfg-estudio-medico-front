@@ -23,6 +23,14 @@ export class HomeResearcherComponent implements OnInit {
 
   emptyList: boolean = false;
 
+  successHidden: boolean = false;
+  alertHidden: boolean = false;
+  alertInvisibleHidden: boolean = true;
+  alertFilterHidden: boolean;
+  successMessage: string = "";
+  alertMessage: string = "";
+
+
   constructor(private router: Router,
     private http: HttpClient,
      private userService: UserServiceService,
@@ -52,9 +60,7 @@ export class HomeResearcherComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-
         this.subjects = response.list;
-        console.log(this.subjects);
         if(this.subjects.length === 0){
           this.emptyList = true;
         }
@@ -64,9 +70,6 @@ export class HomeResearcherComponent implements OnInit {
 
 
       }, error =>{
-        //Debería mostrar un pop-up
-        console.log("Error al listar usuarios");
-        console.log(error);
         this.router.navigate(['/login']);
       });
     }
@@ -86,7 +89,7 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doNewForm(idSubject: string, appointment: string){
-    this.router.navigate(['/researcher/subjectForm/' + idSubject + "/" + appointment]);
+    this.router.navigate(['/researcher/' + this.userLogged.id + '/subjectForm/' + idSubject + "/" + appointment]);
   }
 
   doProfile(){
@@ -101,15 +104,18 @@ export class HomeResearcherComponent implements OnInit {
   registerSubject(){
 
     if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.f.identificationNumber.value)){
-      console.log("Error, número de identificación vacío");
+      this.alertMessage = "Número de identificación vacío";
+      this.setAlertDeleteModal();
     }
 
     else if(!this.identificationNumberSubjectServiceService.validateNumberField(this.f.identificationNumber.value)){
-      console.log("Error, no es un número");
+      this.alertMessage = "No es un número";
+      this.setAlertDeleteModal();
     }
 
     else if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.f.identificationNumber.value)){
-      console.log("Error, deben ser 8 caracteres");
+      this.alertMessage = "No es un número de 8 caracteres";
+      this.setAlertDeleteModal();
     }
 
     else{
@@ -123,8 +129,10 @@ export class HomeResearcherComponent implements OnInit {
       }
       else{
         observable.subscribe(responseData =>{
-          let subjectRegistered: User = responseData;
-          console.log("chachi, paciente creado");
+          var subjectCreated: Subject = responseData;
+          this.successMessage = "Paciente con Nº" + subjectCreated.identificationNumber + " registrado correctamente";
+          this.setSuccessDeleteModal();
+          this.ngOnInit();
         }, error =>{
           if(error.status === 409){
             console.log("Error, el paciente ya existe");
@@ -141,5 +149,23 @@ export class HomeResearcherComponent implements OnInit {
 
 
     
+  }
+
+  setSuccessDeleteModal(){
+    this.successHidden = true;
+    this.alertInvisibleHidden = false;
+    this.alertHidden = false;
+  }
+
+  setAlertDeleteModal(){
+    this.successHidden = false;
+    this.alertHidden = true;
+    this.alertInvisibleHidden = false;
+  }
+
+  setInvisibleDeleteModal(){
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertInvisibleHidden = true;
   }
 }

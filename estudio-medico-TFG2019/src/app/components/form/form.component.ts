@@ -3,6 +3,7 @@ import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserServiceService } from 'src/app/services/userService.service';
 
 @Component({
   selector: 'app-form',
@@ -16,7 +17,8 @@ export class FormComponent implements OnInit {
 
   constructor(private router: Router,
     private http: HttpClient,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private userService: UserServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -65,5 +67,12 @@ export class FormComponent implements OnInit {
   doHome(){
     console.log("Vamos a pacientes");
     this.router.navigate(['/researcher/' + this.userLogged.id]);
+  }
+
+  doLogOut(){
+    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
+      localStorage.removeItem('userLogged');
+      this.router.navigate(['/login']);
+    });
   }
 }
