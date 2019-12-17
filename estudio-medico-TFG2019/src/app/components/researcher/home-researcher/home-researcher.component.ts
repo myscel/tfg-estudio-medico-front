@@ -7,6 +7,7 @@ import { ResearcherServiceService } from 'src/app/services/researcher/researcher
 import { Component, OnInit, Input  } from '@angular/core';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 
 @Component({
   selector: 'app-home-researcher',
@@ -27,6 +28,7 @@ export class HomeResearcherComponent implements OnInit {
      private userService: UserServiceService,
       private researcherService: ResearcherServiceService,
       private adminServiceService: AdminServiceService,
+      private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService,
       private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -103,23 +105,47 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   registerSubject(){
-    if(this.f.identificationNumber.value != ""){
+
+    if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.f.identificationNumber.value)){
+      console.log("Error, número de identificación vacío");
+    }
+
+    else if(!this.identificationNumberSubjectServiceService.validateNumberField(this.f.identificationNumber.value)){
+      console.log("Error, no es un número");
+    }
+
+    else if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.f.identificationNumber.value)){
+      console.log("Error, deben ser 8 caracteres");
+    }
+
+    else{
       var subjectInfo: Subject = new Subject();
       subjectInfo.identificationNumber = this.f.identificationNumber.value;
       subjectInfo.usernameResearcher = this.userLogged.username;
       let observable = this.researcherService.registerSubject(subjectInfo);
-  
+    
       if(observable === null){
         this.router.navigate(['/login']);
       }
       else{
         observable.subscribe(responseData =>{
           let subjectRegistered: User = responseData;
-          console.log("chachi");
+          console.log("chachi, paciente creado");
         }, error =>{
-          console.log("nada de chachi");
+          if(error.status === 409){
+            console.log("Error, el paciente ya existe");
+          }
+          else if(error.status === 410){
+            console.log("Error, el investigador ya no existe");
+          }
+          else if(error.status === 410){
+            console.log("Error en el servidor");
+          }
         });
       }
     }
+
+
+    
   }
 }

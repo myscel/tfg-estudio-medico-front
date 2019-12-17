@@ -87,7 +87,11 @@ header{
 
 
 #divRight{
-    margin: 50px 5% 0 5%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   #titleTableResearchers{
@@ -101,13 +105,7 @@ header{
   #divTable{
       width: 80%;
       border-radius: 8px;
-      margin: 0;
-      margin-top: 50px;
-      position: absolute; 
-      top: 40%;
-      left: 50%;
-      margin-right: 10%;
-      transform: translate(-50%, -50%);
+      margin-top: 30px;      
   }
   
   thead{
@@ -180,13 +178,11 @@ header{
     align-items: center;
 }
 
-.headerBar{
-    width: 90%;
-    margin-left: 5%;
+#headerBar{
+    width: 80%;
     display:flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 10px;
 }
 
 input[type=text] {
