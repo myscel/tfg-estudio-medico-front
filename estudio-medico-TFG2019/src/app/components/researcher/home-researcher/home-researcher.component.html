@@ -61,6 +61,21 @@
       <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
       </div>
 
+      <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
+        <strong>Aviso! </strong> {{warningMessage}}
+        <div id="divConfirmDelete">
+          <div id="divConfirmDeleteLeft"> 
+            <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
+          </div>
+          <div id="divConfirmDeleteRight">
+              <button type="button" (click)="confirmDelete()" class="buttonConfirmDelete btn btn-success">SÍ</button>
+              <button type="button" (click)="cancelDelete()" class="buttonConfirmDelete btn btn-danger">NO</button>
+          </div>
+           
+           
+        </div>   
+      </div>
+
       <div id="headerBar">
         <div id="titleTableResearchers"><strong>LISTA PACIENTES</strong></div>
         <div class="addSubject">
@@ -82,6 +97,16 @@
                     <div class="thText">
                         IDENTIFICADOR PACIENTE
                     </div>
+                    <div>
+                      <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
+                            <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                      </button> 
+                  </div>
+                  <div>
+                    <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
+                        <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                    </button>    
+                  </div>
                   </div>
                 </th>
                 <th>
@@ -105,11 +130,20 @@
               <tr *ngFor="let user of subjects; let i = index"
                 [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                 <td> {{user.identificationNumber}}</td>
-                <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">COMPLETADA</td>
-                <ng-template #buttonFromSubject1> <td><button class="btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 1)">CITA 1</button></td></ng-template>
-                <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">COMPLETADA</td>
-                <ng-template #buttonFromSubject2> <td><button class="btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 2)">CITA 2</button></td></ng-template>
-                <td><button id="buttonDelete" type="button" (click)="deleteResearcher(user.username)"><img id="imgCross"
+                <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">
+                  <button class="buttonLook btn btn-info" type="button">
+                    Consultar  <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
+                  </button>
+                </td>
+                <ng-template #buttonFromSubject1> <td><button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 1)">CITA 1</button></td></ng-template>
+
+                <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
+                  <button class="buttonLook btn btn-info" type="button">
+                    <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
+                  </button>
+                </td>
+                <ng-template #buttonFromSubject2> <td><button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 2)">CITA 2</button></td></ng-template>
+                <td><button id="buttonDelete" type="button" (click)="deleteSubject(user.identificationNumber)"><img id="imgCross"
                       src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>
             </tbody>

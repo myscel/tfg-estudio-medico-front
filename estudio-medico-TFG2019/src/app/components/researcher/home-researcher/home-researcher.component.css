@@ -199,12 +199,71 @@ input[type=text] {
 }
 
 .myModal{
-    height: 60px;
+    height: 90px;
     align-items: center;
 }
 
 #modalInvisible{
     border:0px solid transparent;
     color: transparent;
-    height: 80px; 
+    height: 110px; 
 }
+
+#divConfirmDelete{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    margin-top: 3px;
+}
+
+#divConfirmDeleteLeft{
+    width: 70%;
+}
+  
+#divConfirmDeleteRight{
+ width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#textConfirmDelete{
+    margin-left: 8px;
+}
+
+.buttonConfirmDelete{
+    text-align: center;
+    margin: 0px 10px;
+    width: 70px;
+}
+
+.buttonLook, .buttonInvestigation{
+    height: 35px;
+    align-self: center;
+}
+
+.buttonLook{
+    margin-top: 3px;
+}
+
+.buttonInvisible{
+    background: transparent;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    margin: 0px 4px;
+  }
+  
+  .buttonInvisible:hover{
+    background: transparent;
+    border: none !important;
+  }
+
+  .thSort{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

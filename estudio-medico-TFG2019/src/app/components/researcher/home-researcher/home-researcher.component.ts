@@ -8,6 +8,7 @@ import { Component, OnInit, Input  } from '@angular/core';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
+import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 
 @Component({
   selector: 'app-home-researcher',
@@ -16,7 +17,7 @@ import { IdentificationNumberSubjectServiceService } from 'src/app/services/subj
 })
 export class HomeResearcherComponent implements OnInit {
 
-  @Input() subjects: User[] = [];
+  @Input() subjects: Subject[] = [];
 
   userLogged: User;
   newSubjectForm: FormGroup;
@@ -26,9 +27,12 @@ export class HomeResearcherComponent implements OnInit {
   successHidden: boolean = false;
   alertHidden: boolean = false;
   alertInvisibleHidden: boolean = true;
+  alertWarningHidden: boolean = false;
   alertFilterHidden: boolean;
   successMessage: string = "";
   alertMessage: string = "";
+  warningMessage: string = "";
+  subjectToDelete: string;
 
 
   constructor(private router: Router,
@@ -37,7 +41,8 @@ export class HomeResearcherComponent implements OnInit {
       private researcherService: ResearcherServiceService,
       private adminServiceService: AdminServiceService,
       private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService,
-      private formBuilder: FormBuilder) { }
+      private formBuilder: FormBuilder,
+      private sortSubjectsService: SortSubjectsServiceService) { }
 
   ngOnInit() {
 
@@ -97,7 +102,6 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doHome(){
-    console.log("Vamos a pacientes");
     this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
@@ -134,14 +138,15 @@ export class HomeResearcherComponent implements OnInit {
           this.setSuccessDeleteModal();
           this.ngOnInit();
         }, error =>{
+          this.setAlertDeleteModal();
           if(error.status === 409){
-            console.log("Error, el paciente ya existe");
+            this.alertMessage = "Error, el paciente ya existe";
           }
           else if(error.status === 410){
-            console.log("Error, el investigador ya no existe");
+            this.alertMessage = "Error, el investigador ya no existe";
           }
           else if(error.status === 410){
-            console.log("Error en el servidor");
+            this.alertMessage = "Error en el servidor";
           }
         });
       }
@@ -151,21 +156,147 @@ export class HomeResearcherComponent implements OnInit {
     
   }
 
-  setSuccessDeleteModal(){
-    this.successHidden = true;
-    this.alertInvisibleHidden = false;
-    this.alertHidden = false;
+
+  deleteSubject(identificationNumber: string){
+    let observable = this.researcherService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{
+
+        let investigationsCompleted: number = response.numberInvestigationsCompleted;
+
+        if(investigationsCompleted !== 0){
+
+          window.scroll(0,0);
+
+          this.setWarningDeleteModal()
+
+          this.warningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
+          this.subjectToDelete = identificationNumber;
+        }
+
+        else{
+
+          let observable = this.researcherService.deleteSubjectByIdentificationNumberResearcher(identificationNumber);
+
+          if(observable === null){
+            this.router.navigate(['/login']);
+          }
+      
+          else{
+            observable.subscribe(response =>{
+            
+              window.scroll(0,0);
+      
+              this.ngOnInit();
+      
+              this.setSuccessDeleteModal()
+
+              this.successMessage = "Éxito al borrar al paciente: " + identificationNumber;
+
+            }, error =>{
+              this.setAlertDeleteModal()
+
+              if(error.status === 500){
+                this.alertMessage = "Fallo en el servidor";
+              }
+              else if(error.status === 400){
+                this.alertMessage = "El número de identificación debe ser un número entero";
+              }
+              else if(error.status === 404){
+                this.alertMessage = "El paciente no existe";
+              }
+            });
+          }
+        }
+
+      }, error =>{
+        this.setAlertDeleteModal()
+
+        if(error.status === 500){
+          this.alertMessage = "Fallo en el servidor";
+        }
+        else if(error.status === 400){
+          this.alertMessage = "El número de identificación debe ser un número entero";
+        }
+      });
+    }
   }
 
-  setAlertDeleteModal(){
-    this.successHidden = false;
-    this.alertHidden = true;
-    this.alertInvisibleHidden = false;
-  }
+  confirmDelete(){
+    let observable = this.researcherService.deleteSubjectByIdentificationNumberResearcher(this.subjectToDelete);
 
-  setInvisibleDeleteModal(){
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(response =>{  
+        this.ngOnInit();
+        this.setSuccessDeleteModal();
+
+        this.successMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
+
+      }, error =>{
+        this.setAlertDeleteModal();
+
+        if(error.status === 500){
+          this.alertMessage = "Fallo en el servidor";
+        }
+        else if(error.status === 400){
+          this.alertMessage = "El número de identificación debe ser un número entero";
+        }
+        else if(error.status === 404){
+          this.alertMessage = "El paciente no existe";
+        }
+      });
+    }
+}
+
+  cancelDelete(){
     this.successHidden = false;
     this.alertHidden = false;
     this.alertInvisibleHidden = true;
+    this.alertWarningHidden = false;
+  }
+  
+  setSuccessDeleteModal(){
+      this.successHidden = true;
+      this.alertInvisibleHidden = false;
+      this.alertHidden = false;
+      this.alertWarningHidden = false;
+  }
+  
+  setAlertDeleteModal(){
+      this.successHidden = false;
+      this.alertHidden = true;
+      this.alertInvisibleHidden = false;
+      this.alertWarningHidden = false;
+  }
+  
+  setInvisibleDeleteModal(){
+      this.successHidden = false;
+      this.alertHidden = false;
+      this.alertInvisibleHidden = true;
+      this.alertWarningHidden = false;
+  }
+  
+  setWarningDeleteModal(){
+      this.successHidden = false;
+      this.alertHidden = false;
+      this.alertInvisibleHidden = false;
+      this.alertWarningHidden = true;
+  }
+
+  sortUpIdentificationNumber(){
+    this.sortSubjectsService.sortUpIdentificationNumber(this.subjects);
+  }
+
+  sortDownIdentificationNumber(){
+    this.sortSubjectsService.sortDownIdentificationNumber(this.subjects);
   }
 }
