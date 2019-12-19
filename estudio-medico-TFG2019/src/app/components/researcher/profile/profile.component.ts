@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/services/userService.service';
 
@@ -15,10 +15,18 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router,
     private http: HttpClient,
-    private userService: UserServiceService) { }
+    private userService: UserServiceService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if(id != this.userLogged.id){
+      localStorage.removeItem('userLogged');
+      this.router.navigate(['/login']);
+    }
   }
 
   doHome(){
