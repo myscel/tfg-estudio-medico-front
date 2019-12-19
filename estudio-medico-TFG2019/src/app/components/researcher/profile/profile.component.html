@@ -18,7 +18,7 @@
         <span>
           Investigador
         </span>
-        <span>
+        <span id="spanGrey">
           | {{userLogged.name}}
         </span>
     </div>
@@ -43,5 +43,27 @@
         <button id="buttonCitas" class="btn btn-primary navButton">DOCUMENTACIÓN</button>
         <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
+
+    <div id="content">
+        <div id="titleTableResearcher"><strong>INFORMACIÓN INVESTIGADOR</strong></div>
+
+        <div id="boxGrey">
+            <div id="divName">
+               <div class="inlineBlock textInfo" >NOMBRE:</div>
+               <div class="inlineBlock textData" >  {{this.userLogged.name}}</div>
+            </div>
+            <div id="divSurname">
+                <div class="inlineBlock textInfo" >APELLIDOS:</div>
+                <div class="inlineBlock textData" > {{this.userLogged.surname}}</div>
+            </div>
+
+        </div>
+    </div>
     
+    <button id="buttonReturnHomeResearcher" type="button" class="btn btn-primary" (click)="doHome()">
+        Volver
+        <img id="previous" src="../../../../assets/icons/previous.png" height="20">
+
+    </button>
+
 </body>
