@@ -92,7 +92,6 @@ export class EditResearcherAdminComponent implements OnInit {
   }
 
   doUpdate(){
-
     if(!this.passwordInputServiceService.validatePassAndPassRepeat(
       this.updateFields.password.value,
       this.updateFields.repeatedPassword.value
@@ -103,6 +102,18 @@ export class EditResearcherAdminComponent implements OnInit {
       this.errorMessage= "Las contraseñas no coinciden";
       return;
     }
+
+    if(this.updateFields.name.value.toUpperCase().trim() == "" &&
+      this.updateFields.surname.value.toUpperCase().trim() == "" &&
+      !this.passwordInputServiceService.validateEmptyField(this.updateFields.password.value) &&
+      !this.passwordInputServiceService.validateEmptyField(this.updateFields.repeatedPassword.value)
+    ){
+      this.alertModifyHidden= true;
+      this.successModifyHidden = false;
+      this.errorMessage= "No has modificado ningún campo";
+      return;
+    }
+
     if(
       this.updateFields.name.value.toUpperCase() === this.researcher.name &&
       this.updateFields.surname.value.toUpperCase() === this.researcher.surname &&
