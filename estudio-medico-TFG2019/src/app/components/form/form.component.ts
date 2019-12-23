@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from 'src/app/services/userService.service';
+import { FormServiceService } from 'src/app/services/form/form-service.service';
 
 @Component({
   selector: 'app-form',
@@ -15,10 +16,14 @@ export class FormComponent implements OnInit {
   userLogged: User;
   subjectForm: FormGroup;
 
+  vitaminFieldValidated: boolean = false;
+  hbA1cValidated: boolean = false;
+
   constructor(private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userService: UserServiceService) { }
+    private userService: UserServiceService,
+    private formService: FormServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -61,6 +66,7 @@ export class FormComponent implements OnInit {
   get form() { return this.subjectForm.controls; }
 
   onSubmit() {
+    console.log(this.form.season);
     console.log(this.form);
   }
 
@@ -75,4 +81,13 @@ export class FormComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
+
+
+  checkVitaminD(vitamminDValue: string){
+      this.vitaminFieldValidated = this.formService.validateVitaminD(vitamminDValue);
+  }
+
+  checkHbA1c(hbA1c: string){
+    this.hbA1cValidated = this.formService.validateHbA1c(hbA1c);
+}
 }

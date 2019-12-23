@@ -154,3 +154,15 @@ header{
       margin-bottom: 4px;
       background-color: rgb(151, 205, 255);
   }
+
+  .inputWrong{
+      border: 2px solid red;
+  }
+
+  .inputRight{
+    border: 2px solid green;
+}
+
+.blackFont{
+    color:black;
+}
