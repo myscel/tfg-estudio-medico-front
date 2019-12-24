@@ -166,3 +166,22 @@ header{
 .blackFont{
     color:black;
 }
+
+#divDay{
+    width: 13%;
+}
+
+#divMonth{
+    width: 13%;
+}
+
+#divYear{
+    width: 20%;
+}
+
+#divDate{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
