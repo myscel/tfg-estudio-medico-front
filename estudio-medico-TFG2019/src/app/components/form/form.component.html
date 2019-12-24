@@ -199,9 +199,9 @@
                         </div>
                 </div>
                 <div class="form-group">
-                    <div class="textInput">Tiempo de exposición solar al día</div>
+                    <div class="textInput" tooltip="(0-1200) min">Tiempo de exposición solar al día</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputSolarExposition" type="text" formControlName="solarExposition"
+                    <input (focusout)="checkSunExposure($event.target.value)" [ngClass]="{'inputRight': sunExposureValidated && !sunExposureFirstTime, 'inputWrong': !sunExposureValidated && !sunExposureFirstTime}" class="myInput" [(ngModel)]="inputSolarExposition" type="text" formControlName="solarExposition"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -211,7 +211,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="creamSPF" value="si" required>
+                                        <input (click)="validateSPFCream()" class="inputRadio" type="radio" formControlName="creamSPF" value="si" required>
                                     </div>
                                     <div class="textYesNo">
                                         Si
@@ -222,7 +222,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="creamSPF" value="no" required>
+                                        <input (click)="validateSPFCream()" class="inputRadio" type="radio" formControlName="creamSPF" value="no" required>
                                     </div>
                                     <div class="textYesNo">
                                         No
@@ -238,9 +238,9 @@
                         class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput">Ejercicio físico (horas/semana)</div>
+                    <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico (horas/semana)</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercies"
+                    <input (focusout)="checkExercise($event.target.value)" [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}" class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercies"
                         class="form-control" required>
                 </div>
             </div>

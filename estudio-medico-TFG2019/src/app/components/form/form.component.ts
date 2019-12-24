@@ -31,7 +31,16 @@ export class FormComponent implements OnInit {
 
   //Hábitos de vida
   tobaccoValidated: boolean = false;
+
   alcoholRiskValidated: boolean = false;
+
+  sunExposureValidated: boolean = false;
+  sunExposureFirstTime: boolean = true;
+
+  spfCreamValidated: boolean = false;
+
+  exerciseValidated: boolean = false;
+  exerciseFirstTime: boolean = true;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -100,6 +109,7 @@ export class FormComponent implements OnInit {
   checkVitaminD(vitamminDValue: string){
     if(vitamminDValue === ""){
       this.vitaminFirstTime = true;
+      this.vitaminFieldValidated = false;
     }
     else{
       this.vitaminFirstTime = false;
@@ -110,6 +120,7 @@ export class FormComponent implements OnInit {
   checkHbA1c(hbA1c: string){
     if(hbA1c === ""){
       this.hbA1cFirstTime = true;
+      this.hbA1cValidated = false;
     }
     else{
       this.hbA1cFirstTime = false;
@@ -136,5 +147,32 @@ export class FormComponent implements OnInit {
   validateAlcoholRisk(){
     console.log("Riesgo alcohol actualizado");
     this.alcoholRiskValidated = true;
+  }
+
+  checkSunExposure(sunExposure: string){
+    if(sunExposure === ""){
+      this.sunExposureFirstTime = true;
+      this.sunExposureValidated = false;
+    }
+    else{
+      this.sunExposureFirstTime = false;
+      this.sunExposureValidated = this.formService.validateSunExposure(sunExposure);
+    } 
+  }
+
+  validateSPFCream(){
+    console.log("CREMA SPF actualizada");
+    this.spfCreamValidated = true;
+  }
+
+  checkExercise(exerciseValue: string){
+    if(exerciseValue === ""){
+      this.exerciseFirstTime = true;
+      this.exerciseValidated = false;
+    }
+    else{
+      this.exerciseFirstTime = false;
+      this.exerciseValidated = this.formService.validateExercise(exerciseValue);
+    }
   }
 }
