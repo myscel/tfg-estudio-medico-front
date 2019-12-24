@@ -49,19 +49,19 @@
             <div class="sectionTitle">Variables principales</div>
             <div class="sectionContent">
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont">Vitamina D </span> (0-500 ng/ml)</div>
+                    <div class="textInput"><span class="blackFont">Vitamina D </span> (0-500) ng/ml</div>
                     <div class="lineSeparator"></div>
                     <input (input)="checkVitaminD($event.target.value)" [ngClass]="vitaminFieldValidated ? 'inputRight' : 'inputWrong'"  class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont"> HbA1c </span> (1-40 %)</div>
+                    <div class="textInput"><span class="blackFont"> HbA1c </span> (1-40) %</div>
                     <div class="lineSeparator"></div>
                     <input (input)="checkHbA1c($event.target.value)" [ngClass]="hbA1cValidated ? 'inputRight' : 'inputWrong'" class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput">Estación del año</div>
+                    <div class="textInput"><span class="blackFont">Estación del año </span></div>
                     <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                             <div class="divGenders">
@@ -94,7 +94,7 @@
             <div class="sectionTitle">Variables sociodemográficas</div>
             <div class="sectionContent">
                 <div class="form-group">
-                    <div class="textInput">Sexo</div>
+                    <div class="textInput"><span class="blackFont">Sexo </span></div>
                     <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                             <div class="divGenders">
