@@ -163,6 +163,10 @@ header{
     border: 2px solid green;
 }
 
+.inputClear{
+    border: 2px solid transparent;
+}
+
 .blackFont{
     color:black;
 }

@@ -51,13 +51,13 @@
                 <div class="form-group">
                     <div class="textInput"><span class="blackFont" tooltip="(0-500) ng/ml">Vitamina D</span></div>
                     <div class="lineSeparator"></div>
-                    <input (focusout)="checkVitaminD($event.target.value)" [ngClass]="vitaminFieldValidated ? 'inputRight' : 'inputWrong'"  class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
+                    <input (focusout)="checkVitaminD($event.target.value)" [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"   class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
                     <div class="textInput"><span class="blackFont" tooltip="(1-40) %"> HbA1c </span></div>
                     <div class="lineSeparator"></div>
-                    <input (input)="checkHbA1c($event.target.value)" [ngClass]="hbA1cValidated ? 'inputRight' : 'inputWrong'" class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
+                    <input (focusout)="checkHbA1c($event.target.value)" [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"  class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
                         class="form-control" required>
                 </div>
                 <div class="form-group">

@@ -17,7 +17,11 @@ export class FormComponent implements OnInit {
   subjectForm: FormGroup;
 
   vitaminFieldValidated: boolean = false;
+  vitaminFirstTime: boolean = true;
+
+
   hbA1cValidated: boolean = false;
+  hbA1cFirstTime: boolean = true;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -84,10 +88,23 @@ export class FormComponent implements OnInit {
 
 
   checkVitaminD(vitamminDValue: string){
+    if(vitamminDValue === ""){
+      this.vitaminFirstTime = true;
+    }
+    else{
+      this.vitaminFirstTime = false;
       this.vitaminFieldValidated = this.formService.validateVitaminD(vitamminDValue);
+    }
   }
 
   checkHbA1c(hbA1c: string){
-    this.hbA1cValidated = this.formService.validateHbA1c(hbA1c);
+    if(hbA1c === ""){
+      this.hbA1cFirstTime = true;
+    }
+    else{
+      this.hbA1cFirstTime = false;
+      this.hbA1cValidated = this.formService.validateHbA1c(hbA1c);
+    }
+    
 }
 }
