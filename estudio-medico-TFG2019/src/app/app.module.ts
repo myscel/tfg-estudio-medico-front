@@ -14,6 +14,7 @@ import { FormComponent } from './components/form/form.component';
 import { ProfileComponent } from './components/researcher/profile/profile.component';
 import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
 import { GuardServiceService } from './services/guard/guard-service.service';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
@@ -42,6 +43,7 @@ const appRoutes : Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    TooltipModule,
     RouterModule.forRoot(appRoutes) 
   ],
   providers: [GuardServiceService],
