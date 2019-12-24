@@ -26,6 +26,13 @@ export class FormComponent implements OnInit {
 
   seasonValidated: boolean = false;
 
+  //Variables sociodemográficas
+  genderValidated: boolean = false
+
+  //Hábitos de vida
+  tobaccoValidated: boolean = false;
+  alcoholRiskValidated: boolean = false;
+
   constructor(private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -111,6 +118,23 @@ export class FormComponent implements OnInit {
   }
 
   validateSeason(){
+    console.log("Estación actualizada");
+
     this.seasonValidated = true;
+  }
+
+  validateGender(){
+    console.log("Sexo actualizado");
+    this.genderValidated = true;
+  }
+
+  validateTobacco(){
+    console.log("Tabaco actualizado");
+    this.tobaccoValidated = true;
+  }
+
+  validateAlcoholRisk(){
+    console.log("Riesgo alcohol actualizado");
+    this.alcoholRiskValidated = true;
   }
 }

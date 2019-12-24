@@ -100,7 +100,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="gender" value="hombre" required>
+                                        <input (click)="validateGender()" class="inputRadio" type="radio" formControlName="gender" value="hombre" required>
                                     </div>
                                     <div class="textYesNo">
                                         Hombre
@@ -111,7 +111,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
+                                        <input (click)="validateGender()" class="inputRadio" type="radio" formControlName="gender" value="mujer" required>
                                     </div>
                                     <div class="textYesNo">
                                         Mujer
@@ -151,7 +151,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="smoking" value="si" required>
+                                        <input (click)="validateTobacco()" class="inputRadio" type="radio" formControlName="smoking" value="si" required>
                                     </div>
                                     <div class="textYesNo">
                                         Si
@@ -162,7 +162,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="smoking" value="no" required>
+                                        <input (click)="validateTobacco()" class="inputRadio" type="radio" formControlName="smoking" value="no" required>
                                     </div>
                                     <div class="textYesNo">
                                         No
@@ -178,7 +178,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="alcohol" value="si" required>
+                                        <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio" formControlName="alcohol" value="si" required>
                                     </div>
                                     <div class="textYesNo">
                                         Si
@@ -189,7 +189,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="alcohol" value="no" required>
+                                        <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio" formControlName="alcohol" value="no" required>
                                     </div>
                                     <div class="textYesNo">
                                         No
