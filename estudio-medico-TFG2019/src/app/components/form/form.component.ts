@@ -16,12 +16,15 @@ export class FormComponent implements OnInit {
   userLogged: User;
   subjectForm: FormGroup;
 
+
+  //Variables principales
   vitaminFieldValidated: boolean = false;
   vitaminFirstTime: boolean = true;
 
-
   hbA1cValidated: boolean = false;
   hbA1cFirstTime: boolean = true;
+
+  seasonValidated: boolean = false;
 
   constructor(private router: Router,
     private http: HttpClient,
@@ -104,7 +107,10 @@ export class FormComponent implements OnInit {
     else{
       this.hbA1cFirstTime = false;
       this.hbA1cValidated = this.formService.validateHbA1c(hbA1c);
-    }
-    
-}
+    } 
+  }
+
+  validateSeason(){
+    this.seasonValidated = true;
+  }
 }

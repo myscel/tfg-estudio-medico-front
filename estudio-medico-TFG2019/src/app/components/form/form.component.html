@@ -67,7 +67,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="season" value="verano" required>
+                                        <input (click)="validateSeason()" class="inputRadio" type="radio" formControlName="season" value="verano" required>
                                     </div>
                                     <div class="textYesNo">
                                         Verano
@@ -78,7 +78,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="season" value="invierno" required>
+                                        <input (click)="validateSeason()" class="inputRadio" type="radio" formControlName="season" value="invierno" required>
                                     </div>
                                     <div class="textYesNo">
                                         Invierno
