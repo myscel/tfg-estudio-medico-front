@@ -15,6 +15,8 @@ import { ProfileComponent } from './components/researcher/profile/profile.compon
 import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
 import { GuardServiceService } from './services/guard/guard-service.service';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
@@ -44,6 +46,8 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     FormsModule,
     TooltipModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes) 
   ],
   providers: [GuardServiceService],
