@@ -293,13 +293,15 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="(0-700) mg/dl">Glucemia</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
+                    <input (focusout)="checkGlucose($event.target.value)"
+                    [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}" class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(10-70) kg/m2">IMC</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
+                    <input (focusout)="checkImc($event.target.value)"
+                    [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}" class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -309,7 +311,7 @@
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="obesity" value="si"
+                                    <input (click)="validateObesity()" class="inputRadio" type="radio" formControlName="obesity" value="si"
                                         required>
                                 </div>
                                 <div class="textYesNo">
@@ -321,7 +323,7 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="obesity" value="no"
+                                    <input (click)="validateObesity()" class="inputRadio" type="radio" formControlName="obesity" value="no"
                                         required>
                                 </div>
                                 <div class="textYesNo">
@@ -334,13 +336,15 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="(20-300) mmHg">TAS</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
+                    <input (focusout)="checkTas($event.target.value)"
+                    [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}" class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(20-200) mmHg">TAD</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
+                    <input (focusout)="checkTad($event.target.value)"
+                    [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}" class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -352,25 +356,29 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
+                    <input (focusout)="checkCholesterol($event.target.value)"
+                    [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}" class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(1-400) mg/dl">LDL -col</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
+                    <input (focusout)="checkLdl($event.target.value)"
+                    [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}" class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(1-400) mg/dl">HDL -col</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
+                    <input (focusout)="checkHdl($event.target.value)"
+                    [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}" class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput" tooltip="(1-1000) mg/dl">TG</div>
+                    <div class="textInput" tooltip="(1-10000) mg/dl">TG</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
+                    <input (focusout)="checkTg($event.target.value)"
+                    [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}" class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -380,7 +388,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="dyslipidemia"
+                                        <input (click)="validateDyslipidemia()" class="inputRadio" type="radio" formControlName="dyslipidemia"
                                             value="si" required>
                                     </div>
                                     <div class="textYesNo">
@@ -392,7 +400,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="dyslipidemia"
+                                        <input (click)="validateDyslipidemia()" class="inputRadio" type="radio" formControlName="dyslipidemia"
                                             value="no" required>
                                     </div>
                                     <div class="textYesNo">
@@ -405,7 +413,8 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="(0-30) mg/dl">Creatinina</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
+                    <input (focusout)="checkCreatinine($event.target.value)"
+                    [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}" class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
                         class="form-control" required>
                 </div>
                 <div class="form-group">

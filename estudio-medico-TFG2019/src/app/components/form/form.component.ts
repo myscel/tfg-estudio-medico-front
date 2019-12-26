@@ -42,6 +42,41 @@ export class FormComponent implements OnInit {
   exerciseValidated: boolean = false;
   exerciseFirstTime: boolean = true;
 
+  //Variables clínicas
+  glucoseValidated: boolean = false;
+  glucoseFirstTime: boolean = true;
+
+  imcValidated: boolean = false;
+  imcFirstTime: boolean = true;
+
+  obesityValidated: boolean = false;
+
+  tasValidated: boolean = false;
+  tasFirstTime: boolean = true;
+
+  tadValidated: boolean = false;
+  tadFirstTime: boolean = true;
+
+  cholesterolValidated: boolean = false;
+  cholesterolFirstTime: boolean = true;
+
+  ldlValidated: boolean = false;
+  ldlFirstTime: boolean = true;
+
+  hdlValidated: boolean = false;
+  hdlFirstTime: boolean = true;
+
+  tgValidated: boolean = false;
+  tgFirstTime: boolean = true;
+
+  dyslipidemiaValidated: boolean = false;
+
+  creatinineValidated: boolean = false;
+  creatinineFirstTime: boolean = true;
+
+  
+
+
   constructor(private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -89,8 +124,8 @@ export class FormComponent implements OnInit {
   get form() { return this.subjectForm.controls; }
 
   onSubmit() {
-    console.log(this.form.season);
-    console.log(this.form);
+    //console.log(this.form);
+    this.validatePrincipalVariables();
   }
 
   doHome(){
@@ -106,6 +141,7 @@ export class FormComponent implements OnInit {
   }
 
 
+  //START CHECKING PRINPIPAL VARIABLES
   checkVitaminD(vitamminDValue: string){
     if(vitamminDValue === ""){
       this.vitaminFirstTime = true;
@@ -129,10 +165,10 @@ export class FormComponent implements OnInit {
   }
 
   validateSeason(){
-    console.log("Estación actualizada");
-
     this.seasonValidated = true;
   }
+
+  //END CHECKING PRINPIPAL VARIABLES
 
   validateGender(){
     console.log("Sexo actualizado");
@@ -174,5 +210,126 @@ export class FormComponent implements OnInit {
       this.exerciseFirstTime = false;
       this.exerciseValidated = this.formService.validateExercise(exerciseValue);
     }
+  }
+
+
+  //START CHECKING CLINICAL VARIABLES
+  checkGlucose(glucoseValue: string){
+    if(glucoseValue === ""){
+      this.glucoseFirstTime = true;
+      this.glucoseValidated = false;
+    }
+    else{
+      this.glucoseFirstTime = false;
+      this.glucoseValidated = this.formService.validateGlucose(glucoseValue);
+    }
+  }
+
+  checkImc(imcValue: string){
+    if(imcValue === ""){
+      this.imcFirstTime = true;
+      this.imcValidated = false;
+    }
+    else{
+      this.imcFirstTime = false;
+      this.imcValidated = this.formService.validateImc(imcValue);
+    }
+  }
+
+  validateObesity(){
+    this.obesityValidated = true;
+  }
+
+  checkTas(tasValue: string){
+    if(tasValue === ""){
+      this.tasFirstTime = true;
+      this.tasValidated = false;
+    }
+    else{
+      this.tasFirstTime = false;
+      this.tasValidated = this.formService.validateTas(tasValue);
+    }
+  }
+
+  checkTad(tadValue: string){
+    if(tadValue === ""){
+      this.tadFirstTime = true;
+      this.tadValidated = false;
+    }
+    else{
+      this.tadFirstTime = false;
+      this.tadValidated = this.formService.validateTad(tadValue);
+    }
+  }
+
+  checkCholesterol(cholesterolValue: string){
+    if(cholesterolValue === ""){
+      this.cholesterolFirstTime = true;
+      this.cholesterolValidated = false;
+    }
+    else{
+      this.cholesterolFirstTime = false;
+      this.cholesterolValidated = this.formService.validateCholesterol(cholesterolValue);
+    }
+  }
+
+  checkLdl(ldlValue: string){
+    if(ldlValue === ""){
+      this.ldlFirstTime = true;
+      this.ldlValidated = false;
+    }
+    else{
+      this.ldlFirstTime = false;
+      this.ldlValidated = this.formService.validateLdlAndHdl(ldlValue);
+    }
+  }
+
+  checkHdl(hdlValue: string){
+    if(hdlValue === ""){
+      this.hdlFirstTime = true;
+      this.hdlValidated = false;
+    }
+    else{
+      this.hdlFirstTime = false;
+      this.hdlValidated = this.formService.validateLdlAndHdl(hdlValue);
+    }
+  }
+
+  checkTg(tgValue: string){
+    if(tgValue === ""){
+      this.tgFirstTime = true;
+      this.tgValidated = false;
+    }
+    else{
+      this.tgFirstTime = false;
+      this.tgValidated = this.formService.validateTg(tgValue);
+    }
+  }
+
+  validateDyslipidemia(){
+    this.dyslipidemiaValidated = true;
+  }
+
+  checkCreatinine(creatinineValue: string){
+    if(creatinineValue === ""){
+      this.creatinineFirstTime = true;
+      this.creatinineValidated = false;
+    }
+    else{
+      this.creatinineFirstTime = false;
+      this.creatinineValidated = this.formService.validateCreatinine(creatinineValue);
+    }
+  }
+
+
+
+
+  validatePrincipalVariables(){
+    console.log("Validando variables principales");
+    console.log(this.vitaminFieldValidated);
+    console.log(this.hbA1cValidated);
+    console.log(this.seasonValidated);
+
+    return this.vitaminFieldValidated && this.hbA1cValidated && this.seasonValidated;
   }
 }
