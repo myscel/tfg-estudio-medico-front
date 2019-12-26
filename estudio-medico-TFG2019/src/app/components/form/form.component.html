@@ -420,7 +420,8 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
+                    <input (focusout)="checkGlomerular($event.target.value)"
+                    [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}" class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -430,7 +431,7 @@
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="chronicRenalFailure"
+                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio" formControlName="chronicRenalFailure"
                                         value="si" required>
                                 </div>
                                 <div class="textYesNo">
@@ -442,7 +443,7 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="chronicRenalFailure"
+                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio" formControlName="chronicRenalFailure"
                                         value="no" required>
                                 </div>
                                 <div class="textYesNo">
@@ -474,7 +475,7 @@
                             <div class="divGenders">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="diabetesTreatment"
+                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio" formControlName="diabetesTreatment"
                                             value="si" required>
                                     </div>
                                     <div class="textYesNo">
@@ -486,7 +487,7 @@
                             <div class="divGeneros">
                                 <div class="form-group yesNoRadio">
                                     <div>
-                                        <input class="inputRadio" type="radio" formControlName="diabetesTreatment"
+                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio" formControlName="diabetesTreatment"
                                             value="no" required>
                                     </div>
                                     <div class="textYesNo">
@@ -503,7 +504,7 @@
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
+                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
                                         value="si" required>
                                 </div>
                                 <div class="textYesNo">
@@ -515,7 +516,7 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
+                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
                                         value="no" required>
                                 </div>
                                 <div class="textYesNo">

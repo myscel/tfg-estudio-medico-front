@@ -163,4 +163,17 @@ export class FormServiceService {
     }
     return creatinine >= 0 && creatinine <= 30;
   }
+
+  validateGlomerular(glomerularValue: string): boolean{
+    let glomerular = parseFloat(glomerularValue);
+
+    if(glomerular.toString().length !== glomerularValue.length) {
+      return false
+    }
+
+    if(isNaN(glomerular)){
+      return false;
+    }
+    return glomerular >= 0 && glomerular <= 200;
+  }
 }

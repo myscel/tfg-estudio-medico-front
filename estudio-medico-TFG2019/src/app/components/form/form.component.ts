@@ -39,6 +39,8 @@ export class FormComponent implements OnInit {
 
   spfCreamValidated: boolean = false;
 
+  spfGradeValidated: boolean = false;
+
   exerciseValidated: boolean = false;
   exerciseFirstTime: boolean = true;
 
@@ -73,6 +75,15 @@ export class FormComponent implements OnInit {
 
   creatinineValidated: boolean = false;
   creatinineFirstTime: boolean = true;
+
+  glomerularValidated: boolean = false;
+  glomerularFirstTime: boolean = true;
+
+  kidneyInsufficiencyValidated: boolean = false;
+
+  diabetesTreatmentValidated: boolean = false;
+
+  vitaminDSupplementationValidated: boolean = false;
 
   
 
@@ -125,7 +136,16 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     //console.log(this.form);
-    this.validatePrincipalVariables();
+
+    /*
+    if(this.validatePrincipalVariables()){
+        console.log("VARIABLES PRINCIPALES CORRECTAS");
+    }
+    */
+
+    if(this.validateLifeHabitsVariables()){
+      console.log("HÁBITOS DE VIDA CORRECTOS");
+    }
   }
 
   doHome(){
@@ -176,12 +196,10 @@ export class FormComponent implements OnInit {
   }
 
   validateTobacco(){
-    console.log("Tabaco actualizado");
     this.tobaccoValidated = true;
   }
 
   validateAlcoholRisk(){
-    console.log("Riesgo alcohol actualizado");
     this.alcoholRiskValidated = true;
   }
 
@@ -197,7 +215,6 @@ export class FormComponent implements OnInit {
   }
 
   validateSPFCream(){
-    console.log("CREMA SPF actualizada");
     this.spfCreamValidated = true;
   }
 
@@ -321,15 +338,65 @@ export class FormComponent implements OnInit {
     }
   }
 
+  checkGlomerular(glomerularValue: string){
+    if(glomerularValue === ""){
+      this.glomerularFirstTime = true;
+      this.glomerularValidated = false;
+    }
+    else{
+      this.glomerularFirstTime = false;
+      this.glomerularValidated = this.formService.validateGlomerular(glomerularValue);
+    }
+  }
+
+  validateKidneyInsufficiency(){
+    this.kidneyInsufficiencyValidated = true;
+  }
+
+  validateDiabetesTreatment(){
+    this.diabetesTreatmentValidated = true;
+  }
+
+  validatevitaminDSupplementation(){
+    this.vitaminDSupplementationValidated = true;
+  }
 
 
 
-  validatePrincipalVariables(){
+
+  validatePrincipalVariables(): boolean{
     console.log("Validando variables principales");
-    console.log(this.vitaminFieldValidated);
-    console.log(this.hbA1cValidated);
-    console.log(this.seasonValidated);
+    console.log(this.vitaminFieldValidated + " " + this.form.vitaminaD.value);
+    console.log(this.hbA1cValidated + " " + this.form.HbA1c.value);
+    console.log(this.seasonValidated + " " + this.form.season.value);
+    console.log("=============================================");
 
     return this.vitaminFieldValidated && this.hbA1cValidated && this.seasonValidated;
+  }
+
+  validateLifeHabitsVariables(): boolean{
+    console.log(this.tobaccoValidated + " " + this.form.smoking.value);
+    console.log(this.alcoholRiskValidated + " " + this.form.alcohol.value);
+    console.log(this.sunExposureValidated + " " + this.form.solarExposition.value);
+    console.log(this.spfCreamValidated + " " + this.form.creamSPF.value);
+    
+
+    if(this.form.gradeSPF.value !== undefined){
+      this.spfGradeValidated = true;
+    }
+
+    console.log(this.spfGradeValidated + " " + this.form.gradeSPF.value);
+
+    console.log(this.exerciseValidated + " " + this.form.exercies.value);
+
+    console.log("=============================================");
+
+    return this.tobaccoValidated &&
+    this.alcoholRiskValidated &&
+    this.sunExposureValidated &&
+    this.spfCreamValidated &&
+    this.spfGradeValidated &&
+    this.exerciseValidated;
+
   }
 }
