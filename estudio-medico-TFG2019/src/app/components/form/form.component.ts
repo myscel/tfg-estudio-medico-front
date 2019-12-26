@@ -143,9 +143,11 @@ export class FormComponent implements OnInit {
     }
     */
 
+    /*
     if(this.validateLifeHabitsVariables()){
       console.log("HÁBITOS DE VIDA CORRECTOS");
     }
+    */
   }
 
   doHome(){
@@ -397,6 +399,5 @@ export class FormComponent implements OnInit {
     this.spfCreamValidated &&
     this.spfGradeValidated &&
     this.exerciseValidated;
-
   }
 }

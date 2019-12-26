@@ -142,7 +142,7 @@
                     <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
-                <ng-template #buttonFromSubject2> <td><button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 2)">CITA 2</button></td></ng-template>
+                <ng-template #buttonFromSubject2> <td><button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.identificationNumber, 2)">CITA 2</button></td></ng-template>
                 <td><button id="buttonDelete" type="button" (click)="deleteSubject(user.identificationNumber)"><img id="imgCross"
                       src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>
