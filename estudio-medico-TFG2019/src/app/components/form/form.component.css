@@ -120,6 +120,10 @@ header{
     background-color: rgb(203, 229, 253);
 }
 
+#buttonForm{
+    margin-left: 15px;
+}
+
 #yesNoGroup{
     width: 100%;
     display: flex;

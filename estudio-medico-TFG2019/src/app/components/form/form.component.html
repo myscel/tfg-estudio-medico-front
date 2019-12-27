@@ -149,10 +149,18 @@
                         bsDatepicker class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput" tooltip="Ingreso unidad familiar en euros mensuales">Nivel socioeconómico</div>
+                    <div class="textInput" tooltip="Ingreso unidad familiar en euros mensuales">Nivel socioeconómico
+                    </div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputEconomicLevel" type="text" formControlName="economicLevel"
-                        class="form-control" required>
+                    <div class="form-group">
+                        <select id="inputEconomicLevel" name="inputEconomicLevel" [(ngModel)]="inputEconomicLevel"
+                            class="form-control" formControlName="economicLevel">
+                            <option value="0-1000">0-1000</option>
+                            <option value="1001-2000">1001-2000</option>
+                            <option value="2001-3000">2001-3000</option>
+                            <option value=">3000">>3000</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -258,24 +266,24 @@
                 <div class="form-group">
                     <div class="textInput">Puntuación SPF</div>
                     <div class="lineSeparator"></div>
-                        <div class="form-group">
-                            <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF" class="form-control"
-                                formControlName="gradeSPF">
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF" class="form-control"
+                            formControlName="gradeSPF">
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkExercise($event.target.value)"
                         [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}"
-                        class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercies"
+                        class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercise"
                         class="form-control" required>
                 </div>
             </div>
@@ -285,23 +293,49 @@
             <div class="sectionTitle">Variables clínicas</div>
             <div class="sectionContent">
                 <div class="form-group">
-                    <div class="textInput" tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado de la DM2</div>
+                    <div class="textInput"
+                        tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado
+                        de la DM2</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputDM2" type="text" formControlName="DM2" class="form-control"
-                        required>
+                    <div id="yesNoGroup">
+                        <div class="divGenders">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
+                                        value="hombre" required>
+                                </div>
+                                <div class="textYesNo">
+                                    Hombre
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divGeneros">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
+                                        value="mujer" required>
+                                </div>
+                                <div class="textYesNo">
+                                    Mujer
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(0-700) mg/dl">Glucemia</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkGlucose($event.target.value)"
-                    [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}" class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
+                        [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
+                        class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(10-70) kg/m2">IMC</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkImc($event.target.value)"
-                    [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}" class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
+                        [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
+                        class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -311,8 +345,8 @@
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validateObesity()" class="inputRadio" type="radio" formControlName="obesity" value="si"
-                                        required>
+                                    <input (click)="validateObesity()" class="inputRadio" type="radio"
+                                        formControlName="obesity" value="si" required>
                                 </div>
                                 <div class="textYesNo">
                                     Si
@@ -323,8 +357,8 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validateObesity()" class="inputRadio" type="radio" formControlName="obesity" value="no"
-                                        required>
+                                    <input (click)="validateObesity()" class="inputRadio" type="radio"
+                                        formControlName="obesity" value="no" required>
                                 </div>
                                 <div class="textYesNo">
                                     No
@@ -337,102 +371,27 @@
                     <div class="textInput" tooltip="(20-300) mmHg">TAS</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkTas($event.target.value)"
-                    [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}" class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
+                        [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
+                        class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="(20-200) mmHg">TAD</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkTad($event.target.value)"
-                    [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}" class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
+                        [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
+                        class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
                     <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputArterialHypertension" type="text"
-                        formControlName="arterialHypertension" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkCholesterol($event.target.value)"
-                    [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}" class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
-                        class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkLdl($event.target.value)"
-                    [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}" class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
-                        required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkHdl($event.target.value)"
-                    [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}" class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
-                        required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(1-10000) mg/dl">TG</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkTg($event.target.value)"
-                    [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}" class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
-                        required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia</div>
-                    <div class="lineSeparator"></div>
-                        <div id="yesNoGroup">
-                            <div class="divGenders">
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateDyslipidemia()" class="inputRadio" type="radio" formControlName="dyslipidemia"
-                                            value="si" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div class="divGeneros">
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateDyslipidemia()" class="inputRadio" type="radio" formControlName="dyslipidemia"
-                                            value="no" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkCreatinine($event.target.value)"
-                    [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}" class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
-                        class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular</div>
-                    <div class="lineSeparator"></div>
-                    <input (focusout)="checkGlomerular($event.target.value)"
-                    [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}" class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
-                        class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <div class="textInput">Insuficiencia renal crónica</div>
-                    <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio" formControlName="chronicRenalFailure"
-                                        value="si" required>
+                                    <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
+                                        formControlName="arterialHypertension" value="si" required>
                                 </div>
                                 <div class="textYesNo">
                                     Si
@@ -443,8 +402,114 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio" formControlName="chronicRenalFailure"
-                                        value="no" required>
+                                    <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
+                                        formControlName="arterialHypertension" value="no" required>
+                                </div>
+                                <div class="textYesNo">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkCholesterol($event.target.value)"
+                        [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
+                        class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
+                        class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkLdl($event.target.value)"
+                        [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
+                        class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
+                        required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkHdl($event.target.value)"
+                        [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
+                        class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
+                        required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(1-10000) mg/dl">TG</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkTg($event.target.value)"
+                        [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
+                        class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
+                        required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia</div>
+                    <div class="lineSeparator"></div>
+                    <div id="yesNoGroup">
+                        <div class="divGenders">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
+                                        formControlName="dyslipidemia" value="si" required>
+                                </div>
+                                <div class="textYesNo">
+                                    Si
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="divGeneros">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
+                                        formControlName="dyslipidemia" value="no" required>
+                                </div>
+                                <div class="textYesNo">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkCreatinine($event.target.value)"
+                        [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
+                        class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
+                        class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular</div>
+                    <div class="lineSeparator"></div>
+                    <input (focusout)="checkGlomerular($event.target.value)"
+                        [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}"
+                        class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
+                        class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="textInput">Insuficiencia renal crónica</div>
+                    <div class="lineSeparator"></div>
+                    <div id="yesNoGroup">
+                        <div class="divGenders">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
+                                        formControlName="chronicRenalFailure" value="si" required>
+                                </div>
+                                <div class="textYesNo">
+                                    Si
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="divGeneros">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
+                                        formControlName="chronicRenalFailure" value="no" required>
                                 </div>
                                 <div class="textYesNo">
                                     No
@@ -456,56 +521,28 @@
                 <div class="form-group">
                     <div class="textInput">Fototipo</div>
                     <div class="lineSeparator"></div>
-                        <div class="form-group">
-                            <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype" class="form-control"
-                                formControlName="fototype">
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
-                                <option value="V">V</option>
-                                <option value="VI">VI</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype" class="form-control"
+                            formControlName="fototype">
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                            <option value="VI">VI</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes</div>
-                    <div class="lineSeparator"></div>
-                        <div id="yesNoGroup">
-                            <div class="divGenders">
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio" formControlName="diabetesTreatment"
-                                            value="si" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div class="divGeneros">
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio" formControlName="diabetesTreatment"
-                                            value="no" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="form-group">
-                    <div class="textInput">Suplementación con vitamina D</div>
+                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes
+                    </div>
                     <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                         <div class="divGenders">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
-                                        value="si" required>
+                                    <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
+                                        formControlName="diabetesTreatment" value="si" required>
                                 </div>
                                 <div class="textYesNo">
                                     Si
@@ -516,8 +553,37 @@
                         <div class="divGeneros">
                             <div class="form-group yesNoRadio">
                                 <div>
-                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio" formControlName="vitaminDSupplementation"
-                                        value="no" required>
+                                    <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
+                                        formControlName="diabetesTreatment" value="no" required>
+                                </div>
+                                <div class="textYesNo">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="textInput">Suplementación con vitamina D</div>
+                    <div class="lineSeparator"></div>
+                    <div id="yesNoGroup">
+                        <div class="divGenders">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
+                                        formControlName="vitaminDSupplementation" value="si" required>
+                                </div>
+                                <div class="textYesNo">
+                                    Si
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="divGeneros">
+                            <div class="form-group yesNoRadio">
+                                <div>
+                                    <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
+                                        formControlName="vitaminDSupplementation" value="no" required>
                                 </div>
                                 <div class="textYesNo">
                                     No
@@ -528,8 +594,10 @@
                 </div>
             </div>
         </div>
-        <div id="divButtonLogin">
-            <button id="buttonLogin" type="button" class="btn btn-primary" (click)="onSubmit()">Guardar
+
+        <div>
+            <button id="buttonForm" type="button" class="btn btn-danger" (click)="doHome()">Atras</button>
+            <button id="buttonForm" type="button" class="btn btn-primary" (click)="onSubmit()">Guardar
                 consulta</button>
         </div>
 

@@ -45,6 +45,8 @@ export class FormComponent implements OnInit {
   exerciseFirstTime: boolean = true;
 
   //Variables clínicas
+  DM2Validated: boolean = false;
+
   glucoseValidated: boolean = false;
   glucoseFirstTime: boolean = true;
 
@@ -58,6 +60,8 @@ export class FormComponent implements OnInit {
 
   tadValidated: boolean = false;
   tadFirstTime: boolean = true;
+
+  arterialHypertensionValidated: boolean = false;
 
   cholesterolValidated: boolean = false;
   cholesterolFirstTime: boolean = true;
@@ -110,7 +114,7 @@ export class FormComponent implements OnInit {
       solarExposition: ['', Validators.required],
       creamSPF: ['', Validators.required],
       gradeSPF: ['', Validators.required],
-      exercies: ['', Validators.required],
+      exercise: ['', Validators.required],
       DM2: ['', Validators.required],
       bloodGlucose: ['', Validators.required],
       IMC: ['', Validators.required],
@@ -233,6 +237,11 @@ export class FormComponent implements OnInit {
 
 
   //START CHECKING CLINICAL VARIABLES
+
+  validateDM2(){
+    this.DM2Validated = true;
+  }
+
   checkGlucose(glucoseValue: string){
     if(glucoseValue === ""){
       this.glucoseFirstTime = true;
@@ -279,6 +288,10 @@ export class FormComponent implements OnInit {
       this.tadFirstTime = false;
       this.tadValidated = this.formService.validateTad(tadValue);
     }
+  }
+
+  validateArterialHypertension(){
+    this.arterialHypertensionValidated = true;
   }
 
   checkCholesterol(cholesterolValue: string){
