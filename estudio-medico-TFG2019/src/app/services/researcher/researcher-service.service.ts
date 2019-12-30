@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../../models/User';
 import { Subject } from '../../models/Subject';
 import {Observable} from 'rxjs';
+import { Appointment } from 'src/app/models/Appointment';
 
 
 @Injectable({
@@ -64,6 +65,17 @@ export class ResearcherServiceService {
     let params = new HttpParams().set("identificationNumber", identificationNumber)
 
     return this.http.delete(`${this.researcherUrl}/deleteSubjectResearcher`, {headers: headerList, params: params});
+  }
+
+  public registerAppointment(appointment: Appointment): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+
+    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.post(`${this.researcherUrl}/registerAppointment`, appointment , {headers: headerList});
   }
 
   

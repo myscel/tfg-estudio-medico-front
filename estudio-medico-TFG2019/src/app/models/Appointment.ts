@@ -33,4 +33,6 @@ export class Appointment {
     fototype: number;
     diabetesTreatment: boolean;
     vitaminDSupplementation: boolean;
+
+    numberInvestigation: number;
 }

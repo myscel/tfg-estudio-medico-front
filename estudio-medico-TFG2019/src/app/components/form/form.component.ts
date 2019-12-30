@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from 'src/app/services/userService.service';
@@ -110,7 +110,8 @@ export class FormComponent implements OnInit {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private userService: UserServiceService,
-    private formService: FormServiceService) { }
+    private formService: FormServiceService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -171,6 +172,7 @@ export class FormComponent implements OnInit {
 
   doSave(){
     this.saveAppointment();
+    this.appointmentToSave.numberInvestigation = Number(this.route.snapshot.paramMap.get('appointment'));
     console.log(this.appointmentToSave);
   }
 
