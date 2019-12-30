@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { FormServiceService } from 'src/app/services/form/form-service.service';
+import { Appointment } from 'src/app/models/Appointment';
 
 @Component({
   selector: 'app-form',
@@ -15,10 +16,14 @@ export class FormComponent implements OnInit {
 
   userLogged: User;
   subjectForm: FormGroup;
+  appointmentToSave: Appointment = new Appointment();
 
   successHidden: boolean = false;
   alertHidden: boolean = false;
+  alertMessage: string = "";
   alertWarningExitHidden: boolean = false;
+  alertWarningSaveHidden: boolean = false;
+
   alertInvisibleHidden: boolean = true;
 
 
@@ -155,16 +160,21 @@ export class FormComponent implements OnInit {
       this.validateClinicalVariables() &&
       this.validateSociodemographicVariables() 
     ){
-
+      this.setWarningSaveModal();
     }
     else{
-
+      this.setAlertodal();
+      this.alertMessage = "Algunos campos tienen valores incorrectos"
     }
 
   }
 
+  doSave(){
+    this.saveAppointment();
+    console.log(this.appointmentToSave);
+  }
+
   doHome(){
-    console.log("Vamos a pacientes");
     this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
@@ -413,6 +423,8 @@ export class FormComponent implements OnInit {
   }
 
   validateLifeHabitsVariables(): boolean{
+    console.log("Validando variables de Hábitos de vida");
+
     console.log(this.tobaccoValidated + " " + this.form.smoking.value);
     console.log(this.alcoholRiskValidated + " " + this.form.alcohol.value);
     console.log(this.sunExposureValidated + " " + this.form.solarExposition.value);
@@ -438,6 +450,8 @@ export class FormComponent implements OnInit {
   }
 
   validateSociodemographicVariables(): boolean{
+    console.log("Validando variables sociodemográficas");
+
     console.log(this.genderValidated + " " + this.form.gender.value);
 
     if(this.form.studies.value !== undefined){
@@ -521,6 +535,8 @@ export class FormComponent implements OnInit {
     this.alertInvisibleHidden = false;
     this.alertHidden = false;
     this.alertWarningExitHidden = false;
+    this.alertWarningSaveHidden = false;
+
   }
 
   setAlertodal(){
@@ -528,12 +544,23 @@ export class FormComponent implements OnInit {
     this.alertHidden = true;
     this.alertWarningExitHidden = false;
     this.alertInvisibleHidden = false;
+    this.alertWarningSaveHidden = false;
+
   }
 
-  setWarningModal(){
+  setWarningExitModal(){
     this.successHidden = false;
     this.alertHidden = false;
     this.alertWarningExitHidden = true;
+    this.alertWarningSaveHidden = false;
+    this.alertInvisibleHidden = false;
+  }
+
+  setWarningSaveModal(){
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertWarningExitHidden = false;
+    this.alertWarningSaveHidden = true;
     this.alertInvisibleHidden = false;
   }
 
@@ -542,11 +569,20 @@ export class FormComponent implements OnInit {
     this.successHidden = false;
     this.alertHidden = false;
     this.alertWarningExitHidden = false;
+    this.alertWarningSaveHidden = false;
     this.alertInvisibleHidden = true;
   }
 
   tryExit(){
-    this.setWarningModal();
+    this.setWarningExitModal();
   }
+
+  saveAppointment(){
+  this.appointmentToSave.vitaminD = this.form.vitaminaD.value
+  this.appointmentToSave.hba1c = this.form.HbA1c.value
+  this.appointmentToSave.season = this.form.season.value
+  }
+
+
 
 }

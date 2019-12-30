@@ -175,7 +175,7 @@ header{
     color:black;
 }
 
-#modalSuccess, #modalError, #modalWarningExit{
+#modalSuccess, #modalError, #modalWarningExit, #modalWarningSave{
     font-size: 18px;
     width: 86%;
     margin: 0 auto;

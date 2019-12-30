@@ -302,10 +302,10 @@
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
-                                        value="hombre" required>
+                                        value="1" required>
                                 </div>
                                 <div class="textYesNo">
-                                    Hombre
+                                    Sí
                                 </div>
                             </div>
                         </div>
@@ -313,10 +313,10 @@
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
-                                        value="mujer" required>
+                                        value="0" required>
                                 </div>
                                 <div class="textYesNo">
-                                    Mujer
+                                    No
                                 </div>
                             </div>
                         </div>
@@ -606,7 +606,7 @@
         </div>
             
         <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
-            <strong>Error! </strong> {{alertDeleteMessage}}
+            <strong>Error! </strong> {{alertMessage}}
         </div>
 
         <div id="modalWarningExit" class="myModal alert alert-warning" [hidden]='!alertWarningExitHidden'>
@@ -614,6 +614,16 @@
             <div>
               <div>
                   <button type="button" (click)="doHome()" class="buttonExit btn btn-success">SÍ</button>
+                  <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
+              </div>
+            </div>   
+        </div>
+
+        <div id="modalWarningSave" class="myModal alert alert-warning" [hidden]='!alertWarningSaveHidden'>
+            <strong>Aviso! </strong> ¿Desea guardar los datos definitivamente?
+            <div>
+              <div>
+                  <button type="button" (click)="doSave()" class="buttonExit btn btn-success">SÍ</button>
                   <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
               </div>
             </div>   
