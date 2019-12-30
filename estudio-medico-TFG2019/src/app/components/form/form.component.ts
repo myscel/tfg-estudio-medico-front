@@ -16,6 +16,11 @@ export class FormComponent implements OnInit {
   userLogged: User;
   subjectForm: FormGroup;
 
+  successHidden: boolean = false;
+  alertHidden: boolean = false;
+  alertWarningExitHidden: boolean = false;
+  alertInvisibleHidden: boolean = true;
+
 
   //Variables principales
   vitaminFieldValidated: boolean = false;
@@ -104,6 +109,8 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+
+    this.setInvisibleModal();
 
     this.subjectForm = this.formBuilder.group({
       vitaminaD: ['', Validators.required],
@@ -507,6 +514,39 @@ export class FormComponent implements OnInit {
     this.fototypeValidated &&
     this.diabetesTreatmentValidated &&
     this.vitaminDSupplementationValidated;
+  }
+
+  setSuccessModal(){
+    this.successHidden = true;
+    this.alertInvisibleHidden = false;
+    this.alertHidden = false;
+    this.alertWarningExitHidden = false;
+  }
+
+  setAlertodal(){
+    this.successHidden = false;
+    this.alertHidden = true;
+    this.alertWarningExitHidden = false;
+    this.alertInvisibleHidden = false;
+  }
+
+  setWarningModal(){
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertWarningExitHidden = true;
+    this.alertInvisibleHidden = false;
+  }
+
+  
+  setInvisibleModal(){
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertWarningExitHidden = false;
+    this.alertInvisibleHidden = true;
+  }
+
+  tryExit(){
+    this.setWarningModal();
   }
 
 }

@@ -174,3 +174,32 @@ header{
 .blackFont{
     color:black;
 }
+
+#modalSuccess, #modalError, #modalWarningExit{
+    font-size: 18px;
+    width: 86%;
+    margin: 0 auto;
+  }
+
+  .myModal{
+    height: 100px;
+    align-items: center;
+  }
+
+  #modalInvisible{
+    border:0px solid transparent;
+    color: transparent;
+    height: 100px;
+    
+  }
+
+  .buttonExit{
+      width: 50px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+  }
+
+  #mainButtons{
+      margin-bottom: 20px;
+  }

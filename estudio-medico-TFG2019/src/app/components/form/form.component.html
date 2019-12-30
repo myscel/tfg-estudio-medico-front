@@ -49,7 +49,7 @@
             <div class="sectionTitle">Variables principales</div>
             <div class="sectionContent">
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont" tooltip="(0-500) ng/ml">Vitamina D</span></div>
+                    <div class="textInput" tooltip="(0-500) ng/ml"> >Vitamina D</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkVitaminD($event.target.value)"
                         [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
@@ -57,7 +57,7 @@
                         class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont" tooltip="(1-40) %"> HbA1c </span></div>
+                    <div class="textInput" tooltip="(1-40) %"> HbA1c</div>
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkHbA1c($event.target.value)"
                         [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"
@@ -65,7 +65,7 @@
                         class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont">Estación del año </span></div>
+                    <div class="textInput">Estación del año</div>
                     <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                         <div class="divGenders">
@@ -100,7 +100,7 @@
             <div class="sectionTitle">Variables sociodemográficas</div>
             <div class="sectionContent">
                 <div class="form-group">
-                    <div class="textInput"><span class="blackFont">Sexo </span></div>
+                    <div class="textInput">Sexo</div>
                     <div class="lineSeparator"></div>
                     <div id="yesNoGroup">
                         <div class="divGenders">
@@ -595,10 +595,31 @@
             </div>
         </div>
 
-        <div>
-            <button id="buttonForm" type="button" class="btn btn-danger" (click)="doHome()">Atras</button>
+        <div id="mainButtons">
+            <button id="buttonForm" type="button" class="btn btn-danger" (click)="tryExit()">Atras</button>
             <button id="buttonForm" type="button" class="btn btn-primary" (click)="onSubmit()">Guardar
                 consulta</button>
+        </div>
+
+        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successHidden'>
+            <strong>Éxito! </strong> {{successDeleteMessage}}
+        </div>
+            
+        <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
+            <strong>Error! </strong> {{alertDeleteMessage}}
+        </div>
+
+        <div id="modalWarningExit" class="myModal alert alert-warning" [hidden]='!alertWarningExitHidden'>
+            <strong>Aviso! </strong> ¿Desea cancelar el formulario? Los datos no se guardarán.
+            <div>
+              <div>
+                  <button type="button" (click)="doHome()" class="buttonExit btn btn-success">SÍ</button>
+                  <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
+              </div>
+            </div>   
+        </div>
+
+        <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
         </div>
 
     </form>
