@@ -578,9 +578,40 @@ export class FormComponent implements OnInit {
   }
 
   saveAppointment(){
-  this.appointmentToSave.vitaminD = this.form.vitaminaD.value
-  this.appointmentToSave.hba1c = this.form.HbA1c.value
-  this.appointmentToSave.season = this.form.season.value
+    this.appointmentToSave.vitaminD = this.form.vitaminaD.value;
+    this.appointmentToSave.hba1c = this.form.HbA1c.value;
+    this.appointmentToSave.season = this.form.season.value;
+
+    this.appointmentToSave.gender = this.form.gender.value;
+    this.appointmentToSave.studyLevel = this.form.studies.value;
+    this.appointmentToSave.birthDate = this.form.bornDate.value;
+    this.appointmentToSave.socioeconomicLevel = this.form.economicLevel.value;
+
+    this.appointmentToSave.tobacco = this.form.smoking.value;
+    this.appointmentToSave.riskAlcohol = this.form.alcohol.value;
+    this.appointmentToSave.solarExposure = this.form.solarExposition.value; 
+    this.appointmentToSave.spfCream = this.form.creamSPF.value;
+    this.appointmentToSave.spfScore = this.form.gradeSPF.value;
+    this.appointmentToSave.exercise = this.form.exercise.value;
+
+    this.appointmentToSave.dm2 = this.form.DM2.value;
+    this.appointmentToSave.glucose = this.form.bloodGlucose.value;
+    this.appointmentToSave.imc = this.form.IMC.value; 
+    this.appointmentToSave.obesity = this.form.obesity.value;
+    this.appointmentToSave.tas = this.form.TAS.value;
+    this.appointmentToSave.tad = this.form.TAD.value;
+    this.appointmentToSave.arterialHypertension = this.form.arterialHypertension.value;
+    this.appointmentToSave.cholesterol = this.form.cholesterol.value;
+    this.appointmentToSave.ldl = this.form.LDL.value; 
+    this.appointmentToSave.hdl = this.form.HDL.value;
+    this.appointmentToSave.tg = this.form.TG.value;
+    this.appointmentToSave.dyslipemy = this.form.dyslipidemia.value;
+    this.appointmentToSave.creatinine = this.form.creatinine.value;
+    this.appointmentToSave.glomerular = this.form.glomerular.value;
+    this.appointmentToSave.kidneyInsufficiency = this.form.chronicRenalFailure.value; 
+    this.appointmentToSave.fototype = this.form.fototype.value;
+    this.appointmentToSave.diabetesTreatment = this.form.diabetesTreatment.value;
+    this.appointmentToSave.vitaminDSupplementation = this.form.vitaminDSupplementation.value;
   }
 
 

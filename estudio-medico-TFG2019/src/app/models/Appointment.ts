@@ -26,7 +26,7 @@ export class Appointment {
     ldl: number;
     hdl: number;
     tg: number;
-    dislipemy: boolean;
+    dyslipemy: boolean;
     creatinine: number;
     glomerular: number;
     kidneyInsufficiency: boolean;
