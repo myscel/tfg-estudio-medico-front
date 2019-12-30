@@ -27,7 +27,10 @@ export class FormComponent implements OnInit {
   seasonValidated: boolean = false;
 
   //Variables sociodemográficas
-  genderValidated: boolean = false
+  genderValidated: boolean = false;
+  studyLevelValidated: boolean = false;
+  birthDateValidated: boolean = false;
+  economicLevelValidated: boolean = false;
 
   //Hábitos de vida
   tobaccoValidated: boolean = false;
@@ -83,6 +86,9 @@ export class FormComponent implements OnInit {
   glomerularValidated: boolean = false;
   glomerularFirstTime: boolean = true;
 
+  fototypeValidated: boolean = false;
+
+
   kidneyInsufficiencyValidated: boolean = false;
 
   diabetesTreatmentValidated: boolean = false;
@@ -90,8 +96,6 @@ export class FormComponent implements OnInit {
   vitaminDSupplementationValidated: boolean = false;
 
   
-
-
   constructor(private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -139,19 +143,17 @@ export class FormComponent implements OnInit {
   get form() { return this.subjectForm.controls; }
 
   onSubmit() {
-    //console.log(this.form);
+    if(this.validatePrincipalVariables() && 
+      this.validateLifeHabitsVariables() && 
+      this.validateClinicalVariables() &&
+      this.validateSociodemographicVariables() 
+    ){
 
-    /*
-    if(this.validatePrincipalVariables()){
-        console.log("VARIABLES PRINCIPALES CORRECTAS");
     }
-    */
+    else{
 
-    /*
-    if(this.validateLifeHabitsVariables()){
-      console.log("HÁBITOS DE VIDA CORRECTOS");
     }
-    */
+
   }
 
   doHome(){
@@ -193,14 +195,28 @@ export class FormComponent implements OnInit {
   validateSeason(){
     this.seasonValidated = true;
   }
-
   //END CHECKING PRINPIPAL VARIABLES
 
+  //START CHECKING SOCIODEMOGRAPHIC VARIABLES
   validateGender(){
     console.log("Sexo actualizado");
     this.genderValidated = true;
   }
 
+  validateBirthDate(birthDate: Date): boolean{
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }    
+    console.log("EDAD: " + age);
+
+    return age >= 18;
+  }
+  //END CHECKING SOCIODEMOGRAPHIC VARIABLES
+
+  //START CHECKING LIFESTYLE VARIABLES
   validateTobacco(){
     this.tobaccoValidated = true;
   }
@@ -234,6 +250,7 @@ export class FormComponent implements OnInit {
       this.exerciseValidated = this.formService.validateExercise(exerciseValue);
     }
   }
+  //END CHECKING LIFESTYLE VARIABLES
 
 
   //START CHECKING CLINICAL VARIABLES
@@ -375,8 +392,7 @@ export class FormComponent implements OnInit {
   validatevitaminDSupplementation(){
     this.vitaminDSupplementationValidated = true;
   }
-
-
+   //END CHECKING CLINICAL VARIABLES
 
 
   validatePrincipalVariables(): boolean{
@@ -402,7 +418,7 @@ export class FormComponent implements OnInit {
 
     console.log(this.spfGradeValidated + " " + this.form.gradeSPF.value);
 
-    console.log(this.exerciseValidated + " " + this.form.exercies.value);
+    console.log(this.exerciseValidated + " " + this.form.exercise.value);
 
     console.log("=============================================");
 
@@ -413,4 +429,84 @@ export class FormComponent implements OnInit {
     this.spfGradeValidated &&
     this.exerciseValidated;
   }
+
+  validateSociodemographicVariables(): boolean{
+    console.log(this.genderValidated + " " + this.form.gender.value);
+
+    if(this.form.studies.value !== undefined){
+      this.studyLevelValidated = true;
+    }
+    console.log(this.studyLevelValidated + " " + this.form.studies.value);
+
+    if(this.form.bornDate.value !== undefined && this.validateBirthDate(this.form.bornDate.value)){
+      this.birthDateValidated = true;
+    }
+    console.log(this.birthDateValidated + " " + this.form.bornDate.value);
+
+    if(this.form.economicLevel.value !== undefined){
+      this.economicLevelValidated = true;
+    }
+    console.log(this.economicLevelValidated + " " + this.form.economicLevel.value);
+
+    console.log("=============================================");
+
+    return this.genderValidated &&
+    this.studyLevelValidated &&
+    this.birthDateValidated &&
+    this.economicLevelValidated;
+  }
+
+  validateClinicalVariables(): boolean{
+    console.log("Validando variables clínicas");
+
+    console.log(this.DM2Validated + " " + this.form.DM2.value);
+    console.log(this.glucoseValidated + " " + this.form.bloodGlucose.value);
+    console.log(this.imcValidated + " " + this.form.IMC.value);
+
+    console.log(this.obesityValidated + " " + this.form.obesity.value);
+    console.log(this.tasValidated + " " + this.form.TAS.value);
+    console.log(this.tadValidated + " " + this.form.TAD.value);
+
+    console.log(this.arterialHypertensionValidated + " " + this.form.arterialHypertension.value);
+    console.log(this.cholesterolValidated + " " + this.form.cholesterol.value);
+    console.log(this.ldlValidated + " " + this.form.LDL.value);
+
+    console.log(this.hdlValidated + " " + this.form.HDL.value);
+    console.log(this.tgValidated + " " + this.form.TG.value);
+    console.log(this.dyslipidemiaValidated + " " + this.form.dyslipidemia.value);
+
+    console.log(this.creatinineValidated + " " + this.form.creatinine.value);
+    console.log(this.glomerularValidated + " " + this.form.glomerular.value);
+    console.log(this.kidneyInsufficiencyValidated + " " + this.form.chronicRenalFailure.value);
+
+    if(this.form.fototype.value !== undefined){
+      this.fototypeValidated = true;
+    }
+
+    console.log(this.fototypeValidated + " " + this.form.fototype.value);
+
+    console.log(this.diabetesTreatmentValidated + " " + this.form.diabetesTreatment.value);
+    console.log(this.vitaminDSupplementationValidated + " " + this.form.vitaminDSupplementation.value);
+    console.log("=============================================");
+
+    return this.DM2Validated &&
+    this.glucoseValidated &&
+    this.imcValidated &&
+    this.obesityValidated &&
+    this.tasValidated &&
+    this.tadValidated &&
+    this.arterialHypertensionValidated &&
+    this.cholesterolValidated &&
+    this.ldlValidated &&
+    this.hdlValidated &&
+    this.tgValidated &&
+    this.dyslipidemiaValidated &&
+    this.creatinineValidated &&
+    this.glomerularValidated &&
+    this.kidneyInsufficiencyValidated &&
+    this.fototypeValidated &&
+    this.diabetesTreatmentValidated &&
+    this.vitaminDSupplementationValidated;
+  }
+
 }
