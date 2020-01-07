@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
-  <title>Estudio Médico</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <title>Estudio Médico</title>
 </head>
 
 <header>
@@ -16,10 +16,10 @@
     </div>
     <div id="headerUserName">
         <span>
-          Investigador
+            Investigador
         </span>
         <span id="spanGrey">
-          | {{userLogged.name}}
+            | {{userLogged.name}}
         </span>
     </div>
     <div id="headerDcha">
@@ -42,6 +42,209 @@
         <button id="buttonPacientes" class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
         <button id="buttonCitas" class="btn btn-primary navButton">DOCUMENTACIÓN</button>
         <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
+    </div>
+
+    <div class="appointmentBox">
+
+        <div class="formSection">
+            <div class="sectionTitle">Datos de la cita</div>
+            <div class="sectionContent">
+                <div class="variable">
+                    <div class="textInput"> Identificador de paciente</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{idSubject}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(1-40) %"> Fecha de realización</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{appointmentDate}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="formSection">
+            <div class="sectionTitle">Variables principales</div>
+            <div class="sectionContent">
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-500) ng/ml"> Vitamina D</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{vitamin}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(1-40) %"> HbA1c</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{hbA1c}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Estación del año</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{season}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="formSection">
+            <div class="sectionTitle">Variables sociodemográficas</div>
+            <div class="sectionContent">
+                <div class="variable">
+                    <div class="textInput">Sexo</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{gender}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Nivel de estudios</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{studyLevel}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Fecha de nacimiento</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{birthDate}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="Ingreso unidad familiar en euros mensuales">Nivel socioeconómico
+                    </div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{economicLevel}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="formSection">
+            <div class="sectionTitle">Hábitos de vida</div>
+            <div class="sectionContent">
+                <div class="variable">
+                    <div class="textInput">Tabaco</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{tobacco}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Consumo de riesgo de alcohol</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{alcoholRisk}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-1200) min">Tiempo de exposición solar al día</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{sunExposure}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Uso de crema SPF</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{spfCream}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Puntuación SPF</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{spfGrade}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{exercise}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="formSection">
+            <div class="sectionTitle">Variables clínicas</div>
+            <div class="sectionContent">
+                <div class="variable">
+                    <div class="textInput"
+                        tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado
+                        de la DM2</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{DM2}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-700) mg/dl">Glucemia</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{glucose}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(10-70) kg/m2">IMC</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{imc}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Obesidad</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{obesity}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(20-300) mmHg">TAS</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{tas}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(20-200) mmHg">TAD</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{tad}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{arterialHypertension}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{cholesterol}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{ldl}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{hdl}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(1-10000) mg/dl">TG</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{tg}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{dyslipidemia}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{creatinine}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{glomerular}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Insuficiencia renal crónica</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{kidneyInsufficiency}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Fototipo</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{fototype}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes
+                    </div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{diabetesTreatment}}</span>
+                </div>
+                <div class="variable">
+                    <div class="textInput">Suplementación con vitamina D</div>
+                    <div class="lineSeparator"></div>
+                    <span id="spanGrey" class="variableData">{{vitaminDSupplementation}}</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 

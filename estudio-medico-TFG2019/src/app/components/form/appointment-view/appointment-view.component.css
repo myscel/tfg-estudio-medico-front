@@ -82,3 +82,57 @@ header{
 #spanGrey{
     color: rgb(102, 102, 102);
 }
+
+.appointmentBox{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    border-radius: 8px;
+    padding-bottom: 1%;
+    background-color: rgb(225, 238, 248);
+}
+
+.formSection{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 3%;
+    padding: 0 2% 0 2%;
+}
+
+.sectionTitle{
+    margin-bottom: 2%;
+    font-size: 30px;
+}
+
+.sectionContent{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+}
+
+.textInput{
+    color: rgb(106, 106, 106);
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+.lineSeparator{
+    height: 2px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 4px;
+    background-color: rgb(151, 205, 255);
+}
+
+.variable{
+    min-width: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgb(203, 229, 253);
+    margin-bottom: 3%;
+}
+
+.variableData{
+    font-size: 20px;
+}
