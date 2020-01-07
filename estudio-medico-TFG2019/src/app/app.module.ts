@@ -17,6 +17,7 @@ import { GuardServiceService } from './services/guard/guard-service.service';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppointmentViewComponent } from './components/form/appointment-view/appointment-view.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const appRoutes : Routes = [
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id/subjectForm/:idSubject/:appointment', component: FormComponent, canActivate: [GuardServiceService] },
+  { path: 'researcher/:id/formView/:idSubject/:appointment', component: AppointmentViewComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/profile/:id', component: ProfileComponent, canActivate: [GuardServiceService] }
 ];
 
@@ -38,7 +40,8 @@ const appRoutes : Routes = [
     SubjectsAdminComponent,
     FormComponent,
     ProfileComponent,
-    EditResearcherAdminComponent
+    EditResearcherAdminComponent,
+    AppointmentViewComponent
   ],
   imports: [
     BrowserModule,

@@ -97,6 +97,10 @@ export class HomeResearcherComponent implements OnInit {
     this.router.navigate(['/researcher/' + this.userLogged.id + '/subjectForm/' + idSubject + "/" + appointment]);
   }
 
+  showForm(idSubject: string, appointment: string){
+    this.router.navigate(['/researcher/' + this.userLogged.id + '/formView/' + idSubject + "/" + appointment]);
+  }
+
   doProfile(){
     this.router.navigate(['/researcher/profile/' + this.userLogged.id]);
   }
