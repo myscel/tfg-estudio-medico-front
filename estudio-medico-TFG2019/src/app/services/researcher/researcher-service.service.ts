@@ -75,7 +75,7 @@ export class ResearcherServiceService {
 
     let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.post(`${this.researcherUrl}/registerAppointment`, appointment , {headers: headerList});
+    return this.http.post(`${this.researcherUrl}/registerInvestigationDetails`, appointment , {headers: headerList});
   }
 
   

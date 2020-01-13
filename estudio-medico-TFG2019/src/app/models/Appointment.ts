@@ -30,9 +30,10 @@ export class Appointment {
     creatinine: number;
     glomerular: number;
     kidneyInsufficiency: boolean;
-    fototype: number;
+    fototype: string;
     diabetesTreatment: boolean;
     vitaminDSupplementation: boolean;
 
     numberInvestigation: number;
+    idSubject: number;
 }

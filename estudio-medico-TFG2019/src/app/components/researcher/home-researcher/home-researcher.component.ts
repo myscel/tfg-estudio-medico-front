@@ -94,6 +94,7 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doNewForm(idSubject: string, appointment: string){
+    console.log(this.subjects);
     this.router.navigate(['/researcher/' + this.userLogged.id + '/subjectForm/' + idSubject + "/" + appointment]);
   }
 

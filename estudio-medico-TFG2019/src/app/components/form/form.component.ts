@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from 'src/app/services/userService.service';
 import { FormServiceService } from 'src/app/services/form/form-service.service';
 import { Appointment } from 'src/app/models/Appointment';
+import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
 
 @Component({
   selector: 'app-form',
@@ -111,7 +112,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserServiceService,
     private formService: FormServiceService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private researcherService: ResearcherServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -173,7 +175,18 @@ export class FormComponent implements OnInit {
   doSave(){
     this.saveAppointment();
     this.appointmentToSave.numberInvestigation = Number(this.route.snapshot.paramMap.get('appointment'));
+    this.appointmentToSave.idSubject = Number(this.route.snapshot.paramMap.get('idSubject'));
+
     console.log(this.appointmentToSave);
+
+    this.researcherService.registerAppointment(this.appointmentToSave).subscribe(responseData =>{
+      console.log("Cita registrada");
+
+    }, error =>{
+      console.log("Algo ha ido mal");
+    });
+
+
   }
 
   doHome(){
