@@ -78,5 +78,16 @@ export class ResearcherServiceService {
     return this.http.post(`${this.researcherUrl}/registerInvestigationDetails`, appointment , {headers: headerList});
   }
 
+  public getAppointmentDetails(idSubject: string, numberInvestigation: string): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+      return null;
+    }
+
+    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
+
+    return this.http.get(`${this.researcherUrl}/getInvestigationDetails/${idSubject}/${numberInvestigation}` , {headers: headerList});
+  }
+
   
 }

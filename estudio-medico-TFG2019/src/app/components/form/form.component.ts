@@ -179,6 +179,9 @@ export class FormComponent implements OnInit {
     this.appointmentToSave.numberInvestigation = Number(this.route.snapshot.paramMap.get('appointment'));
     this.appointmentToSave.idSubject = Number(this.route.snapshot.paramMap.get('idSubject'));
 
+    let today = new Date();
+    this.appointmentToSave.investigationDate = today;
+
     console.log(this.appointmentToSave);
 
     this.researcherService.registerAppointment(this.appointmentToSave).subscribe(responseData =>{

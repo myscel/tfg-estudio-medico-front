@@ -136,3 +136,7 @@ header{
 .variableData{
     font-size: 20px;
 }
+
+.noClass{
+    font-family: 'Roboto Slab', serif;
+}
