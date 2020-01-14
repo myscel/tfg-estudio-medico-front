@@ -7,6 +7,7 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { FormServiceService } from 'src/app/services/form/form-service.service';
 import { Appointment } from 'src/app/models/Appointment';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-form',
@@ -20,6 +21,7 @@ export class FormComponent implements OnInit {
   appointmentToSave: Appointment = new Appointment();
 
   successHidden: boolean = false;
+  successMessage: string = " Cita guardada correctamente.";
   alertHidden: boolean = false;
   alertMessage: string = "";
   alertWarningExitHidden: boolean = false;
@@ -27,6 +29,7 @@ export class FormComponent implements OnInit {
 
   alertInvisibleHidden: boolean = true;
 
+  formSaved: boolean = false;
 
   //Variables principales
   vitaminFieldValidated: boolean = false;
@@ -98,7 +101,6 @@ export class FormComponent implements OnInit {
   glomerularFirstTime: boolean = true;
 
   fototypeValidated: boolean = false;
-
 
   kidneyInsufficiencyValidated: boolean = false;
 
@@ -180,10 +182,17 @@ export class FormComponent implements OnInit {
     console.log(this.appointmentToSave);
 
     this.researcherService.registerAppointment(this.appointmentToSave).subscribe(responseData =>{
-      console.log("Cita registrada");
+      this.setSuccessModal();
+      this.formSaved = true;
 
     }, error =>{
-      console.log("Algo ha ido mal");
+      if(error.status === 409){
+        this.alertMessage = "No se pudo registrar la cita";
+      }
+      else{
+        this.alertMessage = "Fallo en el servidor";
+      }
+      this.setAlertodal();
     });
 
 
@@ -628,7 +637,4 @@ export class FormComponent implements OnInit {
     this.appointmentToSave.diabetesTreatment = this.form.diabetesTreatment.value;
     this.appointmentToSave.vitaminDSupplementation = this.form.vitaminDSupplementation.value;
   }
-
-
-
 }

@@ -596,13 +596,18 @@
         </div>
 
         <div id="mainButtons">
-            <button id="buttonForm" type="button" class="btn btn-danger" (click)="tryExit()">Atras</button>
-            <button id="buttonForm" type="button" class="btn btn-primary" (click)="onSubmit()">Guardar
+            <button id="buttonForm" [disabled]="formSaved" type="button" class="btn btn-danger" (click)="tryExit()">Atras</button>
+            <button id="buttonForm" [disabled]="formSaved" type="button" class="btn btn-primary" (click)="onSubmit()">Guardar
                 consulta</button>
         </div>
 
-        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successHidden'>
-            <strong>Éxito! </strong> {{successDeleteMessage}}
+        <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
+            <div>
+                <strong>Éxito! </strong> {{successMessage}}
+            </div>
+            <div>
+                <button type="button" id="buttonExitAfterRegister" class="btn btn-primary" (click)="doHome()">Volver </button>
+            </div>
         </div>
             
         <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>

@@ -203,3 +203,13 @@ header{
   #mainButtons{
       margin-bottom: 20px;
   }
+
+  #modalSuccess{
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #buttonExitAfterRegister{
+    margin-top: 7px;
+  }
