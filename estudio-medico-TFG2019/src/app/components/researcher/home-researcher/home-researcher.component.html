@@ -131,14 +131,14 @@
                 [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                 <td> {{user.identificationNumber}}</td>
                 <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.identificationNumber, 1)">
+                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, 1)">
                     Consultar  <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
                 <ng-template #buttonFromSubject1> <td><button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 1)">CITA 1</button></td></ng-template>
 
                 <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.identificationNumber, 2)">
+                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, 2)">
                     Consultar <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
