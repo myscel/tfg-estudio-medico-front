@@ -4,12 +4,13 @@ import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
 import { Subject } from 'src/app/models/Subject';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input, ɵConsole  } from '@angular/core';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 import { ExcelServiceService } from 'src/app/services/excel/excel-service.service';
+import { Appointment } from 'src/app/models/Appointment';
 
 @Component({
   selector: 'app-home-researcher',
@@ -311,46 +312,64 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   generateExcel(){
+    let observable = this.researcherService.getAllAppointmentDetails(this.userLogged.id);
 
-    let rows = [];
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
 
-    rows[0] = {
-      IDENT_PACIENTE: '33333333',
-      FECHA_INVESTIGACIÓN: '1',
-      VITAMINA_D: 'ravi',
-      HBA1C: 1000,
-      ESTACIÓN: '33333333',
-      SEXO: '33333333',
-      NIVEL_ESTUDIOS: 'ravi',
-      FECHA_NACIMIENTO: 1000,
-      NIVEL_SOCIOECONÓMICO: '33333333',
-      TABACO: 'ravi',
-      RIESGO_ALCOHOL: 1000,
-      EXPOSICIÓN_SOLAR: '33333333',
-      CREMA_SPF: 'ravi',
-      PUNTUACION_SPF: 1000,
-      EJERCICIO: '33333333',
-      DM2: 'ravi',
-      GLUCOSA: 1000,
-      IMC: '33333333',
-      OBESIDAD: 'ravi',
-      TAS: 1000,
-      TAD: '33333333',
-      HIPERTENSION_ARTERIAL: 'ravi',
-      COLESTEROL: 1000,
-      LDL: '33333333',
-      HDL: 'ravi',
-      TG: 1000,
-      DISLIPEMIA: '33333333',
-      CREATININA: 'ravi',
-      FILTRADO_GLOMERULAR: 1000,
-      INSUFICIENCIA_RENAL: '33333333',
-      FOTOTIPO: 'ravi',
-      TRATAMIENTO_DIABETES: 1000,
-      SUPLEMENTACIÓN_VITAMINA_D: '22',
-    }; 
-    
+    else{
+      observable.subscribe(responseData =>{
+        let appointments: Appointment[] = [];
+        appointments = responseData;
 
-    this.excelService.generateExcelFile(rows, "INVESTIGACION_" + this.userLogged.name);
+        var info = {
+          list: []
+        };
+
+        for(var i in appointments["list"]) {    
+          var elem = appointments["list"][i];   
+      
+          info.list.push({ 
+              "IDENT_PACIENTE" : elem.identificationNumber,
+              "FECHA_REALIZACIÓN"  : elem.investigationDate,
+              "VITAMINA_D" : elem.vitaminD,
+              "HBA1C"  : elem.hba1c,
+              "ESTACIÓN"       : elem.season, 
+              "SEXO" : elem.gender,
+              "NIVEL_ESTUDIOS"  : elem.studyLevel,
+              "FECHA_NACIMIENTO"       : elem.birthDate,
+              "NIVEL_SOCIOECONÓMICO" : elem.socioeconomicLevel,
+              "TABACO"  : elem.tobacco,
+              "RIESGO_ALCOHOL"       : elem.riskAlcohol,
+              "EXPOSICIÓN_SOLAR" : elem.solarExposure,
+              "CREMA_SPF"  : elem.spfCream,
+              "PUNTUACION_SPF"       : elem.spfScore,
+              "EJERCICIO" : elem.exercise,
+              "DM2"  : elem.dm2,
+              "GLUCOSA"       : elem.glucose,
+              "IMC" : elem.imc,
+              "OBESIDAD"  : elem.obesity,
+              "TAS"       : elem.tas,
+              "TAD" : elem.tad,
+              "HIPERTENSION_ARTERIAL"  : elem.arterialHypertension,
+              "COLESTEROL"       : elem.cholesterol,
+              "LDL" : elem.ldl,
+              "HDL"  : elem.hdl,
+              "TG"       : elem.tg,
+              "DISLIPEMIA" : elem.dyslipemy,
+              "CREATININA"  : elem.creatinine,
+              "FILTRADO_GLOMERULAR"       : elem.glomerular,
+              "INSUFICIENCIA_RENAL" : elem.kidneyInsufficiency,
+              "FOTOTIPO"  : elem.fototype,
+              "TRATAMIENTO_DIABETES"  : elem.diabetesTreatment,
+              "SUPLEMENTACIÓN_VITAMINA_D" : elem.vitaminDSupplementation,
+          });
+        }
+        this.excelService.generateExcelFile(info.list, "INVESTIGACION_" + this.userLogged.name);
+      }, error =>{
+        console.log("Algo ha ido mal");
+      });
+    }
   }
 }
