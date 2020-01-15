@@ -77,7 +77,13 @@
       </div>
 
       <div id="headerBar">
-        <div id="titleTableResearchers"><strong>LISTA PACIENTES</strong></div>
+        <div id="titleTableResearchers">
+          <strong>
+            LISTA PACIENTES
+          </strong>
+          <button type="button" class="btn btn-danger" (click)="generateExcel()">Generar Excel</button>
+
+        </div>
         <div class="addSubject">
             <b>AÑADIR PACIENTE</b>         
             <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">

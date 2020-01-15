@@ -9,6 +9,7 @@ import { AdminServiceService } from 'src/app/services/admin/admin-service.servic
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
+import { ExcelServiceService } from 'src/app/services/excel/excel-service.service';
 
 @Component({
   selector: 'app-home-researcher',
@@ -42,7 +43,11 @@ export class HomeResearcherComponent implements OnInit {
       private adminServiceService: AdminServiceService,
       private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService,
       private formBuilder: FormBuilder,
-      private sortSubjectsService: SortSubjectsServiceService) { }
+      private sortSubjectsService: SortSubjectsServiceService,
+      private excelService: ExcelServiceService
+      ) { 
+
+      }
 
   ngOnInit() {
 
@@ -303,5 +308,49 @@ export class HomeResearcherComponent implements OnInit {
 
   sortDownIdentificationNumber(){
     this.sortSubjectsService.sortDownIdentificationNumber(this.subjects);
+  }
+
+  generateExcel(){
+
+    let rows = [];
+
+    rows[0] = {
+      IDENT_PACIENTE: '33333333',
+      FECHA_INVESTIGACIÓN: '1',
+      VITAMINA_D: 'ravi',
+      HBA1C: 1000,
+      ESTACIÓN: '33333333',
+      SEXO: '33333333',
+      NIVEL_ESTUDIOS: 'ravi',
+      FECHA_NACIMIENTO: 1000,
+      NIVEL_SOCIOECONÓMICO: '33333333',
+      TABACO: 'ravi',
+      RIESGO_ALCOHOL: 1000,
+      EXPOSICIÓN_SOLAR: '33333333',
+      CREMA_SPF: 'ravi',
+      PUNTUACION_SPF: 1000,
+      EJERCICIO: '33333333',
+      DM2: 'ravi',
+      GLUCOSA: 1000,
+      IMC: '33333333',
+      OBESIDAD: 'ravi',
+      TAS: 1000,
+      TAD: '33333333',
+      HIPERTENSION_ARTERIAL: 'ravi',
+      COLESTEROL: 1000,
+      LDL: '33333333',
+      HDL: 'ravi',
+      TG: 1000,
+      DISLIPEMIA: '33333333',
+      CREATININA: 'ravi',
+      FILTRADO_GLOMERULAR: 1000,
+      INSUFICIENCIA_RENAL: '33333333',
+      FOTOTIPO: 'ravi',
+      TRATAMIENTO_DIABETES: 1000,
+      SUPLEMENTACIÓN_VITAMINA_D: '22',
+    }; 
+    
+
+    this.excelService.generateExcelFile(rows, "INVESTIGACION_" + this.userLogged.name);
   }
 }
