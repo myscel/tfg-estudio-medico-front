@@ -140,3 +140,14 @@ header{
 .noClass{
     font-family: 'Roboto Slab', serif;
 }
+
+#buttonReturn{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    width: 140px;
+    font-size: 20px;
+}
+
+#imgReturn{
+    margin-left: 4px;
+}
