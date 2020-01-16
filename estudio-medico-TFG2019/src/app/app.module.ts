@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { ResearchersAdminComponent } from './components/admin/home-admin/researchers-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
 import { FormComponent } from './components/form/form.component';
@@ -22,7 +22,7 @@ import { AppointmentViewComponent } from './components/form/appointment-view/app
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin/researchers', component: HomeAdminComponent, canActivate: [GuardServiceService] },
+  { path: 'admin/researchers', component: ResearchersAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
@@ -35,7 +35,7 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeAdminComponent,
+    ResearchersAdminComponent,
     HomeResearcherComponent,
     SubjectsAdminComponent,
     FormComponent,

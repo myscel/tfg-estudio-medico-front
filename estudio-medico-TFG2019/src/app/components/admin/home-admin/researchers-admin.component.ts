@@ -13,12 +13,12 @@ import { SurnameInputServiceService } from 'src/app/services/researcher/surname-
 import { SortResearchersServiceService } from 'src/app/services/researcher/sort-researchers-service.service';
 
 @Component({
-  selector: 'app-home-admin',
-  templateUrl: './home-admin.component.html',
-  styleUrls: ['./home-admin.component.css'
+  selector: 'app-researchers-admin',
+  templateUrl: './researchers-admin.component.html',
+  styleUrls: ['./researchers-admin.component.css'
 ]
 })
-export class HomeAdminComponent implements OnInit {
+export class ResearchersAdminComponent implements OnInit {
 
   @Input() researchers: User[] = [];
 
