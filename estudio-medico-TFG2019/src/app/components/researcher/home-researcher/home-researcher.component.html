@@ -88,7 +88,7 @@
 
         </div>
         <div class="addSubject">
-            <b>AÑADIR PACIENTE</b>         
+            <b id="textAddSubject">AÑADIR PACIENTE</b>         
             <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">
               Identificador:
               <input type="text" formControlName="identificationNumber" class="form-control" required>
@@ -147,8 +147,8 @@
                 <ng-template #buttonFromSubject1> 
                   <td>
                   <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 1)">
-                    CITA 1
-                    <img src="../../../../assets/icons/edit.png" height="20px">
+                    Cita 1
+                    <img src="../../../../assets/icons/writing.png" height="18px">
                   </button>
                 </td>
                 </ng-template>
@@ -157,7 +157,14 @@
                     Consultar <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
-                <ng-template #buttonFromSubject2> <td><button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 2)">CITA 2</button></td></ng-template>
+                <ng-template #buttonFromSubject2>
+                   <td>
+                      <button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 2)">
+                       Cita 2
+                       <img src="../../../../assets/icons/writing.png" height="18px">
+                      </button>
+                    </td>
+                  </ng-template>
                 <td><button id="buttonDelete" type="button" (click)="deleteSubject(user.identificationNumber)"><img id="imgCross"
                       src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>

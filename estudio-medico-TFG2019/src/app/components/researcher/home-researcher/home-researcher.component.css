@@ -244,6 +244,7 @@ input[type=text] {
 .buttonLook, .buttonInvestigation{
     height: 35px;
     align-self: center;
+    width: 120px;
 }
 
 .buttonLook{
@@ -283,4 +284,8 @@ input[type=text] {
 
   #imgExcel{
       margin-left: 8px;
+  }
+
+  #textAddSubject{
+      margin-left: 10px;
   }
