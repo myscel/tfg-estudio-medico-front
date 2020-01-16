@@ -38,30 +38,25 @@ export class HomeResearcherComponent implements OnInit {
 
 
   constructor(private router: Router,
-    private http: HttpClient,
-     private userService: UserServiceService,
+      private http: HttpClient,
+      private userService: UserServiceService,
       private researcherService: ResearcherServiceService,
       private adminServiceService: AdminServiceService,
-      private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService,
+      private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
       private formBuilder: FormBuilder,
       private sortSubjectsService: SortSubjectsServiceService,
       private excelService: ExcelServiceService
-      ) { 
-
-      }
+    ) { 
+  }
 
   ngOnInit() {
-
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-
     let observable = null;
     
     if(this.userLogged.role === "ADMIN"){
-      console.log("ACCEDIENDO DESDE ADMIN...");
       observable = this.adminServiceService.getSubjectsAndInvestigationsFromIdAdmin(this.userLogged.id);
     }
     else{
-      console.log("ACCEDIENDO DESDE RESEARCHER...");
       observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
     }
 
@@ -78,8 +73,6 @@ export class HomeResearcherComponent implements OnInit {
         else{
           this.emptyList = false;
         }
-
-
       }, error =>{
         this.router.navigate(['/login']);
       });
@@ -100,7 +93,6 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doNewForm(idSubject: string, appointment: string){
-    console.log(this.subjects);
     this.router.navigate(['/researcher/' + this.userLogged.id + '/subjectForm/' + idSubject + "/" + appointment]);
   }
 
@@ -117,18 +109,15 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   registerSubject(){
-
-    if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.f.identificationNumber.value)){
+    if(!this.identificationNumberSubjectService.validateEmptyField(this.f.identificationNumber.value)){
       this.alertMessage = "Número de identificación vacío";
       this.setAlertDeleteModal();
     }
-
-    else if(!this.identificationNumberSubjectServiceService.validateNumberField(this.f.identificationNumber.value)){
+    else if(!this.identificationNumberSubjectService.validateNumberField(this.f.identificationNumber.value)){
       this.alertMessage = "No es un número";
       this.setAlertDeleteModal();
     }
-
-    else if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.f.identificationNumber.value)){
+    else if(!this.identificationNumberSubjectService.validateIdentificationNumberLenght(this.f.identificationNumber.value)){
       this.alertMessage = "No es un número de 8 caracteres";
       this.setAlertDeleteModal();
     }
@@ -162,11 +151,7 @@ export class HomeResearcherComponent implements OnInit {
         });
       }
     }
-
-
-    
   }
-
 
   deleteSubject(identificationNumber: string){
     let observable = this.researcherService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
@@ -177,21 +162,16 @@ export class HomeResearcherComponent implements OnInit {
 
     else{
       observable.subscribe(response =>{
-
         let investigationsCompleted: number = response.numberInvestigationsCompleted;
 
         if(investigationsCompleted !== 0){
-
           window.scroll(0,0);
-
           this.setWarningDeleteModal()
-
           this.warningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
           this.subjectToDelete = identificationNumber;
         }
 
         else{
-
           let observable = this.researcherService.deleteSubjectByIdentificationNumberResearcher(identificationNumber);
 
           if(observable === null){
@@ -200,15 +180,10 @@ export class HomeResearcherComponent implements OnInit {
       
           else{
             observable.subscribe(response =>{
-            
               window.scroll(0,0);
-      
               this.ngOnInit();
-      
               this.setSuccessDeleteModal()
-
               this.successMessage = "Éxito al borrar al paciente: " + identificationNumber;
-
             }, error =>{
               this.setAlertDeleteModal()
 
@@ -224,7 +199,6 @@ export class HomeResearcherComponent implements OnInit {
             });
           }
         }
-
       }, error =>{
         this.setAlertDeleteModal()
 
@@ -249,9 +223,7 @@ export class HomeResearcherComponent implements OnInit {
       observable.subscribe(response =>{  
         this.ngOnInit();
         this.setSuccessDeleteModal();
-
         this.successMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
-
       }, error =>{
         this.setAlertDeleteModal();
 
@@ -366,9 +338,17 @@ export class HomeResearcherComponent implements OnInit {
               "SUPLEMENTACIÓN_VITAMINA_D" : elem.vitaminDSupplementation,
           });
         }
-        this.excelService.generateExcelFile(info.list, "INVESTIGACION_" + this.userLogged.name);
+
+        this.setSuccessDeleteModal();
+        this.successMessage = "Documento excel generado correctamente";
+        let today = new Date();
+        let day = today.getUTCDate();
+        let month = today.getUTCMonth() + 1;
+        let year = today.getUTCFullYear();
+        this.excelService.generateExcelFile(info.list, "INVESTIGACION_" + this.userLogged.name  + "_" + day + "/" + month + "/" + year);
       }, error =>{
-        console.log("Algo ha ido mal");
+        this.alertMessage = "Fallo al generar el documento excel";
+        this.setAlertDeleteModal();
       });
     }
   }
