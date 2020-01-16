@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ResearchersAdminComponent } from './components/admin/home-admin/researchers-admin.component';
+import { ResearchersAdminComponent } from './components/admin/researchers-admin/researchers-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
 import { FormComponent } from './components/form/form.component';
