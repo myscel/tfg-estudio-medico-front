@@ -100,6 +100,9 @@ header{
     color: rgb(102, 163, 255);
     width: 50%;
     text-align: center;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   #divTable{
@@ -266,4 +269,18 @@ input[type=text] {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  #buttonExcel{
+      height: 52px;
+      font-size: 20px;
+      width: 200px;
+  }
+
+  #textList{
+      font-size: 40px;
+  }
+
+  #imgExcel{
+      margin-left: 8px;
   }

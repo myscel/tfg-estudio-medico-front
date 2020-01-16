@@ -78,10 +78,13 @@
 
       <div id="headerBar">
         <div id="titleTableResearchers">
-          <strong>
+          <strong id="textList">
             LISTA PACIENTES
           </strong>
-          <button type="button" class="btn btn-danger" (click)="generateExcel()">Generar Excel</button>
+          <button type="button" id="buttonExcel" class="btn btn-success" (click)="generateExcel()">
+            Generar Excel
+            <img id="imgExcel" src="../../../../assets/icons/donwload.png"height="24">
+          </button>
 
         </div>
         <div class="addSubject">
@@ -141,8 +144,14 @@
                     Consultar  <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
-                <ng-template #buttonFromSubject1> <td><button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 1)">CITA 1</button></td></ng-template>
-
+                <ng-template #buttonFromSubject1> 
+                  <td>
+                  <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 1)">
+                    CITA 1
+                    <img src="../../../../assets/icons/edit.png" height="20px">
+                  </button>
+                </td>
+                </ng-template>
                 <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
                   <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, 2)">
                     Consultar <img id="imgCross" src="../../../../assets/icons/eye.png" height="20px">
