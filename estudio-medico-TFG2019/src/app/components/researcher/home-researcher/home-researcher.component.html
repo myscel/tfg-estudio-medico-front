@@ -11,7 +11,7 @@
 
 <header>
 
-    <div id="headerIzqa">
+    <div id="headerLeft">
         Estudio <strong>Médico</strong>
     </div>
     <div id="headerUserName">
@@ -22,10 +22,10 @@
           | {{userLogged.name}}
         </span>
     </div>
-    <div id="headerDcha">
-        <div id="buttonPerfil" class="btn btn-primary navButton" (click)="doProfile()">
+    <div id="headerRight">
+        <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
             <div>PERFIL</div>
-            <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
+            <img src="../../../../assets/icons/profile.png" height="24">
         </div>
         <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
             <div>DESCONECTAR</div>
@@ -113,12 +113,12 @@
                     </div>
                     <div>
                       <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
-                            <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                            <img src="../../../../assets/icons/up-arrow.png" height="24">
                       </button> 
                   </div>
                   <div>
                     <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
-                        <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                        <img src="../../../../assets/icons/down-arrow.png" height="24">
                     </button>    
                   </div>
                   </div>
