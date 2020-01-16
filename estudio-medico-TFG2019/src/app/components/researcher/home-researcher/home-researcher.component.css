@@ -215,7 +215,7 @@ input[type=text] {
 #divConfirmDelete{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items:flex-start;
     margin-top: 3px;
 }
@@ -288,4 +288,8 @@ input[type=text] {
 
   #textAddSubject{
       margin-left: 10px;
+  }
+
+  .textModal{
+      margin-top: 15px;
   }

@@ -51,18 +51,24 @@
     <div id="divRight">
 
       <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertHidden'>
-        <strong>Error! </strong> {{alertMessage}}
+        <div class="textModal">
+          <strong>Error! </strong> {{alertMessage}}
+        </div>
       </div>
     
       <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successHidden'>
-        <strong>Éxito! </strong> {{successMessage}}
+        <div class="textModal">
+          <strong>Éxito! </strong> {{successMessage}}
+        </div>
       </div>
     
       <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
       </div>
 
       <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
-        <strong>Aviso! </strong> {{warningMessage}}
+        <div>
+          <strong>Aviso! </strong> {{warningMessage}}
+        </div>
         <div id="divConfirmDelete">
           <div id="divConfirmDeleteLeft"> 
             <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
@@ -88,11 +94,15 @@
 
         </div>
         <div class="addSubject">
-            <b id="textAddSubject">AÑADIR PACIENTE</b>         
+            <b id="textAddSubject">
+              AÑADIR PACIENTE
+            </b>         
             <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">
               Identificador:
               <input type="text" formControlName="identificationNumber" class="form-control" required>
-              <button id="buttonNewSubject" type="button" class="btn btn-primary" (click)="registerSubject()">Añadir</button>
+              <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="registerSubject()">
+                Añadir
+              </button>
             </form>
         </div> 
       </div>
