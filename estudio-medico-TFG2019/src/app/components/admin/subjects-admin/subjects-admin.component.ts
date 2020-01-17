@@ -100,10 +100,8 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   doLogOut(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      localStorage.removeItem('userLogged');
-      this.router.navigate(['/login']);
-    });
+    localStorage.removeItem('userLogged');
+    this.router.navigate(['/login']);
   }
 
   doResearcherView(){

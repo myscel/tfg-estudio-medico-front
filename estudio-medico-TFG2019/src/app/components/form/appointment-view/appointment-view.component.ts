@@ -41,11 +41,9 @@ export class AppointmentViewComponent implements OnInit {
     });
   }
 
-  doLogOut() {
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData => {
-      localStorage.removeItem('userLogged');
-      this.router.navigate(['/login']);
-    });
+  doLogOut(){
+    localStorage.removeItem('userLogged');
+    this.router.navigate(['/login']);
   }
 
   doProfile() {

@@ -226,12 +226,10 @@ export class ResearchersAdminComponent implements OnInit {
       }, 5000);
     });
   }
-
+  
   doLogOut(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      localStorage.removeItem('userLogged');
-      this.router.navigate(['/login']);
-    });
+    localStorage.removeItem('userLogged');
+    this.router.navigate(['/login']);
   }
 
   doResearcherView(){
