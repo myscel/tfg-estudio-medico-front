@@ -52,15 +52,8 @@ export class HomeResearcherComponent implements OnInit {
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-    let observable = null;
     
-    if(this.userLogged.role === "ADMIN"){
-      //this.ResearcherViewButtonHidden = true;
-      observable = this.adminServiceService.getSubjectsAndInvestigationsFromIdAdmin(this.userLogged.id);
-    }
-    else{
-      observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
-    }
+    let observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
 
     if(observable === null){
       this.router.navigate(['/login']);

@@ -13,7 +13,6 @@ export class UserServiceService {
 
   userHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'
-    /*'Authorization':'Basic ' +  btoa(this.username + ':' +  this.password)*/
   });
 
   options = {headers: this.userHeaders}
@@ -27,7 +26,13 @@ export class UserServiceService {
   public loginResearcherAndAdmin(username: string, password: string): Observable<any> {
     let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(username + ':' + password));
 
-    return this.http.get<any>(`${this.userUrl}/login`, {headers: headerLogin});
+
+    let user: User = new User();
+    user.username = username;
+    user.password = password;
+    console.log(user);
+    return this.http.post(`${this.userUrl}/login`, user, {headers: headerLogin})
+
   }
 
   public logOutResearcherAndAdmin(): Observable<any> {

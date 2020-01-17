@@ -26,9 +26,7 @@ export class ResearcherServiceService {
       return null;
     }
 
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
-
-    return this.http.get(`${this.researcherUrl}/${id}/subjects`, {headers: headerList});
+    return this.http.get(`${this.researcherUrl}/${id}/subjects`, {headers: this.researcherHeaders});
   }
 
   public registerSubject(subject: Subject): Observable<any>{
@@ -37,9 +35,8 @@ export class ResearcherServiceService {
       return null;
     }
 
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.post(`${this.researcherUrl}/registerSubject`, subject , {headers: headerList});
+    return this.http.post(`${this.researcherUrl}/registerSubject`, subject , {headers: this.researcherHeaders});
   }
 
   public getNumberInvestigationsCompletedFromSubject(identificationNumber: string): Observable<any>{
@@ -49,9 +46,8 @@ export class ResearcherServiceService {
       return null;
     }
     
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.get(`${this.researcherUrl}/investigationsCompletedSubjectResearcher/${identificationNumber}`, {headers: headerList});
+    return this.http.get(`${this.researcherUrl}/investigationsCompletedSubjectResearcher/${identificationNumber}`, {headers: this.researcherHeaders});
   }
 
   public deleteSubjectByIdentificationNumberResearcher(identificationNumber: string): Observable<any>{
@@ -61,10 +57,9 @@ export class ResearcherServiceService {
       return null;
     }
     
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
     let params = new HttpParams().set("identificationNumber", identificationNumber)
 
-    return this.http.delete(`${this.researcherUrl}/deleteSubjectResearcher`, {headers: headerList, params: params});
+    return this.http.delete(`${this.researcherUrl}/deleteSubjectResearcher`, {headers: this.researcherHeaders, params: params});
   }
 
   public registerAppointment(appointment: Appointment): Observable<any>{
@@ -73,9 +68,8 @@ export class ResearcherServiceService {
       return null;
     }
 
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.post(`${this.researcherUrl}/registerInvestigationDetails`, appointment , {headers: headerList});
+    return this.http.post(`${this.researcherUrl}/registerInvestigationDetails`, appointment , {headers: this.researcherHeaders});
   }
 
   public getAppointmentDetails(idSubject: string, numberInvestigation: string): Observable<any>{
@@ -84,9 +78,8 @@ export class ResearcherServiceService {
       return null;
     }
 
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.get(`${this.researcherUrl}/getInvestigationDetails/${idSubject}/${numberInvestigation}` , {headers: headerList});
+    return this.http.get(`${this.researcherUrl}/getInvestigationDetails/${idSubject}/${numberInvestigation}` , {headers: this.researcherHeaders});
   }
 
   public getAllAppointmentDetails(idSubject: string): Observable<any>{
@@ -95,9 +88,8 @@ export class ResearcherServiceService {
       return null;
     }
 
-    let headerList: HttpHeaders = this.researcherHeaders.append('Authorization', 'Bearer ' + userLogged.token);
 
-    return this.http.get(`${this.researcherUrl}/getAllInvestigationDetails/${idSubject}` , {headers: headerList});
+    return this.http.get(`${this.researcherUrl}/getAllInvestigationDetails/${idSubject}` , {headers: this.researcherHeaders});
   }
 
   
