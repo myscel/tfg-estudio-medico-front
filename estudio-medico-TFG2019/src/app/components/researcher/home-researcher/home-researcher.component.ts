@@ -31,6 +31,7 @@ export class HomeResearcherComponent implements OnInit {
   alertInvisibleHidden: boolean = true;
   alertWarningHidden: boolean = false;
   alertFilterHidden: boolean;
+  researcherViewButtonHidden: boolean = false;
   successMessage: string = "";
   alertMessage: string = "";
   warningMessage: string = "";
@@ -54,6 +55,7 @@ export class HomeResearcherComponent implements OnInit {
     let observable = null;
     
     if(this.userLogged.role === "ADMIN"){
+      //this.ResearcherViewButtonHidden = true;
       observable = this.adminServiceService.getSubjectsAndInvestigationsFromIdAdmin(this.userLogged.id);
     }
     else{
@@ -89,6 +91,12 @@ export class HomeResearcherComponent implements OnInit {
     this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
+    });
+  }
+
+  doAdminView(){
+    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
+      this.router.navigate(['/admin/researchers']);
     });
   }
 

@@ -90,37 +90,41 @@ header{
     margin-bottom: 1%;
     border-radius: 8px;
     padding-bottom: 1%;
-    background-color: rgb(225, 238, 248);
+    padding-top: 1px;
+    background-color: rgb(203, 229, 253);
 }
 
 .formSection{
-    width: 90%;
-    margin-left: 5%;
+    width: 95%;
+    margin-left: 2.5%;
     margin-top: 3%;
-    padding: 0 2% 0 2%;
+    border-radius: 8px;
+    background-color: rgb(222, 239, 252);
+    display: grid;
+    grid-template-columns: 2fr 4fr;
 }
 
 .sectionTitle{
-    margin-bottom: 2%;
-    font-size: 30px;
+    padding-top: 3%;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .sectionContent{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 20px;
+    padding-top: 2%;
+    padding-right: 1%;
 }
 
 .textInput{
     color: rgb(106, 106, 106);
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 20px;
+    text-align: start;
 }
 
 .lineSeparator{
     height: 2px;
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     margin-bottom: 4px;
     background-color: rgb(151, 205, 255);
 }
@@ -134,7 +138,8 @@ header{
 }
 
 .variableData{
-    font-size: 20px;
+    margin-left: 1%;
+    color: rgb(37, 70, 255);
 }
 
 .noClass{

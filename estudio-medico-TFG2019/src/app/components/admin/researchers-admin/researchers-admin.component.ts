@@ -234,6 +234,12 @@ export class ResearchersAdminComponent implements OnInit {
     });
   }
 
+  doResearcherView(){
+    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
+      this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
+    });
+  }
+
   sortUpDni(){
     this.sortResearchersServiceService.sortUpDni(this.researchers);
   }

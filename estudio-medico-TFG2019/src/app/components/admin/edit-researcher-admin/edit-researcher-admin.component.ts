@@ -91,6 +91,12 @@ export class EditResearcherAdminComponent implements OnInit {
     });
   }
 
+  doResearcherView(){
+    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
+      this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
+    });
+  }
+
   doUpdate(){
     if(!this.passwordInputServiceService.validatePassAndPassRepeat(
       this.updateFields.password.value,

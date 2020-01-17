@@ -50,14 +50,14 @@
             <div class="sectionTitle">Datos de la cita</div>
             <div class="sectionContent">
                 <div class="variable">
-                    <div class="textInput"> Identificador de paciente</div>
+                    <div class="textInput"> Identificador de paciente: <span
+                            class="variableData">{{identificationNumber}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{identificationNumber}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(1-40) %"> Fecha de realización</div>
+                    <div class="textInput" tooltip="(1-40) %"> Fecha de realización: <span
+                            class="variableData">{{appointment.investigationDate}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.investigationDate}}</span>
                 </div>
             </div>
         </div>
@@ -66,19 +66,19 @@
             <div class="sectionTitle">Variables principales</div>
             <div class="sectionContent">
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-500) ng/ml"> Vitamina D</div>
+                    <div class="textInput" tooltip="(0-500) ng/ml"> Vitamina D: <span
+                            class="variableData">{{appointment.vitaminD}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.vitaminD}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(1-40) %"> HbA1c</div>
+                    <div class="textInput" tooltip="(1-40) %"> HbA1c: <span
+                            class="variableData">{{appointment.hba1c}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.hba1c}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Estación del año</div>
+                    <div class="textInput">Estación del año: <span class="variableData">{{appointment.season}}</span>
+                    </div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.season}}</span>
                 </div>
             </div>
         </div>
@@ -87,25 +87,25 @@
             <div class="sectionTitle">Variables sociodemográficas</div>
             <div class="sectionContent">
                 <div class="variable">
-                    <div class="textInput">Sexo</div>
+                    <div class="textInput">Sexo: <span class="variableData">{{appointment.gender}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.gender}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Nivel de estudios</div>
+                    <div class="textInput">Nivel de estudios: <span
+                            class="variableData">{{appointment.studyLevel}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.studyLevel}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="> 18 Años">Fecha de nacimiento</div>
+                    <div class="textInput" tooltip="> 18 Años">Fecha de nacimiento: <span
+                            class="variableData">{{appointment.birthDate}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.birthDate}}</span>
+
                 </div>
                 <div class="variable">
                     <div class="textInput" tooltip="Ingreso unidad familiar en euros mensuales">Nivel socioeconómico
+                        :<span class="variableData">{{appointment.socioeconomicLevel}}</span>
                     </div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.socioeconomicLevel}}</span>
                 </div>
             </div>
         </div>
@@ -114,43 +114,38 @@
             <div class="sectionTitle">Hábitos de vida</div>
             <div class="sectionContent">
                 <div class="variable">
-                    <div class="textInput">Tabaco</div>
+                    <div class="textInput">Tabaco: <span *ngIf="appointment.tobacco; else notTobacco" class="variableData">SÍ</span>
+                        <ng-template #notTobacco>
+                            <span class="variableData">NO</span>
+                        </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.tobacco; else notTobacco"  class="variableData">SÍ</span>
-                    <ng-template #notTobacco>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Consumo de riesgo de alcohol</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.riskAlcohol; else notRiskAlcohol"  class="variableData">SÍ</span>
+                    <div class="textInput">Consumo de riesgo de alcohol: <span *ngIf="appointment.riskAlcohol; else notRiskAlcohol"
+                        class="variableData">SÍ</span>
                     <ng-template #notRiskAlcohol>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
+                        <span class="variableData">NO</span>
+                    </ng-template></div>
+                    <div class="lineSeparator"></div>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-1200) min">Tiempo de exposición solar al día</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.solarExposure}}</span>
+                    <div class="textInput" tooltip="(0-1200) min">Tiempo de exposición solar al día: <span class="variableData">{{appointment.solarExposure}}</span></div>
+                    <div class="lineSeparator"></div> 
                 </div>
                 <div class="variable">
-                    <div class="textInput">Uso de crema SPF</div>
+                    <div class="textInput">Uso de crema SPF: <span *ngIf="appointment.spfCream; else notSpfCream" class="variableData">SÍ</span>
+                        <ng-template #notSpfCream>
+                            <span class="variableData">NO</span>
+                        </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.spfCream; else notSpfCream"  class="variableData">SÍ</span>
-                    <ng-template #notSpfCream>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Puntuación SPF</div>
+                    <div class="textInput">Puntuación SPF: <span class="variableData">{{appointment.spfScore}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.spfScore}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico</div>
+                    <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico: <span class="variableData">{{appointment.exercise}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.exercise}}</span>
                 </div>
             </div>
         </div>
@@ -161,123 +156,109 @@
                 <div class="variable">
                     <div class="textInput"
                         tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado
-                        de la DM2</div>
+                        de la DM2:  <span *ngIf="appointment.dm2; else notDm2" class="variableData">SÍ</span>
+                        <ng-template #notDm2>
+                            <span class="variableData">NO</span>
+                        </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.dm2; else notDm2"  class="variableData">SÍ</span>
-                    <ng-template #notDm2>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-700) mg/dl">Glucemia</div>
+                    <div class="textInput" tooltip="(0-700) mg/dl">Glucemia: <span class="variableData">{{appointment.glucose}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.glucose}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(10-70) kg/m2">IMC</div>
+                    <div class="textInput" tooltip="(10-70) kg/m2">IMC: <span class="variableData">{{appointment.imc}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.imc}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Obesidad</div>
+                    <div class="textInput">Obesidad: <span *ngIf="appointment.obesity; else notObesity" class="variableData">SÍ</span>
+                        <ng-template #notObesity>
+                            <span class="variableData">NO</span>
+                        </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.obesity; else notObesity"  class="variableData">SÍ</span>
-                    <ng-template #notObesity>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(20-300) mmHg">TAS</div>
+                    <div class="textInput" tooltip="(20-300) mmHg">TAS: <span class="variableData">{{appointment.tas}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.tas}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(20-200) mmHg">TAD</div>
+                    <div class="textInput" tooltip="(20-200) mmHg">TAD: <span class="variableData">{{appointment.tad}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.tad}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.arterialHypertension; else notArterialHypertension"  class="variableData">SÍ</span>
+                    <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial: <span *ngIf="appointment.arterialHypertension; else notArterialHypertension"
+                        class="variableData">SÍ</span>
                     <ng-template #notArterialHypertension>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
+                        <span class="variableData">NO</span>
+                    </ng-template></div>
+                    <div class="lineSeparator"></div>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total</div>
+                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total: <span class="variableData">{{appointment.cholesterol}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.cholesterol}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col</div>
+                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col: <span class="variableData">{{appointment.ldl}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.ldl}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col</div>
+                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col: <span class="variableData">{{appointment.hdl}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.hdl}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(1-10000) mg/dl">TG</div>
+                    <div class="textInput" tooltip="(1-10000) mg/dl">TG: <span class="variableData">{{appointment.tg}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.tg}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia</div>
+                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia: <span *ngIf="appointment.dyslipemy; else notDislipemy" class="variableData">SÍ</span>
+                        <ng-template #notDislipemy>
+                            <span class="variableData">NO</span>
+                        </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.dyslipemy; else notDislipemy"  class="variableData">SÍ</span>
-                    <ng-template #notDislipemy>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina</div>
+                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina: <span class="variableData">{{appointment.creatinine}}</span></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.creatinine}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.glomerular}}</span>
+                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular: <span class="variableData">{{appointment.glomerular}}</span></div>
+                    <div class="lineSeparator"></div>  
                 </div>
                 <div class="variable">
-                    <div class="textInput">Insuficiencia renal crónica</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.kidneyInsufficiency; else notKidneyInsufficiency"  class="variableData">SÍ</span>
+                    <div class="textInput">Insuficiencia renal crónica: <span *ngIf="appointment.kidneyInsufficiency; else notKidneyInsufficiency"
+                        class="variableData">SÍ</span>
                     <ng-template #notKidneyInsufficiency>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Fototipo</div>
+                        <span class="variableData">NO</span>
+                    </ng-template></div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" class="variableData">{{appointment.fototype}}</span>
                 </div>
                 <div class="variable">
-                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes
+                    <div class="textInput">Fototipo: <span class="variableData">{{appointment.fototype}}</span></div>
+                    <div class="lineSeparator"></div>
+                </div>
+                <div class="variable">
+                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes: <span *ngIf="appointment.diabetesTreatment; else notDiabetesTreatment"
+                        class="variableData">SÍ</span>
+                    <ng-template #notDiabetesTreatment>
+                        <span class="variableData">NO</span>
+                    </ng-template>
                     </div>
                     <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.diabetesTreatment; else notDiabetesTreatment"  class="variableData">SÍ</span>
-                    <ng-template #notDiabetesTreatment>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
                 </div>
                 <div class="variable">
-                    <div class="textInput">Suplementación con vitamina D</div>
-                    <div class="lineSeparator"></div>
-                    <span id="spanGrey" *ngIf="appointment.vitaminDSupplementation; else notVitaminDSupplementation"  class="variableData">SÍ</span>
+                    <div class="textInput">Suplementación con vitamina D: <span *ngIf="appointment.vitaminDSupplementation; else notVitaminDSupplementation"
+                        class="variableData">SÍ</span>
                     <ng-template #notVitaminDSupplementation>
-                        <span id="spanGrey"  class="variableData">NO</span>
-                    </ng-template>
+                        <span class="variableData">NO</span>
+                    </ng-template></div>
+                    <div class="lineSeparator"></div> 
                 </div>
             </div>
         </div>
 
         <div>
             <button type="button" id="buttonReturn" class="btn btn-primary" (click)="doHome()">
-                Volver 
+                Volver
                 <img id="imgReturn" src="../../../../assets/icons/previous.png" height="30">
 
             </button>

@@ -23,6 +23,10 @@
         </span>
     </div>
     <div id="headerRight">
+        <div id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()" [hidden]='!researcherViewButtonHidden'>
+            <div>ADMINISTRAR</div>
+            <img id="imglogout" src="../../../../assets/icons/researcherToAdmin.png" height="24">
+          </div>
         <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
             <div>PERFIL</div>
             <img src="../../../../assets/icons/profile.png" height="24">
@@ -179,7 +183,7 @@
 
       <ng-template #divEmptyList>
         <div id="emptyListMessage">
-          Actualmente no hay investigadores registrados
+          Actualmente no hay pacientes registrados
         </div>
       </ng-template>
        
