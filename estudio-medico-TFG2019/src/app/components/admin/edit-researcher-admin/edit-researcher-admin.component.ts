@@ -90,9 +90,7 @@ export class EditResearcherAdminComponent implements OnInit {
   }
 
   doResearcherView(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
-    });
+    this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
   }
 
   doUpdate(){
@@ -161,9 +159,5 @@ export class EditResearcherAdminComponent implements OnInit {
         } 
       });
     }
-
-
-
   }
-
 }

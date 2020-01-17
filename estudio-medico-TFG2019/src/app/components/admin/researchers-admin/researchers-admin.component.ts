@@ -232,12 +232,6 @@ export class ResearchersAdminComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  doResearcherView(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
-    });
-  }
-
   sortUpDni(){
     this.sortResearchersServiceService.sortUpDni(this.researchers);
   }
@@ -272,6 +266,10 @@ export class ResearchersAdminComponent implements OnInit {
 
   goToModifyResearcher(id: string){
     this.router.navigate(['/admin/researchers/edit/' + id]);
+  }
+
+  doResearcherView(){
+    this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
   }
 
 }

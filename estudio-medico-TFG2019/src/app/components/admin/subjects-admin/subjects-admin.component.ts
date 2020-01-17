@@ -105,9 +105,7 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   doResearcherView(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
-    });
+    this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
   }
 
   deleteSubject(identificationNumber: string){
@@ -412,4 +410,5 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertInvisibleHidden = true;
     this.alertFilterHidden = true;
   }
+
 }
