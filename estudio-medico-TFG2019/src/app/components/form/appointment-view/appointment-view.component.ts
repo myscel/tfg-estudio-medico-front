@@ -34,6 +34,17 @@ export class AppointmentViewComponent implements OnInit {
 
     this.researcherService.getAppointmentDetails(idSubject, numberInvestigation).subscribe(responseData =>{
       this.appointment = responseData;
+      this.appointment.birthDate = new Date(this.appointment.birthDate);
+
+
+      //TEMP
+      var month1 = this.appointment.birthDate.getUTCMonth() + 1; //months from 1-12
+      var day1 = this.appointment.birthDate.getUTCDate();
+      var year1 = this.appointment.birthDate.getUTCFullYear();
+      console.log("FECHA: " + day1 + "-" + month1 + "-" +  year1);
+
+
+      this.appointment.investigationDate = new Date(this.appointment.investigationDate);
       this.identificationNumber = responseData.identificationNumber;
 
     }, error =>{

@@ -31,6 +31,8 @@ export class FormComponent implements OnInit {
 
   formSaved: boolean = false;
 
+  birthDate:Date = new Date();
+
   //Variables principales
   vitaminFieldValidated: boolean = false;
   vitaminFirstTime: boolean = true;
@@ -160,6 +162,7 @@ export class FormComponent implements OnInit {
   get form() { return this.subjectForm.controls; }
 
   onSubmit() {
+
     if(this.validatePrincipalVariables() && 
       this.validateLifeHabitsVariables() && 
       this.validateClinicalVariables() &&
@@ -484,10 +487,13 @@ export class FormComponent implements OnInit {
     }
     console.log(this.studyLevelValidated + " " + this.form.studies.value);
 
-    if(this.form.bornDate.value !== undefined && this.validateBirthDate(this.form.bornDate.value)){
+
+    this.birthDate = new Date( this.form.bornDate.value.getTime() + this.form.bornDate.value.getTimezoneOffset() * -60000 )
+  
+    if(this.form.bornDate.value !== undefined && this.validateBirthDate(this.birthDate)){
       this.birthDateValidated = true;
     }
-    console.log(this.birthDateValidated + " " + this.form.bornDate.value);
+    console.log(this.birthDate + " " + this.form.bornDate.value);
 
     if(this.form.economicLevel.value !== undefined){
       this.economicLevelValidated = true;
@@ -609,7 +615,7 @@ export class FormComponent implements OnInit {
 
     this.appointmentToSave.gender = this.form.gender.value;
     this.appointmentToSave.studyLevel = this.form.studies.value;
-    this.appointmentToSave.birthDate = this.form.bornDate.value;
+    this.appointmentToSave.birthDate = this.birthDate;
     this.appointmentToSave.socioeconomicLevel = this.form.economicLevel.value;
 
     this.appointmentToSave.tobacco = this.form.smoking.value;
