@@ -21,7 +21,7 @@ export class AdminServiceService {
   public getAllResearchers(): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
 
@@ -31,7 +31,7 @@ export class AdminServiceService {
   public deleteResearcher(dni: string): Observable<any>{
 
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
 
@@ -42,7 +42,7 @@ export class AdminServiceService {
 
   public registerResearcher(user: User): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
 
@@ -52,10 +52,9 @@ export class AdminServiceService {
   public getAllSubjects(): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.get(`${this.adminUrl}/subjects`, {headers: this.adminHeaders});
   }
@@ -63,10 +62,9 @@ export class AdminServiceService {
   public getSubjectsAndInvestigationsFromIdAdmin(id: string): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.get(`${this.adminUrl}/${id}/subjects`, {headers: this.adminHeaders});
   }
@@ -74,7 +72,7 @@ export class AdminServiceService {
   public deleteSubjectByIdentificationNumber(identificationNumber: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
@@ -86,7 +84,7 @@ export class AdminServiceService {
   public getNumberInvestigationsCompletedFromSubject(identificationNumber: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
@@ -96,18 +94,17 @@ export class AdminServiceService {
   public getSubjectByIdentificationNumber(identificationNumber: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
-
     return this.http.get(`${this.adminUrl}/subjects/${identificationNumber}`, {headers: this.adminHeaders});
   }
 
   public getSubjectsByResearcherDNI(username: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
@@ -118,20 +115,19 @@ export class AdminServiceService {
   public getResearcherByID(id: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
-
     return this.http.get(`${this.adminUrl}/researchers/${id}`, {headers: this.adminHeaders});
   }
 
   public updateResearcher(user: User): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.post(`${this.adminUrl}/updateResearcher`,user , {headers: this.adminHeaders});
   }

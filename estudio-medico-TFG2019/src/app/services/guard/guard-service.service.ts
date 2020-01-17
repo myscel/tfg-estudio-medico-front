@@ -14,7 +14,7 @@ export class GuardServiceService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{;
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
   
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       localStorage.removeItem('userLogged');
       this.router.navigate(['/login']);
     }

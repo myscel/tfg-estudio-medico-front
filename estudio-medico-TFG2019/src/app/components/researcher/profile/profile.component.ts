@@ -41,5 +41,10 @@ export class ProfileComponent implements OnInit {
     localStorage.removeItem('userLogged');
     this.router.navigate(['/login']);
   }
+
+  
+  doAdminView(){
+    this.router.navigate(['/admin/researchers']);
+  }
   
 }

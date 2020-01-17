@@ -23,7 +23,7 @@
         </span>
     </div>
     <div id="headerRight">
-        <div id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()" [hidden]='!researcherViewButtonHidden'>
+        <div *ngIf="userLogged.role !== 'RESEARCHER'" id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()" [hidden]='!researcherViewButtonHidden'>
             <div>ADMINISTRAR</div>
             <img id="imglogout" src="../../../../assets/icons/researcherToAdmin.png" height="24">
           </div>
@@ -62,23 +62,6 @@
       </div>
     
       <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
-      </div>
-
-      <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
-        <div>
-          <strong>Aviso! </strong> {{warningMessage}}
-        </div>
-        <div id="divConfirmDelete">
-          <div id="divConfirmDeleteLeft"> 
-            <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
-          </div>
-          <div id="divConfirmDeleteRight">
-              <button type="button" (click)="confirmDelete()" class="buttonConfirmDelete btn btn-success">SÍ</button>
-              <button type="button" (click)="cancelDelete()" class="buttonConfirmDelete btn btn-danger">NO</button>
-          </div>
-           
-           
-        </div>   
       </div>
 
       <div id="headerBar">
@@ -141,7 +124,7 @@
                         </div>
                       </div>
                     </th>
-                <th></th>
+        
               </tr>
             </thead>
             <tbody>
@@ -174,8 +157,6 @@
                       </button>
                     </td>
                   </ng-template>
-                <td><button id="buttonDelete" type="button" (click)="deleteSubject(user.identificationNumber)"><img id="imgCross"
-                      src="../../../../assets/icons/cross.png" height="20px"></button></td>
               </tr>
             </tbody>
           </table>

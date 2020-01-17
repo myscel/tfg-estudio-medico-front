@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../../models/User';
 import { Subject } from '../../models/Subject';
@@ -22,7 +22,7 @@ export class ResearcherServiceService {
   public getSubjectsAndInvestigationsFromIdResearcher(id: string): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
 
@@ -31,10 +31,10 @@ export class ResearcherServiceService {
 
   public registerSubject(subject: Subject): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.post(`${this.researcherUrl}/registerSubject`, subject , {headers: this.researcherHeaders});
   }
@@ -42,52 +42,39 @@ export class ResearcherServiceService {
   public getNumberInvestigationsCompletedFromSubject(identificationNumber: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
 
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    if(userLogged === null){
       return null;
     }
     
-
     return this.http.get(`${this.researcherUrl}/investigationsCompletedSubjectResearcher/${identificationNumber}`, {headers: this.researcherHeaders});
-  }
-
-  public deleteSubjectByIdentificationNumberResearcher(identificationNumber: string): Observable<any>{
-    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
-      return null;
-    }
-    
-    let params = new HttpParams().set("identificationNumber", identificationNumber)
-
-    return this.http.delete(`${this.researcherUrl}/deleteSubjectResearcher`, {headers: this.researcherHeaders, params: params});
   }
 
   public registerAppointment(appointment: Appointment): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.post(`${this.researcherUrl}/registerInvestigationDetails`, appointment , {headers: this.researcherHeaders});
   }
 
   public getAppointmentDetails(idSubject: string, numberInvestigation: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+   
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.get(`${this.researcherUrl}/getInvestigationDetails/${idSubject}/${numberInvestigation}` , {headers: this.researcherHeaders});
   }
 
   public getAllAppointmentDetails(idSubject: string): Observable<any>{
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
-    if(userLogged === null || userLogged.token === null || userLogged.token === ""){
+    
+    if(userLogged === null){
       return null;
     }
-
 
     return this.http.get(`${this.researcherUrl}/getAllInvestigationDetails/${idSubject}` , {headers: this.researcherHeaders});
   }

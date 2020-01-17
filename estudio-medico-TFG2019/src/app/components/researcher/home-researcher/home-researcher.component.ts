@@ -86,9 +86,7 @@ export class HomeResearcherComponent implements OnInit {
   }
 
   doAdminView(){
-    this.userService.logOutResearcherAndAdmin().subscribe(responseData =>{
-      this.router.navigate(['/admin/researchers']);
-    });
+    this.router.navigate(['/admin/researchers']);
   }
 
   doNewForm(idSubject: string, appointment: string){
@@ -137,6 +135,7 @@ export class HomeResearcherComponent implements OnInit {
           this.setSuccessDeleteModal();
           this.ngOnInit();
         }, error =>{
+
           this.setAlertDeleteModal();
           if(error.status === 409){
             this.alertMessage = "Error, el paciente ya existe";
@@ -144,7 +143,7 @@ export class HomeResearcherComponent implements OnInit {
           else if(error.status === 410){
             this.alertMessage = "Error, el investigador ya no existe";
           }
-          else if(error.status === 410){
+          else if(error.status === 500){
             this.alertMessage = "Error en el servidor";
           }
         });
@@ -152,100 +151,6 @@ export class HomeResearcherComponent implements OnInit {
     }
   }
 
-  deleteSubject(identificationNumber: string){
-    let observable = this.researcherService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
-
-    if(observable === null){
-      this.router.navigate(['/login']);
-    }
-
-    else{
-      observable.subscribe(response =>{
-        let investigationsCompleted: number = response.numberInvestigationsCompleted;
-
-        if(investigationsCompleted !== 0){
-          window.scroll(0,0);
-          this.setWarningDeleteModal()
-          this.warningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
-          this.subjectToDelete = identificationNumber;
-        }
-
-        else{
-          let observable = this.researcherService.deleteSubjectByIdentificationNumberResearcher(identificationNumber);
-
-          if(observable === null){
-            this.router.navigate(['/login']);
-          }
-      
-          else{
-            observable.subscribe(response =>{
-              window.scroll(0,0);
-              this.ngOnInit();
-              this.setSuccessDeleteModal()
-              this.successMessage = "Éxito al borrar al paciente: " + identificationNumber;
-            }, error =>{
-              this.setAlertDeleteModal()
-
-              if(error.status === 500){
-                this.alertMessage = "Fallo en el servidor";
-              }
-              else if(error.status === 400){
-                this.alertMessage = "El número de identificación debe ser un número entero";
-              }
-              else if(error.status === 404){
-                this.alertMessage = "El paciente no existe";
-              }
-            });
-          }
-        }
-      }, error =>{
-        this.setAlertDeleteModal()
-
-        if(error.status === 500){
-          this.alertMessage = "Fallo en el servidor";
-        }
-        else if(error.status === 400){
-          this.alertMessage = "El número de identificación debe ser un número entero";
-        }
-      });
-    }
-  }
-
-  confirmDelete(){
-    let observable = this.researcherService.deleteSubjectByIdentificationNumberResearcher(this.subjectToDelete);
-
-    if(observable === null){
-      this.router.navigate(['/login']);
-    }
-
-    else{
-      observable.subscribe(response =>{  
-        this.ngOnInit();
-        this.setSuccessDeleteModal();
-        this.successMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
-      }, error =>{
-        this.setAlertDeleteModal();
-
-        if(error.status === 500){
-          this.alertMessage = "Fallo en el servidor";
-        }
-        else if(error.status === 400){
-          this.alertMessage = "El número de identificación debe ser un número entero";
-        }
-        else if(error.status === 404){
-          this.alertMessage = "El paciente no existe";
-        }
-      });
-    }
-}
-
-  cancelDelete(){
-    this.successHidden = false;
-    this.alertHidden = false;
-    this.alertInvisibleHidden = true;
-    this.alertWarningHidden = false;
-  }
-  
   setSuccessDeleteModal(){
       this.successHidden = true;
       this.alertInvisibleHidden = false;
@@ -299,8 +204,15 @@ export class HomeResearcherComponent implements OnInit {
         };
 
         for(var i in appointments["list"]) {    
-          var elem = appointments["list"][i];   
-      
+          var elem = appointments["list"][i];  
+          
+          if(elem.birthDate !== null){
+            elem.birthDate = new Date(elem.birthDate);
+          }
+          if(elem.investigationDate !== null){
+            elem.investigationDate = new Date(elem.investigationDate);
+          }
+
           info.list.push({ 
               "IDENT_PACIENTE" : elem.identificationNumber,
               "FECHA_REALIZACIÓN"  : elem.investigationDate,

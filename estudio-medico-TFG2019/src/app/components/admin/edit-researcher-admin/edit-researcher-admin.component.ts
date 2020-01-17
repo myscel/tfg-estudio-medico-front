@@ -90,7 +90,8 @@ export class EditResearcherAdminComponent implements OnInit {
   }
 
   doResearcherView(){
-    this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
+    let user: User = JSON.parse(localStorage.getItem("userLogged"));
+    this.router.navigate(['/researcher/' + user.id]);
   }
 
   doUpdate(){
