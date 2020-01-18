@@ -14,19 +14,11 @@ export class ProfileComponent implements OnInit {
   userLogged: User;
 
   constructor(private router: Router,
-    private http: HttpClient,
-    private userService: UserServiceService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-
-    let id = this.route.snapshot.paramMap.get('id');
-
-    if(id != this.userLogged.id){
-      localStorage.removeItem('userLogged');
-      this.router.navigate(['/login']);
-    }
+    this.checkUserLogged();
   }
 
   doHome(){
@@ -45,6 +37,15 @@ export class ProfileComponent implements OnInit {
   
   doAdminView(){
     this.router.navigate(['/admin/researchers']);
+  }
+
+
+  checkUserLogged(){
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if(id != this.userLogged.id){
+      this.doLogOut();
+    }
   }
   
 }

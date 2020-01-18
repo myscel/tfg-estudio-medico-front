@@ -23,7 +23,7 @@
         </span>
     </div>
     <div id="headerRight">
-        <div *ngIf="userLogged.role !== 'RESEARCHER'" id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()" [hidden]='!researcherViewButtonHidden'>
+        <div *ngIf="userLogged.role !== 'RESEARCHER'" id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()">
             <div>ADMINISTRAR</div>
             <img id="imglogout" src="../../../../assets/icons/researcherToAdmin.png" height="24">
           </div>
@@ -69,7 +69,7 @@
           <strong id="textList">
             LISTA PACIENTES
           </strong>
-          <button type="button" id="buttonExcel" class="btn btn-success" (click)="generateExcel()">
+          <button [disabled]="this.subjects.length == 0" type="button" id="buttonExcel" class="btn btn-success" (click)="generateExcel()">
             Generar Excel
             <img id="imgExcel" src="../../../../assets/icons/donwload.png"height="24">
           </button>
@@ -89,7 +89,7 @@
         </div> 
       </div>
 
-      <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
+      <div id="divTable" class="table-responsive" *ngIf="this.subjects.length !== 0; else divEmptyList">
           <table class="table">
             <thead>
               <tr>

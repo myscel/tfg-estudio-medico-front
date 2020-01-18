@@ -11,7 +11,7 @@
 
 <header>
 
-    <div id="headerIzqa">
+    <div id="headerLeft">
         Estudio <strong>Médico</strong>
     </div>
     <div id="headerUserName">
@@ -22,8 +22,8 @@
             | {{userLogged.name}}
         </span>
     </div>
-    <div id="headerDcha">
-        <div id="buttonPerfil" class="btn btn-primary navButton" (click)="doProfile()">
+    <div id="headerRight">
+        <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
             <div>PERFIL</div>
             <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
         </div>
@@ -39,9 +39,9 @@
 <body>
 
     <div id="navigationBar">
-        <button id="buttonPacientes" class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
-        <button id="buttonCitas" class="btn btn-primary navButton">DOCUMENTACIÓN</button>
-        <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
+        <button class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
+        <button class="btn btn-primary navButton">DOCUMENTACIÓN</button>
+        <button class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
 
     <div class="appointmentBox">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="variable">
                     <div class="textInput" tooltip="(1-40) %"> Fecha de realización: <span
-                            class="variableData">{{appointment.investigationDate}}</span></div>
+                            class="variableData">{{investigationDay}}-{{investigationMonth}}-{{investigationYear}}</span></div>
                     <div class="lineSeparator"></div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="variable">
                     <div class="textInput" tooltip="> 18 Años">Fecha de nacimiento: <span
-                            class="variableData">{{appointment.birthDate}}</span></div>
+                            class="variableData">{{birthDay}}-{{birthMonth}}-{{birthYear}}</span></div>
                     <div class="lineSeparator"></div>
 
                 </div>

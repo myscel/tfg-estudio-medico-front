@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ResearchersAdminComponent } from './components/admin/researchers-admin/researchers-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
-import { FormComponent } from './components/form/form.component';
+import { AppointmentComponent } from './components/form/appointment-questionary/appointment.component';
 import { ProfileComponent } from './components/researcher/profile/profile.component';
 import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
 import { GuardServiceService } from './services/guard/guard-service.service';
@@ -28,7 +28,7 @@ const appRoutes : Routes = [
   { path: 'admin/appointments', component: EditAppointmentsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
-  { path: 'researcher/:id/subjectForm/:idSubject/:appointment', component: FormComponent, canActivate: [GuardServiceService] },
+  { path: 'researcher/:id/subjectForm/:idSubject/:appointment', component: AppointmentComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id/formView/:idSubject/:appointment', component: AppointmentViewComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/profile/:id', component: ProfileComponent, canActivate: [GuardServiceService] }
 ];
@@ -40,7 +40,7 @@ const appRoutes : Routes = [
     ResearchersAdminComponent,
     HomeResearcherComponent,
     SubjectsAdminComponent,
-    FormComponent,
+    AppointmentComponent,
     ProfileComponent,
     EditResearcherAdminComponent,
     AppointmentViewComponent,
