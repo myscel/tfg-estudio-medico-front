@@ -176,4 +176,16 @@ export class FormServiceService {
     }
     return glomerular >= 0 && glomerular <= 200;
   }
+
+  validateBirthDate(birthDate: Date): boolean{
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }    
+    console.log("EDAD: " + age);
+
+    return age >= 18;
+  }
 }

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormServiceService } from 'src/app/services/form/form-service.service';
 import { Appointment } from 'src/app/models/Appointment';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
+import { FormServiceService } from 'src/app/services/form/form-service.service';
 
 @Component({
   selector: 'app-appointment',
@@ -28,9 +28,9 @@ export class AppointmentComponent implements OnInit {
 
   formSaved: boolean = false;
 
-  birthDate:Date = new Date();
+  birthDate: Date = new Date();
 
-  //Variables principales
+  //Principal variables
   vitaminFieldValidated: boolean = false;
   vitaminFirstTime: boolean = true;
 
@@ -39,13 +39,13 @@ export class AppointmentComponent implements OnInit {
 
   seasonValidated: boolean = false;
 
-  //Variables sociodemográficas
+  //Sociodemographic variables
   genderValidated: boolean = false;
   studyLevelValidated: boolean = false;
   birthDateValidated: boolean = false;
   economicLevelValidated: boolean = false;
 
-  //Hábitos de vida
+  //Lifestyle
   tobaccoValidated: boolean = false;
 
   alcoholRiskValidated: boolean = false;
@@ -60,7 +60,7 @@ export class AppointmentComponent implements OnInit {
   exerciseValidated: boolean = false;
   exerciseFirstTime: boolean = true;
 
-  //Variables clínicas
+  //Clinic variables
   DM2Validated: boolean = false;
 
   glucoseValidated: boolean = false;
@@ -170,7 +170,6 @@ export class AppointmentComponent implements OnInit {
       this.setAlertodal();
       this.alertMessage = "Algunos campos tienen valores incorrectos"
     }
-
   }
 
   doSave(){
@@ -240,20 +239,12 @@ export class AppointmentComponent implements OnInit {
 
   //START CHECKING SOCIODEMOGRAPHIC VARIABLES
   validateGender(){
-    console.log("Sexo actualizado");
     this.genderValidated = true;
   }
 
   validateBirthDate(birthDate: Date): boolean{
-    let today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }    
-    console.log("EDAD: " + age);
+    return this.formService.validateBirthDate(birthDate);
 
-    return age >= 18;
   }
   //END CHECKING SOCIODEMOGRAPHIC VARIABLES
 
@@ -437,33 +428,16 @@ export class AppointmentComponent implements OnInit {
 
 
   validatePrincipalVariables(): boolean{
-    console.log("Validando variables principales");
-    console.log(this.vitaminFieldValidated + " " + this.form.vitaminaD.value);
-    console.log(this.hbA1cValidated + " " + this.form.HbA1c.value);
-    console.log(this.seasonValidated + " " + this.form.season.value);
-    console.log("=============================================");
-
     return this.vitaminFieldValidated && this.hbA1cValidated && this.seasonValidated;
   }
 
   validateLifeHabitsVariables(): boolean{
-    console.log("Validando variables de Hábitos de vida");
-
-    console.log(this.tobaccoValidated + " " + this.form.smoking.value);
-    console.log(this.alcoholRiskValidated + " " + this.form.alcohol.value);
-    console.log(this.sunExposureValidated + " " + this.form.solarExposition.value);
-    console.log(this.spfCreamValidated + " " + this.form.creamSPF.value);
-    
-
     if(this.form.gradeSPF.value !== undefined){
       this.spfGradeValidated = true;
     }
-
-    console.log(this.spfGradeValidated + " " + this.form.gradeSPF.value);
-
-    console.log(this.exerciseValidated + " " + this.form.exercise.value);
-
-    console.log("=============================================");
+    else{
+      this.spfGradeValidated = false;
+    }
 
     return this.tobaccoValidated &&
     this.alcoholRiskValidated &&
@@ -474,29 +448,31 @@ export class AppointmentComponent implements OnInit {
   }
 
   validateSociodemographicVariables(): boolean{
-    console.log("Validando variables sociodemográficas");
-
-    console.log(this.genderValidated + " " + this.form.gender.value);
 
     if(this.form.studies.value !== undefined){
       this.studyLevelValidated = true;
     }
-    console.log(this.studyLevelValidated + " " + this.form.studies.value);
-
-
-    this.birthDate = new Date( this.form.bornDate.value.getTime() + this.form.bornDate.value.getTimezoneOffset() * -60000 )
+    else{
+      this.studyLevelValidated = false;
+    }
+    
+    if(this.form.bornDate.value !== undefined){
+      this.birthDate = new Date( this.form.bornDate.value.getTime() + this.form.bornDate.value.getTimezoneOffset() * -60000 )
+    }
   
     if(this.form.bornDate.value !== undefined && this.validateBirthDate(this.birthDate)){
       this.birthDateValidated = true;
     }
-    console.log(this.birthDate + " " + this.form.bornDate.value);
+    else{
+      this.birthDateValidated = false;
+    }
 
     if(this.form.economicLevel.value !== undefined){
       this.economicLevelValidated = true;
     }
-    console.log(this.economicLevelValidated + " " + this.form.economicLevel.value);
-
-    console.log("=============================================");
+    else{
+      this.economicLevelValidated = false;
+    }
 
     return this.genderValidated &&
     this.studyLevelValidated &&
@@ -505,37 +481,13 @@ export class AppointmentComponent implements OnInit {
   }
 
   validateClinicalVariables(): boolean{
-    console.log("Validando variables clínicas");
-
-    console.log(this.DM2Validated + " " + this.form.DM2.value);
-    console.log(this.glucoseValidated + " " + this.form.bloodGlucose.value);
-    console.log(this.imcValidated + " " + this.form.IMC.value);
-
-    console.log(this.obesityValidated + " " + this.form.obesity.value);
-    console.log(this.tasValidated + " " + this.form.TAS.value);
-    console.log(this.tadValidated + " " + this.form.TAD.value);
-
-    console.log(this.arterialHypertensionValidated + " " + this.form.arterialHypertension.value);
-    console.log(this.cholesterolValidated + " " + this.form.cholesterol.value);
-    console.log(this.ldlValidated + " " + this.form.LDL.value);
-
-    console.log(this.hdlValidated + " " + this.form.HDL.value);
-    console.log(this.tgValidated + " " + this.form.TG.value);
-    console.log(this.dyslipidemiaValidated + " " + this.form.dyslipidemia.value);
-
-    console.log(this.creatinineValidated + " " + this.form.creatinine.value);
-    console.log(this.glomerularValidated + " " + this.form.glomerular.value);
-    console.log(this.kidneyInsufficiencyValidated + " " + this.form.chronicRenalFailure.value);
-
+  
     if(this.form.fototype.value !== undefined){
       this.fototypeValidated = true;
     }
-
-    console.log(this.fototypeValidated + " " + this.form.fototype.value);
-
-    console.log(this.diabetesTreatmentValidated + " " + this.form.diabetesTreatment.value);
-    console.log(this.vitaminDSupplementationValidated + " " + this.form.vitaminDSupplementation.value);
-    console.log("=============================================");
+    else{
+      this.fototypeValidated = false;
+    }
 
     return this.DM2Validated &&
     this.glucoseValidated &&
@@ -563,7 +515,6 @@ export class AppointmentComponent implements OnInit {
     this.alertHidden = false;
     this.alertWarningExitHidden = false;
     this.alertWarningSaveHidden = false;
-
   }
 
   setAlertodal(){
@@ -572,7 +523,6 @@ export class AppointmentComponent implements OnInit {
     this.alertWarningExitHidden = false;
     this.alertInvisibleHidden = false;
     this.alertWarningSaveHidden = false;
-
   }
 
   setWarningExitModal(){
@@ -591,7 +541,6 @@ export class AppointmentComponent implements OnInit {
     this.alertInvisibleHidden = false;
   }
 
-  
   setInvisibleModal(){
     this.successHidden = false;
     this.alertHidden = false;
