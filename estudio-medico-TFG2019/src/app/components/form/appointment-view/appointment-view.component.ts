@@ -81,7 +81,4 @@ export class AppointmentViewComponent implements OnInit {
       this.doLogOut();
     }
   }
-
-
-
 }
