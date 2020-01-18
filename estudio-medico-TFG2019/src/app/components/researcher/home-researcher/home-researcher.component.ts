@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { Subject } from 'src/app/models/Subject';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
@@ -34,12 +34,14 @@ export class HomeResearcherComponent implements OnInit {
       private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
       private formBuilder: FormBuilder,
       private sortSubjectsService: SortSubjectsServiceService,
-      private excelService: ExcelServiceService
+      private excelService: ExcelServiceService,
+      private route: ActivatedRoute
     ) { 
   }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+    this.checkUserLogged();
     
     let observable = this.researcherService.getSubjectsAndInvestigationsFromIdResearcher(this.userLogged.id);
 
@@ -239,6 +241,14 @@ export class HomeResearcherComponent implements OnInit {
         this.alertMessage = "Fallo al generar el documento excel";
         this.setAlertDeleteModal();
       });
+    }
+  }
+
+  checkUserLogged(){
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if(id != this.userLogged.id){
+      this.doLogOut();
     }
   }
 }

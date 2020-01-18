@@ -112,15 +112,14 @@ export class FormComponent implements OnInit {
 
   
   constructor(private router: Router,
-    private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userService: UserServiceService,
     private formService: FormServiceService,
     private route: ActivatedRoute,
     private researcherService: ResearcherServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+    this.checkUserLogged();
 
     this.setInvisibleModal();
 
@@ -643,5 +642,13 @@ export class FormComponent implements OnInit {
     this.appointmentToSave.fototype = this.form.fototype.value;
     this.appointmentToSave.diabetesTreatment = this.form.diabetesTreatment.value;
     this.appointmentToSave.vitaminDSupplementation = this.form.vitaminDSupplementation.value;
+  }
+
+  checkUserLogged(){
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if(id != this.userLogged.id){
+      this.doLogOut();
+    }
   }
 }

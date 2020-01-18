@@ -20,13 +20,14 @@ export class AppointmentViewComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userService: UserServiceService,
-    private researcherService: ResearcherServiceService
+    private researcherService: ResearcherServiceService,
+    private route: ActivatedRoute,
   ) { 
   }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
+    this. checkUserLogged();
     this.appointment = new Appointment();
 
     let idSubject = this.activatedRoute.snapshot.params.idSubject;
@@ -64,5 +65,15 @@ export class AppointmentViewComponent implements OnInit {
   doHome() {
     this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
+
+  checkUserLogged(){
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if(id != this.userLogged.id){
+      this.doLogOut();
+    }
+  }
+
+
 
 }
