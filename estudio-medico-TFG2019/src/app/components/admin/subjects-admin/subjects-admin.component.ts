@@ -99,6 +99,10 @@ export class SubjectsAdminComponent implements OnInit {
     this.router.navigate(['/admin/subjects']);
   }
 
+  goToInvestigationList(){
+    this.router.navigate(['/admin/appointments']);
+  }
+
   doLogOut(){
     localStorage.removeItem('userLogged');
     this.router.navigate(['/login']);

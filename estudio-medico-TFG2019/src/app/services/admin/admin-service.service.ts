@@ -132,5 +132,10 @@ export class AdminServiceService {
     return this.http.post(`${this.adminUrl}/updateResearcher`,user , {headers: this.adminHeaders});
   }
 
+  public getAllCompletedAppointments(): Observable<any> {
+
+    return this.http.get(`${this.adminUrl}/completedAppointments`, {headers: this.adminHeaders});
+  }
+
   
 }

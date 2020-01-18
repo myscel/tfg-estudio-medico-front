@@ -264,6 +264,10 @@ export class ResearchersAdminComponent implements OnInit {
     this.router.navigate(['/admin/subjects']);
   }
 
+  goToInvestigationList(){
+    this.router.navigate(['/admin/appointments']);
+  }
+
   goToModifyResearcher(id: string){
     this.router.navigate(['/admin/researchers/edit/' + id]);
   }

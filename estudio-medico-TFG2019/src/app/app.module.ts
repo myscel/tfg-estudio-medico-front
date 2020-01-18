@@ -18,12 +18,14 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentViewComponent } from './components/form/appointment-view/appointment-view.component';
+import { EditAppointmentsAdminComponent } from './components/admin/edit-appointments-admin/edit-appointments-admin.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/researchers', component: ResearchersAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
+  { path: 'admin/appointments', component: EditAppointmentsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id/subjectForm/:idSubject/:appointment', component: FormComponent, canActivate: [GuardServiceService] },
@@ -41,7 +43,8 @@ const appRoutes : Routes = [
     FormComponent,
     ProfileComponent,
     EditResearcherAdminComponent,
-    AppointmentViewComponent
+    AppointmentViewComponent,
+    EditAppointmentsAdminComponent
   ],
   imports: [
     BrowserModule,
