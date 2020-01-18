@@ -1,11 +1,8 @@
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { UserServiceService } from 'src/app/services/userService.service';
 import { User } from 'src/app/models/User';
 import { Subject } from 'src/app/models/Subject';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
 import { Component, OnInit, Input, ɵConsole  } from '@angular/core';
-import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
 import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
@@ -24,25 +21,16 @@ export class HomeResearcherComponent implements OnInit {
   userLogged: User;
   newSubjectForm: FormGroup;
 
-  emptyList: boolean = false;
-
   successHidden: boolean = false;
   alertHidden: boolean = false;
   alertInvisibleHidden: boolean = true;
-  alertWarningHidden: boolean = false;
   alertFilterHidden: boolean;
-  researcherViewButtonHidden: boolean = false;
   successMessage: string = "";
   alertMessage: string = "";
-  warningMessage: string = "";
-  subjectToDelete: string;
 
 
   constructor(private router: Router,
-      private http: HttpClient,
-      private userService: UserServiceService,
       private researcherService: ResearcherServiceService,
-      private adminServiceService: AdminServiceService,
       private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
       private formBuilder: FormBuilder,
       private sortSubjectsService: SortSubjectsServiceService,
@@ -62,12 +50,6 @@ export class HomeResearcherComponent implements OnInit {
     else{
       observable.subscribe(response =>{
         this.subjects = response.list;
-        if(this.subjects.length === 0){
-          this.emptyList = true;
-        }
-        else{
-          this.emptyList = false;
-        }
       }, error =>{
         this.router.navigate(['/login']);
       });
@@ -155,28 +137,24 @@ export class HomeResearcherComponent implements OnInit {
       this.successHidden = true;
       this.alertInvisibleHidden = false;
       this.alertHidden = false;
-      this.alertWarningHidden = false;
   }
   
   setAlertDeleteModal(){
       this.successHidden = false;
       this.alertHidden = true;
       this.alertInvisibleHidden = false;
-      this.alertWarningHidden = false;
   }
   
   setInvisibleDeleteModal(){
       this.successHidden = false;
       this.alertHidden = false;
       this.alertInvisibleHidden = true;
-      this.alertWarningHidden = false;
   }
   
   setWarningDeleteModal(){
       this.successHidden = false;
       this.alertHidden = false;
       this.alertInvisibleHidden = false;
-      this.alertWarningHidden = true;
   }
 
   sortUpIdentificationNumber(){
