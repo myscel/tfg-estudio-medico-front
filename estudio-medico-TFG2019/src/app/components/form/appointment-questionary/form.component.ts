@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserServiceService } from 'src/app/services/userService.service';
 import { FormServiceService } from 'src/app/services/form/form-service.service';
 import { Appointment } from 'src/app/models/Appointment';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
-import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-form',
