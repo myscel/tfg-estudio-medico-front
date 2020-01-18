@@ -7,11 +7,11 @@ import { Appointment } from 'src/app/models/Appointment';
 import { ResearcherServiceService } from 'src/app/services/researcher/researcher-service.service';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-appointment',
+  templateUrl: './appointment.component.html',
+  styleUrls: ['./appointment.component.css']
 })
-export class FormComponent implements OnInit {
+export class AppointmentComponent implements OnInit {
 
   userLogged: User;
   subjectForm: FormGroup;
