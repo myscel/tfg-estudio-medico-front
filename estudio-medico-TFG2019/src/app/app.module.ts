@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ResearchersAdminComponent } from './components/admin/researchers-admin/researchers-admin.component';
 import { HomeResearcherComponent } from './components/researcher/home-researcher/home-researcher.component';
 import { SubjectsAdminComponent } from './components/admin/subjects-admin/subjects-admin.component';
-import { FormComponent } from './components/form/form.component';
+import { FormComponent } from './components/form/appointment-questionary/form.component';
 import { ProfileComponent } from './components/researcher/profile/profile.component';
 import { EditResearcherAdminComponent } from './components/admin/edit-researcher-admin/edit-researcher-admin.component';
 import { GuardServiceService } from './services/guard/guard-service.service';

@@ -17,6 +17,14 @@ export class AppointmentViewComponent implements OnInit {
   appointment: Appointment;
   identificationNumber: number;
 
+  investigationDay: number;
+  investigationMonth: number;
+  investigationYear: number;
+
+  birthDay: number;
+  birthMonth: number;
+  birthYear: number;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -35,17 +43,18 @@ export class AppointmentViewComponent implements OnInit {
 
     this.researcherService.getAppointmentDetails(idSubject, numberInvestigation).subscribe(responseData =>{
       this.appointment = responseData;
+
       this.appointment.birthDate = new Date(this.appointment.birthDate);
-
-
-      //TEMP
-      var month1 = this.appointment.birthDate.getUTCMonth() + 1; //months from 1-12
-      var day1 = this.appointment.birthDate.getUTCDate();
-      var year1 = this.appointment.birthDate.getUTCFullYear();
-      console.log("FECHA: " + day1 + "-" + month1 + "-" +  year1);
+      this.birthMonth = this.appointment.birthDate.getUTCMonth() + 1; //months from 1-12
+      this.birthDay = this.appointment.birthDate.getUTCDate();
+      this.birthYear = this.appointment.birthDate.getUTCFullYear();
 
 
       this.appointment.investigationDate = new Date(this.appointment.investigationDate);
+      this.investigationMonth = this.appointment.investigationDate.getUTCMonth() + 1; //months from 1-12
+      this.investigationDay = this.appointment.investigationDate.getUTCDate();
+      this.investigationYear = this.appointment.investigationDate.getUTCFullYear();
+
       this.identificationNumber = responseData.identificationNumber;
 
     }, error =>{
