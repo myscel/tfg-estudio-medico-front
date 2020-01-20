@@ -23,12 +23,9 @@ export class UserServiceService {
     this.userLogged = null;
   }
 
-  public loginResearcherAndAdmin(username: string, password: string): Observable<any> {
-    let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(username + ':' + password));
-    let user: User = new User();
-    user.username = username;
-    user.password = password;
-    return this.http.post(`${this.userUrl}/login`, user, {headers: headerLogin})
+  public loginResearcherAndAdmin(user: User): Observable<any> {
+    //let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(user.username + ':' + user.password));
+    return this.http.post(`${this.userUrl}/login`, user, {headers: this.userHeaders})
   }
 
   public logOutResearcherAndAdmin(): Observable<any> {
