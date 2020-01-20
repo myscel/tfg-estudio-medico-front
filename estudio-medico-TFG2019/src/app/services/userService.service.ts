@@ -24,12 +24,6 @@ export class UserServiceService {
   }
 
   public loginResearcherAndAdmin(user: User): Observable<any> {
-    //let headerLogin: HttpHeaders = this.userHeaders.append('Authorization', 'Basic ' +  btoa(user.username + ':' + user.password));
-    return this.http.post(`${this.userUrl}/login`, user, {headers: this.userHeaders})
+    return this.http.post(`${this.userUrl}/login`, user,  {headers: this.userHeaders})
   }
-
-  public logOutResearcherAndAdmin(): Observable<any> {
-    return this.http.post(`${this.userUrl}/logout`, {});
-  }
-
 }
