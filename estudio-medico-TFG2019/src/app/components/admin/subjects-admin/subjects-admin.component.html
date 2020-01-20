@@ -82,14 +82,16 @@
     </div>
     <div id="divListSubjects">
         <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successDeleteHidden'>
+          <div class="textModal">
             <strong>Éxito! </strong> {{successDeleteMessage}}
           </div>
+        </div>
             
-          <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertDeleteHidden'>
+        <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertDeleteHidden'>
             <strong>Error! </strong> {{alertDeleteMessage}}
-          </div>
+        </div>
 
-          <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
+        <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
             <strong>Aviso! </strong> {{alertWarningMessage}}
             <div id="divConfirmDelete">
               <div id="divConfirmDeleteLeft"> 
@@ -102,10 +104,10 @@
                
                
             </div>   
-          </div>
+        </div>
 
-          <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
-          </div>
+        <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
+        </div>
 
         <div id="titleTableSubjects"> 
           Lista Pacientes 
