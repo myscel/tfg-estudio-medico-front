@@ -195,8 +195,6 @@ export class AppointmentComponent implements OnInit {
       }
       this.setAlertodal();
     });
-
-
   }
 
   doHome(){
@@ -244,7 +242,6 @@ export class AppointmentComponent implements OnInit {
 
   validateBirthDate(birthDate: Date): boolean{
     return this.formService.validateBirthDate(birthDate);
-
   }
   //END CHECKING SOCIODEMOGRAPHIC VARIABLES
 
@@ -448,7 +445,6 @@ export class AppointmentComponent implements OnInit {
   }
 
   validateSociodemographicVariables(): boolean{
-
     if(this.form.studies.value !== undefined){
       this.studyLevelValidated = true;
     }
@@ -481,7 +477,6 @@ export class AppointmentComponent implements OnInit {
   }
 
   validateClinicalVariables(): boolean{
-  
     if(this.form.fototype.value !== undefined){
       this.fototypeValidated = true;
     }

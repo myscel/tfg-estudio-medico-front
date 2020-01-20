@@ -10,8 +10,7 @@
 </head>
 
 <header>
-
-    <div id="headerIzqa">
+    <div id="headerLeft">
         Estudio <strong>Médico</strong>
     </div>
     <div id="headerUserName">
@@ -22,26 +21,24 @@
             | {{userLogged.name}}
         </span>
     </div>
-    <div id="headerDcha">
-        <div id="buttonPerfil" class="btn btn-primary navButton" (click)="doProfile()">
+    <div id="headerRight">
+        <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
             <div>PERFIL</div>
-            <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
+            <img src="../../../../assets/icons/profile.png" height="24">
         </div>
         <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
             <div>DESCONECTAR</div>
             <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
         </div>
     </div>
-
-
 </header>
 
 <body>
 
     <div id="navigationBar">
-        <button id="buttonPacientes" class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
-        <button id="buttonCitas" class="btn btn-primary navButton">DOCUMENTACIÓN</button>
-        <button id="buttonEstadisticas" class="btn btn-primary navButton">ESTADÍSTICAS</button>
+        <button class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
+        <button class="btn btn-primary navButton">DOCUMENTACIÓN</button>
+        <button class="btn btn-primary navButton">ESTADÍSTICAS</button>
     </div>
 
     <form class="form" [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
@@ -67,8 +64,8 @@
                 <div class="form-group">
                     <div class="textInput">Estación del año</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateSeason()" class="inputRadio" type="radio"
@@ -80,7 +77,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateSeason()" class="inputRadio" type="radio"
@@ -102,8 +99,8 @@
                 <div class="form-group">
                     <div class="textInput">Sexo</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateGender()" class="inputRadio" type="radio"
@@ -115,7 +112,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateGender()" class="inputRadio" type="radio"
@@ -171,8 +168,8 @@
                 <div class="form-group">
                     <div class="textInput">Tabaco</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateTobacco()" class="inputRadio" type="radio"
@@ -184,7 +181,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateTobacco()" class="inputRadio" type="radio"
@@ -200,8 +197,8 @@
                 <div class="form-group">
                     <div class="textInput">Consumo de riesgo de alcohol</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
@@ -211,9 +208,8 @@
                                     Si
                                 </div>
                             </div>
-
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
@@ -237,8 +233,8 @@
                 <div class="form-group">
                     <div class="textInput">Uso de crema SPF</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateSPFCream()" class="inputRadio" type="radio"
@@ -250,7 +246,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateSPFCream()" class="inputRadio" type="radio"
@@ -297,8 +293,8 @@
                         tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado
                         de la DM2</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
@@ -309,7 +305,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
@@ -341,8 +337,8 @@
                 <div class="form-group">
                     <div class="textInput">Obesidad</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateObesity()" class="inputRadio" type="radio"
@@ -354,7 +350,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateObesity()" class="inputRadio" type="radio"
@@ -386,8 +382,8 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
@@ -399,7 +395,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
@@ -447,8 +443,8 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="Colesterol total > 240">Dislipemia</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
@@ -460,7 +456,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
@@ -492,8 +488,8 @@
                 <div class="form-group">
                     <div class="textInput">Insuficiencia renal crónica</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
@@ -505,7 +501,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
@@ -537,8 +533,8 @@
                     <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes
                     </div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
@@ -550,7 +546,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
@@ -566,8 +562,8 @@
                 <div class="form-group">
                     <div class="textInput">Suplementación con vitamina D</div>
                     <div class="lineSeparator"></div>
-                    <div id="yesNoGroup">
-                        <div class="divGenders">
+                    <div class="yesNoGroup">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
@@ -579,7 +575,7 @@
                             </div>
 
                         </div>
-                        <div class="divGeneros">
+                        <div>
                             <div class="form-group yesNoRadio">
                                 <div>
                                     <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
@@ -638,7 +634,5 @@
 
         <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
         </div>
-
     </form>
-
 </body>
