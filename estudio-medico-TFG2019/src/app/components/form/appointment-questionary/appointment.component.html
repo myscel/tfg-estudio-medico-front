@@ -611,7 +611,9 @@
         </div>
             
         <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
-            <strong>Error! </strong> {{alertMessage}}
+            <div class="textModal">
+                <strong>Error! </strong> {{alertMessage}}
+              </div>
         </div>
 
         <div id="modalWarningExit" class="myModal alert alert-warning" [hidden]='!alertWarningExitHidden'>
