@@ -61,6 +61,7 @@
               </form>
           </div>
         </div>
+
         <div id="divListSubjects">
             <div id="titleTableSubjects"> 
               Lista Citas Pacientes 
@@ -90,7 +91,7 @@
                       <th>
                           <div class="thSort">
                             <div class="thText">
-                                DNI INVESTIGADOR
+                                CITA REALIZADA
                             </div>
                             <div>
                                 <button class="buttonInvisible" type="button" (click)="sortUpDniResearcher()">
@@ -108,12 +109,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let subject of subjects; let i = index"
+                    <tr *ngFor="let appointment of appointments; let i = index"
                       [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
-                      <td> {{subject.identificationNumber}}</td>
-                      <td>{{subject.usernameResearcher.toUpperCase()}}</td>
-                      <td><button id="buttonDelete" type="button" (click)="deleteSubject(subject.identificationNumber)"><img id="imgCross"
-                            src="../../../../assets/icons/cross.png" height="20px"></button></td>
+                      <td> {{appointment.subjectIdentificationNumber}}</td>
+                      <td *ngIf="appointment.numberInvestigation == 1; else secondAppointment">
+                       Cita 1
+                      </td>
+                      <ng-template #secondAppointment> 
+                      <td>
+                       Cita 2
+                      </td>
+                    </ng-template>
+                    <td>
+                    <button id="buttonModify" type="button" (click)="goToModifyAppointment(appointment.investigationDetailsId)"><img id="imgEdit"
+                      src="../../../../assets/icons/edit.png" height="22px"></button>
+                    </td>
                     </tr>
                   </tbody>
                 </table>
