@@ -75,10 +75,12 @@ export class AdminServiceService {
     if(userLogged === null){
       return null;
     }
-    
+
+    let idNumber = {"identificationNumber": identificationNumber};
+
     let params = new HttpParams().set("identificationNumber", identificationNumber)
 
-    return this.http.delete(`${this.adminUrl}/deleteSubject`, {headers: this.adminHeaders, params: params});
+    return this.http.post(`${this.adminUrl}/deleteSubject`,idNumber,  {headers: this.adminHeaders});
   }
 
   public getNumberInvestigationsCompletedFromSubject(identificationNumber: string): Observable<any>{
@@ -108,7 +110,6 @@ export class AdminServiceService {
       return null;
     }
     
-    console.log(`${this.adminUrl}/${username}/subjects`);
     return this.http.get(`${this.adminUrl}/${username}/subject`, {headers: this.adminHeaders});
   }
 

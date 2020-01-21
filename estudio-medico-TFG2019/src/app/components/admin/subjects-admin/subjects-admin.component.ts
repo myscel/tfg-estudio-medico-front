@@ -145,7 +145,6 @@ export class SubjectsAdminComponent implements OnInit {
       
           else{
             observable.subscribe(response =>{
-            
               window.scroll(0,0);
       
               this.adminService.getAllSubjects().subscribe(response =>{
@@ -382,8 +381,6 @@ export class SubjectsAdminComponent implements OnInit {
     }
   }
 
-
-
   setSuccessDeleteModal(){
     this.successDeleteHidden = true;
     this.alertInvisibleHidden = false;
@@ -415,5 +412,4 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertInvisibleHidden = true;
     this.alertFilterHidden = true;
   }
-
 }
