@@ -91,10 +91,11 @@ strong{
   }
 
   #titleTableSubjects{
-    font-size: 30px;
+
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: rgb(10, 10, 10);
+    color: rgb(102, 163, 255);
     align-self: flex-start;
   }
 
@@ -276,8 +277,12 @@ strong{
   margin-bottom: 10px;
 }
 
+#textNumberInvestigationFilter{
+  margin-top:20px;
+}
+
 #inputFilterResearcher, #inputFilterSubject{
-  width:80%;
+  width:100%;
 }
 
 #divFlexFilterResearcher, #divFlexFilterSubject{
@@ -287,26 +292,40 @@ strong{
 }
 
 #divInputFilterResearcher, #divInputFilterSubject {
-  width:80%;
+  width:65%;
 }
 
 #divInputButtonResearcher,#divInputButtonSubject{
   width: 10%;
-  margin-left: 5px;
 }
 
-#modalFilter{
-  width:95%;
+.modalFilter{
+  width:82%;
   align-self: flex-start;
   margin-top: 40px;
 }
 
 #buttonUpdate{
-  margin-left: 10px;
+  margin-left: 30px;
+  font-size: 18px;
 }
 
 .textModal{
   margin-top: 15px;
+}
+
+#titleList{
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(102, 163, 255);
+}
+
+#imgUpdate{
+  margin-left: 5px;
+}
+
+.buttonFind{
+  font-size: 15px;
 }
 
 

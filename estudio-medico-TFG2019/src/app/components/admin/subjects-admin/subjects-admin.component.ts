@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserServiceService } from 'src/app/services/userService.service';
-import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
@@ -24,33 +22,32 @@ export class SubjectsAdminComponent implements OnInit {
   researcherFilterForm: FormGroup;
   subjectsFilterForm: FormGroup;
 
-  successDeleteHidden: boolean = false;
-  alertDeleteHidden: boolean = false;
+  successHidden: boolean = false;
+  alertHidden: boolean = false;
   alertWarningHidden: boolean = false;
   alertInvisibleHidden: boolean = true;
   alertFilterHidden: boolean = false;
-  successDeleteMessage: string = "";
-  alertDeleteMessage: string = "";
+  successFilterHidden: boolean = false;
+  successMessage: string = "";
+  alertMessage: string = "";
   alertWarningMessage: string = "";
   alertFilterMessage: string = "";
+  successFilterMessage: string = "";
   subjectToDelete: string;
 
   constructor(private router: Router,
-    private http: HttpClient,
-    private userService: UserServiceService,
     private adminService: AdminServiceService,
     private formBuilder: FormBuilder,
     private sortSubjectsServiceService: SortSubjectsServiceService,
     private dniInputServiceService: DniInputServiceService,
-    private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService) { }
+    private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-
     this.adminService.getAllSubjects().subscribe(response =>{
       this.subjects = response.list;
-
       if(this.subjects.length === 0){
         this.emptyList = true;
       }
@@ -58,8 +55,8 @@ export class SubjectsAdminComponent implements OnInit {
         this.emptyList = false;
       }
     }, error =>{
-      this.setAlertDeleteModal()
-      this.alertDeleteMessage = "No se pudo cargar la lista de pacientes"
+      this.setAlertModal()
+      this.alertMessage = "No se pudo cargar la lista de pacientes"
     });
 
   this.researcherFilterForm = this.formBuilder.group({
@@ -69,7 +66,6 @@ export class SubjectsAdminComponent implements OnInit {
   this.subjectsFilterForm = this.formBuilder.group({
     subjectFilterID: ['', Validators.required]
   });
-
 }
 
   get researcherFilterDataForm() { return this.researcherFilterForm.controls; }
@@ -114,78 +110,31 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   deleteSubject(identificationNumber: string){
-
     let observable = this.adminService.getNumberInvestigationsCompletedFromSubject(identificationNumber);
 
     if(observable === null){
       this.router.navigate(['/login']);
     }
-
     else{
       observable.subscribe(response =>{
-
         let investigationsCompleted: number = response.numberInvestigationsCompleted;
-
+        this.subjectToDelete = identificationNumber;
         if(investigationsCompleted !== 0){
-
           window.scroll(0,0);
-
           this.setWarningDeleteModal()
-
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";
-          this.subjectToDelete = identificationNumber;
         }
-
         else{
-          let observable = this.adminService.deleteSubjectByIdentificationNumber(identificationNumber);
-
-          if(observable === null){
-            this.router.navigate(['/login']);
-          }
-      
-          else{
-            observable.subscribe(response =>{
-              window.scroll(0,0);
-      
-              this.adminService.getAllSubjects().subscribe(response =>{
-                this.subjects = response.list;
-        
-                if(this.subjects.length === 0){
-                  this.emptyList = true;
-                }
-                else{
-                  this.emptyList = false;
-                }
-              });
-      
-              this.setSuccessDeleteModal()
-
-              this.successDeleteMessage = "Éxito al borrar al paciente: " + identificationNumber;
-
-            }, error =>{
-              this.setAlertDeleteModal()
-
-              if(error.status === 500){
-                this.alertDeleteMessage = "Fallo en el servidor";
-              }
-              else if(error.status === 400){
-                this.alertDeleteMessage = "El número de identificación debe ser un número entero";
-              }
-              else if(error.status === 404){
-                this.alertDeleteMessage = "El paciente no existe";
-              }
-            });
-          }
-        }
-
+         this.confirmDelete();
+        }  
       }, error =>{
-        this.setAlertDeleteModal()
+        this.setAlertModal()
 
         if(error.status === 500){
-          this.alertDeleteMessage = "Fallo en el servidor";
+          this.alertMessage = "Fallo en el servidor";
         }
         else if(error.status === 400){
-          this.alertDeleteMessage = "El número de identificación debe ser un número entero";
+          this.alertMessage = "El número de identificación debe ser un número entero";
         }
       });
     }
@@ -193,11 +142,9 @@ export class SubjectsAdminComponent implements OnInit {
 
   confirmDelete(){
       let observable = this.adminService.deleteSubjectByIdentificationNumber(this.subjectToDelete);
-
       if(observable === null){
         this.router.navigate(['/login']);
       }
-  
       else{
         observable.subscribe(response =>{  
           this.adminService.getAllSubjects().subscribe(response =>{
@@ -210,49 +157,47 @@ export class SubjectsAdminComponent implements OnInit {
               this.emptyList = false;
             }
           });
-          this.setSuccessDeleteModal();
+          this.setSuccessModal();
 
-          this.successDeleteMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
+          this.successMessage = "Éxito al borrar al paciente: " + this.subjectToDelete;
 
         }, error =>{
-          this.setAlertDeleteModal();
+          this.setAlertModal();
 
           if(error.status === 500){
-            this.alertDeleteMessage = "Fallo en el servidor";
+            this.alertMessage = "Fallo en el servidor";
           }
           else if(error.status === 400){
-            this.alertDeleteMessage = "El número de identificación debe ser un número entero";
+            this.alertMessage = "El número de identificación debe ser un número entero";
           }
           else if(error.status === 404){
-            this.alertDeleteMessage = "El paciente no existe";
+            this.alertMessage = "El paciente no existe";
           }
         });
       }
   }
 
   cancelDelete(){
-    this.successDeleteHidden = false;
-    this.alertDeleteHidden = false;
+    this.successHidden = false;
+    this.alertHidden = false;
     this.alertInvisibleHidden = true;
     this.alertWarningHidden = false;
     this.alertFilterHidden = false;
+    this.successFilterHidden = false;
   }
 
   filterSubjectsByIdentificationNumber(){
-
-    if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){
+    if(!this.identificationNumberSubjectService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Campo Número Identificación Vacío";
       return;
     }
-
-    if(isNaN(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
+    if(!this.identificationNumberSubjectService.validateNumberField(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Introduce un número como identificación del paciente";
       return;
     }
-
-    if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.subjectsFilterDataForm.subjectFilterID.value)){
+    if(!this.identificationNumberSubjectService.validateIdentificationNumberLenght(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "El número de identificación debe tener 8 dígitos";
       return;
@@ -263,29 +208,17 @@ export class SubjectsAdminComponent implements OnInit {
     if(observable === null){
       this.router.navigate(['/login']);
     }
-
     else{
       observable.subscribe(response =>{
-        this.cancelDelete();
-
+        this.setSuccessFilterModal();
+        this.successFilterMessage ="Paciente encontrado!"
         window.scroll(0,0);
-
         let subject: Subject = response;
-
         let subjectsAux: Subject[] = [];
         subjectsAux.push(subject);
-
         this.subjects = subjectsAux;
-
-        if(this.subjects.length === 0){
-          this.emptyList = true;
-        }
-        else{
-          this.emptyList = false;
-        }
       }, error =>{
         this.setAlertFilterModal();
-
         if(error.status === 400){
           this.alertFilterMessage = "Introduce un número";
         }
@@ -300,47 +233,29 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   filterSubjectsByResearcherDNI(){ 
-
-    
     if(!this.dniInputServiceService.validateEmptyField(this.researcherFilterDataForm.researcherFilterDNI.value)){
-      this.successDeleteHidden = false;
-      this.alertDeleteHidden = false;
-      this.alertWarningHidden = false;
-      this.alertInvisibleHidden = true;
-      this.alertFilterHidden = true;
+      this.setAlertFilterModal();
       this.alertFilterMessage = "Campo DNI Vacío";
       return;
     }
-
     if(! this.dniInputServiceService.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
-      this.setAlertFilterModal()
+      this.setAlertFilterModal();
       this.alertFilterMessage = "Introduce un DNI Válido";
       return;
     }
-    
     let observable = this.adminService.getSubjectsByResearcherDNI(this.researcherFilterDataForm.researcherFilterDNI.value);
 
     if(observable === null){
       this.router.navigate(['/login']);
     }
-
     else{
       observable.subscribe(response =>{
-        this.cancelDelete();
-
+        this.setSuccessFilterModal();
+        this.successFilterMessage ="Investigador encontrado!"
         window.scroll(0,0);
-
         this.subjects = response.list;
-
-        if(this.subjects.length === 0){
-          this.emptyList = true;
-        }
-        else{
-          this.emptyList = false;
-        }
       }, error =>{
         this.setAlertFilterModal();
-
         if(error.status === 404){
           this.alertFilterMessage = "El investigador con DNI " + this.researcherFilterDataForm.researcherFilterDNI.value + " no existe";
         }
@@ -357,15 +272,11 @@ export class SubjectsAdminComponent implements OnInit {
     if(observable === null){
       this.router.navigate(['/login']);
     }
-
     else{
       observable.subscribe(response =>{
-
-        this.setSuccessDeleteModal();
-        this.successDeleteMessage = "Lista Pacientes actualizada"
-
+        this.setSuccessModal();
+        this.successMessage = "Lista Pacientes actualizada"
         window.scroll(0,0);
-
         this.subjects = response.list;
 
         if(this.subjects.length === 0){
@@ -375,41 +286,54 @@ export class SubjectsAdminComponent implements OnInit {
           this.emptyList = false;
         }
       }, error =>{     
-        this.setAlertDeleteModal();
-        this.alertDeleteMessage = "No se pudo actualizar la lista de pacientes"
+        this.setAlertModal();
+        this.alertMessage = "No se pudo actualizar la lista de pacientes"
       });
     }
   }
 
-  setSuccessDeleteModal(){
-    this.successDeleteHidden = true;
+  setSuccessModal(){
+    this.successHidden = true;
     this.alertInvisibleHidden = false;
-    this.alertDeleteHidden = false;
+    this.alertHidden = false;
     this.alertWarningHidden = false;
     this.alertFilterHidden = false;
+    this.successFilterHidden = false;
   }
 
-  setAlertDeleteModal(){
-    this.successDeleteHidden = false;
-    this.alertDeleteHidden = true;
+  setAlertModal(){
+    this.successHidden = false;
+    this.alertHidden = true;
     this.alertWarningHidden = false;
     this.alertInvisibleHidden = false;
     this.alertFilterHidden = false;
+    this.successFilterHidden = false;
   }
 
   setWarningDeleteModal(){
-    this.successDeleteHidden = false;
-    this.alertDeleteHidden = false;
+    this.successHidden = false;
+    this.alertHidden = false;
     this.alertWarningHidden = true;
     this.alertInvisibleHidden = false;
     this.alertFilterHidden = false;
+    this.successFilterHidden = false;
+  }
+
+  setSuccessFilterModal(){
+    this.successHidden = false;
+    this.alertInvisibleHidden = true;
+    this.alertHidden = false;
+    this.alertWarningHidden = false;
+    this.alertFilterHidden = false;
+    this.successFilterHidden = true;
   }
 
   setAlertFilterModal(){
-    this.successDeleteHidden = false;
-    this.alertDeleteHidden = false;
+    this.successHidden = false;
+    this.alertHidden = false;
     this.alertWarningHidden = false;
     this.alertInvisibleHidden = true;
     this.alertFilterHidden = true;
+    this.successFilterHidden = false;
   }
 }

@@ -56,7 +56,10 @@
                     <input id="inputFilterResearcher" type="text" formControlName="researcherFilterDNI" class="form-control">
               </div>
               <div id="divInputButtonSubject">
-                    <button type="button" (click)="filterSubjectsByResearcherDNI()" class="btn btn-primary">Buscar</button>
+                    <button type="button" (click)="filterSubjectsByResearcherDNI()" class="btn btn-primary buttonFind">
+                      Buscar
+                      <img src="../../../../assets/icons/find.png" height="18">
+                    </button>
               </div>
             </div>
           </form>
@@ -71,23 +74,29 @@
                 <input id="inputFilterSubject" type="text"  formControlName="subjectFilterID" class="form-control">
               </div>
               <div id="divInputButtonResearcher">
-                <button type="button" (click)="filterSubjectsByIdentificationNumber()" class="btn btn-primary">Buscar</button>
+                <button type="button" (click)="filterSubjectsByIdentificationNumber()" class="btn btn-primary buttonFind">
+                  Buscar
+                  <img src="../../../../assets/icons/find.png" height="18">
+                </button>
               </div>
             </div>
           </form>
       </div>
-      <div id="modalFilter" class="alert alert-danger" [hidden]='!alertFilterHidden'>
+      <div class="alert alert-danger modalFilter" [hidden]='!alertFilterHidden'>
           <strong>Error! </strong> {{alertFilterMessage}}
       </div>
+      <div class="alert alert-success modalFilter" [hidden]='!successFilterHidden'>
+        <strong>Éxito! </strong> {{successFilterMessage}}
+    </div>
     </div>
     <div id="divListSubjects">
-        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successDeleteHidden'>
+        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successHidden'>
           <div class="textModal">
-            <strong>Éxito! </strong> {{successDeleteMessage}}
+            <strong>Éxito! </strong> {{successMessage}}
           </div>
         </div>
             
-        <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertDeleteHidden'>
+        <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertHidden'>
             <strong>Error! </strong> {{alertDeleteMessage}}
         </div>
 
@@ -111,7 +120,11 @@
 
         <div id="titleTableSubjects"> 
           Lista Pacientes 
-          <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">Actualizar Lista</button>
+          <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">
+            Actualizar Lista
+            <img id="imgUpdate" src="../../../../assets/icons/refresh-button.png" height="18">
+
+          </button>
         </div>
         <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
             <table class="table">
