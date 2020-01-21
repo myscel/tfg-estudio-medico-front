@@ -134,7 +134,7 @@ strong{
     transform: scale(1.05, 1.05);
 }
 
-  #imglogout{
+  #imgMargin{
     margin-top: 4px;
     margin-left: 5px;
   }
@@ -356,6 +356,13 @@ input{
 .buttonInvisible:hover{
   background: transparent;
   border: none !important;
+}
+
+.textButton{
+  text-align: center;
+  display: flex;
+  justify-content:center;
+  align-items: center;
 }
 
 

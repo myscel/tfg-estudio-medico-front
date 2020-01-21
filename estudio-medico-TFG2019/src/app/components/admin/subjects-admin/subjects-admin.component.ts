@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { Subject } from 'src/app/models/Subject';
@@ -40,8 +40,7 @@ export class SubjectsAdminComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sortSubjectsServiceService: SortSubjectsServiceService,
     private dniInputServiceService: DniInputServiceService,
-    private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
-    private route: ActivatedRoute) { }
+    private identificationNumberSubjectService: IdentificationNumberSubjectServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));

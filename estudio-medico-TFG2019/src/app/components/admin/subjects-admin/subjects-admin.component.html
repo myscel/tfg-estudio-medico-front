@@ -24,16 +24,15 @@
           | {{userLogged.name}}
         </span>
       </div>
-      <div id="buttonLogout" class="btn btn-primary navButton" (click)="doResearcherView()">
+      <div class="btn btn-primary navButton textButton" (click)="doResearcherView()">
         <div>INVESTIGAR</div>
-        <img id="imglogout" src="../../../../assets/icons/adminToResearcher.png" height="24">
+        <img class="imgMargin" src="../../../../assets/icons/adminToResearcher.png" height="24">
       </div>
-      <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
+      <div class="btn btn-primary navButton textButton" (click)="doLogOut()">
         <div>DESCONECTAR</div>
-        <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
+        <img class="imgMargin" src="../../../../assets/icons/logout.png" height="24">
     </div>
     </div>
-
   </header>
 
   
@@ -41,7 +40,6 @@
     <button (click)="goToResearcherList()" class="btn btn-primary navButton">INVESTIGADORES</button>
     <button (click)="goToSubjectList()" class="btn btn-primary navButton">PACIENTES</button>
     <button (click)="goToInvestigationList()" class="btn btn-primary navButton">CITAS</button>
-
   </div>
 
   <div id="page">
@@ -90,17 +88,17 @@
     </div>
     </div>
     <div id="divListSubjects">
-        <div id="modalSuccessDelete" class="myModal alert alert-success" [hidden]='!successHidden'>
+        <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
           <div class="textModal">
             <strong>Éxito! </strong> {{successMessage}}
           </div>
         </div>
             
-        <div id="modalErrorDelete" class="myModal alert alert-danger" [hidden]='!alertHidden'>
+        <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
             <strong>Error! </strong> {{alertDeleteMessage}}
         </div>
 
-        <div id="modalWarningDelete" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
+        <div id="modalWarning" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
             <strong>Aviso! </strong> {{alertWarningMessage}}
             <div id="divConfirmDelete">
               <div id="divConfirmDeleteLeft"> 
@@ -137,12 +135,12 @@
                       </div>
                       <div>
                           <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
-                                <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                                <img class="imgMargin" src="../../../../assets/icons/up-arrow.png" height="24">
                           </button> 
                       </div>
                       <div>
                         <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
-                            <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                            <img class="imgMargin" src="../../../../assets/icons/down-arrow.png" height="24">
                         </button>    
                       </div>
                     </div>
@@ -154,12 +152,12 @@
                         </div>
                         <div>
                             <button class="buttonInvisible" type="button" (click)="sortUpDniResearcher()">
-                                  <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
+                                  <img class="imgMargin" src="../../../../assets/icons/up-arrow.png" height="24">
                             </button> 
                         </div>
                         <div>
                           <button class="buttonInvisible" type="button" (click)="sortDownDniResearcher()">
-                              <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
+                              <img class="imgMargin" src="../../../../assets/icons/down-arrow.png" height="24">
                           </button>    
                         </div>
                       </div>

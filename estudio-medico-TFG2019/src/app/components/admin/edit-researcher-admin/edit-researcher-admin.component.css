@@ -41,7 +41,7 @@
   strong{
     margin-left: 10px;
   }
-  #buttonLogout{
+  .textButton{
     text-align: center;
     display: flex;
     justify-content:center;
@@ -157,7 +157,7 @@
     align-items: center;
   }
 
-  #imglogout{
+  .imgMargin{
     margin-top: 4px;
     margin-left: 5px;
   }
