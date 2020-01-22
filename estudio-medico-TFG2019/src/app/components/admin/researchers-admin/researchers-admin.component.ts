@@ -44,31 +44,25 @@ export class ResearchersAdminComponent implements OnInit {
 
   emptyList: boolean = false;
 
+  passIsChecked: boolean = false;
+  passRepeatedIsChecked: boolean = false;
+
   constructor(private router: Router,
-              private http: HttpClient,
-              private userService: UserServiceService,
               private adminService: AdminServiceService,
               private formBuilder: FormBuilder,
               private dniInputServiceService: DniInputServiceService,
-              private passwordInputServiceService: PasswordInputServiceService,
-              private genderInputServiceService: GenderInputServiceService,
-              private nameInputServiceService: NameInputServiceService,
-              private surnameInputServiceService: SurnameInputServiceService,
-              private sortResearchersServiceService: SortResearchersServiceService) { 
+              private passwordInputService: PasswordInputServiceService,
+              private genderInputService: GenderInputServiceService,
+              private nameInputService: NameInputServiceService,
+              private surnameInputService: SurnameInputServiceService,
+              private sortResearchersService: SortResearchersServiceService) { 
   }
 
-
   ngOnInit() {
-
     this.alertRegisterHidden = false;
-    this.inputName = "";
-    this.inputSurname= "";
-    this.inputMyDni= "";
-    this.inputPass= "";
-    this.inputPassRepeat= "";
+    this.resetInputFields();
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-
 
     this.adminService.getAllResearchers().subscribe(response =>{
       this.researchers = response.list;
@@ -106,12 +100,12 @@ export class ResearchersAdminComponent implements OnInit {
       this.successRegisterHidden = false;
       this.errorMessage = "DNI formato incorrecto";
     }
-    else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
+    else if(!this.passwordInputService.validateLengthPass(this.f.password.value)){
       this.alertRegisterHidden = true;
       this.successRegisterHidden = false;
       this.errorMessage = "Las contraseñas deben de tener al menos 5 caracteres";
     }
-    else if(!this.passwordInputServiceService.validatePassAndPassRepeat(this.f.password.value, this.f.passwordRepeat.value )){
+    else if(!this.passwordInputService.validatePassAndPassRepeat(this.f.password.value, this.f.passwordRepeat.value )){
       this.alertRegisterHidden = true;
       this.successRegisterHidden = false;
       this.errorMessage = "Las contraseñas no coinciden";
@@ -130,20 +124,18 @@ export class ResearchersAdminComponent implements OnInit {
 
   checkEmptyFields(): boolean{
     if(!this.dniInputServiceService.validateEmptyField(this.f.dni.value) || 
-        !this.passwordInputServiceService.validateEmptyField(this.f.password.value) ||   
-        !this.passwordInputServiceService.validateEmptyField(this.f.passwordRepeat.value) || 
-        !this.nameInputServiceService.validateEmptyField(this.f.name.value) ||
-        !this.surnameInputServiceService.validateEmptyField(this.f.lastname.value) ||
-        !this.genderInputServiceService.validateEmptyField(this.f.gender.value)
+        !this.passwordInputService.validateEmptyField(this.f.password.value) ||   
+        !this.passwordInputService.validateEmptyField(this.f.passwordRepeat.value) || 
+        !this.nameInputService.validateEmptyField(this.f.name.value) ||
+        !this.surnameInputService.validateEmptyField(this.f.lastname.value) ||
+        !this.genderInputService.validateEmptyField(this.f.gender.value)
     ){
       return false;
     }
-
     return true;
   }
 
   registerResearcher(user: User){
-      
     this.alertRegisterHidden = false;
 
     let observable = this.adminService.registerResearcher(user);
@@ -155,18 +147,11 @@ export class ResearchersAdminComponent implements OnInit {
       observable.subscribe(responseData =>{
         let userRegistered: User = responseData;
         this.researchers.push(userRegistered);
-
         this.emptyList = false;
         this.alertRegisterHidden = false;
         this.successRegisterHidden = true;
         this.successMessage = "Investigador registrado correctamente"
-
-        this.inputName = "";
-        this.inputSurname= "";
-        this.inputMyDni= "";
-        this.inputPass= "";
-        this.inputPassRepeat= "";
-
+        this.resetInputFields();
       }, error =>{
         this.alertRegisterHidden = true;
         this.successRegisterHidden = false;
@@ -184,21 +169,12 @@ export class ResearchersAdminComponent implements OnInit {
 
     this.alertRegisterHidden = false;
     this.successRegisterHidden = false;
-    this.inputName = "";
-    this.inputSurname= "";
-    this.inputMyDni= "";
-    this.inputPass= "";
-    this.inputPassRepeat= "";
+    this.resetInputFields();
 
     this.adminService.deleteResearcher(username).subscribe(responseData =>{
-
       this.successDeleteHidden = true;
       this.successDeleteMessage = "Investigador con DNI " + username +   " eliminado correctamente";
 
-      setTimeout( () =>{
-        this.successDeleteHidden = false;
-      }, 3000);
-      
       this.adminService.getAllResearchers().subscribe(response =>{
         this.researchers = response.list;
 
@@ -209,21 +185,14 @@ export class ResearchersAdminComponent implements OnInit {
           this.emptyList = false;
         }
       });
-      
     }, err => {
-
       if(err.status === 409){
         this.alertDeleteMessage = "El investigador con DNI: " + username + " tiene pacientes asociados.";
-
       }
       else{
         this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username + ".";
       }
       this.alertDeleteHidden = true;
-
-      setTimeout( () =>{
-        this.alertDeleteHidden = false;
-      }, 5000);
     });
   }
   
@@ -233,27 +202,27 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   sortUpDni(){
-    this.sortResearchersServiceService.sortUpDni(this.researchers);
+    this.sortResearchersService.sortUpDni(this.researchers);
   }
 
   sortDownDni(){
-    this.sortResearchersServiceService.sortDownDni(this.researchers);
+    this.sortResearchersService.sortDownDni(this.researchers);
   }
 
   sortUpName(){
-    this.sortResearchersServiceService.sortUpName(this.researchers);
+    this.sortResearchersService.sortUpName(this.researchers);
   }
 
   sortDownName(){
-    this.sortResearchersServiceService.sortDownName(this.researchers);
+    this.sortResearchersService.sortDownName(this.researchers);
   }
 
   sortUpGender(){
-    this.sortResearchersServiceService.sortUpGender(this.researchers);
+    this.sortResearchersService.sortUpGender(this.researchers);
   }
 
   sortDownGender(){
-    this.sortResearchersServiceService.sortDownGender(this.researchers);
+    this.sortResearchersService.sortDownGender(this.researchers);
   }
 
   goToResearcherList(){
@@ -275,6 +244,22 @@ export class ResearchersAdminComponent implements OnInit {
   doResearcherView(){
     let user: User = JSON.parse(localStorage.getItem("userLogged"));
     this.router.navigate(['/researcher/' + user.id]);
+  }
+
+  changeShowPass(){
+    this.passIsChecked = !this.passIsChecked;
+  }
+
+  changeRepeatedShowPass(){
+    this.passRepeatedIsChecked = !this.passRepeatedIsChecked;
+  }
+
+  resetInputFields(){
+    this.inputName = "";
+    this.inputSurname= "";
+    this.inputMyDni= "";
+    this.inputPass= "";
+    this.inputPassRepeat= "";
   }
 
 }
