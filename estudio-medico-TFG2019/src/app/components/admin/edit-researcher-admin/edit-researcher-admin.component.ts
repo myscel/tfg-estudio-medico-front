@@ -1,14 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { User } from 'src/app/models/User';
-import { UserServiceService } from 'src/app/services/userService.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordInputServiceService } from 'src/app/services/researcher/password-input-service.service';
-import { NameInputServiceService } from 'src/app/services/researcher/name-input-service.service';
-import { SurnameInputServiceService } from 'src/app/services/researcher/surname-input-service.service';
 
 @Component({
   selector: 'app-edit-researcher-admin',
@@ -30,33 +26,24 @@ export class EditResearcherAdminComponent implements OnInit {
   researcherFound: boolean = true;
 
   constructor(private router: Router,
-    private http: HttpClient,
     private adminService: AdminServiceService,
-    private userService: UserServiceService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private passwordInputServiceService: PasswordInputServiceService,
-    private nameInputServiceService: NameInputServiceService,
-    private surnameInputServiceService: SurnameInputServiceService,
-    private adminServiceService: AdminServiceService) { }
+    private passwordInputService: PasswordInputServiceService) { }
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-
     this.id = this.route.snapshot.paramMap.get('id');
-
 
     this.adminService.getResearcherByID(this.id).subscribe(response =>{
       this.researcher = response;
     }, error =>{
-      this.alertModifyHidden= true;
-      this.successModifyHidden = false;
+      this.setAlertModify();
       this.researcherFound = false;
       
       if(error.status === 404){
         this.errorMessage= "El investigador no existe";
       }
-
       else if(error.status === 500){
         this.errorMessage= "Fallo en el servidor";
       }
@@ -90,75 +77,82 @@ export class EditResearcherAdminComponent implements OnInit {
   }
 
   doResearcherView(){
-    let user: User = JSON.parse(localStorage.getItem("userLogged"));
-    this.router.navigate(['/researcher/' + user.id]);
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
   doUpdate(){
-    if(!this.passwordInputServiceService.validatePassAndPassRepeat(
-      this.updateFields.password.value,
-      this.updateFields.repeatedPassword.value
+    if(!this.passwordInputService.validatePassAndPassRepeat(
+      this.updateFields.password.value.trim(),
+      this.updateFields.repeatedPassword.value.trim()
     )
     ){
-      this.alertModifyHidden= true;
-      this.successModifyHidden = false;
+      this.setAlertModify();
       this.errorMessage= "Las contraseñas no coinciden";
       return;
     }
-
     if(this.updateFields.name.value.toUpperCase().trim() == "" &&
       this.updateFields.surname.value.toUpperCase().trim() == "" &&
-      !this.passwordInputServiceService.validateEmptyField(this.updateFields.password.value) &&
-      !this.passwordInputServiceService.validateEmptyField(this.updateFields.repeatedPassword.value)
+      !this.passwordInputService.validateEmptyField(this.updateFields.password.value.trim()) &&
+      !this.passwordInputService.validateEmptyField(this.updateFields.repeatedPassword.value.trim())
     ){
-      this.alertModifyHidden= true;
-      this.successModifyHidden = false;
+      this.setAlertModify();
       this.errorMessage= "No has modificado ningún campo";
       return;
     }
-
     if(
-      this.updateFields.name.value.toUpperCase() === this.researcher.name &&
-      this.updateFields.surname.value.toUpperCase() === this.researcher.surname &&
-      !this.passwordInputServiceService.validateEmptyField(this.updateFields.password.value) &&
-      !this.passwordInputServiceService.validateEmptyField(this.updateFields.repeatedPassword.value)
+      this.updateFields.name.value.toUpperCase().trim() === this.researcher.name.trim() &&
+      this.updateFields.surname.value.toUpperCase().trim() === this.researcher.surname.trim() &&
+      !this.passwordInputService.validateEmptyField(this.updateFields.password.value.trim()) &&
+      !this.passwordInputService.validateEmptyField(this.updateFields.repeatedPassword.value.trim())
     ){
-        this.alertModifyHidden= true;
-        this.successModifyHidden = false;
+        this.setAlertModify();
         this.errorMessage= "No has modificado ningún campo";
         return;
     }
 
     let userToUpdate: User = new User();
-
     userToUpdate.name = this.updateFields.name.value.toUpperCase().trim()
+    if(userToUpdate.name === ""){
+      userToUpdate.name = this.researcher.name;
+    }
     userToUpdate.surname = this.updateFields.surname.value.toUpperCase().trim();
+    if(userToUpdate.surname === ""){
+      userToUpdate.surname = this.researcher.surname;
+    }
     userToUpdate.password = this.updateFields.password.value.trim();
     userToUpdate.id = this.id;
 
     let observable = this.adminService.updateResearcher(userToUpdate);
-
     if(observable === null){
       this.router.navigate(['/login']);
     }
     else{
       observable.subscribe(responseData =>{
-        this.alertModifyHidden = false;
-        this.successModifyHidden = true;
+        this.setSuccessModify()
         this.researcher = responseData;
         this.successMessage = "Usuario modificado con éxito";
-
       }, error =>{
-        this.alertModifyHidden = true;
-        this.successModifyHidden = false;
-
+        this.setAlertModify();
         if(error.status === 404){
           this.errorMessage = "Usario no encontrado";
+        }
+        if(error.status === 400){
+          this.errorMessage = "Id no válido";
         }
         else{
           this.errorMessage = "Fallo en el servidor";
         } 
       });
     }
+  }
+
+  setAlertModify(){
+    this.alertModifyHidden = true;
+    this.successModifyHidden = false;
+  }
+
+  setSuccessModify(){
+    this.alertModifyHidden = false;
+    this.successModifyHidden = true;
   }
 }

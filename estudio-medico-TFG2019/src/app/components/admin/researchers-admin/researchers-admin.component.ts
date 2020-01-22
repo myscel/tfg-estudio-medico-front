@@ -233,8 +233,7 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   doResearcherView(){
-    let user: User = JSON.parse(localStorage.getItem("userLogged"));
-    this.router.navigate(['/researcher/' + user.id]);
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
   changeShowPass(){
