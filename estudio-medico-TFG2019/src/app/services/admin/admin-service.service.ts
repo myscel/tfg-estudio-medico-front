@@ -29,15 +29,15 @@ export class AdminServiceService {
   }
 
   public deleteResearcher(dni: string): Observable<any>{
-
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
     if(userLogged === null){
       return null;
     }
 
-    let params = new HttpParams().set("username", dni)
+    let dniAux = {"username": dni};
 
-    return this.http.delete(`${this.adminUrl}/deleteResearcher`, {headers: this.adminHeaders, params: params});
+
+    return this.http.post(`${this.adminUrl}/deleteResearcher`, dniAux,  {headers: this.adminHeaders});
   }
 
   public registerResearcher(user: User): Observable<any>{

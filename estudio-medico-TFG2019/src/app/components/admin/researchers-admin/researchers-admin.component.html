@@ -151,13 +151,11 @@
       <div id="modalSuccess" class="alert alert-success" [hidden]='!successRegisterHidden'>
         <strong>Éxito! </strong> {{successMessage}}
       </div>
-    </div>
 
-    <div *ngIf="isLoggedIn; else loggedOut">
-      Welcome back, friend.
+      <div id="modalInvisible"  [hidden]='!invisibleRegisterHidden'>
+      </div>
     </div>
     
-
     <div id="divRight">
       <div id="titleTableResearchers"> Lista Investigadores</div>
       <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">

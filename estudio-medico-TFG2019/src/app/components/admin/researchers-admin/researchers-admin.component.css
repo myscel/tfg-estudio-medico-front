@@ -163,8 +163,8 @@ strong{
     width: 70%;
     font-size: 30px;
     font-weight: bold;
-    margin-top: 70px;
     margin-bottom: 70px;
+    margin-top: 45px;
     color: rgb(10, 10, 10);
   }
 
@@ -322,8 +322,8 @@ input{
 }
 
 #modalAlert, #modalSuccess{
-  font-size: 18px;
-  width: 90%;
+  font-size: 16px;
+  width: 70%;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -385,6 +385,10 @@ input{
   color: rgb(128, 128, 128);
   font-size: 14px;
   font-weight: bolder;
+}
+
+#modalInvisible{
+  height:90px;
 }
 
 

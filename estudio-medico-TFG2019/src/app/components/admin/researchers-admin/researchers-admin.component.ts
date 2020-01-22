@@ -1,7 +1,5 @@
 import { Component, OnInit, Input  } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { UserServiceService } from 'src/app/services/userService.service';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { User } from 'src/app/models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +20,6 @@ export class ResearchersAdminComponent implements OnInit {
 
   @Input() researchers: User[] = [];
 
-
   userLogged: User;
   registerForm: FormGroup;
   alertRegisterHidden: boolean = false;
@@ -35,6 +32,8 @@ export class ResearchersAdminComponent implements OnInit {
 
   alertDeleteHidden: boolean = false;
   alertDeleteMessage: string;
+
+  invisibleRegisterHidden: boolean = true;
 
   inputName: string;
   inputSurname: string;
@@ -59,7 +58,7 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.alertRegisterHidden = false;
+    this.setAInvisibleModal();
     this.resetInputFields();
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
@@ -91,23 +90,19 @@ export class ResearchersAdminComponent implements OnInit {
 
   onSubmit() {
     if(!this.checkEmptyFields()){
-      this.alertRegisterHidden = true;
-      this.successRegisterHidden = false;
+      this.setAlertRegister();
       this.errorMessage = "Rellena todos los campos";
     }
     else if(!this.dniInputServiceService.validateDNI(this.f.dni.value)){
-      this.alertRegisterHidden = true;
-      this.successRegisterHidden = false;
+      this.setAlertRegister();
       this.errorMessage = "DNI formato incorrecto";
     }
     else if(!this.passwordInputService.validateLengthPass(this.f.password.value)){
-      this.alertRegisterHidden = true;
-      this.successRegisterHidden = false;
+      this.setAlertRegister();
       this.errorMessage = "Las contraseñas deben de tener al menos 5 caracteres";
     }
     else if(!this.passwordInputService.validatePassAndPassRepeat(this.f.password.value, this.f.passwordRepeat.value )){
-      this.alertRegisterHidden = true;
-      this.successRegisterHidden = false;
+      this.setAlertRegister();
       this.errorMessage = "Las contraseñas no coinciden";
     }
     else{
@@ -136,8 +131,6 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   registerResearcher(user: User){
-    this.alertRegisterHidden = false;
-
     let observable = this.adminService.registerResearcher(user);
 
     if(observable === null){
@@ -148,13 +141,11 @@ export class ResearchersAdminComponent implements OnInit {
         let userRegistered: User = responseData;
         this.researchers.push(userRegistered);
         this.emptyList = false;
-        this.alertRegisterHidden = false;
-        this.successRegisterHidden = true;
+        this.setSuccessRegister();
         this.successMessage = "Investigador registrado correctamente"
         this.resetInputFields();
       }, error =>{
-        this.alertRegisterHidden = true;
-        this.successRegisterHidden = false;
+        this.setAlertRegister();
         if(error.status === 409){
           this.errorMessage = "Ya existe un usuario con el mismo dni";
         }
@@ -166,13 +157,10 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   deleteResearcher(username: string){
-
-    this.alertRegisterHidden = false;
-    this.successRegisterHidden = false;
     this.resetInputFields();
 
     this.adminService.deleteResearcher(username).subscribe(responseData =>{
-      this.successDeleteHidden = true;
+      this.setSuccessDelete();
       this.successDeleteMessage = "Investigador con DNI " + username +   " eliminado correctamente";
 
       this.adminService.getAllResearchers().subscribe(response =>{
@@ -186,13 +174,16 @@ export class ResearchersAdminComponent implements OnInit {
         }
       });
     }, err => {
+      if(err.status === 404){
+        this.alertDeleteMessage = "Investigador con DNI: " + username + " no encontrado.";
+      }
       if(err.status === 409){
         this.alertDeleteMessage = "El investigador con DNI: " + username + " tiene pacientes asociados.";
       }
       else{
         this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username + ".";
       }
-      this.alertDeleteHidden = true;
+      this.setAlertDelete();
     });
   }
   
@@ -260,6 +251,46 @@ export class ResearchersAdminComponent implements OnInit {
     this.inputMyDni= "";
     this.inputPass= "";
     this.inputPassRepeat= "";
+  }
+
+  setSuccessDelete(){
+    this.successDeleteHidden = true;
+    this.alertDeleteHidden = false;
+    this.alertRegisterHidden = false;
+    this.successRegisterHidden = false;
+    this.invisibleRegisterHidden = true;
+  }
+
+  setAlertDelete(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = true;
+    this.alertRegisterHidden = false;
+    this.successRegisterHidden = false;
+    this.invisibleRegisterHidden = true;
+  }
+
+  setSuccessRegister(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertRegisterHidden = false;
+    this.successRegisterHidden = true;
+    this.invisibleRegisterHidden = false;
+  }
+
+  setAlertRegister(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertRegisterHidden = true;
+    this.successRegisterHidden = false;
+    this.invisibleRegisterHidden = false;
+  }
+
+  setAInvisibleModal(){
+    this.successDeleteHidden = false;
+    this.alertDeleteHidden = false;
+    this.alertRegisterHidden = false;
+    this.successRegisterHidden = false;
+    this.invisibleRegisterHidden = true;
   }
 
 }
