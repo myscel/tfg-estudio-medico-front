@@ -17,7 +17,7 @@ header{
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
   }
 
-#headerLeft{
+  #headerLeft{
     font-size: 40px;
     color: rgb(102, 163, 255);
     margin-left: 40px;

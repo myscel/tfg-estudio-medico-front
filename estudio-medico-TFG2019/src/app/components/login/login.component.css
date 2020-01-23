@@ -103,15 +103,12 @@ button {
 
   #headerLeft{
     font-size: 40px;
-      color: rgb(102, 163, 255);
-      margin-left: 40px;
-  }
+    color: rgb(102, 163, 255);
+    margin-left: 40px;
+}
 
   strong{
     margin-left: 10px;
   }
 
-  #logo{
-    margin-bottom: 18px;
-  }
 

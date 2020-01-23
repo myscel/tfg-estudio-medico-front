@@ -4,3 +4,7 @@ html, body {
     height: auto;
     margin: 0;
   }
+
+  #logo{
+    margin-bottom: 18px;
+  }

@@ -17,7 +17,7 @@ header{
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
   }
 
-  #headerIzqa{
+  #headerLeft{
     font-size: 40px;
     color: rgb(102, 163, 255);
     margin-left: 40px;
@@ -28,7 +28,7 @@ header{
     font-size: 20px;
 }
 
-#headerDcha{
+#headerRight{
     margin-right: 30px;
     font-size: 40px;
     font-weight: bolder;
@@ -45,16 +45,17 @@ header{
     align-items: center;
 }
 
-#buttonPerfil{
+#buttonProfile{
     text-align: center;
     display: flex;
     justify-content:center;
     align-items: center;
 }
 
-#imglogout{
+.imgMargin{
+    margin-top: 4px;
     margin-left: 5px;
-}
+  }
 
 .navButton:hover{
     transform: scale(1.05, 1.05);
