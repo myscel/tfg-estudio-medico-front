@@ -19,6 +19,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentViewComponent } from './components/form/appointment-view/appointment-view.component';
 import { EditAppointmentsAdminComponent } from './components/admin/edit-appointments-admin/edit-appointments-admin.component';
+import { ModifyAppointmentComponent } from './components/admin/edit-appointments-admin/modify-appointment/modify-appointment.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
@@ -27,6 +28,7 @@ const appRoutes : Routes = [
   { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/appointments', component: EditAppointmentsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
+  { path: 'admin/modifyAppointment/:subjectIdentificationNumber/:investigationsDetailsId', component: ModifyAppointmentComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id/subjectForm/:idSubject/:appointment', component: AppointmentComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id/formView/:idSubject/:appointment', component: AppointmentViewComponent, canActivate: [GuardServiceService] },
@@ -44,7 +46,8 @@ const appRoutes : Routes = [
     ProfileComponent,
     EditResearcherAdminComponent,
     AppointmentViewComponent,
-    EditAppointmentsAdminComponent
+    EditAppointmentsAdminComponent,
+    ModifyAppointmentComponent
   ],
   imports: [
     BrowserModule,

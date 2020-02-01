@@ -71,6 +71,10 @@ export class EditAppointmentsAdminComponent implements OnInit {
     this.router.navigate(['/admin/appointments']);
   }
 
+  goToModifyAppointment(investigationsDetailsId: string, subjectIdentificationNumber: string){
+    this.router.navigate(['/admin/modifyAppointment/' + subjectIdentificationNumber + '/' + investigationsDetailsId ]);
+  }
+
   filterSubjectsByIdentificationNumber(){
 
     if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){

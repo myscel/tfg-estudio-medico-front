@@ -1,0 +1,175 @@
+* {
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+}
+
+header{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 50px;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
+  }
+
+  #headerLeft{
+    font-size: 40px;
+    color: rgb(102, 163, 255);
+    margin-left: 40px;
+}
+
+#headerUserName{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#headerRight{
+    margin-right: 30px;
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgb(102, 102, 102);
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#buttonLogout{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+#buttonProfile{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+#imglogout{
+    margin-left: 5px;
+}
+
+.navButton:hover{
+    transform: scale(1.05, 1.05);
+}
+
+#navigationBar{
+    width: 100%;
+    font-size: 40px;
+    -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    box-shadow: 1px 2px 3px rgb(65, 115, 155);
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 800px 5px 80px;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
+}
+
+.navButton{
+    min-width: 150px;
+    margin-left: 20px;
+    text-shadow: 1px 1px 2px #000000;
+    font-weight: bold;
+}
+
+#spanGrey{
+    color: rgb(102, 102, 102);
+}
+
+.appointmentBox{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    border-radius: 8px;
+    padding-bottom: 1%;
+    padding-top: 1px;
+    background-color: rgb(203, 229, 253);
+}
+
+.formSection{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 3%;
+    border-radius: 8px;
+    background-color: rgb(222, 239, 252);
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+}
+
+.sectionTitle{
+    padding-top: 3%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.sectionContent{
+    padding-top: 2%;
+    padding-right: 1%;
+}
+
+.textInput{
+    color: rgb(106, 106, 106);
+    font-weight: bolder;
+    font-size: 20px;
+    text-align: start;
+}
+
+.lineSeparator{
+    height: 2px;
+    width: 100%;
+    margin-bottom: 4px;
+    background-color: rgb(151, 205, 255);
+}
+
+.variable{
+    min-width: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgb(203, 229, 253);
+    margin-bottom: 3%;
+}
+
+.variableData{
+    margin-left: 1%;
+    color: rgb(37, 70, 255);
+}
+
+.noClass{
+    font-family: 'Roboto Slab', serif;
+}
+
+#buttonReturn{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    width: 140px;
+    font-size: 20px;
+}
+
+#imgReturn{
+    margin-left: 4px;
+}
+
+.form-group{
+    float: right;
+    width: 30%;
+}
+
+.yesNoRadio{
+    width: 50%;
+    display: flex;
+}
+
+.inputRadio{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
