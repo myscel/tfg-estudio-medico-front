@@ -2,6 +2,7 @@ import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../../models/User';
 import {Observable} from 'rxjs';
+import { Appointment } from 'src/app/models/Appointment';
 
 
 @Injectable({
@@ -141,6 +142,11 @@ export class AdminServiceService {
   public getAppointmentDetails(investigationsDetailsId: string): Observable<any> { 
 
     return this.http.get(`${this.adminUrl}/getAppointmentDetails/${investigationsDetailsId}`, {headers: this.adminHeaders});
+  }
+
+  public updateAppointmentDetails(appointment: Appointment): Observable<any>{
+
+    return this.http.post(`${this.adminUrl}/updateInvestigationDetails`, appointment, {headers: this.adminHeaders});
   }
   
 }

@@ -57,113 +57,116 @@
                 </div>
                 <div class="variable">
                     <div class="textInput"> Fecha de realización: <span
-                            class="variableData">{{investigationDay}}-{{investigationMonth}}-{{investigationYear}}</span></div>
-                    <div class="lineSeparator"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="formSection">
-            <div class="sectionTitle">Variables principales</div>
-            <div class="sectionContent">
-                <div class="variable">
-                    <div class="textInput"> Vitamina D: <span class="variableData">{{appointment.vitaminD}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkVitaminD($event.target.value)" tooltip="(0-500) ng/ml"
-                                [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
-                                class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput"> HbA1c: <span class="variableData">{{appointment.hba1c}}</span>
-                        <div class="form-group">
-                            <input tooltip="(1-40) %" (focusout)="checkHbA1c($event.target.value)"
-                                [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"
-                                class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Estación del año: <span class="variableData">{{appointment.season}}</span>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateSeason()" class="inputRadio" type="radio"
-                                                formControlName="season" value="verano" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Verano
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateSeason()" class="inputRadio" type="radio"
-                                                formControlName="season" value="invierno" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Invierno
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            class="variableData">{{investigationDay}}-{{investigationMonth}}-{{investigationYear}}</span>
                     </div>
                     <div class="lineSeparator"></div>
                 </div>
             </div>
         </div>
 
-        <div class="formSection">
-            <div class="sectionTitle">Variables sociodemográficas</div>
-            <div class="sectionContent">
-                <div class="variable">
-                    <div class="textInput">Sexo: <span class="variableData">{{appointment.gender}}</span>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateGender()" class="inputRadio" type="radio"
-                                                formControlName="gender" value="hombre" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Hombre
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateGender()" class="inputRadio" type="radio"
-                                                formControlName="gender" value="mujer" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Mujer
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Nivel de estudios: <span
-                            class="variableData">{{appointment.studyLevel}}</span>
+        <form class="form" [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+            <div class="formSection">
+                <div class="sectionTitle">Variables principales</div>
+                <div class="sectionContent">
+                    <div class="variable">
+                        <div class="textInput"> Vitamina D: <span class="variableData">{{appointment.vitaminD}}</span>
                             <div class="form-group">
-                                <select id="inputStudies" name="inputStudies" [(ngModel)]="inputStudies" class="form-control"
-                                    formControlName="studies">
+                                <input (focusout)="checkVitaminD($event.target.value)" tooltip="(0-500) ng/ml"
+                                    [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
+                                    class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput"> HbA1c: <span class="variableData">{{appointment.hba1c}}</span>
+                            <div class="form-group">
+                                <input tooltip="(1-40) %" (focusout)="checkHbA1c($event.target.value)"
+                                    [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"
+                                    class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Estación del año: <span
+                                class="variableData">{{appointment.season}}</span>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateSeason()" class="inputRadio" type="radio"
+                                                    formControlName="season" value="verano" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Verano
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateSeason()" class="inputRadio" type="radio"
+                                                    formControlName="season" value="invierno" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Invierno
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formSection">
+                <div class="sectionTitle">Variables sociodemográficas</div>
+                <div class="sectionContent">
+                    <div class="variable">
+                        <div class="textInput">Sexo: <span class="variableData">{{appointment.gender}}</span>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateGender()" class="inputRadio" type="radio"
+                                                    formControlName="gender" value="hombre" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Hombre
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateGender()" class="inputRadio" type="radio"
+                                                    formControlName="gender" value="mujer" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Mujer
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Nivel de estudios: <span
+                                class="variableData">{{appointment.studyLevel}}</span>
+                            <div class="form-group">
+                                <select id="inputStudies" name="inputStudies" [(ngModel)]="inputStudies"
+                                    class="form-control" formControlName="studies">
                                     <option value="Sin estudios">Sin estudios</option>
                                     <option value="Primaria">Primaria</option>
                                     <option value="ESO">ESO</option>
@@ -172,161 +175,166 @@
                                 </select>
                             </div>
                         </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Fecha de nacimiento: <span
-                            class="variableData">{{birthDay}}-{{birthMonth}}-{{birthYear}}</span>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Fecha de nacimiento: <span
+                                class="variableData">{{birthDay}}-{{birthMonth}}-{{birthYear}}</span>
                             <div class="form-group">
-                                <input class="myInput" tooltip="> 18 Años" [(ngModel)]="inputBornDate" type="text" formControlName="bornDate"
-                                    bsDatepicker class="form-control" required>
+                                <input class="myInput" tooltip="> 18 Años" [(ngModel)]="inputBornDate" type="text"
+                                    formControlName="bornDate" bsDatepicker class="form-control" required>
                             </div>
                         </div>
-                    <div class="lineSeparator"></div>
+                        <div class="lineSeparator"></div>
 
-                </div>
-                <div class="variable">
-                    <div class="textInput">Nivel socioeconómico
-                        :<span class="variableData">{{appointment.socioeconomicLevel}}</span>
-                        <div class="form-group">
-                            <select id="inputEconomicLevel" tooltip="Ingreso unidad familiar en euros mensuales" name="inputEconomicLevel" [(ngModel)]="inputEconomicLevel"
-                                class="form-control" formControlName="economicLevel">
-                                <option value="0-1000">0-1000</option>
-                                <option value="1001-2000">1001-2000</option>
-                                <option value="2001-3000">2001-3000</option>
-                                <option value=">3000">>3000</option>
-                            </select>
-                        </div>
                     </div>
-                    <div class="lineSeparator"></div>
+                    <div class="variable">
+                        <div class="textInput">Nivel socioeconómico
+                            :<span class="variableData">{{appointment.socioeconomicLevel}}</span>
+                            <div class="form-group">
+                                <select id="inputEconomicLevel" tooltip="Ingreso unidad familiar en euros mensuales"
+                                    name="inputEconomicLevel" [(ngModel)]="inputEconomicLevel" class="form-control"
+                                    formControlName="economicLevel">
+                                    <option value="0-1000">0-1000</option>
+                                    <option value="1001-2000">1001-2000</option>
+                                    <option value="2001-3000">2001-3000</option>
+                                    <option value=">3000">>3000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="formSection">
-            <div class="sectionTitle">Hábitos de vida</div>
-            <div class="sectionContent">
-                <div class="variable">
-                    <div class="textInput">Tabaco: <span *ngIf="appointment.tobacco; else notTobacco" class="variableData">SÍ</span>
-                        <ng-template #notTobacco>
-                            <span class="variableData">NO</span>
-                        </ng-template>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateTobacco()" class="inputRadio" type="radio"
-                                                formControlName="smoking" value="true" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Si
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateTobacco()" class="inputRadio" type="radio"
-                                                formControlName="smoking" value="false" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            No
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Consumo de riesgo de alcohol: <span *ngIf="appointment.riskAlcohol; else notRiskAlcohol"
-                        class="variableData">SÍ</span>
-                    <ng-template #notRiskAlcohol>
-                        <span class="variableData">NO</span>
-                    </ng-template>
-                    <div class="form-group">
-                        <div class="yesNoGroup">
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
-                                            formControlName="alcohol" value="true" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
-                                            formControlName="alcohol" value="false" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(0-1200) min">Tiempo de exposición solar al día: <span class="variableData">{{appointment.solarExposure}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkSunExposure($event.target.value)"
-                                [ngClass]="{'inputRight': sunExposureValidated && !sunExposureFirstTime, 'inputWrong': !sunExposureValidated && !sunExposureFirstTime}"
-                                class="myInput" [(ngModel)]="inputSolarExposition" type="text" formControlName="solarExposition"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div> 
-                </div>
-                <div class="variable">
-                    <div class="textInput">Uso de crema SPF: <span *ngIf="appointment.spfCream; else notSpfCream" class="variableData">SÍ</span>
-                        <ng-template #notSpfCream>
-                            <span class="variableData">NO</span>
-                        </ng-template>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateSPFCream()" class="inputRadio" type="radio"
-                                                formControlName="creamSPF" value="true" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Si
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateSPFCream()" class="inputRadio" type="radio"
-                                                formControlName="creamSPF" value="false" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            No
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Puntuación SPF: <span class="variableData">{{appointment.spfScore}}</span>
+            <div class="formSection">
+                <div class="sectionTitle">Hábitos de vida</div>
+                <div class="sectionContent">
+                    <div class="variable">
+                        <div class="textInput">Tabaco: <span *ngIf="appointment.tobacco; else notTobacco"
+                                class="variableData">SÍ</span>
+                            <ng-template #notTobacco>
+                                <span class="variableData">NO</span>
+                            </ng-template>
                             <div class="form-group">
-                                <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF" class="form-control"
-                                    formControlName="gradeSPF">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateTobacco()" class="inputRadio" type="radio"
+                                                    formControlName="smoking" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateTobacco()" class="inputRadio" type="radio"
+                                                    formControlName="smoking" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Consumo de riesgo de alcohol: <span
+                                *ngIf="appointment.riskAlcohol; else notRiskAlcohol" class="variableData">SÍ</span>
+                            <ng-template #notRiskAlcohol>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
+                                                    formControlName="alcohol" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateAlcoholRisk()" class="inputRadio" type="radio"
+                                                    formControlName="alcohol" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Tiempo de exposición solar al día: <span
+                                class="variableData">{{appointment.solarExposure}}</span>
+                            <div class="form-group">
+                                <input tooltip="(0-1200) min" (focusout)="checkSunExposure($event.target.value)"
+                                    [ngClass]="{'inputRight': sunExposureValidated && !sunExposureFirstTime, 'inputWrong': !sunExposureValidated && !sunExposureFirstTime}"
+                                    class="myInput" [(ngModel)]="inputSolarExposition" type="text"
+                                    formControlName="solarExposition" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Uso de crema SPF: <span *ngIf="appointment.spfCream; else notSpfCream"
+                                class="variableData">SÍ</span>
+                            <ng-template #notSpfCream>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateSPFCream()" class="inputRadio" type="radio"
+                                                    formControlName="creamSPF" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateSPFCream()" class="inputRadio" type="radio"
+                                                    formControlName="creamSPF" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Puntuación SPF: <span
+                                class="variableData">{{appointment.spfScore}}</span>
+                            <div class="form-group">
+                                <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF"
+                                    class="form-control" formControlName="gradeSPF">
                                     <option value="10">10</option>
                                     <option value="15">15</option>
                                     <option value="20">20</option>
@@ -335,319 +343,339 @@
                                     <option value="50">50</option>
                                 </select>
                             </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(0-700) horas/semana">Ejercicio físico: <span class="variableData">{{appointment.exercise}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkExercise($event.target.value)"
-                                [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}"
-                                class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercise"
-                                class="form-control" required>
                         </div>
+                        <div class="lineSeparator"></div>
                     </div>
-                    <div class="lineSeparator"></div>
+                    <div class="variable">
+                        <div class="textInput">Ejercicio físico: <span
+                                class="variableData">{{appointment.exercise}}</span>
+                            <div class="form-group">
+                                <input tooltip="(0-700) horas/semana" (focusout)="checkExercise($event.target.value)"
+                                    [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}"
+                                    class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercise"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="formSection">
-            <div class="sectionTitle">Variables clínicas</div>
-            <div class="sectionContent">
-                <div class="variable">
-                    <div class="textInput"
-                        tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos">Control adecuado
-                        de la DM2:  <span *ngIf="appointment.dm2; else notDm2" class="variableData">SÍ</span>
-                        <ng-template #notDm2>
-                            <span class="variableData">NO</span>
-                        </ng-template>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
-                                                value="true" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Sí
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateDM2()" class="inputDM2" type="radio" formControlName="DM2"
-                                                value="false" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            No
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(0-700) mg/dl">Glucemia: <span class="variableData">{{appointment.glucose}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkGlucose($event.target.value)"
-                                [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
-                                class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(10-70) kg/m2">IMC: <span class="variableData">{{appointment.imc}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkImc($event.target.value)"
-                                [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
-                                class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Obesidad: <span *ngIf="appointment.obesity; else notObesity" class="variableData">SÍ</span>
-                        <ng-template #notObesity>
-                            <span class="variableData">NO</span>
-                        </ng-template>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateObesity()" class="inputRadio" type="radio"
-                                                formControlName="obesity" value="true" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Si
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateObesity()" class="inputRadio" type="radio"
-                                                formControlName="obesity" value="false" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            No
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(20-300) mmHg">TAS: <span class="variableData">{{appointment.tas}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkTas($event.target.value)"
-                                [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
-                                class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(20-200) mmHg">TAD: <span class="variableData">{{appointment.tad}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkTad($event.target.value)"
-                                [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
-                                class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="TA >= 140/90">Hipertensión arterial: <span *ngIf="appointment.arterialHypertension; else notArterialHypertension"
-                        class="variableData">SÍ</span>
-                    <ng-template #notArterialHypertension>
-                        <span class="variableData">NO</span>
-                    </ng-template>
-                    <div class="form-group">
-                        <div class="yesNoGroup">
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
-                                            formControlName="arterialHypertension" value="true" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateArterialHypertension()" class="inputRadio" type="radio"
-                                            formControlName="arterialHypertension" value="false" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(50-900) mg/dl">Colesterol total: <span class="variableData">{{appointment.cholesterol}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkCholesterol($event.target.value)"
-                                [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
-                                class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(1-400) mg/dl">LDL -col: <span class="variableData">{{appointment.ldl}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkLdl($event.target.value)"
-                                [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
-                                class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(1-400) mg/dl">HDL -col: <span class="variableData">{{appointment.hdl}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkHdl($event.target.value)"
-                                [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
-                                class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(1-10000) mg/dl">TG: <span class="variableData">{{appointment.tg}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkTg($event.target.value)"
-                                [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
-                                class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="Colesterol total > 240">Dislipemia: <span *ngIf="appointment.dyslipemy; else notDislipemy" class="variableData">SÍ</span>
-                        <ng-template #notDislipemy>
-                            <span class="variableData">NO</span>
-                        </ng-template>
-                        <div class="form-group">
-                            <div class="yesNoGroup">
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
-                                                formControlName="dyslipidemia" value="true" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            Si
-                                        </div>
-                                    </div>
-        
-                                </div>
-                                <div>
-                                    <div class="form-group yesNoRadio">
-                                        <div>
-                                            <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
-                                                formControlName="dyslipidemia" value="false" required>
-                                        </div>
-                                        <div class="textYesNo">
-                                            No
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(0-30) mg/dl">Creatinina: <span class="variableData">{{appointment.creatinine}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkCreatinine($event.target.value)"
-                                [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
-                                class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="(0-200) MDRD4">Estimación del filtrado glomerular: <span class="variableData">{{appointment.glomerular}}</span>
-                        <div class="form-group">
-                            <input (focusout)="checkGlomerular($event.target.value)"
-                                [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}"
-                                class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
-                                class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="lineSeparator"></div>  
-                </div>
-                <div class="variable">
-                    <div class="textInput">Insuficiencia renal crónica: <span *ngIf="appointment.kidneyInsufficiency; else notKidneyInsufficiency"
-                        class="variableData">SÍ</span>
-                    <ng-template #notKidneyInsufficiency>
-                        <span class="variableData">NO</span>
-                    </ng-template>
-                    <div class="form-group">
-                        <div class="yesNoGroup">
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
-                                            formControlName="chronicRenalFailure" value="true" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div>
-                                <div class="form-group yesNoRadio">
-                                    <div>
-                                        <input (click)="validateKidneyInsufficiency()" class="inputRadio" type="radio"
-                                            formControlName="chronicRenalFailure" value="false" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Fototipo: <span class="variableData">{{appointment.fototype}}</span>
+            <div class="formSection">
+                <div class="sectionTitle">Variables clínicas</div>
+                <div class="sectionContent">
+                    <div class="variable">
+                        <div class="textInput"
+                            >Control
+                            adecuado
+                            de la DM2: <span *ngIf="appointment.dm2; else notDm2" class="variableData">SÍ</span>
+                            <ng-template #notDm2>
+                                <span class="variableData">NO</span>
+                            </ng-template>
                             <div class="form-group">
-                                <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype" class="form-control"
-                                    formControlName="fototype">
+                                <div tooltip="HbA1c<7 en pacientes sin complicaciones y <8,5 en pacientes ancianos" class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDM2()" class="inputRadio" type="radio"
+                                                    formControlName="DM2" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Sí
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDM2()" class="inputRadio" type="radio"
+                                                    formControlName="DM2" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Glucemia: <span
+                                class="variableData">{{appointment.glucose}}</span>
+                            <div class="form-group">
+                                <input tooltip="(0-700) mg/dl" (focusout)="checkGlucose($event.target.value)"
+                                    [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
+                                    class="myInput" [(ngModel)]="inputBloodGlucose" type="text"
+                                    formControlName="bloodGlucose" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">IMC: <span
+                                class="variableData">{{appointment.imc}}</span>
+                            <div class="form-group">
+                                <input tooltip="(10-70) kg/m2" (focusout)="checkImc($event.target.value)"
+                                    [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
+                                    class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Obesidad: <span *ngIf="appointment.obesity; else notObesity"
+                                class="variableData">SÍ</span>
+                            <ng-template #notObesity>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateObesity()" class="inputRadio" type="radio"
+                                                    formControlName="obesity" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateObesity()" class="inputRadio" type="radio"
+                                                    formControlName="obesity" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">TAS: <span
+                                class="variableData">{{appointment.tas}}</span>
+                            <div class="form-group">
+                                <input tooltip="(20-300) mmHg" (focusout)="checkTas($event.target.value)"
+                                    [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
+                                    class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">TAD: <span
+                                class="variableData">{{appointment.tad}}</span>
+                            <div class="form-group">
+                                <input tooltip="(20-200) mmHg" (focusout)="checkTad($event.target.value)"
+                                    [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
+                                    class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Hipertensión arterial: <span
+                                *ngIf="appointment.arterialHypertension; else notArterialHypertension"
+                                class="variableData">SÍ</span>
+                            <ng-template #notArterialHypertension>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup" tooltip="TA >= 140/90">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateArterialHypertension()" class="inputRadio"
+                                                    type="radio" formControlName="arterialHypertension" value="true"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateArterialHypertension()" class="inputRadio"
+                                                    type="radio" formControlName="arterialHypertension" value="false"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Colesterol total: <span
+                                class="variableData">{{appointment.cholesterol}}</span>
+                            <div class="form-group">
+                                <input tooltip="(50-900) mg/dl" (focusout)="checkCholesterol($event.target.value)"
+                                    [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
+                                    class="myInput" [(ngModel)]="inputCholesterol" type="text"
+                                    formControlName="cholesterol" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">LDL -col: <span
+                                class="variableData">{{appointment.ldl}}</span>
+                            <div class="form-group">
+                                <input tooltip="(1-400) mg/dl" (focusout)="checkLdl($event.target.value)"
+                                    [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
+                                    class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">HDL -col: <span
+                                class="variableData">{{appointment.hdl}}</span>
+                            <div class="form-group">
+                                <input tooltip="(1-400) mg/dl" (focusout)="checkHdl($event.target.value)"
+                                    [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
+                                    class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">TG: <span
+                                class="variableData">{{appointment.tg}}</span>
+                            <div class="form-group">
+                                <input tooltip="(1-10000) mg/dl" (focusout)="checkTg($event.target.value)"
+                                    [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
+                                    class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Dislipemia: <span
+                                *ngIf="appointment.dyslipemy; else notDislipemy" class="variableData">SÍ</span>
+                            <ng-template #notDislipemy>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup" tooltip="Colesterol total > 240">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
+                                                    formControlName="dyslipidemia" value="true" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDyslipidemia()" class="inputRadio" type="radio"
+                                                    formControlName="dyslipidemia" value="false" required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Creatinina: <span
+                                class="variableData">{{appointment.creatinine}}</span>
+                            <div class="form-group">
+                                <input tooltip="(0-30) mg/dl" (focusout)="checkCreatinine($event.target.value)"
+                                    [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
+                                    class="myInput" [(ngModel)]="inputCreatinine" type="text"
+                                    formControlName="creatinine" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Estimación del filtrado glomerular: <span
+                                class="variableData">{{appointment.glomerular}}</span>
+                            <div class="form-group">
+                                <input tooltip="(0-200) MDRD4" (focusout)="checkGlomerular($event.target.value)"
+                                    [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}"
+                                    class="myInput" [(ngModel)]="inputGlomerular" type="text"
+                                    formControlName="glomerular" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Insuficiencia renal crónica: <span
+                                *ngIf="appointment.kidneyInsufficiency; else notKidneyInsufficiency"
+                                class="variableData">SÍ</span>
+                            <ng-template #notKidneyInsufficiency>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateKidneyInsufficiency()" class="inputRadio"
+                                                    type="radio" formControlName="chronicRenalFailure" value="true"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateKidneyInsufficiency()" class="inputRadio"
+                                                    type="radio" formControlName="chronicRenalFailure" value="false"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lineSeparator"></div>
+                    </div>
+                    <div class="variable">
+                        <div class="textInput">Fototipo: <span class="variableData">{{appointment.fototype}}</span>
+                            <div class="form-group">
+                                <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype"
+                                    class="form-control" formControlName="fototype">
                                     <option value="I">I</option>
                                     <option value="II">II</option>
                                     <option value="III">III</option>
@@ -656,94 +684,101 @@
                                     <option value="VI">VI</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="lineSeparator"></div>
                     </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput" tooltip="Intensificación farmacológica">Tratamiento para la diabetes: <span *ngIf="appointment.diabetesTreatment; else notDiabetesTreatment"
-                        class="variableData">SÍ</span>
-                    <ng-template #notDiabetesTreatment>
-                        <span class="variableData">NO</span>
-                    </ng-template>
-                    <div class="form-group">
-                        <div class="yesNoGroup">
-                            <div>
-                                <div class="form-group yesNoRadio">
+                    <div class="variable">
+                        <div class="textInput">Tratamiento para la diabetes:
+                            <span *ngIf="appointment.diabetesTreatment; else notDiabetesTreatment"
+                                class="variableData">SÍ</span>
+                            <ng-template #notDiabetesTreatment>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup" tooltip="Intensificación farmacológica">
                                     <div>
-                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
-                                            formControlName="diabetesTreatment" value="true" required>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDiabetesTreatment()" class="inputRadio"
+                                                    type="radio" formControlName="diabetesTreatment" value="true"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div>
-                                <div class="form-group yesNoRadio">
                                     <div>
-                                        <input (click)="validateDiabetesTreatment()" class="inputRadio" type="radio"
-                                            formControlName="diabetesTreatment" value="false" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validateDiabetesTreatment()" class="inputRadio"
+                                                    type="radio" formControlName="diabetesTreatment" value="false"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="lineSeparator"></div>
                     </div>
-                    </div>
-                    <div class="lineSeparator"></div>
-                </div>
-                <div class="variable">
-                    <div class="textInput">Suplementación con vitamina D: <span *ngIf="appointment.vitaminDSupplementation; else notVitaminDSupplementation"
-                        class="variableData">SÍ</span>
-                    <ng-template #notVitaminDSupplementation>
-                        <span class="variableData">NO</span>
-                    </ng-template>
-                    <div class="form-group">
-                        <div class="yesNoGroup">
-                            <div>
-                                <div class="form-group yesNoRadio">
+                    <div class="variable">
+                        <div class="textInput">Suplementación con vitamina D: <span
+                                *ngIf="appointment.vitaminDSupplementation; else notVitaminDSupplementation"
+                                class="variableData">SÍ</span>
+                            <ng-template #notVitaminDSupplementation>
+                                <span class="variableData">NO</span>
+                            </ng-template>
+                            <div class="form-group">
+                                <div class="yesNoGroup">
                                     <div>
-                                        <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
-                                            formControlName="vitaminDSupplementation" value="true" required>
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validatevitaminDSupplementation()" class="inputRadio"
+                                                    type="radio" formControlName="vitaminDSupplementation" value="true"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                Si
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="textYesNo">
-                                        Si
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div>
-                                <div class="form-group yesNoRadio">
                                     <div>
-                                        <input (click)="validatevitaminDSupplementation()" class="inputRadio" type="radio"
-                                            formControlName="vitaminDSupplementation" value="false" required>
-                                    </div>
-                                    <div class="textYesNo">
-                                        No
+                                        <div class="form-group yesNoRadio">
+                                            <div>
+                                                <input (click)="validatevitaminDSupplementation()" class="inputRadio"
+                                                    type="radio" formControlName="vitaminDSupplementation" value="false"
+                                                    required>
+                                            </div>
+                                            <div class="textYesNo">
+                                                No
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="lineSeparator"></div>
                     </div>
-                </div>
-                    <div class="lineSeparator"></div> 
                 </div>
             </div>
-        </div>
 
-        <div>
-            <button type="button" id="buttonReturn" class="btn btn-primary" (click)="doHome()">
-                Volver
-                <img id="imgReturn" src="../../../../assets/icons/previous.png" height="30">
-
-            </button>
-
-        </div>
-
+            <div>
+                <button type="button" id="buttonReturn" class="btn btn-primary" (click)="doHome()">
+                    Volver
+                    <img id="imgReturn" src="../../../../assets/icons/previous.png" height="30">
+                </button>
+                <button id="buttonForm" [disabled]="formSaved" type="button" class="btn btn-success"
+                    (click)="doUpdate()">
+                    Modificar consulta
+                </button>
+            </div>
+        </form>
     </div>
-
-
+    
 </body>

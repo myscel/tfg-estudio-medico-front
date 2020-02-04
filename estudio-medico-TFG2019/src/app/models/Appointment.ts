@@ -1,4 +1,6 @@
 export class Appointment {
+    id: number;
+
     vitaminD: number;
     hba1c: number;
     season: string;
