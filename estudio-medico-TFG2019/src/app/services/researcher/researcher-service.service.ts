@@ -4,6 +4,7 @@ import { User } from '../../models/User';
 import { Subject } from '../../models/Subject';
 import {Observable} from 'rxjs';
 import { Appointment } from 'src/app/models/Appointment';
+import { ConstantsService } from '../constants/constants.service';
 
 
 @Injectable({
@@ -11,13 +12,14 @@ import { Appointment } from 'src/app/models/Appointment';
 })
 export class ResearcherServiceService {
 
-  researcherUrl: string = 'http://localhost:8080/api/researcher';
+  researcherUrl: string = `http://${this.constantsService.localHost}:8080/api/researcher`;
 
   researcherHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private constantsService: ConstantsService) { }
 
   public getSubjectsAndInvestigationsFromIdResearcher(id: string): Observable<any> {
     let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));

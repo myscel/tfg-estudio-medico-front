@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { User } from '../models/User';
+import { ConstantsService } from './constants/constants.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  userUrl: string = 'http://localhost:8080/api/user';
+  userUrl: string = `http://${this.constantsService.localHost}:8080/api/user`;
   userLogged: User;
 
   userHeaders = new HttpHeaders ({
@@ -17,7 +18,8 @@ export class UserServiceService {
 
   options = {headers: this.userHeaders}
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private constantsService: ConstantsService) { }
 
   ngOnInit() {
     this.userLogged = null;
