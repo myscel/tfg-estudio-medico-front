@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/researcher/' + this.userService.userLogged.id]);
       }
     }, err => {
-      if(err.status === 401){
+      if(err.status === 409){
         this.errorMessage = "Usuario o contraseña incorrectos";
       }
       else{
