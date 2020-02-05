@@ -17,7 +17,7 @@
   margin-top: 50px;
 }
 
-#titleTableResearchers{
+.titleTable{
   margin-bottom: 30px;
   font-size: 40px;
   font-weight: bold;
@@ -25,7 +25,7 @@
   align-self: flex-start;
 }
 
-#divTable{
+.divTable{
     width: 100%;
     border-radius: 8px;
 }
@@ -388,6 +388,11 @@ input{
 #modalInvisible{
   height:80px;
 }
+
+#adminTable{
+  margin-bottom: 10px;
+}
+
 
 
 

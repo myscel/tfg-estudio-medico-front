@@ -19,6 +19,7 @@ import { SortResearchersServiceService } from 'src/app/services/researcher/sort-
 export class ResearchersAdminComponent implements OnInit {
 
   @Input() researchers: User[] = [];
+  @Input() admins: User[] = [];
 
   userLogged: User;
   registerForm: FormGroup;
@@ -64,7 +65,8 @@ export class ResearchersAdminComponent implements OnInit {
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
     this.adminService.getAllResearchers().subscribe(response =>{
-      this.researchers = response.list;
+      this.researchers = response.listResearchers;
+      this.admins = response.listAdmins;
 
       if(this.researchers.length === 0){
         this.emptyList = true;
@@ -164,7 +166,7 @@ export class ResearchersAdminComponent implements OnInit {
       this.successDeleteMessage = "Investigador con DNI " + username +   " eliminado correctamente";
 
       this.adminService.getAllResearchers().subscribe(response =>{
-        this.researchers = response.list;
+        this.researchers = response.listResearchers;
 
         if(this.researchers.length === 0){
           this.emptyList = true;

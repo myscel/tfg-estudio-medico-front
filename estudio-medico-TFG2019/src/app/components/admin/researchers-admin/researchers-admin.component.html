@@ -158,8 +158,49 @@
     </div>
     
     <div id="divRight">
-      <div id="titleTableResearchers"> Lista Investigadores</div>
-      <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
+      <div class="titleTable"> Lista Administradores</div>
+      <div  id="adminTable" class="table-responsive divTable">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <div class="thSort">
+                  <div>
+                      DNI
+                  </div>
+                </div>
+              </th>
+              <th>
+                  <div class="thSort">
+                    <div>
+                        NOMBRE
+                    </div>
+                  </div>
+              </th>
+              <th>
+                    <div class="thSort">
+                      <div>
+                          GÉNERO
+                      </div>
+                    </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of admins; let i = index"
+              [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
+              <td> {{user.username}}</td>
+              <td >{{user.name.toUpperCase()}} {{user.surname.toUpperCase()}}</td>
+              <td>{{user.gender.toUpperCase()}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="titleTable"> Lista Investigadores</div>
+      
+
+      <div class="table-responsive divTable" *ngIf="!emptyList; else divEmptyList">
         <table class="table">
           <thead>
             <tr>
@@ -233,6 +274,7 @@
           </tbody>
         </table>
       </div>
+
       <ng-template id="divEmptyList" #divEmptyList>
           <label class="textEmptyList">Actualmente no hay investigadores registrados</label>
       </ng-template>
@@ -244,7 +286,8 @@
       <div id="modalSuccessDelete" class="alert alert-danger" [hidden]='!alertDeleteHidden'>
         <strong>Error! </strong> {{alertDeleteMessage}}
       </div>
-  </div>
+      
+    </div>
   </div>
 </body>
 
