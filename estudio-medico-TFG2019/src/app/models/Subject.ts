@@ -1,4 +1,4 @@
 export class Subject {
-    identificationNumber: number;
+    identificationNumber: string;
     usernameResearcher: string;
 }
