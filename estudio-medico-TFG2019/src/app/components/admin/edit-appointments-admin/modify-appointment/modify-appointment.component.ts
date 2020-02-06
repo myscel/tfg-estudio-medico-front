@@ -134,7 +134,7 @@ export class ModifyAppointmentComponent implements OnInit {
     this.identificationNumber = this.activatedRoute.snapshot.params.subjectIdentificationNumber
 
     this.adminService.getAppointmentDetails(investigationsDetailsId).subscribe(responseData =>{
-debugger;
+
       this.appointment = responseData;
 
       this.appointment.birthDate = new Date(this.appointment.birthDate);
@@ -210,12 +210,20 @@ debugger;
     this.router.navigate(['/login']);
   }
 
-  doProfile() {
-    this.router.navigate(['/researcher/profile/' + this.userLogged.id]);
+  doResearcherView(){
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
-  doHome() {
-    this.router.navigate(['/researcher/' + this.userLogged.id]);
+  goToResearcherList(){
+    this.router.navigate(['/admin/researchers']);
+  }
+
+  goToSubjectList(){
+    this.router.navigate(['/admin/subjects']);
+  }
+
+  goToInvestigationList(){
+    this.router.navigate(['/admin/appointments']);
   }
 
   //START CHECKING PRINPIPAL VARIABLES
@@ -570,11 +578,9 @@ debugger;
     }
 
     if(this.alcoholRiskValidated){
-      this.appointmentToUpdate.riskAlcohol = this.form.alcohol.value;
+      this.appointmentToUpdate.riskalcohol = this.form.alcohol.value;
     }else{
-      debugger;
-      console.log(this.appointment);
-      this.appointmentToUpdate.riskAlcohol = this.appointment.riskAlcohol;
+      this.appointmentToUpdate.riskalcohol = this.appointment.riskalcohol;
     }
 
     if(this.sunExposureValidated){

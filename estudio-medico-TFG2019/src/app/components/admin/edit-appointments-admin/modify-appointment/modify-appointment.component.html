@@ -2,47 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <title>Estudio Médico</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <title>Estudio Médico</title>
 </head>
 
-<header>
-
+<body>
+  <header>
     <div id="headerLeft">
-        <img id="logo" src="../../../assets/img/logo.png" height="55">
-        Estudio <strong>Médico</strong>
-    </div>
-    <div id="headerUserName">
-        <span>
-            Investigador
-        </span>
-        <span id="spanGrey">
-            | {{userLogged.name}}
-        </span>
+      <img id="logo" src="../../../assets/img/logo.png" height="55">
+      Estudio <strong>Médico</strong>
     </div>
     <div id="headerRight">
-        <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
-            <div>PERFIL</div>
-            <img id="imglogout" src="../../../../assets/icons/profile.png" height="24">
-        </div>
-        <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
-            <div>DESCONECTAR</div>
-            <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
-        </div>
+      <div id="headerUserName">
+        <span id="roleUser">
+          Admin
+        </span>
+        <span>
+          | {{userLogged.name}}
+        </span>
+      </div>
+      <div class="btn btn-primary navButton textButton" (click)="doResearcherView()">
+        <div>INVESTIGAR</div>
+        <img class="imgMargin" src="../../../../assets/icons/adminToResearcher.png" height="24">
+      </div>
+      <div class="btn btn-primary navButton textButton" (click)="doLogOut()">
+        <div>DESCONECTAR</div>
+        <img class="imgMargin" src="../../../../assets/icons/logout.png" height="24">
     </div>
-
-
-</header>
-
-<body>
+    </div>
+  </header>
 
     <div id="navigationBar">
-        <button class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
-        <button class="btn btn-primary navButton">DOCUMENTACIÓN</button>
-        <button class="btn btn-primary navButton">ESTADÍSTICAS</button>
+        <button (click)="goToResearcherList()" class="btn btn-primary navButton">INVESTIGADORES</button>
+        <button (click)="goToSubjectList()" class="btn btn-primary navButton">PACIENTES</button>
+        <button (click)="goToInvestigationList()" class="btn btn-primary navButton">CITAS</button>
     </div>
 
     <div class="appointmentBox">

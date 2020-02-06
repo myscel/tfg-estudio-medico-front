@@ -206,6 +206,13 @@ export class AppointmentComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  doProfile() {
+    this.router.navigate(['/researcher/profile/' + this.userLogged.id]);
+  }
+
+  doAdminView(){
+    this.router.navigate(['/admin/researchers']);
+  }
 
   //START CHECKING PRINPIPAL VARIABLES
   checkVitaminD(vitamminDValue: string){
@@ -559,7 +566,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentToSave.socioeconomicLevel = this.form.economicLevel.value;
 
     this.appointmentToSave.tobacco = this.form.smoking.value;
-    this.appointmentToSave.riskAlcohol = this.form.alcohol.value;
+    this.appointmentToSave.riskalcohol = this.form.alcohol.value;
     this.appointmentToSave.solarExposure = this.form.solarExposition.value; 
     this.appointmentToSave.spfCream = this.form.creamSPF.value;
     this.appointmentToSave.spfScore = this.form.gradeSPF.value;

@@ -59,6 +59,15 @@ export class EditAppointmentsAdminComponent implements OnInit {
 
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
 
+  doLogOut(){
+    localStorage.removeItem('userLogged');
+    this.router.navigate(['/login']);
+  }
+
+  doResearcherView(){
+    this.router.navigate(['/researcher/' + this.userLogged.id]);
+  }
+
   goToResearcherList(){
     this.router.navigate(['/admin/researchers']);
   }

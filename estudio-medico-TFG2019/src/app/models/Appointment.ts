@@ -11,7 +11,7 @@ export class Appointment {
     socioeconomicLevel: string;
 
     tobacco: boolean;
-    riskAlcohol: boolean;
+    riskalcohol: boolean;
     solarExposure: number;
     spfCream: boolean;
     spfScore: number;

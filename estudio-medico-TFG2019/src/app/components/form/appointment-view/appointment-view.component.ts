@@ -74,6 +74,10 @@ export class AppointmentViewComponent implements OnInit {
     this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
+  doAdminView(){
+    this.router.navigate(['/admin/researchers']);
+  }
+
   checkUserLogged(){
     let id = this.route.snapshot.paramMap.get('id');
 
