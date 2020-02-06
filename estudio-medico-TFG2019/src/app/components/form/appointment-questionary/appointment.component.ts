@@ -163,7 +163,6 @@ export class AppointmentComponent implements OnInit {
       this.validateSociodemographicVariables() &&
       this.validateLifeHabitsVariables() && 
       this.validateClinicalVariables()
-     
     ){
       this.setWarningSaveModal();
     }

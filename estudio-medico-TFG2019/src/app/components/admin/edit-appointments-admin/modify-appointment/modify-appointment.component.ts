@@ -192,15 +192,14 @@ export class ModifyAppointmentComponent implements OnInit {
   onSubmit() {
 
     if(this.validatePrincipalVariables() && 
-      this.validateLifeHabitsVariables() && 
-      this.validateClinicalVariables() &&
-      this.validateSociodemographicVariables() 
+    this.validateSociodemographicVariables() &&
+    this.validateLifeHabitsVariables() && 
+    this.validateClinicalVariables() 
     ){
       this.setWarningSaveModal();
     }
     else{
       this.setAlertodal();
-      this.alertMessage = "Algunos campos tienen valores incorrectos"
     }
   }
 
@@ -444,6 +443,18 @@ export class ModifyAppointmentComponent implements OnInit {
 
 
   validatePrincipalVariables(): boolean{
+    if(!this.vitaminFieldValidated){
+      this.alertMessage = "campo vitamina D erróneo";
+      return false;
+    }
+    if(!this.hbA1cValidated){
+      this.alertMessage = "campo hbA1c erróneo";
+      return false;
+    }
+    if(!this.seasonValidated){
+      this.alertMessage = "campo estación del año erróneo";
+      return false;
+    }
     return this.vitaminFieldValidated && this.hbA1cValidated && this.seasonValidated;
   }
 
@@ -453,6 +464,31 @@ export class ModifyAppointmentComponent implements OnInit {
     }
     else{
       this.spfGradeValidated = false;
+    }
+
+    if(!this.tobaccoValidated){
+      this.alertMessage = "campo tabaco erróneo";
+      return false;
+    }
+    if(!this.alcoholRiskValidated){
+      this.alertMessage = "campo riesgo de alcohol erróneo";
+      return false;
+    }
+    if(!this.sunExposureValidated){
+      this.alertMessage = "campo exposición solar erróneo";
+      return false;
+    }
+    if(!this.spfCreamValidated){
+      this.alertMessage = "campo crema SPF erróneo";
+      return false;
+    }
+    if(!this.spfGradeValidated){
+      this.alertMessage = "campo puntuación SPF erróneo";
+      return false;
+    }
+    if(!this.exerciseValidated){
+      this.alertMessage = "campo ejercicio físico erróneo";
+      return false;
     }
 
     return this.tobaccoValidated &&
@@ -489,6 +525,23 @@ export class ModifyAppointmentComponent implements OnInit {
       this.economicLevelValidated = false;
     }
 
+    if(!this.genderValidated){
+      this.alertMessage = "campo sexo erróneo";
+      return false;
+    }
+    if(!this.studyLevelValidated){
+      this.alertMessage = "campo nivel de estudios erróneo";
+      return false;
+    }
+    if(!this.birthDateValidated){
+      this.alertMessage = "campo fecha de nacimiento erróneo";
+      return false;
+    }
+    if(!this.economicLevelValidated){
+      this.alertMessage = "campo nivel socioeconómico erróneo";
+      return false;
+    }
+
     return this.genderValidated &&
     this.studyLevelValidated &&
     this.birthDateValidated &&
@@ -502,6 +555,80 @@ export class ModifyAppointmentComponent implements OnInit {
     else{
       this.fototypeValidated = false;
     }
+
+    if(!this.DM2Validated){
+      this.alertMessage = "campo DM2 erróneo";
+      return false;
+    }
+    if(!this.glucoseValidated){
+      this.alertMessage = "campo glucemia erróneo";
+      return false;
+    }
+    if(!this.imcValidated){
+      this.alertMessage = "campo IMC erróneo";
+      return false;
+    }
+    if(!this.obesityValidated){
+      this.alertMessage = "campo obesidad erróneo";
+      return false;
+    }
+    if(!this.tasValidated){
+      this.alertMessage = "campo tas erróneo";
+      return false;
+    }
+    if(!this.tadValidated){
+      this.alertMessage = "campo tad erróneo";
+      return false;
+    }
+    if(!this.arterialHypertensionValidated){
+      this.alertMessage = "campo hipertensión arterial erróneo";
+      return false;
+    }
+    if(!this.cholesterolValidated){
+      this.alertMessage = "campo colesterol erróneo";
+      return false;
+    }
+    if(!this.ldlValidated){
+      this.alertMessage = "campo ldl erróneo";
+      return false;
+    }
+    if(!this.hdlValidated){
+      this.alertMessage = "campo hdl erróneo";
+      return false;
+    }
+    if(!this.tgValidated){
+      this.alertMessage = "campo tg erróneo";
+      return false;
+    }
+    if(!this.dyslipidemiaValidated){
+      this.alertMessage = "campo dislipemia erróneo";
+      return false;
+    }
+    if(!this.creatinineValidated){
+      this.alertMessage = "campo creatinina erróneo";
+      return false;
+    }
+    if(!this.glomerularValidated){
+      this.alertMessage = "campo filtrado glomerular erróneo";
+      return false;
+    }
+    if(!this.kidneyInsufficiencyValidated){
+      this.alertMessage = "campo insuficiencia renal erróneo";
+      return false;
+    }
+    if(!this.fototypeValidated){
+      this.alertMessage = "campo fototipo erróneo";
+      return false;
+    }
+    if(!this.diabetesTreatmentValidated){
+      this.alertMessage = "campo nivel de estudios erróneo";
+      return false;
+    }
+    if(!this.vitaminDSupplementationValidated){
+      this.alertMessage = "campo tratamiento diabetes erróneo";
+      return false;
+    }
+
 
     return this.DM2Validated &&
     this.glucoseValidated &&
