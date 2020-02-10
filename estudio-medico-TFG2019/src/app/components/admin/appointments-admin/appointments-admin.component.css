@@ -78,6 +78,7 @@ header{
     font-weight: bold;
 }
 
+
 .navButton:hover{
     transform: scale(1.05, 1.05);
 }
@@ -88,7 +89,7 @@ header{
 }
 
 strong{
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 #divFilters{
