@@ -19,7 +19,7 @@ header{
     justify-content: space-between;
     align-items: center;
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
-}
+  }
 
 #headerLeft{
     font-size: 40px;
@@ -41,7 +41,7 @@ header{
     font-size: 20px;
     font-weight: bolder;
     color: rgb(102, 102, 102);
-}
+  }
 
 #roleUser{
     color: rgb(44, 44, 44);
@@ -89,7 +89,7 @@ header{
 }
 
 strong{
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 #divFilters{
