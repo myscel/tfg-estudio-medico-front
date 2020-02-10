@@ -61,12 +61,47 @@
                 </div>
               </form>
           </div>
+          <div class="alert alert-danger modalFilter" [hidden]='!alertFilterHidden'>
+            <strong>Error! </strong> {{alertFilterMessage}}
         </div>
+        <div class="alert alert-success modalFilter" [hidden]='!successFilterHidden'>
+          <strong>Éxito! </strong> {{successFilterMessage}}
+      </div>
+      </div>
 
         <div id="divListSubjects">
+            <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
+                <div class="textModal">
+                  <strong>Éxito! </strong> {{successMessage}}
+                </div>
+              </div>
+                  
+              <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
+                  <strong>Error! </strong> {{alertDeleteMessage}}
+              </div>
+      
+              <div id="modalWarning" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
+                  <strong>Aviso! </strong> {{alertWarningMessage}}
+                  <div id="divConfirmDelete">
+                    <div id="divConfirmDeleteLeft"> 
+                      <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
+                    </div>
+                    <div id="divConfirmDeleteRight">
+                        <button type="button" (click)="confirmDelete()" class="buttonConfirmDelete btn btn-success">SÍ</button>
+                        <button type="button" (click)="cancelDelete()" class="buttonConfirmDelete btn btn-danger">NO</button>
+                    </div>
+                     
+                     
+                  </div>   
+              </div>
+      
+              <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
+              </div>
             <div id="titleTableSubjects"> 
               Lista Citas Pacientes 
-              <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">Actualizar Lista</button>
+              <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">Actualizar Lista
+                  <img id="imgUpdate" src="../../../../assets/icons/refresh-button.png" height="18">
+              </button>
             </div>
             <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
                 <table class="table">

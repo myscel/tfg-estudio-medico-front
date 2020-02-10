@@ -132,15 +132,16 @@ strong{
 }
 
 #titleTableSubjects{
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: rgb(10, 10, 10);
+    color: rgb(102, 163, 255);
     align-self: flex-start;
-}
+  }
 
 #buttonUpdate{
-    margin-left: 10px;
+    margin-left: 30px;
+    font-size: 18px;
 }
 
 #divTable{
@@ -212,4 +213,26 @@ td{
 #imgEdit{
     margin-bottom: 3px;
 }
-  
+
+.modalFilter{
+    width:82%;
+    align-self: flex-start;
+    margin-top: 40px;
+}
+
+#modalSuccess, #modalError, #modalWarning{
+    font-size: 18px;
+    width: 100%;
+}
+
+.myModal{
+    height: 90px;
+    align-items: center;
+}
+
+#modalInvisible{
+    border:0px solid transparent;
+    color: transparent;
+    height: 110px;
+    
+}

@@ -191,19 +191,34 @@ export class ModifyAppointmentComponent implements OnInit {
 
   onSubmit() {
 
-    if(this.validatePrincipalVariables() && 
-      this.validateLifeHabitsVariables() && 
-      this.validateClinicalVariables() &&
-      this.validateSociodemographicVariables() 
+    if(!this.vitaminFieldValidated && !this.hbA1cValidated &&
+      !this.seasonValidated && !this.genderValidated &&
+      !this.studyLevelValidated && !this.birthDateValidated &&
+      !this.economicLevelValidated && !this.tobaccoValidated &&
+      !this.alcoholRiskValidated && !this.sunExposureValidated &&
+      !this.spfCreamValidated && !this.spfGradeValidated &&
+      !this.exerciseValidated && !this.DM2Validated &&
+      !this.glucoseValidated && !this.imcValidated &&
+      !this.obesityValidated && !this.tasValidated &&
+      !this.tadValidated && !this.arterialHypertensionValidated &&
+      !this.cholesterolValidated && !this.ldlValidated &&
+      !this.hdlValidated && !this.tgValidated &&
+      !this.dyslipidemiaValidated && !this.creatinineValidated &&
+      !this.glomerularValidated && !this.fototypeValidated &&
+      !this.kidneyInsufficiencyValidated && !this.diabetesTreatmentValidated &&
+      !this.vitaminDSupplementationValidated
     ){
-      this.setWarningSaveModal();
+      this.setAlertodal();
+      this.alertMessage = "No se a rellenado ningún campo que modificar"
     }
     else{
-      this.setAlertodal();
-      this.alertMessage = "Algunos campos tienen valores incorrectos"
+      this.setWarningSaveModal();
     }
   }
 
+  doHome(){
+    this.router.navigate(['/admin/appointments']);
+  }
   
   doLogOut(){
     localStorage.removeItem('userLogged');
@@ -723,7 +738,7 @@ export class ModifyAppointmentComponent implements OnInit {
 
     this.adminService.updateAppointmentDetails(this.appointmentToUpdate).subscribe(responseData =>{
 
-      this.router.navigate(['/admin/modifyAppointment/' + this.identificationNumber + '/' + this.activatedRoute.snapshot.params.investigationsDetailsId ]);
+      this.router.navigate(['/admin/appointments']);
 
     }, error =>{
         this.alertMessage = "Fallo en el servidor";
@@ -769,5 +784,9 @@ export class ModifyAppointmentComponent implements OnInit {
     this.alertWarningExitHidden = false;
     this.alertWarningSaveHidden = false;
     this.alertInvisibleHidden = true;
+  }
+
+  tryExit(){
+    this.setWarningExitModal();
   }
 }

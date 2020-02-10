@@ -67,7 +67,7 @@
                     <div class="variable">
                         <div class="textInput"> Vitamina D: <span class="variableData">{{appointment.vitaminD}}</span>
                             <div class="form-group">
-                                <input (focusout)="checkVitaminD($event.target.value)" tooltip="(0-500) ng/ml"
+                                <input (focusout)="checkVitaminD($event.target.value)" tooltip="(0-500) ng/ml. Los decimales se introducen separados por un punto"
                                     [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
                                     class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
                                     class="form-control" required>
@@ -401,7 +401,7 @@
                         <div class="textInput">Glucemia: <span
                                 class="variableData">{{appointment.glucose}}</span>
                             <div class="form-group">
-                                <input tooltip="(0-700) mg/dl" (focusout)="checkGlucose($event.target.value)"
+                                <input tooltip="(0-700) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkGlucose($event.target.value)"
                                     [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
                                     class="myInput" [(ngModel)]="inputBloodGlucose" type="text"
                                     formControlName="bloodGlucose" class="form-control" required>
@@ -413,7 +413,7 @@
                         <div class="textInput">IMC: <span
                                 class="variableData">{{appointment.imc}}</span>
                             <div class="form-group">
-                                <input tooltip="(10-70) kg/m2" (focusout)="checkImc($event.target.value)"
+                                <input tooltip="(10-70) kg/m2. Los decimales se introducen separados por un punto" (focusout)="checkImc($event.target.value)"
                                     [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
                                     class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC"
                                     class="form-control" required>
@@ -461,7 +461,7 @@
                         <div class="textInput">TAS: <span
                                 class="variableData">{{appointment.tas}}</span>
                             <div class="form-group">
-                                <input tooltip="(20-300) mmHg" (focusout)="checkTas($event.target.value)"
+                                <input tooltip="(20-300) mmHg. Los decimales se introducen separados por un punto" (focusout)="checkTas($event.target.value)"
                                     [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
                                     class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS"
                                     class="form-control" required>
@@ -473,7 +473,7 @@
                         <div class="textInput">TAD: <span
                                 class="variableData">{{appointment.tad}}</span>
                             <div class="form-group">
-                                <input tooltip="(20-200) mmHg" (focusout)="checkTad($event.target.value)"
+                                <input tooltip="(20-200) mmHg. Los decimales se introducen separados por un punto" (focusout)="checkTad($event.target.value)"
                                     [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
                                     class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD"
                                     class="form-control" required>
@@ -524,7 +524,7 @@
                         <div class="textInput">Colesterol total: <span
                                 class="variableData">{{appointment.cholesterol}}</span>
                             <div class="form-group">
-                                <input tooltip="(50-900) mg/dl" (focusout)="checkCholesterol($event.target.value)"
+                                <input tooltip="(50-900) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkCholesterol($event.target.value)"
                                     [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
                                     class="myInput" [(ngModel)]="inputCholesterol" type="text"
                                     formControlName="cholesterol" class="form-control" required>
@@ -536,7 +536,7 @@
                         <div class="textInput">LDL -col: <span
                                 class="variableData">{{appointment.ldl}}</span>
                             <div class="form-group">
-                                <input tooltip="(1-400) mg/dl" (focusout)="checkLdl($event.target.value)"
+                                <input tooltip="(1-400) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkLdl($event.target.value)"
                                     [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
                                     class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL"
                                     class="form-control" required>
@@ -548,7 +548,7 @@
                         <div class="textInput">HDL -col: <span
                                 class="variableData">{{appointment.hdl}}</span>
                             <div class="form-group">
-                                <input tooltip="(1-400) mg/dl" (focusout)="checkHdl($event.target.value)"
+                                <input tooltip="(1-400) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkHdl($event.target.value)"
                                     [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
                                     class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL"
                                     class="form-control" required>
@@ -560,7 +560,7 @@
                         <div class="textInput">TG: <span
                                 class="variableData">{{appointment.tg}}</span>
                             <div class="form-group">
-                                <input tooltip="(1-10000) mg/dl" (focusout)="checkTg($event.target.value)"
+                                <input tooltip="(1-10000) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkTg($event.target.value)"
                                     [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
                                     class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG"
                                     class="form-control" required>
@@ -608,7 +608,7 @@
                         <div class="textInput">Creatinina: <span
                                 class="variableData">{{appointment.creatinine}}</span>
                             <div class="form-group">
-                                <input tooltip="(0-30) mg/dl" (focusout)="checkCreatinine($event.target.value)"
+                                <input tooltip="(0-30) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkCreatinine($event.target.value)"
                                     [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
                                     class="myInput" [(ngModel)]="inputCreatinine" type="text"
                                     formControlName="creatinine" class="form-control" required>
@@ -765,15 +765,53 @@
             </div>
 
             <div>
-                <button type="button" id="buttonReturn" class="btn btn-primary" (click)="doHome()">
-                    Volver
+                <button type="button" id="buttonReturn" class="btn btn-primary" (click)="tryExit()">
+                    Atras
                     <img id="imgReturn" src="../../../../assets/icons/previous.png" height="30">
                 </button>
                 <button id="buttonForm" [disabled]="formSaved" type="button" class="btn btn-success"
-                    (click)="doUpdate()">
+                    (click)="onSubmit()">
                     Modificar consulta
                 </button>
             </div>
+
+            <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
+                    <div>
+                        <strong>Éxito! </strong> {{successMessage}}
+                    </div>
+                    <div>
+                        <button type="button" id="buttonExitAfterRegister" class="btn btn-primary" (click)="doHome()">Volver </button>
+                    </div>
+                </div>
+                    
+                <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
+                    <div class="textModal">
+                        <strong>Error! </strong> {{alertMessage}}
+                      </div>
+                </div>
+        
+                <div id="modalWarningExit" class="myModal alert alert-warning" [hidden]='!alertWarningExitHidden'>
+                    <strong>Aviso! </strong> ¿Desea cancelar el formulario? Los datos no se guardarán.
+                    <div>
+                      <div>
+                          <button type="button" (click)="doHome()" class="buttonExit btn btn-success">SÍ</button>
+                          <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
+                      </div>
+                    </div>   
+                </div>
+        
+                <div id="modalWarningSave" class="myModal alert alert-warning" [hidden]='!alertWarningSaveHidden'>
+                    <strong>Aviso! </strong> ¿Desea guardar los cambios definitivamente?
+                    <div>
+                      <div>
+                          <button type="button" (click)="doUpdate()" class="buttonExit btn btn-success">SÍ</button>
+                          <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
+                      </div>
+                    </div>   
+                </div>
+        
+                <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
+                </div>
         </form>
     </div>
     
