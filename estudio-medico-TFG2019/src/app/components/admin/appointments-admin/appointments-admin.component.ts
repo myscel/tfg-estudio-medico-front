@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
@@ -16,7 +16,6 @@ import { SortAppointmentsServiceService } from 'src/app/services/appointment/sor
 export class AppointmentsAdminComponent implements OnInit {
 
   @Input() appointments: Appointment[] = [];
-
 
   userLogged: User;
 
@@ -39,6 +38,8 @@ export class AppointmentsAdminComponent implements OnInit {
 
     this.adminService.getAllCompletedAppointments().subscribe(response =>{
       this.appointments = response.list;
+
+      console.log(this.appointments);
 
       if(this.appointments.length === 0){
         this.emptyList = true;
@@ -154,11 +155,19 @@ export class AppointmentsAdminComponent implements OnInit {
   }
 
   sortUpIdentificationNumber(){
-    this.sortAppointmentsService.sortDownIdentificationNumber(this.appointments);
+    this.sortAppointmentsService.sortUpIdentificationNumber(this.appointments);
   }
 
   sortDownIdentificationNumber(){
     this.sortAppointmentsService.sortDownIdentificationNumber(this.appointments);
+  }
+
+  sortUpNumberInvestigation(){
+    this.sortAppointmentsService.sortUpNumberInvestigation(this.appointments);
+  }
+
+  sortDownNumberInvestigation(){
+    this.sortAppointmentsService.sortDownNumberInvestigation(this.appointments);
   }
 
   checkAdminProfile(){

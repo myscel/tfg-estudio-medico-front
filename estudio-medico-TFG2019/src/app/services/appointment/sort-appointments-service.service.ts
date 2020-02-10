@@ -8,9 +8,51 @@ export class SortAppointmentsServiceService {
 
   constructor() { }
 
-  sortDownIdentificationNumber(appointments){
+  sortUpIdentificationNumber(appointments: Appointment[]){
+    appointments = appointments.sort(function (a, b) {
+      if (a.subjectIdentificationNumber > b.subjectIdentificationNumber) {
+        return 1;
+      }
+      if (a.subjectIdentificationNumber < b.subjectIdentificationNumber) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
-  sortUpIdentificationNumber(appointments){
+  sortDownIdentificationNumber(appointments: Appointment[]){
+    appointments = appointments.sort(function (a, b) {
+      if (a.subjectIdentificationNumber < b.subjectIdentificationNumber) {
+        return 1;
+      }
+      if (a.subjectIdentificationNumber > b.subjectIdentificationNumber) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortUpNumberInvestigation(appointments: Appointment[]){
+    appointments = appointments.sort(function (a, b) {
+      if (a.numberInvestigation > b.numberInvestigation) {
+        return 1;
+      }
+      if (a.numberInvestigation < b.numberInvestigation) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortDownNumberInvestigation(appointments: Appointment[]){
+    appointments = appointments.sort(function (a, b) {
+      if (a.numberInvestigation < b.numberInvestigation) {
+        return 1;
+      }
+      if (a.numberInvestigation > b.numberInvestigation) {
+        return -1;
+      }
+      return 0;
+    });
   }
 }

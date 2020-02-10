@@ -39,4 +39,6 @@ export class Appointment {
     numberInvestigation: number;
     idSubject: number;
     investigationDate: Date;
+
+    subjectIdentificationNumber: string
 }
