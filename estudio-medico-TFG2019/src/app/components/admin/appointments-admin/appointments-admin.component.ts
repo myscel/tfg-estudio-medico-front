@@ -1,18 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
-import { HttpClient } from '@angular/common/http';
 import { AdminServiceService } from 'src/app/services/admin/admin-service.service';
 import { Appointment } from 'src/app/models/Appointment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
+import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
+import { SortAppointmentsServiceService } from 'src/app/services/appointment/sort-appointments-service.service';
 
 @Component({
-  selector: 'app-edit-appointments-admin',
-  templateUrl: './edit-appointments-admin.component.html',
-  styleUrls: ['./edit-appointments-admin.component.css']
+  selector: 'app-appointments-admin',
+  templateUrl: './appointments-admin.component.html',
+  styleUrls: ['./appointments-admin.component.css']
 })
-export class EditAppointmentsAdminComponent implements OnInit {
+export class AppointmentsAdminComponent implements OnInit {
 
   @Input() appointments: Appointment[] = [];
 
@@ -27,19 +28,17 @@ export class EditAppointmentsAdminComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
     private formBuilder: FormBuilder,
     private identificationNumberSubjectServiceService: IdentificationNumberSubjectServiceService,
-    private adminService: AdminServiceService,) { }
+    private adminService: AdminServiceService,
+    private sortAppointmentsService: SortAppointmentsServiceService) { }
 
   ngOnInit() {
-
+    this.checkAdminProfile();
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
-    
     this.adminService.getAllCompletedAppointments().subscribe(response =>{
       this.appointments = response.list;
-      console.log(this.appointments);
 
       if(this.appointments.length === 0){
         this.emptyList = true;
@@ -53,8 +52,7 @@ export class EditAppointmentsAdminComponent implements OnInit {
 
     this.subjectsFilterForm = this.formBuilder.group({
       subjectFilterID: ['', Validators.required]
-    });
-    
+    }); 
   }
 
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
@@ -153,5 +151,19 @@ export class EditAppointmentsAdminComponent implements OnInit {
   cancelDelete(){
     this.alertInvisibleHidden = true;
     this.alertFilterHidden = false;
+  }
+
+  sortUpIdentificationNumber(){
+    this.sortAppointmentsService.sortDownIdentificationNumber(this.appointments);
+  }
+
+  sortDownIdentificationNumber(){
+    this.sortAppointmentsService.sortDownIdentificationNumber(this.appointments);
+  }
+
+  checkAdminProfile(){
+    if(!this.adminService.checkAdminProfile()){
+      this.doLogOut();
+    }
   }
 }

@@ -38,7 +38,7 @@ export class SubjectsAdminComponent implements OnInit {
   constructor(private router: Router,
     private adminService: AdminServiceService,
     private formBuilder: FormBuilder,
-    private sortSubjectsServiceService: SortSubjectsServiceService,
+    private sortSubjectsService: SortSubjectsServiceService,
     private dniInputServiceService: DniInputServiceService,
     private identificationNumberSubjectService: IdentificationNumberSubjectServiceService) { }
 
@@ -72,19 +72,19 @@ export class SubjectsAdminComponent implements OnInit {
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
 
   sortUpIdentificationNumber(){
-    this.sortSubjectsServiceService.sortUpIdentificationNumber(this.subjects);
+    this.sortSubjectsService.sortUpIdentificationNumber(this.subjects);
   }
 
   sortDownIdentificationNumber(){
-    this.sortSubjectsServiceService.sortDownIdentificationNumber(this.subjects);
+    this.sortSubjectsService.sortDownIdentificationNumber(this.subjects);
   }
 
   sortUpDniResearcher(){
-    this.sortSubjectsServiceService.sortUpDniResearcher(this.subjects);
+    this.sortSubjectsService.sortUpDniResearcher(this.subjects);
   }
 
   sortDownDniResearcher(){
-    this.sortSubjectsServiceService.sortDownDniResearcher(this.subjects);
+    this.sortSubjectsService.sortDownDniResearcher(this.subjects);
   }
 
   goToResearcherList(){
@@ -119,6 +119,7 @@ export class SubjectsAdminComponent implements OnInit {
         let investigationsCompleted: number = response.numberInvestigationsCompleted;
         this.subjectToDelete = identificationNumber;
         if(investigationsCompleted !== 0){
+          console.log("EL PACIENTE TIENE " +  investigationsCompleted + " investigacion pendiente");
           window.scroll(0,0);
           this.setWarningDeleteModal()
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";

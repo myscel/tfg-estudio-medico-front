@@ -102,6 +102,21 @@
         <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
         </div>
 
+        <div id="modalWarning" class="myModal alert alert-warning" [hidden]='!alertWarningHidden'>
+          <strong>Aviso! </strong> {{alertWarningMessage}}
+          <div id="divConfirmDelete">
+            <div id="divConfirmDeleteLeft"> 
+              <p id="textConfirmDelete">¿Desea eliminar al paciente y sus citas realizas?<p></p>
+            </div>
+            <div id="divConfirmDeleteRight">
+                <button type="button" (click)="confirmDelete()" class="buttonConfirmDelete btn btn-success">SÍ</button>
+                <button type="button" (click)="cancelDelete()" class="buttonConfirmDelete btn btn-danger">NO</button>
+            </div>
+             
+             
+          </div>   
+        </div>
+
         <div id="titleTableSubjects"> 
           Lista Pacientes 
           <button type="button" id="buttonUpdate" (click)="updateListSubjects()" class= "btn btn-primary">

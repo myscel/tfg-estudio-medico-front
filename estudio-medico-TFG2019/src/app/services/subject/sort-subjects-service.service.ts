@@ -20,7 +20,7 @@ export class SortSubjectsServiceService {
     });
   }
 
-  sortDownIdentificationNumber(subjects: Subject[]){
+  sortDownIdentificationNumber(subjects){
     subjects = subjects.sort(function (a, b) {
       if (a.identificationNumber < b.identificationNumber) {
         return 1;

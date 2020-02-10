@@ -18,15 +18,15 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentViewComponent } from './components/form/appointment-view/appointment-view.component';
-import { EditAppointmentsAdminComponent } from './components/admin/edit-appointments-admin/edit-appointments-admin.component';
-import { ModifyAppointmentComponent } from './components/admin/edit-appointments-admin/modify-appointment/modify-appointment.component';
+import { AppointmentsAdminComponent } from './components/admin/appointments-admin/appointments-admin.component';
+import { ModifyAppointmentComponent } from './components/admin/appointments-admin/modify-appointment/modify-appointment.component';
 
 const appRoutes : Routes = [ 
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/researchers', component: ResearchersAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/subjects', component: SubjectsAdminComponent, canActivate: [GuardServiceService] },
-  { path: 'admin/appointments', component: EditAppointmentsAdminComponent, canActivate: [GuardServiceService] },
+  { path: 'admin/appointments', component: AppointmentsAdminComponent, canActivate: [GuardServiceService] },
   { path: 'admin/researchers/edit/:id', component: EditResearcherAdminComponent, canActivate: [GuardServiceService]},
   { path: 'admin/modifyAppointment/:subjectIdentificationNumber/:investigationsDetailsId', component: ModifyAppointmentComponent, canActivate: [GuardServiceService] },
   { path: 'researcher/:id', component: HomeResearcherComponent, canActivate: [GuardServiceService] },
@@ -46,7 +46,7 @@ const appRoutes : Routes = [
     ProfileComponent,
     EditResearcherAdminComponent,
     AppointmentViewComponent,
-    EditAppointmentsAdminComponent,
+    AppointmentsAdminComponent,
     ModifyAppointmentComponent
   ],
   imports: [
