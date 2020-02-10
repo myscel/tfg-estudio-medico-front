@@ -43,6 +43,7 @@ export class SubjectsAdminComponent implements OnInit {
     private identificationNumberSubjectService: IdentificationNumberSubjectServiceService) { }
 
   ngOnInit() {
+    this.checkAdminProfile();
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
 
     this.adminService.getAllSubjects().subscribe(response =>{
@@ -333,5 +334,11 @@ export class SubjectsAdminComponent implements OnInit {
     this.alertInvisibleHidden = true;
     this.alertFilterHidden = true;
     this.successFilterHidden = false;
+  }
+
+  checkAdminProfile(){
+    if(!this.adminService.checkAdminProfile()){
+      this.doLogOut();
+    }
   }
 }

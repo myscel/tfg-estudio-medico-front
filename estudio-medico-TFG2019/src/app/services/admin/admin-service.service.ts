@@ -150,5 +150,15 @@ export class AdminServiceService {
 
     return this.http.post(`${this.adminUrl}/updateInvestigationDetails`, appointment, {headers: this.adminHeaders});
   }
+
+  checkAdminProfile(): boolean{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+
+    if(userLogged === null){
+      return false;
+    }
+
+    return userLogged.role === "ADMIN";
+  }
   
 }

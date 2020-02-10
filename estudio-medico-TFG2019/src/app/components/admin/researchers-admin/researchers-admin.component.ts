@@ -59,11 +59,13 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setAInvisibleModal();
+    this.checkAdminProfile();
+
+    this.setInvisibleModal();
     this.resetInputFields();
 
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
-
+    
     this.adminService.getAllResearchers().subscribe(response =>{
       this.researchers = response.listResearchers;
       this.admins = response.listAdmins;
@@ -286,12 +288,18 @@ export class ResearchersAdminComponent implements OnInit {
     this.invisibleRegisterHidden = false;
   }
 
-  setAInvisibleModal(){
+  setInvisibleModal(){
     this.successDeleteHidden = false;
     this.alertDeleteHidden = false;
     this.alertRegisterHidden = false;
     this.successRegisterHidden = false;
     this.invisibleRegisterHidden = true;
+  }
+
+  checkAdminProfile(){
+    if(!this.adminService.checkAdminProfile()){
+      this.doLogOut();
+    }
   }
 
 }

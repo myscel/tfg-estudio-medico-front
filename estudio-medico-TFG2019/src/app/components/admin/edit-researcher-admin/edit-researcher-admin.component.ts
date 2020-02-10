@@ -32,6 +32,7 @@ export class EditResearcherAdminComponent implements OnInit {
     private passwordInputService: PasswordInputServiceService) { }
 
   ngOnInit() {
+    this.checkAdminProfile();
     this.userLogged = JSON.parse(localStorage.getItem("userLogged"));
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -154,5 +155,11 @@ export class EditResearcherAdminComponent implements OnInit {
   setSuccessModify(){
     this.alertModifyHidden = false;
     this.successModifyHidden = true;
+  }
+
+  checkAdminProfile(){
+    if(!this.adminService.checkAdminProfile()){
+      this.doLogOut();
+    }
   }
 }
