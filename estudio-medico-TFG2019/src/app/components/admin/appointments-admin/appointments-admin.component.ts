@@ -5,7 +5,6 @@ import { AdminServiceService } from 'src/app/services/admin/admin-service.servic
 import { Appointment } from 'src/app/models/Appointment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
-import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 import { SortAppointmentsServiceService } from 'src/app/services/appointment/sort-appointments-service.service';
 
 @Component({
