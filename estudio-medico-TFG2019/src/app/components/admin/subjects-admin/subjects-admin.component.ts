@@ -35,6 +35,10 @@ export class SubjectsAdminComponent implements OnInit {
   successFilterMessage: string = "";
   subjectToDelete: string;
 
+  inputIDSubject: string;
+  inputDNIResearcher: string;
+
+
   constructor(private router: Router,
     private adminService: AdminServiceService,
     private formBuilder: FormBuilder,
@@ -187,6 +191,8 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   filterSubjectsByIdentificationNumber(){
+    this.inputDNIResearcher = "";
+
     if(!this.identificationNumberSubjectService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Campo Número Identificación Vacío";
@@ -233,6 +239,7 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   filterSubjectsByResearcherDNI(){ 
+    this.inputIDSubject = "";
     if(!this.dniInputServiceService.validateEmptyField(this.researcherFilterDataForm.researcherFilterDNI.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Campo DNI Vacío";
@@ -267,6 +274,9 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   updateListSubjects(){
+    this.inputIDSubject = "";
+    this.inputDNIResearcher = "";
+
     let observable = this.adminService.getAllSubjects();
 
     if(observable === null){

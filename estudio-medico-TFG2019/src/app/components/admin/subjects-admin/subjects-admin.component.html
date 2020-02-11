@@ -52,7 +52,7 @@
             </div>
             <div id="divFlexFilterResearcher">
               <div id="divInputFilterResearcher">
-                    <input id="inputFilterResearcher" type="text" formControlName="researcherFilterDNI" class="form-control">
+                    <input id="inputFilterResearcher" [(ngModel)]="inputDNIResearcher" type="text" formControlName="researcherFilterDNI" class="form-control">
               </div>
               <div id="divInputButtonSubject">
                     <button type="button" (click)="filterSubjectsByResearcherDNI()" class="btn btn-primary buttonFind">
@@ -70,7 +70,7 @@
             </div>
             <div id="divFlexFilterSubject">
               <div id="divInputFilterSubject">
-                <input id="inputFilterSubject" type="text"  formControlName="subjectFilterID" class="form-control">
+                <input id="inputFilterSubject" [(ngModel)]="inputIDSubject" type="text"  formControlName="subjectFilterID" class="form-control">
               </div>
               <div id="divInputButtonResearcher">
                 <button type="button" (click)="filterSubjectsByIdentificationNumber()" class="btn btn-primary buttonFind">
