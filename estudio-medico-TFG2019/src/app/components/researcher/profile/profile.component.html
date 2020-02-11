@@ -60,10 +60,44 @@
         </div>
     </div>
     
-    <button id="buttonReturnHomeResearcher" type="button" class="btn btn-primary" (click)="doHome()">
+    <button type="button" class="optButton btn btn-primary" (click)="doHome()">
         Volver
         <img id="previous" src="../../../../assets/icons/previous.png" height="20">
-
     </button>
+    <button type="button" class="optButton btn btn-warning" (click)="doUpdatePass()">
+        Modificar contraseña
+        <img id="previous" src="../../../../assets/icons/edit.png" height="20">
+    </button>
+
+    <div id="content" *ngIf='updatePass'>
+    <div id="boxGreyPass">
+        <form [formGroup]="updateForm" id="form" (ngSubmit)="doUpdate()">
+            <div class="modify">
+                <div>
+                <div class="textInput">Nueva Contraseña </div>
+                <input class="myInput form-control " [type]="!passIsChecked ? 'password' : 'text'" formControlName="password">
+                </div>
+
+                <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1" [(ngModel)]="passIsChecked" (click)="changeShowPass()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
+     
+                <div class="gradientInput"></div>
+            </div>
+            <div class="modify">
+                <div>
+                <div class="textInput">Repetir Contraseña </div>
+                <input class="myInput form-control " [type]="!passRepeatIsChecked ? 'password' : 'text'" formControlName="repeatedPassword">
+                </div>
+                <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2" [(ngModel)]="passRepeatIsChecked" (click)="changeShowPassRepeat()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
+
+         
+                <div class="gradientInput"></div>
+            </div>
+
+            <div>
+                <button id="buttonModify" type="button" [disabled]="!researcherFound" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
+            </div>
+        </form>
+    </div>
+    </div>
 
 </body>
