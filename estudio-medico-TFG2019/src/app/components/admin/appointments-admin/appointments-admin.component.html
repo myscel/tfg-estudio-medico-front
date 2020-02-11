@@ -10,31 +10,31 @@
 </head>
 
 <body>
-
     <header>
-        <div id="headerLeft">
-          <img id="logo" src="../../../assets/img/logo.png" height="55">
-            Estudio <strong>Médico</strong>
-        </div>
-        <div id="headerRight">
-            <div id="headerUserName">
-                <span id="roleUser">
-                    Admin
-                </span>
-                <span>
-                    | {{userLogged.name}}
-                </span>
-            </div>
-            <div id="buttonLogout" class="btn btn-primary navButton" (click)="doResearcherView()">
-                <div>INVESTIGAR</div>
-                <img id="imglogout" src="../../../../assets/icons/adminToResearcher.png" height="24">
-            </div>
-            <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
-                <div>DESCONECTAR</div>
-                <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
-            </div>
+      <div id="headerLeft">
+        <img id="logo" src="../../../assets/img/logo.png" height="55">
+        Estudio <strong>Médico</strong>
+      </div>
+      <div id="headerRight">
+        <div id="headerUserName">
+          <span id="roleUser">
+            Admin
+          </span>
+          <span>
+            | {{userLogged.name}}
+          </span>
         </div>
 
+        <div class="btn btn-primary navButton buttonMain" (click)="doResearcherView()">
+            <div>INVESTIGAR</div>
+            <img class = "imgApp" src="../../../../assets/icons/adminToResearcher.png" height="24">
+        </div>
+
+        <div class="btn btn-primary navButton buttonMain" (click)="doLogOut()">
+            <div>DESCONECTAR</div>
+            <img class="imgApp" src="../../../../assets/icons/logout.png" height="24">
+        </div>
+      </div>
     </header>
 
     <div id="navigationBar">
@@ -97,48 +97,50 @@
         </div>
 
         <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>
-                        <div class="thSort">
-                          <div class="thText">
-                              NÚMERO IDENTIFICACIÓN
-                          </div>
-                          <div>
-                              <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
-                                    <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
-                              </button> 
-                          </div>
-                          <div>
-                            <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
-                                <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
-                            </button>    
-                          </div>
-                        </div>
-                      </th>
-                      <th>
-                          <div class="thSort">
-                            <div class="thText">
-                                CITA REALIZADA
-                            </div>
-                            <div>
-                                <button class="buttonInvisible" type="button" (click)="sortUpNumberInvestigation()">
-                                      <img id="imglogout" src="../../../../assets/icons/up-arrow.png" height="24">
-                                </button> 
-                            </div>
-                            <div>
-                              <button class="buttonInvisible" type="button" (click)="sortDownNumberInvestigation()">
-                                  <img id="imglogout" src="../../../../assets/icons/down-arrow.png" height="24">
-                              </button>    
-                            </div>
-                          </div>
-                      </th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let appointment of appointments; let i = index"
+          <table class="table">
+            <thead>
+              <tr>
+              <th>
+                <div class="thSort">
+                  <div class="thText">
+                    NÚMERO IDENTIFICACIÓN
+                  </div>
+                  <div>
+                    <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
+                      <img class="imgApp" src="../../../../assets/icons/up-arrow.png" height="24">
+                    </button> 
+                  </div>
+                  <div>
+                    <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
+                      <img class="imgApp" src="../../../../assets/icons/down-arrow.png" height="24">
+                    </button>    
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div class="thSort">
+                  <div class="thText">
+                    CITA REALIZADA
+                  </div>
+                  <div>
+                    <button class="buttonInvisible" type="button" (click)="sortUpNumberInvestigation()">
+                      <img class="imgApp" src="../../../../assets/icons/up-arrow.png" height="24">
+                    </button> 
+                  </div>
+                  <div>
+                    <button class="buttonInvisible" type="button" (click)="sortDownNumberInvestigation()">
+                      <img class="imgApp" src="../../../../assets/icons/down-arrow.png" height="24">
+                    </button>    
+                  </div>
+                </div>
+              </th>
+              <th>
+
+              </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of appointments; let i = index"
                       [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                       <td> {{appointment.subjectIdentificationNumber}}</td>
                       <td *ngIf="appointment.numberInvestigation == 1; else secondAppointment">
@@ -153,14 +155,13 @@
                       <button id="buttonModify" type="button" (click)="goToModifyAppointment(appointment.investigationDetailsId, appointment.subjectIdentificationNumber)"><img id="imgEdit"
                         src="../../../../assets/icons/edit.png" height="22px"></button>
                     </td>
-                    </tr>
-                  </tbody>
-                </table>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <ng-template id="divEmptyList" #divEmptyList>
-                  <label class="textEmptyList">Actualmente no hay citas registradas</label>
+            <label class="textEmptyList">Actualmente no hay citas registradas</label>
         </ng-template>
       </div>
     </div>
-
 </body>
