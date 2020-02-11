@@ -20,9 +20,20 @@ export class AppointmentsAdminComponent implements OnInit {
 
   subjectsFilterForm: FormGroup;
   emptyList: boolean = false;
+
   alertFilterHidden: boolean = false;
   alertFilterMessage: string = "";
+  successFilterHidden: boolean = false;
+  successFilterMessage: string = "";
+
+  successHidden: boolean = false;
+  successMessage: string = "Lista de citas cargada correctamente.";
+  alertHidden: boolean = false;
+  alertMessage: string = "Fallo al cargar la lista de citas";
   alertInvisibleHidden: boolean = true;
+
+  inputID: string;
+  
 
   constructor(
     private router: Router,
@@ -37,8 +48,6 @@ export class AppointmentsAdminComponent implements OnInit {
 
     this.adminService.getAllCompletedAppointments().subscribe(response =>{
       this.appointments = response.list;
-
-      console.log(this.appointments);
 
       if(this.appointments.length === 0){
         this.emptyList = true;
@@ -56,6 +65,23 @@ export class AppointmentsAdminComponent implements OnInit {
   }
 
   get subjectsFilterDataForm() { return this.subjectsFilterForm.controls; }
+
+  refreshAppointmentList(){
+    this.inputID = "";
+    this.adminService.getAllCompletedAppointments().subscribe(response =>{
+      this.setSuccessListModal();
+      this.appointments = response.list;
+
+      if(this.appointments.length === 0){
+        this.emptyList = true;
+      }
+      else{
+        this.emptyList = false;
+      }
+    }, error =>{
+      this.setAlertListModal();
+    });
+  }
 
   doLogOut(){
     localStorage.removeItem('userLogged');
@@ -83,44 +109,32 @@ export class AppointmentsAdminComponent implements OnInit {
   }
 
   filterSubjectsByIdentificationNumber(){
-
     if(!this.identificationNumberSubjectServiceService.validateEmptyField(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Campo Número Identificación Vacío";
       return;
     }
-
     if(isNaN(this.subjectsFilterDataForm.subjectFilterID.value.trim())){
       this.setAlertFilterModal();
       this.alertFilterMessage = "Introduce un número como identificación del paciente";
       return;
     }
-
     if(!this.identificationNumberSubjectServiceService.validateIdentificationNumberLenght(this.subjectsFilterDataForm.subjectFilterID.value)){
       this.setAlertFilterModal();
       this.alertFilterMessage = "El número de identificación debe tener 8 dígitos";
       return;
     }
-
-    let observable = this.adminService.getSubjectByIdentificationNumber(this.subjectsFilterDataForm.subjectFilterID.value.trim());
+    let observable = this.adminService.getAllCompletedAppointmentsByIdentificationNumber(this.subjectsFilterDataForm.subjectFilterID.value.trim());
 
     if(observable === null){
       this.router.navigate(['/login']);
     }
-
     else{
       observable.subscribe(response =>{
-        this.cancelDelete();
-
+        this.successFilterMessage = "Paciente encontrado!";
+        this.setSuccessFilterModal();
         window.scroll(0,0);
-
-        let appointment: Appointment = response;
-
-        let appointmentsAux: Appointment[] = [];
-        appointmentsAux.push(appointment);
-
-        this.appointments = appointmentsAux;
-
+        this.appointments = response.list;
         if(this.appointments.length === 0){
           this.emptyList = true;
         }
@@ -144,13 +158,39 @@ export class AppointmentsAdminComponent implements OnInit {
   }
 
   setAlertFilterModal(){
-    this.alertInvisibleHidden = true;
     this.alertFilterHidden = true;
+    this.successFilterHidden = false;
+
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertInvisibleHidden = true;
   }
 
-  cancelDelete(){
-    this.alertInvisibleHidden = true;
+  setSuccessFilterModal(){
     this.alertFilterHidden = false;
+    this.successFilterHidden = true;
+
+    this.successHidden = false;
+    this.alertHidden = false;
+    this.alertInvisibleHidden = true;
+  }
+
+  setSuccessListModal(){
+    this.alertFilterHidden = false;
+    this.successFilterHidden = false;
+
+    this.successHidden = true;
+    this.alertHidden = false;
+    this.alertInvisibleHidden = false;
+  }
+
+  setAlertListModal(){
+    this.alertFilterHidden = false;
+    this.successFilterHidden = false;
+
+    this.successHidden = false;
+    this.alertHidden = true;
+    this.alertInvisibleHidden = false;
   }
 
   sortUpIdentificationNumber(){

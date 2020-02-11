@@ -141,6 +141,11 @@ export class AdminServiceService {
     return this.http.get(`${this.adminUrl}/completedAppointments`, {headers: this.adminHeaders});
   }
 
+  public getAllCompletedAppointmentsByIdentificationNumber(identificationNumber: string): Observable<any> {
+
+    return this.http.get(`${this.adminUrl}/completedAppointments/${identificationNumber}`, {headers: this.adminHeaders});
+  }
+
   public getAppointmentDetails(investigationsDetailsId: string): Observable<any> { 
 
     return this.http.get(`${this.adminUrl}/getAppointmentDetails/${investigationsDetailsId}`, {headers: this.adminHeaders});

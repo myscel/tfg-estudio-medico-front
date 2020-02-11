@@ -225,7 +225,7 @@ td{
     margin-top: 40px;
 }
 
-#modalSuccess, #modalError, #modalWarning{
+#modalSuccess, #modalError{
     font-size: 18px;
     width: 100%;
 }
@@ -253,4 +253,9 @@ td{
 
 #buttonFind{
     width: 100%;
+}
+
+.textModal{
+    display:inline-block;
+    margin-top: 15px;
 }
