@@ -190,7 +190,11 @@ export class ModifyAppointmentComponent implements OnInit {
   get form() { return this.subjectForm.controls; }
 
   onSubmit() {
-    if(!this.vitaminFieldValidated && !this.hbA1cValidated &&
+
+    if(!this.validatePrincipalVariables() || !this.validateSociodemographicVariables() 
+      || !this.validateLifeHabitsVariables() || !this.validateClinicalVariables()){
+        this.setAlertodal();
+    }else if(!this.vitaminFieldValidated && !this.hbA1cValidated &&
       !this.seasonValidated && !this.genderValidated &&
       !this.studyLevelValidated && !this.birthDateValidated &&
       !this.economicLevelValidated && !this.tobaccoValidated &&
@@ -458,211 +462,90 @@ export class ModifyAppointmentComponent implements OnInit {
 
 
   validatePrincipalVariables(): boolean{
-    if(!this.vitaminFieldValidated){
+
+    if(this.form.vitaminaD.value != undefined && this.form.vitaminaD.value != "" && !this.vitaminFieldValidated){
       this.alertMessage = "campo vitamina D erróneo";
       return false;
     }
-    if(!this.hbA1cValidated){
+    if(this.form.HbA1c.value != undefined && this.form.HbA1c.value != "" && !this.hbA1cValidated){
       this.alertMessage = "campo hbA1c erróneo";
       return false;
     }
-    if(!this.seasonValidated){
-      this.alertMessage = "campo estación del año erróneo";
-      return false;
+   
+    return true;
+  }
+
+  validateSociodemographicVariables(): boolean{
+
+    if(this.form.bornDate.value != undefined){
+      this.birthDateValidated = this.validateBirthDate(this.form.bornDate.value);
+      if(this.form.bornDate.value != "" && !this.birthDateValidated){
+        this.alertMessage = "campo fecha de nacimiento erróneo";
+        return false;
+      }
     }
-    return this.vitaminFieldValidated && this.hbA1cValidated && this.seasonValidated;
+
+    return true;
   }
 
   validateLifeHabitsVariables(): boolean{
-    if(this.form.gradeSPF.value !== undefined){
-      this.spfGradeValidated = true;
-    }
-    else{
-      this.spfGradeValidated = false;
-    }
 
-    if(!this.tobaccoValidated){
-      this.alertMessage = "campo tabaco erróneo";
-      return false;
-    }
-    if(!this.alcoholRiskValidated){
-      this.alertMessage = "campo riesgo de alcohol erróneo";
-      return false;
-    }
-    if(!this.sunExposureValidated){
+    if(this.form.solarExposition.value != undefined && this.form.solarExposition.value != "" && !this.sunExposureValidated){
       this.alertMessage = "campo exposición solar erróneo";
       return false;
     }
-    if(!this.spfCreamValidated){
-      this.alertMessage = "campo crema SPF erróneo";
-      return false;
-    }
-    if(!this.spfGradeValidated){
-      this.alertMessage = "campo puntuación SPF erróneo";
-      return false;
-    }
-    if(!this.exerciseValidated){
+    if(this.form.exercise.value != undefined && this.form.exercise.value != "" && !this.exerciseValidated){
       this.alertMessage = "campo ejercicio físico erróneo";
       return false;
     }
 
-    return this.tobaccoValidated &&
-    this.alcoholRiskValidated &&
-    this.sunExposureValidated &&
-    this.spfCreamValidated &&
-    this.spfGradeValidated &&
-    this.exerciseValidated;
+    return true;
   }
-
-  validateSociodemographicVariables(): boolean{
-    if(this.form.studies.value !== undefined){
-      this.studyLevelValidated = true;
-    }
-    else{
-      this.studyLevelValidated = false;
-    }
-    
-    if(this.form.bornDate.value !== undefined){
-      this.birthDate = new Date( this.form.bornDate.value.getTime() + this.form.bornDate.value.getTimezoneOffset() * -60000 )
-    }
-  
-    if(this.form.bornDate.value !== undefined && this.validateBirthDate(this.birthDate)){
-      this.birthDateValidated = true;
-    }
-    else{
-      this.birthDateValidated = false;
-    }
-
-    if(this.form.economicLevel.value !== undefined){
-      this.economicLevelValidated = true;
-    }
-    else{
-      this.economicLevelValidated = false;
-    }
-
-    if(!this.genderValidated){
-      this.alertMessage = "campo sexo erróneo";
-      return false;
-    }
-    if(!this.studyLevelValidated){
-      this.alertMessage = "campo nivel de estudios erróneo";
-      return false;
-    }
-    if(!this.birthDateValidated){
-      this.alertMessage = "campo fecha de nacimiento erróneo";
-      return false;
-    }
-    if(!this.economicLevelValidated){
-      this.alertMessage = "campo nivel socioeconómico erróneo";
-      return false;
-    }
-
-    return this.genderValidated &&
-    this.studyLevelValidated &&
-    this.birthDateValidated &&
-    this.economicLevelValidated;
-  }
-
+ 
   validateClinicalVariables(): boolean{
-    if(this.form.fototype.value !== undefined){
-      this.fototypeValidated = true;
-    }
-    else{
-      this.fototypeValidated = false;
-    }
-
-    if(!this.DM2Validated){
-      this.alertMessage = "campo DM2 erróneo";
-      return false;
-    }
-    if(!this.glucoseValidated){
+    
+    if(this.form.bloodGlucose.value != undefined && this.form.bloodGlucose.value != "" && !this.glucoseValidated){
       this.alertMessage = "campo glucemia erróneo";
       return false;
     }
-    if(!this.imcValidated){
+    if(this.form.IMC.value != undefined && this.form.IMC.value != "" && !this.imcValidated){
       this.alertMessage = "campo IMC erróneo";
       return false;
     }
-    if(!this.obesityValidated){
-      this.alertMessage = "campo obesidad erróneo";
-      return false;
-    }
-    if(!this.tasValidated){
+    if(this.form.TAS.value != undefined && this.form.TAS.value != "" && !this.tasValidated){
       this.alertMessage = "campo tas erróneo";
       return false;
     }
-    if(!this.tadValidated){
+    if(this.form.TAD.value != undefined && this.form.TAD.value != "" && !this.tadValidated){
       this.alertMessage = "campo tad erróneo";
       return false;
     }
-    if(!this.arterialHypertensionValidated){
-      this.alertMessage = "campo hipertensión arterial erróneo";
-      return false;
-    }
-    if(!this.cholesterolValidated){
+    if(this.form.cholesterol.value != undefined && this.form.cholesterol.value != "" && !this.cholesterolValidated){
       this.alertMessage = "campo colesterol erróneo";
       return false;
     }
-    if(!this.ldlValidated){
+    if(this.form.LDL.value != undefined && this.form.LDL.value != "" && !this.ldlValidated){
       this.alertMessage = "campo ldl erróneo";
       return false;
     }
-    if(!this.hdlValidated){
+    if(this.form.HDL.value != undefined && this.form.HDL.value != "" && !this.hdlValidated){
       this.alertMessage = "campo hdl erróneo";
       return false;
     }
-    if(!this.tgValidated){
+    if(this.form.TG.value != undefined && this.form.TG.value != "" && !this.tgValidated){
       this.alertMessage = "campo tg erróneo";
       return false;
     }
-    if(!this.dyslipidemiaValidated){
-      this.alertMessage = "campo dislipemia erróneo";
-      return false;
-    }
-    if(!this.creatinineValidated){
+    if(this.form.creatinine.value != undefined && this.form.creatinine.value != "" && !this.creatinineValidated){
       this.alertMessage = "campo creatinina erróneo";
       return false;
     }
-    if(!this.glomerularValidated){
+    if(this.form.glomerular.value != undefined && this.form.glomerular.value != "" && !this.glomerularValidated){
       this.alertMessage = "campo filtrado glomerular erróneo";
       return false;
     }
-    if(!this.kidneyInsufficiencyValidated){
-      this.alertMessage = "campo insuficiencia renal erróneo";
-      return false;
-    }
-    if(!this.fototypeValidated){
-      this.alertMessage = "campo fototipo erróneo";
-      return false;
-    }
-    if(!this.diabetesTreatmentValidated){
-      this.alertMessage = "campo nivel de estudios erróneo";
-      return false;
-    }
-    if(!this.vitaminDSupplementationValidated){
-      this.alertMessage = "campo tratamiento diabetes erróneo";
-      return false;
-    }
 
-
-    return this.DM2Validated &&
-    this.glucoseValidated &&
-    this.imcValidated &&
-    this.obesityValidated &&
-    this.tasValidated &&
-    this.tadValidated &&
-    this.arterialHypertensionValidated &&
-    this.cholesterolValidated &&
-    this.ldlValidated &&
-    this.hdlValidated &&
-    this.tgValidated &&
-    this.dyslipidemiaValidated &&
-    this.creatinineValidated &&
-    this.glomerularValidated &&
-    this.kidneyInsufficiencyValidated &&
-    this.fototypeValidated &&
-    this.diabetesTreatmentValidated &&
-    this.vitaminDSupplementationValidated;
+    return true;
   }
 
   doUpdate(){
