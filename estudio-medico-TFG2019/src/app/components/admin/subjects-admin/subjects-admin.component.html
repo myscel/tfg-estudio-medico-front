@@ -46,7 +46,7 @@
   <div id="page">
     <div id="divFilters">
       <div id="filterByResearcher">
-          <form class="form" [formGroup]="researcherFilterForm" (ngSubmit)="onSubmit()">
+          <form class="form" [formGroup]="researcherFilterForm">
             <div id="textDNIFilter">
               DNI Investigador
             </div>
@@ -96,7 +96,7 @@
         </div>
             
         <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
-            <strong>Error! </strong> {{alertDeleteMessage}}
+            <strong>Error! </strong> {{alertMessage}}
         </div>
 
         <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>

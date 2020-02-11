@@ -79,7 +79,7 @@
             <b id="textAddSubject">
               AÑADIR PACIENTE
             </b>         
-            <form class="form" [formGroup]="newSubjectForm" (ngSubmit)="onSubmit()">
+            <form class="form" [formGroup]="newSubjectForm">
               Identificador:
               <input type="text" formControlName="identificationNumber" class="form-control" required>
               <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="registerSubject()">
@@ -132,26 +132,26 @@
                 [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
                 <td> {{user.identificationNumber}}</td>
                 <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, 1)">
+                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '1')">
                     Consultar  <img src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
                 <ng-template #buttonFromSubject1> 
                   <td>
-                  <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 1)">
+                  <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '1')">
                     Cita 1
                     <img src="../../../../assets/icons/writing.png" height="18px">
                   </button>
                 </td>
                 </ng-template>
                 <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, 2)">
+                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '2')">
                     Consultar <img src="../../../../assets/icons/eye.png" height="20px">
                   </button>
                 </td>
                 <ng-template #buttonFromSubject2>
                    <td>
-                      <button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, 2)">
+                      <button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '2')">
                        Cita 2
                        <img src="../../../../assets/icons/writing.png" height="18px">
                       </button>
