@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <input (focusout)="checkVitaminD($event.target.value)" tooltip="(0-500) ng/ml. Los decimales se introducen separados por un punto"
                                     [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
-                                    class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
+                                    class="myInput" type="text" formControlName="vitaminaD"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                             <div class="form-group">
                                 <input tooltip="(1-40) %" (focusout)="checkHbA1c($event.target.value)"
                                     [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"
-                                    class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
+                                    class="myInput" type="text" formControlName="HbA1c"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
                         <div class="textInput">Nivel de estudios: <span
                                 class="variableData">{{appointment.studyLevel}}</span>
                             <div class="form-group">
-                                <select id="inputStudies" name="inputStudies" [(ngModel)]="inputStudies"
+                                <select id="inputStudies" name="inputStudies"
                                     class="form-control" formControlName="studies">
                                     <option value="Sin estudios">Sin estudios</option>
                                     <option value="Primaria">Primaria</option>
@@ -177,7 +177,7 @@
                         <div class="textInput">Fecha de nacimiento: <span
                                 class="variableData">{{birthDay}}-{{birthMonth}}-{{birthYear}}</span>
                             <div class="form-group">
-                                <input class="myInput" tooltip="> 18 Años" [(ngModel)]="inputBornDate" type="text"
+                                <input class="myInput" tooltip="> 18 Años" type="text"
                                     formControlName="bornDate" bsDatepicker class="form-control" required>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                             :<span class="variableData">{{appointment.socioeconomicLevel}}</span>
                             <div class="form-group">
                                 <select id="inputEconomicLevel" tooltip="Ingreso unidad familiar en euros mensuales"
-                                    name="inputEconomicLevel" [(ngModel)]="inputEconomicLevel" class="form-control"
+                                    name="inputEconomicLevel" class="form-control"
                                     formControlName="economicLevel">
                                     <option value="0-1000">0-1000</option>
                                     <option value="1001-2000">1001-2000</option>
@@ -244,7 +244,7 @@
                     </div>
                     <div class="variable">
                         <div class="textInput">Consumo de riesgo de alcohol: <span
-                                *ngIf="appointment.riskAlcohol; else notRiskAlcohol" class="variableData">SÍ</span>
+                                *ngIf="appointment.riskalcohol; else notRiskAlcohol" class="variableData">SÍ</span>
                             <ng-template #notRiskAlcohol>
                                 <span class="variableData">NO</span>
                             </ng-template>
@@ -283,7 +283,7 @@
                             <div class="form-group">
                                 <input tooltip="(0-1200) min" (focusout)="checkSunExposure($event.target.value)"
                                     [ngClass]="{'inputRight': sunExposureValidated && !sunExposureFirstTime, 'inputWrong': !sunExposureValidated && !sunExposureFirstTime}"
-                                    class="myInput" [(ngModel)]="inputSolarExposition" type="text"
+                                    class="myInput" type="text"
                                     formControlName="solarExposition" class="form-control" required>
                             </div>
                         </div>
@@ -329,7 +329,7 @@
                         <div class="textInput">Puntuación SPF: <span
                                 class="variableData">{{appointment.spfScore}}</span>
                             <div class="form-group">
-                                <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF"
+                                <select id="inputGradeSPF" name="inputGradeSPF"
                                     class="form-control" formControlName="gradeSPF">
                                     <option value="10">10</option>
                                     <option value="15">15</option>
@@ -348,7 +348,7 @@
                             <div class="form-group">
                                 <input tooltip="(0-700) horas/semana" (focusout)="checkExercise($event.target.value)"
                                     [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}"
-                                    class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercise"
+                                    class="myInput" type="text" formControlName="exercise"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -403,7 +403,7 @@
                             <div class="form-group">
                                 <input tooltip="(0-700) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkGlucose($event.target.value)"
                                     [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
-                                    class="myInput" [(ngModel)]="inputBloodGlucose" type="text"
+                                    class="myInput" type="text"
                                     formControlName="bloodGlucose" class="form-control" required>
                             </div>
                         </div>
@@ -415,7 +415,7 @@
                             <div class="form-group">
                                 <input tooltip="(10-70) kg/m2. Los decimales se introducen separados por un punto" (focusout)="checkImc($event.target.value)"
                                     [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
-                                    class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC"
+                                    class="myInput" type="text" formControlName="IMC"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -463,7 +463,7 @@
                             <div class="form-group">
                                 <input tooltip="(20-300) mmHg. Los decimales se introducen separados por un punto" (focusout)="checkTas($event.target.value)"
                                     [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
-                                    class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS"
+                                    class="myInput" type="text" formControlName="TAS"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -475,7 +475,7 @@
                             <div class="form-group">
                                 <input tooltip="(20-200) mmHg. Los decimales se introducen separados por un punto" (focusout)="checkTad($event.target.value)"
                                     [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
-                                    class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD"
+                                    class="myInput" type="text" formControlName="TAD"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -526,7 +526,7 @@
                             <div class="form-group">
                                 <input tooltip="(50-900) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkCholesterol($event.target.value)"
                                     [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
-                                    class="myInput" [(ngModel)]="inputCholesterol" type="text"
+                                    class="myInput" type="text"
                                     formControlName="cholesterol" class="form-control" required>
                             </div>
                         </div>
@@ -538,7 +538,7 @@
                             <div class="form-group">
                                 <input tooltip="(1-400) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkLdl($event.target.value)"
                                     [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
-                                    class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL"
+                                    class="myInput" type="text" formControlName="LDL"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -550,7 +550,7 @@
                             <div class="form-group">
                                 <input tooltip="(1-400) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkHdl($event.target.value)"
                                     [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
-                                    class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL"
+                                    class="myInput" type="text" formControlName="HDL"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -562,7 +562,7 @@
                             <div class="form-group">
                                 <input tooltip="(1-10000) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkTg($event.target.value)"
                                     [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
-                                    class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG"
+                                    class="myInput" type="text" formControlName="TG"
                                     class="form-control" required>
                             </div>
                         </div>
@@ -610,7 +610,7 @@
                             <div class="form-group">
                                 <input tooltip="(0-30) mg/dl. Los decimales se introducen separados por un punto" (focusout)="checkCreatinine($event.target.value)"
                                     [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
-                                    class="myInput" [(ngModel)]="inputCreatinine" type="text"
+                                    class="myInput" type="text"
                                     formControlName="creatinine" class="form-control" required>
                             </div>
                         </div>
@@ -622,7 +622,7 @@
                             <div class="form-group">
                                 <input tooltip="(0-200) MDRD4" (focusout)="checkGlomerular($event.target.value)"
                                     [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}"
-                                    class="myInput" [(ngModel)]="inputGlomerular" type="text"
+                                    class="myInput" type="text"
                                     formControlName="glomerular" class="form-control" required>
                             </div>
                         </div>
@@ -670,7 +670,7 @@
                     <div class="variable">
                         <div class="textInput">Fototipo: <span class="variableData">{{appointment.fototype}}</span>
                             <div class="form-group">
-                                <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype"
+                                <select id="inputFototype" name="inputFototype"
                                     class="form-control" formControlName="fototype">
                                     <option value="I">I</option>
                                     <option value="II">II</option>
@@ -769,7 +769,7 @@
                     Atras
                     <img id="imgReturn" src="../../../../assets/icons/previous.png" height="30">
                 </button>
-                <button id="buttonForm" [disabled]="formSaved" type="button" class="btn btn-success"
+                <button id="buttonForm" type="button" class="btn btn-success"
                     (click)="onSubmit()">
                     Modificar consulta
                 </button>

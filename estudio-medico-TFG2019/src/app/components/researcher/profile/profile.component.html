@@ -71,30 +71,30 @@
 
     <div id="content" *ngIf='updatePass'>
     <div id="boxGreyPass">
-        <form [formGroup]="updateForm" id="form" (ngSubmit)="doUpdate()">
+        <form [formGroup]="updateForm" id="form">
             <div class="modify">
                 <div>
                 <div class="textInput">Nueva Contraseña </div>
-                <input class="myInput form-control " [type]="!passIsChecked ? 'password' : 'text'" formControlName="password">
+                <input class="myInput form-control" formControlName="password">
                 </div>
 
-                <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1" [(ngModel)]="passIsChecked" (click)="changeShowPass()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
+                <input class="myInputChangeViewPassword" type="checkbox" name="pass1" value="pass1"> Mostrar contraseña<br>
      
                 <div class="gradientInput"></div>
             </div>
             <div class="modify">
                 <div>
                 <div class="textInput">Repetir Contraseña </div>
-                <input class="myInput form-control " [type]="!passRepeatIsChecked ? 'password' : 'text'" formControlName="repeatedPassword">
+                <input class="myInput form-control " formControlName="repeatedPassword">
                 </div>
-                <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2" [(ngModel)]="passRepeatIsChecked" (click)="changeShowPassRepeat()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
+                <input class="myInputChangeViewPassword" type="checkbox" name="pass2" value="pass2"> Mostrar contraseña<br>
 
          
                 <div class="gradientInput"></div>
             </div>
 
             <div>
-                <button id="buttonModify" type="button" [disabled]="!researcherFound" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
+                <button id="buttonModify" type="button" class="btn btn-primary" (click)="doHome()">Modificar</button>
             </div>
         </form>
     </div>
