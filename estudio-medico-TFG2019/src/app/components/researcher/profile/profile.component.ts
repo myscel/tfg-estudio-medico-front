@@ -107,10 +107,10 @@ export class ProfileComponent implements OnInit {
 
   doUpdate() {
     let userToUpdate: UserToUpdatePass = new UserToUpdatePass;
-debugger;
+
     userToUpdate.id = this.userLogged.id;
-    userToUpdate.oldPassword = this.form.oldPassword.value;
-    userToUpdate.newPassword = this.form.password.value;
+    userToUpdate.oldPassword = this.form.oldPassword.value.trim();
+    userToUpdate.newPassword = this.form.password.value.trim();
 
     let observable = this.researcherService.updatePassword(userToUpdate);
     if (observable === null) {
@@ -127,8 +127,11 @@ debugger;
         if (error.status === 404) {
           this.alertMessage = "Usario no encontrado";
         }
-        if (error.status === 400) {
+        if (error.status === 409) {
           this.alertMessage = "La antigua contraseña no coincide";
+        }
+        if (error.status === 400) {
+          this.alertMessage = "Datos incorrectos";
         }
         else {
           this.alertMessage = "Fallo en el servidor";
