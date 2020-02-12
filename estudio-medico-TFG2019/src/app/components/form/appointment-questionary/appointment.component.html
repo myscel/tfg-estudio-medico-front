@@ -54,7 +54,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkVitaminD($event.target.value)"
                         [ngClass]="{'inputRight': vitaminFieldValidated && !vitaminFirstTime, 'inputWrong': !vitaminFieldValidated && !vitaminFirstTime}"
-                        class="myInput" [(ngModel)]="inputvitaminaD" type="text" formControlName="vitaminaD"
+                        class="myInput" type="text" formControlName="vitaminaD"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -62,7 +62,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkHbA1c($event.target.value)"
                         [ngClass]="{'inputRight': hbA1cValidated && !hbA1cFirstTime, 'inputWrong': !hbA1cValidated && !hbA1cFirstTime}"
-                        class="myInput" [(ngModel)]="inputHbA1c" type="text" formControlName="HbA1c"
+                        class="myInput" type="text" formControlName="HbA1c"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -133,7 +133,7 @@
                     <div class="textInput">Nivel de estudios</div>
                     <div class="lineSeparator"></div>
                     <div class="form-group">
-                        <select id="inputStudies" name="inputStudies" [(ngModel)]="inputStudies" class="form-control"
+                        <select id="inputStudies" name="inputStudies" class="form-control"
                             formControlName="studies">
                             <option value="Sin estudios">Sin estudios</option>
                             <option value="Primaria">Primaria</option>
@@ -146,7 +146,7 @@
                 <div class="form-group">
                     <div class="textInput" tooltip="> 18 Años">Fecha de nacimiento</div>
                     <div class="lineSeparator"></div>
-                    <input class="myInput" [(ngModel)]="inputBornDate" type="text" formControlName="bornDate"
+                    <input class="myInput"  type="text" formControlName="bornDate"
                         bsDatepicker class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -154,7 +154,7 @@
                     </div>
                     <div class="lineSeparator"></div>
                     <div class="form-group">
-                        <select id="inputEconomicLevel" name="inputEconomicLevel" [(ngModel)]="inputEconomicLevel"
+                        <select id="inputEconomicLevel" name="inputEconomicLevel"
                             class="form-control" formControlName="economicLevel">
                             <option value="0-1000">0-1000</option>
                             <option value="1001-2000">1001-2000</option>
@@ -231,7 +231,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkSunExposure($event.target.value)"
                         [ngClass]="{'inputRight': sunExposureValidated && !sunExposureFirstTime, 'inputWrong': !sunExposureValidated && !sunExposureFirstTime}"
-                        class="myInput" [(ngModel)]="inputSolarExposition" type="text" formControlName="solarExposition"
+                        class="myInput" type="text" formControlName="solarExposition"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -267,7 +267,7 @@
                     <div class="textInput">Puntuación SPF</div>
                     <div class="lineSeparator"></div>
                     <div class="form-group">
-                        <select id="inputGradeSPF" name="inputGradeSPF" [(ngModel)]="inputGradeSPF" class="form-control"
+                        <select id="inputGradeSPF" name="inputGradeSPF" class="form-control"
                             formControlName="gradeSPF">
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -283,7 +283,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkExercise($event.target.value)"
                         [ngClass]="{'inputRight': exerciseValidated && !exerciseFirstTime, 'inputWrong': !exerciseValidated && !exerciseFirstTime}"
-                        class="myInput" [(ngModel)]="inputExercies" type="text" formControlName="exercise"
+                        class="myInput" type="text" formControlName="exercise"
                         class="form-control" required>
                 </div>
             </div>
@@ -327,7 +327,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkGlucose($event.target.value)"
                         [ngClass]="{'inputRight': glucoseValidated && !glucoseFirstTime, 'inputWrong': !glucoseValidated && !glucoseFirstTime}"
-                        class="myInput" [(ngModel)]="inputBloodGlucose" type="text" formControlName="bloodGlucose"
+                        class="myInput" type="text" formControlName="bloodGlucose"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -335,7 +335,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkImc($event.target.value)"
                         [ngClass]="{'inputRight': imcValidated && !imcFirstTime, 'inputWrong': !imcValidated && !imcFirstTime}"
-                        class="myInput" [(ngModel)]="inputIMC" type="text" formControlName="IMC" class="form-control"
+                        class="myInput" type="text" formControlName="IMC" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -372,7 +372,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkTas($event.target.value)"
                         [ngClass]="{'inputRight': tasValidated && !tasFirstTime, 'inputWrong': !tasValidated && !tasFirstTime}"
-                        class="myInput" [(ngModel)]="inputTAS" type="text" formControlName="TAS" class="form-control"
+                        class="myInput" type="text" formControlName="TAS" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -380,7 +380,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkTad($event.target.value)"
                         [ngClass]="{'inputRight': tadValidated && !tadFirstTime, 'inputWrong': !tadValidated && !tadFirstTime}"
-                        class="myInput" [(ngModel)]="inputTAD" type="text" formControlName="TAD" class="form-control"
+                        class="myInput" type="text" formControlName="TAD" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -417,7 +417,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkCholesterol($event.target.value)"
                         [ngClass]="{'inputRight': cholesterolValidated && !cholesterolFirstTime, 'inputWrong': !cholesterolValidated && !cholesterolFirstTime}"
-                        class="myInput" [(ngModel)]="inputCholesterol" type="text" formControlName="cholesterol"
+                        class="myInput" type="text" formControlName="cholesterol"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -425,7 +425,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkLdl($event.target.value)"
                         [ngClass]="{'inputRight': ldlValidated && !ldlFirstTime, 'inputWrong': !ldlValidated && !ldlFirstTime}"
-                        class="myInput" [(ngModel)]="inputLDL" type="text" formControlName="LDL" class="form-control"
+                        class="myInput" type="text" formControlName="LDL" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -433,7 +433,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkHdl($event.target.value)"
                         [ngClass]="{'inputRight': hdlValidated && !hdlFirstTime, 'inputWrong': !hdlValidated && !hdlFirstTime}"
-                        class="myInput" [(ngModel)]="inputHDL" type="text" formControlName="HDL" class="form-control"
+                        class="myInput" type="text" formControlName="HDL" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -441,7 +441,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkTg($event.target.value)"
                         [ngClass]="{'inputRight': tgValidated && !tgFirstTime, 'inputWrong': !tgValidated && !tgFirstTime}"
-                        class="myInput" [(ngModel)]="inputTG" type="text" formControlName="TG" class="form-control"
+                        class="myInput" type="text" formControlName="TG" class="form-control"
                         required>
                 </div>
                 <div class="form-group">
@@ -478,7 +478,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkCreatinine($event.target.value)"
                         [ngClass]="{'inputRight': creatinineValidated && !creatinineFirstTime, 'inputWrong': !creatinineValidated && !creatinineFirstTime}"
-                        class="myInput" [(ngModel)]="inputCreatinine" type="text" formControlName="creatinine"
+                        class="myInput" type="text" formControlName="creatinine"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -486,7 +486,7 @@
                     <div class="lineSeparator"></div>
                     <input (focusout)="checkGlomerular($event.target.value)"
                         [ngClass]="{'inputRight': glomerularValidated && !glomerularFirstTime, 'inputWrong': !glomerularValidated && !glomerularFirstTime}"
-                        class="myInput" [(ngModel)]="inputGlomerular" type="text" formControlName="glomerular"
+                        class="myInput" type="text" formControlName="glomerular"
                         class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -522,7 +522,7 @@
                     <div class="textInput">Fototipo</div>
                     <div class="lineSeparator"></div>
                     <div class="form-group">
-                        <select id="inputFototype" name="inputFototype" [(ngModel)]="inputFototype" class="form-control"
+                        <select id="inputFototype" name="inputFototype" class="form-control"
                             formControlName="fototype">
                             <option value="I">I</option>
                             <option value="II">II</option>
