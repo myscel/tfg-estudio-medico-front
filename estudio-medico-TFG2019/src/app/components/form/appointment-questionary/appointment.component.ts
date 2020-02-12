@@ -178,7 +178,7 @@ export class AppointmentComponent implements OnInit {
 
     let today = new Date();
     this.appointmentToSave.investigationDate = today;
-
+debugger;
     this.researcherService.registerAppointment(this.appointmentToSave).subscribe(responseData =>{
       this.setSuccessModal();
       this.formSaved = true;
