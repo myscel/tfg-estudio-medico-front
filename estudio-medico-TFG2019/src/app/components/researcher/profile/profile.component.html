@@ -60,11 +60,11 @@
         </div>
     </div>
     
-    <button type="button" class="optButton btn btn-primary" (click)="doHome()">
+    <button type="button" class="optButtonIz btn btn-primary" (click)="doHome()">
         Volver
         <img id="previous" src="../../../../assets/icons/previous.png" height="20">
     </button>
-    <button type="button" class="optButton btn btn-warning" (click)="doUpdatePass()">
+    <button type="button" class="optButton btn btn-warning" (click)="showUpdateBox()">
         Modificar contraseña
         <img id="previous" src="../../../../assets/icons/edit.png" height="20">
     </button>
@@ -72,6 +72,16 @@
     <div id="content" *ngIf='updatePass'>
     <div id="boxGreyPass">
         <form [formGroup]="updateForm" id="form" (ngSubmit)="doUpdate()">
+                <div class="modify">
+                        <div>
+                        <div class="textInput">Contraseña antigua</div>
+                        <input class="myInput form-control " [type]="!oldPassIsChecked ? 'password' : 'text'" formControlName="oldPassword">
+                        </div>
+        
+                        <input class="myInputChangeViewPassword" type="checkbox" name="pass0" value="pass0" [(ngModel)]="oldPassIsChecked" (click)="changeShowOldPass()" [ngModelOptions]="{standalone: true}"> Mostrar contraseña<br>
+             
+                        <div class="gradientInput"></div>
+                    </div>
             <div class="modify">
                 <div>
                 <div class="textInput">Nueva Contraseña </div>
@@ -94,10 +104,38 @@
             </div>
 
             <div>
-                <button id="buttonModify" type="button" [disabled]="!researcherFound" class="btn btn-primary" (click)="doUpdate()">Modificar</button>
+                <button id="buttonModify" type="button"  class="btn btn-primary" (click)="doUpdatePass()">Modificar</button>
             </div>
         </form>
     </div>
+    </div>
+
+    <div id="content" *ngIf='errorText'>
+    <div id="modalError" class="errorModal alert alert-danger">
+        <div class="textModal">
+            <strong>Error! </strong> {{alertMessage}}
+          </div>
+    </div>
+    </div>
+
+    <div id="content" *ngIf='succesModal'>
+    <div id="modalWarningSave" class="warningModal alert alert-warning" >
+            <strong>Aviso! </strong> ¿Desea guardar los cambios definitivamente?
+            <div>
+              <div>
+                  <button type="button" (click)="doUpdate()" class="buttonSucces btn btn-success">SÍ</button>
+                  <button type="button" (click)="setInvisibleModal()" class="buttonExit btn btn-danger">NO</button>
+              </div>
+            </div>   
+        </div>
+    </div>
+
+    <div id="content" *ngIf='updatedModal'>
+        <div id="modalSucces" class="errorModal alert alert-warning" >
+            <div class="textModal">
+                <strong>Exito! </strong> {{alertMessage}}
+            </div>
+        </div>
     </div>
 
 </body>
