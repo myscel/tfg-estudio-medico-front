@@ -123,7 +123,6 @@ export class SubjectsAdminComponent implements OnInit {
         let investigationsCompleted: number = response.numberInvestigationsCompleted;
         this.subjectToDelete = identificationNumber;
         if(investigationsCompleted !== 0){
-          console.log("EL PACIENTE TIENE " +  investigationsCompleted + " investigacion pendiente");
           window.scroll(0,0);
           this.setWarningDeleteModal()
           this.alertWarningMessage = "El paciente " + identificationNumber + " tiene " + investigationsCompleted + " citas completada(s)";

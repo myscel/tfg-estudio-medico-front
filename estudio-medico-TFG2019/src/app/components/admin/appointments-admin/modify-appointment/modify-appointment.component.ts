@@ -549,9 +549,6 @@ export class ModifyAppointmentComponent implements OnInit {
   }
 
   doUpdate(){
-
-    console.log(this.appointment.vitaminD);
-
     this.appointmentToUpdate.id = this.activatedRoute.snapshot.params.investigationsDetailsId;
 
     if(this.vitaminFieldValidated){

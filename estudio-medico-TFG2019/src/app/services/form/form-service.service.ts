@@ -184,8 +184,6 @@ export class FormServiceService {
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }    
-    console.log("EDAD: " + age);
-
     return age >= 18;
   }
 }
