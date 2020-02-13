@@ -606,11 +606,11 @@ export class AppointmentComponent implements OnInit {
       return false;
     }
     if(!this.diabetesTreatmentValidated){
-      this.alertMessage = "campo nivel de estudios erróneo";
+      this.alertMessage = "campo tratamiento diabetes erróneo";
       return false;
     }
     if(!this.vitaminDSupplementationValidated){
-      this.alertMessage = "campo tratamiento diabetes erróneo";
+      this.alertMessage = "campo suplementación vitamina D erróneo";
       return false;
     }
 
