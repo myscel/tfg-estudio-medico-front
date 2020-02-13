@@ -13,7 +13,7 @@ import { UserToUpdatePass } from 'src/app/models/UserToUpdatePass';
 })
 export class ResearcherServiceService {
 
-  researcherUrl: string = `http://${this.constantsService.localHost}:8080/api/researcher`;
+  researcherUrl: string = `http://${this.constantsService.remoteHost}:8080/api/researcher`;
 
   researcherHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'

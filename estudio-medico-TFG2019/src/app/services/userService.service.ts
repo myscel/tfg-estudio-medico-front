@@ -9,7 +9,7 @@ import { ConstantsService } from './constants/constants.service';
 })
 export class UserServiceService {
 
-  userUrl: string = `http://${this.constantsService.localHost}:8080/api/user`;
+  userUrl: string = `http://${this.constantsService.remoteHost}:8080/api/user`;
   userLogged: User;
 
   userHeaders = new HttpHeaders ({

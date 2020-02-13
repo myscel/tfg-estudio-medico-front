@@ -11,7 +11,7 @@ import { ConstantsService } from '../constants/constants.service';
 })
 export class AdminServiceService {
 
-  adminUrl: string = `http://${this.constantsService.localHost}:8080/api/admin`;
+  adminUrl: string = `http://${this.constantsService.remoteHost}:8080/api/admin`;
 
   adminHeaders = new HttpHeaders ({
     'Content-Type': 'application/json'
