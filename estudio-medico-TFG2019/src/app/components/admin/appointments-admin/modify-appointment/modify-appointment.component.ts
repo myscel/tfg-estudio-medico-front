@@ -136,7 +136,7 @@ export class ModifyAppointmentComponent implements OnInit {
     this.adminService.getAppointmentDetails(investigationsDetailsId).subscribe(responseData =>{
 
       this.appointment = responseData;
-
+      
       this.appointment.birthDate = new Date(this.appointment.birthDate);
       this.birthMonth = this.appointment.birthDate.getUTCMonth() + 1; //months from 1-12
       this.birthDay = this.appointment.birthDate.getUTCDate();
@@ -477,6 +477,20 @@ export class ModifyAppointmentComponent implements OnInit {
 
   validateSociodemographicVariables(): boolean{
 
+    if(this.form.studies.value !== undefined){
+      this.studyLevelValidated = true;
+    }
+    else{
+      this.studyLevelValidated = false;
+    }
+
+    if(this.form.economicLevel.value !== undefined){
+      this.economicLevelValidated = true;
+    }
+    else{
+      this.economicLevelValidated = false;
+    }
+
     if(this.form.bornDate.value != undefined){
       this.birthDateValidated = this.validateBirthDate(this.form.bornDate.value);
       if(this.form.bornDate.value != "" && !this.birthDateValidated){
@@ -489,6 +503,13 @@ export class ModifyAppointmentComponent implements OnInit {
   }
 
   validateLifeHabitsVariables(): boolean{
+
+    if(this.form.gradeSPF.value !== undefined){
+      this.spfGradeValidated = true;
+    }
+    else{
+      this.spfGradeValidated = false;
+    }
 
     if(this.form.solarExposition.value != undefined && this.form.solarExposition.value != "" && !this.sunExposureValidated){
       this.alertMessage = "campo exposición solar erróneo";
@@ -503,6 +524,13 @@ export class ModifyAppointmentComponent implements OnInit {
   }
  
   validateClinicalVariables(): boolean{
+
+    if(this.form.fototype.value !== undefined){
+      this.fototypeValidated = true;
+    }
+    else{
+      this.fototypeValidated = false;
+    }
     
     if(this.form.bloodGlucose.value != undefined && this.form.bloodGlucose.value != "" && !this.glucoseValidated){
       this.alertMessage = "campo glucemia erróneo";
@@ -558,7 +586,7 @@ export class ModifyAppointmentComponent implements OnInit {
     }
 
     if(this.hbA1cValidated){
-      this.appointmentToUpdate.hba1c = this.form.hbA1c.value;
+      this.appointmentToUpdate.hba1c = this.form.HbA1c.value;
     }else{
       this.appointmentToUpdate.hba1c = this.appointment.hba1c;
     }
@@ -576,7 +604,7 @@ export class ModifyAppointmentComponent implements OnInit {
     }
 
     if(this.studyLevelValidated){
-      this.appointmentToUpdate.studyLevel = this.form.studyLevel.value;
+      this.appointmentToUpdate.studyLevel = this.form.studies.value;
     }else{
       this.appointmentToUpdate.studyLevel = this.appointment.studyLevel;
     }

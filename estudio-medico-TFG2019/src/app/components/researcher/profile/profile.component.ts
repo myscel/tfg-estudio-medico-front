@@ -124,13 +124,13 @@ export class ProfileComponent implements OnInit {
       }, error => {
         this.errorText = true;
         this.succesModal = false;
-        if (error.status === 404) {
+        if (error.status == 404) {
           this.alertMessage = "Usario no encontrado";
         }
-        if (error.status === 409) {
+        else if (error.status == 409) {
           this.alertMessage = "La antigua contraseña no coincide";
         }
-        if (error.status === 400) {
+        else if (error.status == 400) {
           this.alertMessage = "Datos incorrectos";
         }
         else {
