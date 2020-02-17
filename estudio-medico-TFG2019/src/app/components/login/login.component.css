@@ -4,9 +4,9 @@
 }
 
 body {
-    background-image: url("../../../assets/img/loginBackground.jpg");
+    background-image: url("../../../assets/img/fotopresentacion.jpg");
+    background-repeat: no-repeat;
     background-size: cover;
-   
 }
 
 button {
