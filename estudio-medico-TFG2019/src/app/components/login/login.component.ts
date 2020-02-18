@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     private userService: UserServiceService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private passwordInputServiceService: PasswordInputServiceService,
-    private dniInputServiceService: DniInputServiceService
+    private passwordInputService: PasswordInputServiceService,
+    private dniInputService: DniInputServiceService
     ) {}
 
 
@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.alertHidden = false;
 
-    if(!this.passwordInputServiceService.validateEmptyField(this.f.password.value) ||
-       !this.dniInputServiceService.validateEmptyField(this.f.dni.value)){
-      this.errorMessage = "Dni y/o contraseña vacíos";
+    if(!this.passwordInputService.validateEmptyField(this.f.password.value) ||
+       !this.dniInputService.validateEmptyField(this.f.dni.value)){
+      this.errorMessage = "DNI/NIE y/o contraseña vacíos";
       this.alertHidden = true;
       this.inputDni = "";
       this.inputPassword = "";
@@ -57,18 +57,13 @@ export class LoginComponent implements OnInit {
 
  
     else{
-      if(!this.dniInputServiceService.validateDNI(this.f.dni.value)){
-        this.errorMessage = "DNI formato incorrecto";
+      if(!this.dniInputService.validateDNI(this.f.dni.value) && !this.dniInputService.validateNIE(this.f.dni.value)){
+        this.errorMessage = "DNI/NIE formato incorrecto";
         this.alertHidden = true;
         this.inputDni = "";
         this.inputPassword = "";
       }
-      // else if(!this.passwordInputServiceService.validateLengthPass(this.f.password.value)){
-      //   this.errorMessage = "La contraseña debe tener al menos 5 caracteres";
-      //   this.alertHidden = true;
-      //   this.inputDni = "";
-      //   this.inputPassword = "";
-      // }
+
       else{
         this.alertHidden = false;
         this.userToLog.username = this.f.dni.value;

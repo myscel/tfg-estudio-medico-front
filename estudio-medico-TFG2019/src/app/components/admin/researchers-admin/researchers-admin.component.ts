@@ -50,7 +50,7 @@ export class ResearchersAdminComponent implements OnInit {
   constructor(private router: Router,
               private adminService: AdminServiceService,
               private formBuilder: FormBuilder,
-              private dniInputServiceService: DniInputServiceService,
+              private dniInputService: DniInputServiceService,
               private passwordInputService: PasswordInputServiceService,
               private genderInputService: GenderInputServiceService,
               private nameInputService: NameInputServiceService,
@@ -97,9 +97,9 @@ export class ResearchersAdminComponent implements OnInit {
       this.setAlertRegister();
       this.errorMessage = "Rellena todos los campos";
     }
-    else if(!this.dniInputServiceService.validateDNI(this.f.dni.value)){
+    else if(!this.dniInputService.validateDNI(this.f.dni.value) && !this.dniInputService.validateNIE(this.f.dni.value)){
       this.setAlertRegister();
-      this.errorMessage = "DNI formato incorrecto";
+      this.errorMessage = "DNI/NIE formato incorrecto";
     }
     else if(!this.passwordInputService.validateLengthPass(this.f.password.value)){
       this.setAlertRegister();
@@ -122,7 +122,7 @@ export class ResearchersAdminComponent implements OnInit {
   }
 
   checkEmptyFields(): boolean{
-    if(!this.dniInputServiceService.validateEmptyField(this.f.dni.value) || 
+    if(!this.dniInputService.validateEmptyField(this.f.dni.value) || 
         !this.passwordInputService.validateEmptyField(this.f.password.value) ||   
         !this.passwordInputService.validateEmptyField(this.f.passwordRepeat.value) || 
         !this.nameInputService.validateEmptyField(this.f.name.value) ||
@@ -151,7 +151,7 @@ export class ResearchersAdminComponent implements OnInit {
       }, error =>{
         this.setAlertRegister();
         if(error.status === 409){
-          this.errorMessage = "Ya existe un usuario con el mismo dni";
+          this.errorMessage = "Ya existe un usuario con el mismo DNI/NIE";
         }
         else{
           this.errorMessage = "Fallo en el servidor";
@@ -165,7 +165,7 @@ export class ResearchersAdminComponent implements OnInit {
 
     this.adminService.deleteResearcher(username).subscribe(responseData =>{
       this.setSuccessDelete();
-      this.successDeleteMessage = "Investigador con DNI " + username +   " eliminado correctamente";
+      this.successDeleteMessage = "Investigador con DNI/NIE " + username +   " eliminado correctamente";
 
       this.adminService.getAllResearchers().subscribe(response =>{
         this.researchers = response.listResearchers;
@@ -179,13 +179,13 @@ export class ResearchersAdminComponent implements OnInit {
       });
     }, err => {
       if(err.status === 404){
-        this.alertDeleteMessage = "Investigador con DNI: " + username + " no encontrado.";
+        this.alertDeleteMessage = "Investigador con DNI/NIE: " + username + " no encontrado.";
       }
       if(err.status === 409){
-        this.alertDeleteMessage = "El investigador con DNI: " + username + " tiene pacientes asociados.";
+        this.alertDeleteMessage = "El investigador con DNI/NIE: " + username + " tiene pacientes asociados.";
       }
       else{
-        this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI " + username + ".";
+        this.alertDeleteMessage = "No se ha podido eliminar al Investigador con DNI/NIE " + username + ".";
       }
       this.setAlertDelete();
     });

@@ -15,8 +15,8 @@
     <hr>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="dni">DNI</label>
-            <input type="text" [(ngModel)]="inputDni" placeholder="Introduce tu DNI" onfocus="placeholder = ''" onblur="this.placeholder = 'Introduce tu DNI'" formControlName="dni" class="form-control" required autofocus/>
+            <label for="dni">DNI/NIE</label>
+            <input type="text" [(ngModel)]="inputDni" placeholder="Introduce tu DNI/NIE" onfocus="placeholder = ''" onblur="this.placeholder = 'Introduce tu DNI/NIE'" formControlName="dni" class="form-control" required autofocus/>
         </div>
         <hr>
         <div class="form-group">

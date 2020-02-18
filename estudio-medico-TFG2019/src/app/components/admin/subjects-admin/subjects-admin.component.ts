@@ -43,7 +43,7 @@ export class SubjectsAdminComponent implements OnInit {
     private adminService: AdminServiceService,
     private formBuilder: FormBuilder,
     private sortSubjectsService: SortSubjectsServiceService,
-    private dniInputServiceService: DniInputServiceService,
+    private dniInputService: DniInputServiceService,
     private identificationNumberSubjectService: IdentificationNumberSubjectServiceService) { }
 
   ngOnInit() {
@@ -239,14 +239,14 @@ export class SubjectsAdminComponent implements OnInit {
 
   filterSubjectsByResearcherDNI(){ 
     this.inputIDSubject = "";
-    if(!this.dniInputServiceService.validateEmptyField(this.researcherFilterDataForm.researcherFilterDNI.value)){
+    if(!this.dniInputService.validateEmptyField(this.researcherFilterDataForm.researcherFilterDNI.value)){
       this.setAlertFilterModal();
-      this.alertFilterMessage = "Campo DNI Vacío";
+      this.alertFilterMessage = "Campo DNI/NIE Vacío";
       return;
     }
-    if(! this.dniInputServiceService.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
+    if(!this.dniInputService.validateDNI(this.researcherFilterDataForm.researcherFilterDNI.value.trim()) && !this.dniInputService.validateNIE(this.researcherFilterDataForm.researcherFilterDNI.value.trim())){
       this.setAlertFilterModal();
-      this.alertFilterMessage = "Introduce un DNI Válido";
+      this.alertFilterMessage = "Introduce un DNI/NIE Válido";
       return;
     }
     let observable = this.adminService.getSubjectsByResearcherDNI(this.researcherFilterDataForm.researcherFilterDNI.value);
@@ -263,7 +263,7 @@ export class SubjectsAdminComponent implements OnInit {
       }, error =>{
         this.setAlertFilterModal();
         if(error.status === 404){
-          this.alertFilterMessage = "El investigador con DNI " + this.researcherFilterDataForm.researcherFilterDNI.value + " no existe";
+          this.alertFilterMessage = "El investigador con DNI/NIE " + this.researcherFilterDataForm.researcherFilterDNI.value + " no existe";
         }
         else{
           this.alertFilterMessage = "Fallo en el servidor";

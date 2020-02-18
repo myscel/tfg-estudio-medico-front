@@ -19,4 +19,14 @@ export class DniInputServiceService {
     }
     return true;
   }
+
+  validateNIE(nie: string): boolean {
+    var regExpresion =  /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+    //Check length and format
+    if(nie.length !== 9 || !regExpresion.test(nie)){
+      return false;
+    }
+    return true;
+  }
+
 }
