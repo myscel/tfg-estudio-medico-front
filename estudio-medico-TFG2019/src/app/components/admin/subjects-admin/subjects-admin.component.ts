@@ -356,6 +356,9 @@ export class SubjectsAdminComponent implements OnInit {
   }
 
   generateExcel(){
+    this.inputIDSubject = "";
+    this.inputDNIResearcher = "";
+    
     let observable = this.adminService.getAllAppointmentDetails();
 
     if(observable === null){
