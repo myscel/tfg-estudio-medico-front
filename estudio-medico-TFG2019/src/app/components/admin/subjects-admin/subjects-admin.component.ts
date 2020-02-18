@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 import { DniInputServiceService } from 'src/app/services/researcher/dni-input-service.service';
 import { IdentificationNumberSubjectServiceService } from 'src/app/services/subject/identification-number-subject-service.service';
+import { Appointment } from 'src/app/models/Appointment';
+import { ExcelServiceService } from 'src/app/services/excel/excel-service.service';
 
 @Component({
   selector: 'app-subjects-admin',
@@ -44,7 +46,8 @@ export class SubjectsAdminComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sortSubjectsService: SortSubjectsServiceService,
     private dniInputService: DniInputServiceService,
-    private identificationNumberSubjectService: IdentificationNumberSubjectServiceService) { }
+    private identificationNumberSubjectService: IdentificationNumberSubjectServiceService,
+    private excelService: ExcelServiceService) { }
 
   ngOnInit() {
     this.checkAdminProfile();
@@ -349,6 +352,83 @@ export class SubjectsAdminComponent implements OnInit {
   checkAdminProfile(){
     if(!this.adminService.checkAdminProfile()){
       this.doLogOut();
+    }
+  }
+
+  generateExcel(){
+    let observable = this.adminService.getAllAppointmentDetails();
+
+    if(observable === null){
+      this.router.navigate(['/login']);
+    }
+
+    else{
+      observable.subscribe(responseData =>{
+        let appointments: Appointment[] = [];
+        appointments = responseData;
+
+        var info = {
+          list: []
+        };
+
+        for(var i in appointments["list"]) {    
+          var elem = appointments["list"][i];  
+          
+          if(elem.birthDate !== null){
+            elem.birthDate = new Date(elem.birthDate);
+          }
+          if(elem.investigationDate !== null){
+            elem.investigationDate = new Date(elem.investigationDate);
+          }
+
+          info.list.push({ 
+              "IDENT_PACIENTE" : elem.identificationNumber,
+              "FECHA_REALIZACIÓN"  : elem.investigationDate,
+              "VITAMINA_D" : elem.vitaminD,
+              "HBA1C"  : elem.hba1c,
+              "ESTACIÓN"       : elem.season, 
+              "SEXO" : elem.gender,
+              "NIVEL_ESTUDIOS"  : elem.studyLevel,
+              "FECHA_NACIMIENTO"       : elem.birthDate,
+              "NIVEL_SOCIOECONÓMICO" : elem.socioeconomicLevel,
+              "TABACO"  : elem.tobacco,
+              "RIESGO_ALCOHOL"       : elem.riskAlcohol,
+              "EXPOSICIÓN_SOLAR" : elem.solarExposure,
+              "CREMA_SPF"  : elem.spfCream,
+              "PUNTUACION_SPF"       : elem.spfScore,
+              "EJERCICIO" : elem.exercise,
+              "DM2"  : elem.dm2,
+              "GLUCOSA"       : elem.glucose,
+              "IMC" : elem.imc,
+              "OBESIDAD"  : elem.obesity,
+              "TAS"       : elem.tas,
+              "TAD" : elem.tad,
+              "HIPERTENSION_ARTERIAL"  : elem.arterialHypertension,
+              "COLESTEROL"       : elem.cholesterol,
+              "LDL" : elem.ldl,
+              "HDL"  : elem.hdl,
+              "TG"       : elem.tg,
+              "DISLIPEMIA" : elem.dyslipemy,
+              "CREATININA"  : elem.creatinine,
+              "FILTRADO_GLOMERULAR"       : elem.glomerular,
+              "INSUFICIENCIA_RENAL" : elem.kidneyInsufficiency,
+              "FOTOTIPO"  : elem.fototype,
+              "TRATAMIENTO_DIABETES"  : elem.diabetesTreatment,
+              "SUPLEMENTACIÓN_VITAMINA_D" : elem.vitaminDSupplementation,
+          });
+        }
+
+        this.setSuccessModal();
+        this.successMessage = "Documento excel generado correctamente";
+        let today = new Date();
+        let day = today.getUTCDate();
+        let month = today.getUTCMonth() + 1;
+        let year = today.getUTCFullYear();
+        this.excelService.generateExcelFile(info.list, "INVESTIGACION_" + this.userLogged.name  + "_" + day + "/" + month + "/" + year);
+      }, error =>{
+        this.alertMessage = "Fallo al generar el documento excel";
+        this.setAlertModal();
+      });
     }
   }
 }

@@ -124,6 +124,12 @@
             <img id="imgUpdate" src="../../../../assets/icons/refresh-button.png" height="18">
 
           </button>
+
+          <button [disabled]="this.subjects.length == 0" type="button" id="buttonExcel" (click)="generateExcel()" class= "btn btn-success">
+            Generar Excel
+            <img id="imgExcel" src="../../../../assets/icons/donwload.png" height="18">
+
+          </button>
         </div>
         <div id="divTable" class="table-responsive" *ngIf="!emptyList; else divEmptyList">
             <table class="table">

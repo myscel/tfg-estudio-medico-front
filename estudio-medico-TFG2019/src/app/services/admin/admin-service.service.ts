@@ -165,5 +165,15 @@ export class AdminServiceService {
 
     return userLogged.role === "ADMIN";
   }
+
+  public getAllAppointmentDetails(): Observable<any>{
+    let userLogged: User = JSON.parse(localStorage.getItem("userLogged"));
+    
+    if(userLogged === null){
+      return null;
+    }
+
+    return this.http.get(`${this.adminUrl}/getAllInvestigationDetailsAdmin` , {headers: this.adminHeaders});
+  }
   
 }
