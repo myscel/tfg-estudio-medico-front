@@ -93,13 +93,33 @@ export class ResearchersAdminComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    if(!this.checkEmptyFields()){
+    if(!this.checkNameField()){
       this.setAlertRegister();
-      this.errorMessage = "Rellena todos los campos";
+      this.errorMessage = "Campo Nombre vacío";
+    }
+    else if(!this.checkLastNameField()){
+      this.setAlertRegister();
+      this.errorMessage = "Campo Apellidos vacío";
+    }
+    else if(!this.checkDNIField()){
+      this.setAlertRegister();
+      this.errorMessage = "Campo DNI/NIE vacío";
+    }
+    else if(!this.checkPasswordField()){
+      this.setAlertRegister();
+      this.errorMessage = "Campo Contraseña vacío";
+    }
+    else if(!this.checkPasswordRepeatField()){
+      this.setAlertRegister();
+      this.errorMessage = "Campo Confirmar Contraseña vacío";
+    }
+    else if(!this.checkGenderField()){
+      this.setAlertRegister();
+      this.errorMessage = "Campo Género vacío";
     }
     else if(!this.dniInputService.validateDNI(this.f.dni.value) && !this.dniInputService.validateNIE(this.f.dni.value)){
       this.setAlertRegister();
-      this.errorMessage = "DNI/NIE formato incorrecto";
+      this.errorMessage = "Formatos válidos DNI:11111111X NIE: X1111111Y";
     }
     else if(!this.passwordInputService.validateLengthPass(this.f.password.value)){
       this.setAlertRegister();
@@ -121,18 +141,31 @@ export class ResearchersAdminComponent implements OnInit {
     }
   }
 
-  checkEmptyFields(): boolean{
-    if(!this.dniInputService.validateEmptyField(this.f.dni.value) || 
-        !this.passwordInputService.validateEmptyField(this.f.password.value) ||   
-        !this.passwordInputService.validateEmptyField(this.f.passwordRepeat.value) || 
-        !this.nameInputService.validateEmptyField(this.f.name.value) ||
-        !this.surnameInputService.validateEmptyField(this.f.lastname.value) ||
-        !this.genderInputService.validateEmptyField(this.f.gender.value)
-    ){
-      return false;
-    }
-    return true;
+  checkNameField(): boolean{
+    return this.nameInputService.validateEmptyField(this.f.name.value);
   }
+
+  checkLastNameField(): boolean{
+    return this.surnameInputService.validateEmptyField(this.f.lastname.value);
+  }
+
+  checkDNIField(): boolean{
+    return this.dniInputService.validateEmptyField(this.f.dni.value);
+  }
+
+  checkPasswordField(): boolean{
+    return this.passwordInputService.validateEmptyField(this.f.password.value);
+  }
+
+  checkPasswordRepeatField(): boolean{
+    return this.passwordInputService.validateEmptyField(this.f.passwordRepeat.value);
+  }
+
+  checkGenderField(): boolean{
+    return this.genderInputService.validateEmptyField(this.f.gender.value);
+  }
+
+
 
   registerResearcher(user: User){
     let observable = this.adminService.registerResearcher(user);
