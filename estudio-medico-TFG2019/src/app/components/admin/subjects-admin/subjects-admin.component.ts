@@ -373,52 +373,99 @@ export class SubjectsAdminComponent implements OnInit {
         var info = {
           list: []
         };
+        var elemAnterior;
+        var elem;
 
         for(var i in appointments["list"]) {    
-          var elem = appointments["list"][i];  
-          
-          if(elem.birthDate !== null){
-            elem.birthDate = new Date(elem.birthDate);
+          if(Number(i) % 2 === 0){
+            elemAnterior = appointments["list"][i];
           }
-          if(elem.investigationDate !== null){
-            elem.investigationDate = new Date(elem.investigationDate);
-          }
+          else{
+            elem = appointments["list"][i];
+            if(elem.birthDate !== null){
+              elem.birthDate = new Date(elem.birthDate);
+            }
+            if(elem.investigationDate !== null){
+              elem.investigationDate = new Date(elem.investigationDate);
+            }
 
-          info.list.push({ 
-              "IDENT_PACIENTE" : elem.identificationNumber,
-              "FECHA_REALIZACIÓN"  : elem.investigationDate,
-              "VITAMINA_D" : elem.vitaminD,
-              "HBA1C"  : elem.hba1c,
-              "ESTACIÓN"       : elem.season, 
-              "SEXO" : elem.gender,
-              "NIVEL_ESTUDIOS"  : elem.studyLevel,
-              "FECHA_NACIMIENTO"       : elem.birthDate,
-              "NIVEL_SOCIOECONÓMICO" : elem.socioeconomicLevel,
-              "TABACO"  : elem.tobacco,
-              "RIESGO_ALCOHOL"       : elem.riskAlcohol,
-              "EXPOSICIÓN_SOLAR" : elem.solarExposure,
-              "CREMA_SPF"  : elem.spfCream,
-              "PUNTUACION_SPF"       : elem.spfScore,
-              "EJERCICIO" : elem.exercise,
-              "DM2"  : elem.dm2,
-              "GLUCOSA"       : elem.glucose,
-              "IMC" : elem.imc,
-              "OBESIDAD"  : elem.obesity,
-              "TAS"       : elem.tas,
-              "TAD" : elem.tad,
-              "HIPERTENSION_ARTERIAL"  : elem.arterialHypertension,
-              "COLESTEROL"       : elem.cholesterol,
-              "LDL" : elem.ldl,
-              "HDL"  : elem.hdl,
-              "TG"       : elem.tg,
-              "DISLIPEMIA" : elem.dyslipemy,
-              "CREATININA"  : elem.creatinine,
-              "FILTRADO_GLOMERULAR"       : elem.glomerular,
-              "INSUFICIENCIA_RENAL" : elem.kidneyInsufficiency,
-              "FOTOTIPO"  : elem.fototype,
-              "TRATAMIENTO_DIABETES"  : elem.diabetesTreatment,
-              "SUPLEMENTACIÓN_VITAMINA_D" : elem.vitaminDSupplementation,
-          });
+            if(elemAnterior.birthDate !== null){
+              elemAnterior.birthDate = new Date(elemAnterior.birthDate);
+            }
+            if(elemAnterior.investigationDate !== null){
+              elemAnterior.investigationDate = new Date(elemAnterior.investigationDate);
+            }
+  
+            info.list.push({ 
+                "IDENT_PACIENTE" : elem.identificationNumber,
+
+                "FECHA_REALIZACIÓN_1"  : elemAnterior.investigationDate,
+                "VITAMINA_D_1" : elemAnterior.vitaminD,
+                "HBA1C_1"  : elemAnterior.hba1c,
+                "ESTACIÓN_1"       : elemAnterior.season, 
+                "SEXO_1" : elemAnterior.gender,
+                "NIVEL_ESTUDIOS_1"  : elemAnterior.studyLevel,
+                "FECHA_NACIMIENTO_1"       : elemAnterior.birthDate,
+                "NIVEL_SOCIOECONÓMICO_1" : elemAnterior.socioeconomicLevel,
+                "TABACO_1"  : elemAnterior.tobacco,
+                "RIESGO_ALCOHOL_1"       : elemAnterior.riskAlcohol,
+                "EXPOSICIÓN_SOLAR_1" : elemAnterior.solarExposure,
+                "CREMA_SPF_1"  : elemAnterior.spfCream,
+                "PUNTUACION_SPF_1"       : elemAnterior.spfScore,
+                "EJERCICIO_1" : elemAnterior.exercise,
+                "DM2_1"  : elemAnterior.dm2,
+                "GLUCOSA_1"       : elemAnterior.glucose,
+                "IMC_1" : elemAnterior.imc,
+                "OBESIDAD_1"  : elemAnterior.obesity,
+                "TAS_1"       : elemAnterior.tas,
+                "TAD_1" : elemAnterior.tad,
+                "HIPERTENSION_ARTERIAL_1"  : elemAnterior.arterialHypertension,
+                "COLESTEROL_1"       : elemAnterior.cholesterol,
+                "LDL_1" : elemAnterior.ldl,
+                "HDL_1"  : elemAnterior.hdl,
+                "TG_1"       : elemAnterior.tg,
+                "DISLIPEMIA_1" : elemAnterior.dyslipemy,
+                "CREATININA_1"  : elemAnterior.creatinine,
+                "FILTRADO_GLOMERULAR_1"       : elemAnterior.glomerular,
+                "INSUFICIENCIA_RENAL_1" : elemAnterior.kidneyInsufficiency,
+                "FOTOTIPO_1"  : elemAnterior.fototype,
+                "TRATAMIENTO_DIABETES_1"  : elemAnterior.diabetesTreatment,
+                "SUPLEMENTACIÓN_VITAMINA_D_1" : elemAnterior.vitaminDSupplementation,
+
+                "FECHA_REALIZACIÓN_2"  : elem.investigationDate,
+                "VITAMINA_D_2" : elem.vitaminD,
+                "HBA1C_2"  : elem.hba1c,
+                "ESTACIÓN_2"       : elem.season, 
+                "SEXO_2" : elem.gender,
+                "NIVEL_ESTUDIOS_2"  : elem.studyLevel,
+                "FECHA_NACIMIENTO_2"       : elem.birthDate,
+                "NIVEL_SOCIOECONÓMICO_2" : elem.socioeconomicLevel,
+                "TABACO_2"  : elem.tobacco,
+                "RIESGO_ALCOHOL_2"       : elem.riskAlcohol,
+                "EXPOSICIÓN_SOLAR_2" : elem.solarExposure,
+                "CREMA_SPF_2"  : elem.spfCream,
+                "PUNTUACION_SPF_2"       : elem.spfScore,
+                "EJERCICIO_2" : elem.exercise,
+                "DM2_2"  : elem.dm2,
+                "GLUCOSA_2"       : elem.glucose,
+                "IMC_2" : elem.imc,
+                "OBESIDAD_2"  : elem.obesity,
+                "TAS_2"       : elem.tas,
+                "TAD_2" : elem.tad,
+                "HIPERTENSION_ARTERIAL_2"  : elem.arterialHypertension,
+                "COLESTEROL_2"       : elem.cholesterol,
+                "LDL_2" : elem.ldl,
+                "HDL_2"  : elem.hdl,
+                "TG_2"       : elem.tg,
+                "DISLIPEMIA_2" : elem.dyslipemy,
+                "CREATININA_2"  : elem.creatinine,
+                "FILTRADO_GLOMERULAR_2"       : elem.glomerular,
+                "INSUFICIENCIA_RENAL_2" : elem.kidneyInsufficiency,
+                "FOTOTIPO_2"  : elem.fototype,
+                "TRATAMIENTO_DIABETES_2"  : elem.diabetesTreatment,
+                "SUPLEMENTACIÓN_VITAMINA_D_2" : elem.vitaminDSupplementation,
+            });
+          }       
         }
 
         this.setSuccessModal();
