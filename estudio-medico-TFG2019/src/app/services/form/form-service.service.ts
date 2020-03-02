@@ -44,7 +44,7 @@ export class FormServiceService {
     if(isNaN(sunExposure)){
       return false;
     }
-    return sunExposure >= 0 && sunExposure <= 1200;
+    return Number.isInteger(sunExposure) && sunExposure >= 0 && sunExposure <= 1200;
   }
 
   validateExercise(exerciseValue: string): boolean{
@@ -57,7 +57,7 @@ export class FormServiceService {
     if(isNaN(exercise)){
       return false;
     }
-    return exercise >= 0 && exercise <= 700;
+    return Number.isInteger(exercise) && exercise >= 0 && exercise <= 700;
   }
 
   validateGlucose(glucoseValue: string): boolean{
