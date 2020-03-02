@@ -444,11 +444,21 @@ export class AppointmentComponent implements OnInit {
   }
 
   validateLifeHabitsVariables(): boolean{
+    
     if(this.form.gradeSPF.value !== undefined){
       this.spfGradeValidated = true;
     }
     else{
       this.spfGradeValidated = false;
+    }
+
+    if(this.form.creamSPF.value === "false" && this.form.gradeSPF.value !== undefined &&  this.form.gradeSPF.value !== "0"){
+      this.alertMessage = "La puntuación SPF debe valer cero";
+      return false;
+    }
+    if(this.form.creamSPF.value === "true" && this.form.gradeSPF.value !== undefined &&  this.form.gradeSPF.value === "0"){
+      this.alertMessage = "La puntuación SPF no puede valer cero";
+      return false;
     }
 
     if(!this.tobaccoValidated){
