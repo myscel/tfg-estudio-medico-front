@@ -1,219 +1,218 @@
 * {
-    text-align: center;
-    font-family: 'Roboto Slab', serif;
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
 }
 
-header{
-    width: 100%;
-    height: 100px;
-    background-color: white;
-    -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 50px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
-  }
-
-  #headerLeft{
-    font-size: 40px;
-    color: rgb(102, 163, 255);
-    margin-left: 40px;
+header {
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 50px;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(179, 215, 248));
 }
 
-#headerUserName{
-    font-weight: bold;
-    font-size: 20px;
+#headerLeft {
+  font-size: 40px;
+  color: rgb(102, 163, 255);
+  margin-left: 40px;
 }
 
-#headerRight{
-    margin-right: 30px;
-    font-size: 40px;
-    font-weight: bolder;
-    color: rgb(102, 102, 102);
-    display: flex;
-    justify-content: right;
-    align-items: center;
+#headerUserName {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-  #buttonLogout{
-    text-align: center;
-    display: flex;
-    justify-content:center;
-    align-items: center;
+#headerRight {
+  margin-right: 30px;
+  font-size: 40px;
+  font-weight: bolder;
+  color: rgb(102, 102, 102);
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
-#buttonProfile{
-    text-align: center;
-    display: flex;
-    justify-content:center;
-    align-items: center;
+#buttonLogout {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#imglogout{
-    margin-left: 5px;
+#buttonProfile {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.navButton:hover{
-    transform: scale(1.05, 1.05);
+#imglogout {
+  margin-left: 5px;
 }
 
-#navigationBar{
-    width: 100%;
-    font-size: 40px;
-    -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    box-shadow: 1px 2px 3px rgb(65, 115, 155);
-    display: flex;
-    justify-content: flex-start;
-    padding: 5px 800px 5px 80px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
+.navButton:hover {
+  transform: scale(1.05, 1.05);
 }
 
-.navButton{
-    min-width: 150px;
-    margin-left: 20px;
-    text-shadow: 1px 1px 2px #000000;
-    font-weight: bold;
+#navigationBar {
+  width: 100%;
+  font-size: 40px;
+  -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  -webkit-box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  box-shadow: 1px 2px 3px rgb(65, 115, 155);
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px 800px 5px 80px;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(179, 215, 248));
 }
 
-.form{
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    border-radius: 8px;
-    padding-bottom: 1%;
-    background-color: rgb(225, 238, 248);
+.navButton {
+  min-width: 150px;
+  margin-left: 20px;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: bold;
 }
 
-.formSection{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 3%;
-    padding: 0 2% 0 2%;
-  }
-
-  .textInput{
-    color: rgb(106, 106, 106);
-    font-weight: bolder;
-    font-size: 16px;
-  }
-
-.sectionTitle{
-    margin-bottom: 2%;
-    font-size: 30px;
+.form {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  border-radius: 8px;
+  padding-bottom: 1%;
+  background-color: rgb(225, 238, 248);
 }
 
-.sectionContent{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 20px;
+.formSection {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3%;
+  padding: 0 2% 0 2%;
 }
 
-.form-group{
-    min-width: 30%;
-    padding: 5px;
-    border-radius: 8px;
-    background-color: rgb(203, 229, 253);
+.textInput {
+  color: rgb(106, 106, 106);
+  font-weight: bolder;
+  font-size: 16px;
 }
 
-#buttonForm{
-    margin-left: 15px;
+.sectionTitle {
+  margin-bottom: 2%;
+  font-size: 30px;
 }
 
-.yesNoGroup{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-
-  .yesNoRadio{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .textYesNo{
-    color: rgb(54, 54, 54);
-    font-weight: bolder;
-    font-size: 12px;
-    color: rgb(106, 106, 106);
-  }
-  
-  .inputRadio{
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-
-  .lineSeparator{
-      height: 2px;
-      width: 90%;
-      margin-left: 5%;
-      margin-bottom: 4px;
-      background-color: rgb(151, 205, 255);
-  }
-
-  .inputWrong{
-      border: 2px solid red;
-  }
-
-  .inputRight{
-    border: 2px solid green;
+.sectionContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 20px;
 }
 
-.inputClear{
-    border: 2px solid transparent;
+.form-group {
+  min-width: 30%;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: rgb(203, 229, 253);
 }
 
-.blackFont{
-    color:black;
+#buttonForm {
+  margin-left: 15px;
 }
 
-#modalSuccess, #modalError, #modalWarningExit, #modalWarningSave{
-    font-size: 18px;
-    width: 86%;
-    margin: 0 auto;
-  }
+.yesNoGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
-  .myModal{
-    height: 100px;
-    align-items: center;
-  }
+.yesNoRadio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  #modalInvisible{
-    border:0px solid transparent;
-    color: transparent;
-    height: 100px;
-    
-  }
+.textYesNo {
+  color: rgb(54, 54, 54);
+  font-weight: bolder;
+  font-size: 12px;
+  color: rgb(106, 106, 106);
+}
 
-  .buttonExit{
-      width: 50px;
-      margin-right: 20px;
-      margin-bottom: 10px;
-      margin-top: 10px;
-  }
+.inputRadio {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
 
-  #mainButtons{
-      margin-bottom: 20px;
-  }
+.lineSeparator {
+  height: 2px;
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 4px;
+  background-color: rgb(151, 205, 255);
+}
 
-  #modalSuccess{
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
+.inputWrong {
+  border: 2px solid red;
+}
 
-  #buttonExitAfterRegister{
-    margin-top: 7px;
-  }
+.inputRight {
+  border: 2px solid green;
+}
 
-  .textModal{
-    margin-top: 15px;
+.inputClear {
+  border: 2px solid transparent;
+}
+
+.blackFont {
+  color: black;
+}
+
+#modalSuccess, #modalError, #modalWarningExit, #modalWarningSave {
+  font-size: 18px;
+  width: 86%;
+  margin: 0 auto;
+}
+
+.myModal {
+  height: 100px;
+  align-items: center;
+}
+
+#modalInvisible {
+  border: 0px solid transparent;
+  color: transparent;
+  height: 100px;
+}
+
+.buttonExit {
+  width: 50px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#mainButtons {
+  margin-bottom: 20px;
+}
+
+#modalSuccess {
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+#buttonExitAfterRegister {
+  margin-top: 7px;
+}
+
+.textModal {
+  margin-top: 15px;
 }

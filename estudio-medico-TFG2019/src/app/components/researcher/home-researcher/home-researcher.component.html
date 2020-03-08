@@ -11,162 +11,500 @@
 
 <header>
 
-    <div id="headerLeft">
-      <img id="logo" src="../../../assets/img/logo.png" height="55">
-        Estudio <strong>Médico</strong>
+  <div id="headerLeft">
+    <img id="logo" src="../../../assets/img/logo.png" height="55">
+    Estudio <strong>Médico</strong>
+  </div>
+  <div id="headerUserName">
+    <span>
+      Investigador
+    </span>
+    <span id="spanGrey">
+      | {{userLogged.name}}
+    </span>
+  </div>
+  <div id="headerRight">
+    <div *ngIf="userLogged.role !== 'RESEARCHER'" id="buttonLogout" class="btn btn-primary navButton"
+      (click)="doAdminView()">
+      <div>ADMINISTRAR</div>
+      <img id="imglogout" src="../../../../assets/icons/researcherToAdmin.png" height="24">
     </div>
-    <div id="headerUserName">
-        <span>
-          Investigador
-        </span>
-        <span id="spanGrey">
-          | {{userLogged.name}}
-        </span>
+    <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
+      <div>PERFIL</div>
+      <img src="../../../../assets/icons/profile.png" height="24">
     </div>
-    <div id="headerRight">
-        <div *ngIf="userLogged.role !== 'RESEARCHER'" id="buttonLogout" class="btn btn-primary navButton" (click)="doAdminView()">
-            <div>ADMINISTRAR</div>
-            <img id="imglogout" src="../../../../assets/icons/researcherToAdmin.png" height="24">
-          </div>
-        <div id="buttonProfile" class="btn btn-primary navButton" (click)="doProfile()">
-            <div>PERFIL</div>
-            <img src="../../../../assets/icons/profile.png" height="24">
-        </div>
-        <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
-            <div>DESCONECTAR</div>
-            <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
-        </div>
+    <div id="buttonLogout" class="btn btn-primary navButton" (click)="doLogOut()">
+      <div>DESCONECTAR</div>
+      <img id="imglogout" src="../../../../assets/icons/logout.png" height="24">
     </div>
+  </div>
 
 
 </header>
 
 <body>
-    <div id="navigationBar">
-        <button class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
-        <button class="btn btn-primary navButton">DOCUMENTACIÓN</button>
+  <div id="navigationBar">
+    <button class="btn btn-primary navButton" (click)="doHome()">PACIENTES</button>
+    <button class="btn btn-primary navButton">DOCUMENTACIÓN</button>
+  </div>
+
+  <div id="divRight">
+
+    <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
+      <div class="textModal">
+        <strong>Error! </strong> {{alertMessage}}
+      </div>
     </div>
 
-    <div id="divRight">
+    <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
+      <div class="textModal">
+        <strong>Éxito! </strong> {{successMessage}}
+      </div>
+    </div>
 
-      <div id="modalError" class="myModal alert alert-danger" [hidden]='!alertHidden'>
-        <div class="textModal">
-          <strong>Error! </strong> {{alertMessage}}
-        </div>
-      </div>
-    
-      <div id="modalSuccess" class="myModal alert alert-success" [hidden]='!successHidden'>
-        <div class="textModal">
-          <strong>Éxito! </strong> {{successMessage}}
-        </div>
-      </div>
-    
-      <div id="modalInvisible"  [hidden]='!alertInvisibleHidden'>
-      </div>
+    <div id="modalInvisible" [hidden]='!alertInvisibleHidden'>
+    </div>
 
-      <div id="headerBar">
-        <div id="titleTableResearchers">
-          <strong id="textList">
-            LISTA PACIENTES
-          </strong>
-          <button [disabled]="this.subjects.length == 0" type="button" id="buttonExcel" class="btn btn-success" (click)="generateExcel()">
-            Generar Excel
-            <img id="imgExcel" src="../../../../assets/icons/donwload.png"height="24">
+    <div id="headerBar">
+      <div id="titleTableResearchers">
+        <strong id="textList">
+          LISTA PACIENTES
+        </strong>
+        <button [disabled]="this.subjects.length == 0" type="button" id="buttonExcel" class="btn btn-success"
+          (click)="generateExcel()">
+          Generar Excel
+          <img id="imgExcel" src="../../../../assets/icons/donwload.png" height="24">
+        </button>
+
+      </div>
+      <div class="addSubject">
+        <b id="textAddSubject">
+          AÑADIR PACIENTE
+        </b>
+        <form class="form" [formGroup]="newSubjectForm">
+          Identificador:
+          <input type="text" formControlName="identificationNumber" class="form-control" required>
+          <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="registerSubject()">
+            Añadir
           </button>
-
-        </div>
-        <div class="addSubject">
-            <b id="textAddSubject">
-              AÑADIR PACIENTE
-            </b>         
-            <form class="form" [formGroup]="newSubjectForm">
-              Identificador:
-              <input type="text" formControlName="identificationNumber" class="form-control" required>
-              <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="registerSubject()">
-                Añadir
-              </button>
-            </form>
-        </div> 
+        </form>
       </div>
-
-      <div id="divTable" class="table-responsive" *ngIf="this.subjects.length !== 0; else divEmptyList">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>
-                  <div class="thSort">
-                    <div>
-                        IDENTIFICADOR PACIENTE
-                    </div>
-                    <div>
-                      <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
-                            <img src="../../../../assets/icons/up-arrow.png" height="24">
-                      </button> 
-                  </div>
-                  <div>
-                    <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
-                        <img src="../../../../assets/icons/down-arrow.png" height="24">
-                    </button>    
-                  </div>
-                  </div>
-                </th>
-                <th>
-                    <div class="thSort">
-                      <div>
-                          PRIMERA CITA
-                      </div>
-                    </div>
-                  </th>
-                  <th>
-                      <div class="thSort">
-                        <div>
-                            SEGUNDA CITA
-                        </div>
-                      </div>
-                    </th>
-        
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of subjects; let i = index"
-                [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
-                <td> {{user.identificationNumber}}</td>
-                <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '1')">
-                    Consultar  <img src="../../../../assets/icons/eye.png" height="20px">
-                  </button>
-                </td>
-                <ng-template #buttonFromSubject1> 
-                  <td>
-                  <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '1')">
-                    Cita 1
-                    <img src="../../../../assets/icons/writing.png" height="18px">
-                  </button>
-                </td>
-                </ng-template>
-                <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
-                  <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '2')">
-                    Consultar <img src="../../../../assets/icons/eye.png" height="20px">
-                  </button>
-                </td>
-                <ng-template #buttonFromSubject2>
-                   <td>
-                      <button [disabled]="!user.firstInvestigationCompleted" class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '2')">
-                       Cita 2
-                       <img src="../../../../assets/icons/writing.png" height="18px">
-                      </button>
-                    </td>
-                  </ng-template>
-              </tr>
-            </tbody>
-          </table>
-      </div> 
-
-      <ng-template #divEmptyList>
-        <div id="emptyListMessage">
-          Actualmente no hay pacientes registrados
-        </div>
-      </ng-template>
-       
     </div>
+
+    <div id="divTable" class="table-responsive" *ngIf="this.subjects.length !== 0; else divEmptyList">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <div class="thSort">
+                <div>
+                  IDENTIFICADOR PACIENTE
+                </div>
+                <div>
+                  <button class="buttonInvisible" type="button" (click)="sortUpIdentificationNumber()">
+                    <img src="../../../../assets/icons/up-arrow.png" height="24">
+                  </button>
+                </div>
+                <div>
+                  <button class="buttonInvisible" type="button" (click)="sortDownIdentificationNumber()">
+                    <img src="../../../../assets/icons/down-arrow.png" height="24">
+                  </button>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div class="thSort">
+                <div>
+                  PRIMERA CITA
+                </div>
+              </div>
+            </th>
+            <th>
+              <div class="thSort">
+                <div>
+                  SEGUNDA CITA
+                </div>
+              </div>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of subjects; let i = index"
+            [ngStyle]="{'background-color': (i % 2) !== 1 ? 'rgb(240, 240, 240)' : 'white'}">
+            <td> {{user.identificationNumber}}</td>
+            <td *ngIf="user.firstInvestigationCompleted; else buttonFromSubject1">
+              <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '1')">
+                Consultar <img src="../../../../assets/icons/eye.png" height="20px">
+              </button>
+            </td>
+            <ng-template #buttonFromSubject1>
+              <td>
+                <button class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '1')">
+                  Cita 1
+                  <img src="../../../../assets/icons/writing.png" height="18px">
+                </button>
+              </td>
+            </ng-template>
+            <td *ngIf="user.secondInvestigationCompleted; else buttonFromSubject2">
+              <button class="buttonLook btn btn-info" type="button" (click)="showForm(user.id, '2')">
+                Consultar <img src="../../../../assets/icons/eye.png" height="20px">
+              </button>
+            </td>
+            <ng-template #buttonFromSubject2>
+              <td>
+                <button [disabled]="!user.firstInvestigationCompleted"
+                  class="buttonInvestigation btn btn-primary formButton" (click)="doNewForm(user.id, '2')">
+                  Cita 2
+                  <img src="../../../../assets/icons/writing.png" height="18px">
+                </button>
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #divEmptyList>
+      <div id="emptyListMessage">
+        Actualmente no hay pacientes registrados
+      </div>
+    </ng-template>
+
+  </div>
+
+  <div class="checksContainer">
+    <div class="checkBox">
+      <form [formGroup]="inclusionForm" (ngSubmit)="onSubmit()">
+        <h2>Criterios de inclusión</h2>
+
+        <div class="checksDisplay">
+
+          <div class="yesNoGroup">
+            <p>Mayor de 18 años</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Tarjeta sanitaria en los centros de salud participantes</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Registro en histórica clínica electrónica de diagnóstico de diabetes mellitus tipo 2 (código CIAP T90)
+            </p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Al menos una visita registrada en la historia clínica electrónica de AP en el último año</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Manifiesten su conformidad para participar y firmen el consentimiento informado</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Criterios de exclusión</h2>
+
+        <div class="checksDisplay">
+
+          <div class="yesNoGroup">
+            <p>Personas inmovilizadas en domicilio o institucionalizadas en residencias u hospitales durante el periodo
+              de
+              estudio</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Personas que residan fuera del área donde se realiza la investigación durante más de 6 meses
+              al
+              año o durante el periodo de estudio</p>
+            <div class="radioButtons">
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    Sí
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group yesNoRadio">
+                  <div>
+                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      required>
+                  </div>
+                  <div class="textYesNo">
+                    No
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yesNoGroup">
+            <p>Tener patologías que modifican los niveles séricos de vitamina D y/o HbA1c:
+              osteomalacia, osteoporosis, artritis reumatoide, hiperparatiroidismo, nefrolitiasis, hipercalcemia,
+              enfermedad renal crónica con FG < 50 o historia de cirugía bariátrica</p> <div class="radioButtons">
+                <div>
+                  <div class="form-group yesNoRadio">
+                    <div>
+                      <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                        required>
+                    </div>
+                    <div class="textYesNo">
+                      Sí
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group yesNoRadio">
+                    <div>
+                      <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                        required>
+                    </div>
+                    <div class="textYesNo">
+                      No
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+
+
+        <div class="yesNoGroup">
+          <p>Estar en tratamiento concomitante con corticoides orales, carbamazepina, fenobarbital, ácido valproico,
+            gabapentina, isoniacida y calcitonina, antiretrovirales para VIH o tratamiento inmunosupresor</p>
+          <div class="radioButtons">
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  Sí
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  No
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="yesNoGroup">
+          <p>Haber estado en los 6 meses previos o estar activamente en tratamiento con suplementos de vitamina D</p>
+          <div class="radioButtons">
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  Sí
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  No
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="yesNoGroup">
+          <p>Mujeres embarazadas o lactantes</p>
+          <div class="radioButtons">
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  Sí
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-group yesNoRadio">
+                <div>
+                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    required>
+                </div>
+                <div class="textYesNo">
+                  No
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    </form>
+
+  </div>
+  </div>
+
 </body>

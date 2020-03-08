@@ -3,7 +3,7 @@
     font-family: 'Roboto Slab', serif;
 }
 
-header{
+header {
     width: 100%;
     height: 100px;
     background-color: white;
@@ -14,21 +14,21 @@ header{
     justify-content: space-between;
     align-items: center;
     padding-right: 50px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
-  }
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(179, 215, 248));
+}
 
-  #headerLeft{
+#headerLeft {
     font-size: 40px;
     color: rgb(102, 163, 255);
     margin-left: 40px;
 }
 
-#headerUserName{
+#headerUserName {
     font-weight: bold;
     font-size: 20px;
 }
 
-#headerRight{
+#headerRight {
     margin-right: 30px;
     font-size: 40px;
     font-weight: bolder;
@@ -38,33 +38,33 @@ header{
     align-items: center;
 }
 
-#buttonLogout{
+#buttonLogout {
     text-align: center;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
-#buttonProfile{
+#buttonProfile {
     text-align: center;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
-#buttonNewSubject{
+#buttonNewSubject {
     font-size: 16px;
 }
 
-#imglogout{
+#imglogout {
     margin-left: 5px;
 }
 
-.navButton:hover{
+.navButton:hover {
     transform: scale(1.05, 1.05);
 }
 
-#navigationBar{
+#navigationBar {
     width: 100%;
     font-size: 40px;
     -moz-box-shadow: 1px 2px 3px rgb(65, 115, 155);
@@ -73,102 +73,101 @@ header{
     display: flex;
     justify-content: flex-start;
     padding: 5px 800px 5px 80px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(179, 215, 248));
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(179, 215, 248));
 }
 
-.navButton{
+.navButton {
     min-width: 150px;
     margin-left: 20px;
     text-shadow: 1px 1px 2px #000000;
     font-weight: bold;
 }
 
-#divRight{
+#divRight {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
 
-#titleTableResearchers{
+#titleTableResearchers {
     font-size: 30px;
     font-weight: bold;
     color: rgb(102, 163, 255);
     width: 50%;
     text-align: center;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
-  
-#divTable{
-      width: 80%;
-      border-radius: 8px;
-      margin-top: 30px;      
+
+#divTable {
+    width: 80%;
+    border-radius: 8px;
+    margin-top: 30px;
 }
-  
-thead{
-      background: rgba(105,105,105,1);
-      background: -moz-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(105,105,105,1)), color-stop(49%, rgba(102,102,102,1)), color-stop(50%, rgba(82,81,82,1)), color-stop(100%, rgba(31,31,31,1)));
-      background: -webkit-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-      background: -o-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-      background: -ms-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-      background: linear-gradient(to bottom, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#1f1f1f', GradientType=0 );
+
+thead {
+    background: rgba(105, 105, 105, 1);
+    background: -moz-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(105, 105, 105, 1)), color-stop(49%, rgba(102, 102, 102, 1)), color-stop(50%, rgba(82, 81, 82, 1)), color-stop(100%, rgba(31, 31, 31, 1)));
+    background: -webkit-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -o-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: linear-gradient(to bottom, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#1f1f1f', GradientType=0);
 }
-  
-th{
+
+th {
     color: white;
     font-size: 20px;
     font-weight: 575;
 }
-  
-td{
+
+td {
     font-size: 20px;
 }
 
-tr{
+tr {
     border-bottom: 1px solid gray;
 }
 
-
-.formButton{
+.formButton {
     margin: 5px 0 5px 0;
 }
 
-.addSubject{
+.addSubject {
     width: 650px;
     padding: 8px;
     border-radius: 8px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
     font-size: 15px;
     font-weight: 575;
-    background: rgba(105,105,105,1);
-    background: -moz-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(105,105,105,1)), color-stop(49%, rgba(102,102,102,1)), color-stop(50%, rgba(82,81,82,1)), color-stop(100%, rgba(31,31,31,1)));
-    background: -webkit-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-    background: -o-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-    background: -ms-linear-gradient(top, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-    background: linear-gradient(to bottom, rgba(105,105,105,1) 0%, rgba(102,102,102,1) 49%, rgba(82,81,82,1) 50%, rgba(31,31,31,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#1f1f1f', GradientType=0 );
+    background: rgba(105, 105, 105, 1);
+    background: -moz-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(105, 105, 105, 1)), color-stop(49%, rgba(102, 102, 102, 1)), color-stop(50%, rgba(82, 81, 82, 1)), color-stop(100%, rgba(31, 31, 31, 1)));
+    background: -webkit-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -o-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    background: linear-gradient(to bottom, rgba(105, 105, 105, 1) 0%, rgba(102, 102, 102, 1) 49%, rgba(82, 81, 82, 1) 50%, rgba(31, 31, 31, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#1f1f1f', GradientType=0);
 }
 
-.form{
+.form {
     margin-left: 20px;
     padding-left: 4px;
-    display:flex;
-    justify-content: right; 
+    display: flex;
+    justify-content: right;
     align-items: center;
 }
 
-#headerBar{
+#headerBar {
     width: 80%;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -177,37 +176,37 @@ input[type=text] {
     margin: 0 15px 0 15px;
 }
 
-#spanGrey{
+#spanGrey {
     color: rgb(102, 102, 102);
 }
 
-#modalSuccess, #modalError{
+#modalSuccess, #modalError {
     font-size: 18px;
     width: 80%;
 }
 
-.myModal{
+.myModal {
     height: 90px;
     align-items: center;
 }
 
-#modalInvisible{
-    border:0px solid transparent;
+#modalInvisible {
+    border: 0px solid transparent;
     color: transparent;
-    height: 110px; 
+    height: 110px;
 }
 
-.buttonLook, .buttonInvestigation{
+.buttonLook, .buttonInvestigation {
     height: 35px;
     align-self: center;
     width: 120px;
 }
 
-.buttonLook{
+.buttonLook {
     margin-top: 3px;
 }
 
-.buttonInvisible{
+.buttonInvisible {
     background: transparent;
     border: none !important;
     display: flex;
@@ -215,49 +214,119 @@ input[type=text] {
     align-items: center;
     width: 24px;
     margin: 0px 4px;
-  }
-  
-.buttonInvisible:hover{
+}
+
+.buttonInvisible:hover {
     background: transparent;
     border: none !important;
 }
 
-.thSort{
+.thSort {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#buttonExcel{
+#buttonExcel {
     height: 52px;
     font-size: 20px;
     width: 200px;
+    margin-right: 1%;
 }
 
-#textList{
+#textList {
     font-size: 40px;
 }
 
-#imgExcel{
+#imgExcel {
     margin-left: 8px;
 }
 
-#textAddSubject{
+#textAddSubject {
     margin-left: 10px;
 }
 
-.textModal{
+.textModal {
     margin-top: 15px;
 }
 
-#imgCross{
+#imgCross {
     margin-bottom: 2px;
 }
 
-#emptyListMessage{
+#emptyListMessage {
     width: 90%;
     font-size: 30px;
     margin-top: 30px;
     font-weight: bolder;
     color: rgb(102, 102, 102);
+}
+
+.checksContainer {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.checkBox {
+    width: 85%;
+    background-color: rgb(204, 228, 250);
+    margin: 0 auto;
+    margin-top: 4%;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.checkBox h2{
+    color: rgb(0, 119, 255);
+    text-shadow: 1px 1px white;
+}
+
+.checksDisplay{
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    column-gap: 4px;
+    row-gap: 4px;
+}
+
+.yesNoGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #72c8fa;
+    box-shadow: 1px 2px 3px #94d7fd;
+    border-radius: 8px;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.radioButtons{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.yesNoRadio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textYesNo {
+    color: rgb(54, 54, 54);
+    font-weight: bolder;
+    font-size: 12px;
+    color: rgb(106, 106, 106);
+}
+
+.inputRadio {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
