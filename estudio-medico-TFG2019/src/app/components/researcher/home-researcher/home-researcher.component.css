@@ -330,3 +330,7 @@ input[type=text] {
     border-radius: 50%;
     margin-right: 5px;
 }
+
+.buttonPop{
+    margin: 15px;
+}

@@ -8,6 +8,7 @@ import { IdentificationNumberSubjectServiceService } from 'src/app/services/subj
 import { SortSubjectsServiceService } from 'src/app/services/subject/sort-subjects-service.service';
 import { ExcelServiceService } from 'src/app/services/excel/excel-service.service';
 import { Appointment } from 'src/app/models/Appointment';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-home-researcher',
@@ -20,6 +21,7 @@ export class HomeResearcherComponent implements OnInit {
 
   userLogged: User;
   newSubjectForm: FormGroup;
+  inclusionForm: FormGroup;
 
   successHidden: boolean = false;
   alertHidden: boolean = false;
@@ -27,6 +29,7 @@ export class HomeResearcherComponent implements OnInit {
   alertFilterHidden: boolean;
   successMessage: string = "";
   alertMessage: string = "";
+  showContainer: boolean = false;
 
 
   constructor(private router: Router,
@@ -60,9 +63,25 @@ export class HomeResearcherComponent implements OnInit {
     this.newSubjectForm = this.formBuilder.group({
       identificationNumber: ['', Validators.required]
   });
+
+  this.inclusionForm = this.formBuilder.group({
+    years: ['', Validators.required],
+    card: ['', Validators.required],
+    diabetesRegis: ['', Validators.required],
+    visit: ['', Validators.required],
+    signature: ['', Validators.required],
+
+    immobilized: ['', Validators.required],
+    outsideArea: ['', Validators.required],
+    pathologies: ['', Validators.required],
+    treatment: ['', Validators.required],
+    supplement: ['', Validators.required],
+    pregnant: ['', Validators.required],
+});
   }
 
   get f() { return this.newSubjectForm.controls; }
+  get incluForm() { return this.inclusionForm.controls; }
 
   doLogOut(){
     localStorage.removeItem('userLogged');
@@ -89,7 +108,15 @@ export class HomeResearcherComponent implements OnInit {
     this.router.navigate(['/researcher/' + this.userLogged.id]);
   }
 
-  registerSubject(){
+  showContainerOn(){
+    this.showContainer = true;
+  }
+
+  showContainerOff(){
+    this.showContainer = false;
+  }
+
+  checkRegisterField(){
     if(!this.identificationNumberSubjectService.validateEmptyField(this.f.identificationNumber.value)){
       this.alertMessage = "Número de identificación vacío";
       this.setAlertDeleteModal();
@@ -101,14 +128,23 @@ export class HomeResearcherComponent implements OnInit {
     else if(!this.identificationNumberSubjectService.validateIdentificationNumberLenght(this.f.identificationNumber.value)){
       this.alertMessage = "No es un número de 8 caracteres";
       this.setAlertDeleteModal();
+    }else{
+      this.setInvisibleDeleteModal()
+      this.showContainerOn();
     }
 
-    else{
+  }
+
+  registerSubject(){
+    if(this.incluForm.years.value == "true" && this.incluForm.card.value == "true" && this.incluForm.diabetesRegis.value == "true"
+      && this.incluForm.visit.value == "true" && this.incluForm.signature.value == "true" && this.incluForm.immobilized.value == "false"
+      && this.incluForm.outsideArea.value == "false" && this.incluForm.pathologies.value == "false" && this.incluForm.treatment.value == "false"
+      && this.incluForm.supplement.value == "false" && this.incluForm.pregnant.value == "false"){
+        
       var subjectInfo: Subject = new Subject();
       subjectInfo.identificationNumber = this.f.identificationNumber.value;
       subjectInfo.usernameResearcher = this.userLogged.username;
       let observable = this.researcherService.registerSubject(subjectInfo);
-    
       if(observable === null){
         this.router.navigate(['/login']);
       }
@@ -133,6 +169,11 @@ export class HomeResearcherComponent implements OnInit {
         });
       }
     }
+    else{
+      this.setAlertDeleteModal();
+      this.alertMessage = "Criterios de aceptación no superados";
+    }
+    this.showContainerOff();
   }
 
   setSuccessDeleteModal(){

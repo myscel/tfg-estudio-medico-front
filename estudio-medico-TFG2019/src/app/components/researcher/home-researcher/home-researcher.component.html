@@ -84,7 +84,7 @@
         <form class="form" [formGroup]="newSubjectForm">
           Identificador:
           <input type="text" formControlName="identificationNumber" class="form-control" required>
-          <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="registerSubject()">
+          <button id="buttonNewSubject" type="button" class="btn btn-info" (click)="checkRegisterField()">
             Añadir
           </button>
         </form>
@@ -173,7 +173,9 @@
 
   </div>
 
-  <div class="checksContainer">
+  <!-- -->
+  <span *ngIf="showContainer">
+    <div class="checksContainer">
     <div class="checkBox">
       <form [formGroup]="inclusionForm" (ngSubmit)="onSubmit()">
         <h2>Criterios de inclusión</h2>
@@ -186,7 +188,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="years" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -197,7 +199,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="years" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -214,7 +216,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="card" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -225,7 +227,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="card" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -243,7 +245,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input  class="inputRadio" type="radio" formControlName="diabetesRegis" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -254,7 +256,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="diabetesRegis" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -271,7 +273,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="visit" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -282,7 +284,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="visit" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -299,7 +301,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="signature" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -310,7 +312,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="signature" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -334,7 +336,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="immobilized" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -345,7 +347,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="immobilized" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -364,7 +366,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                    <input class="inputRadio" type="radio" formControlName="outsideArea" value="true"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -375,7 +377,7 @@
               <div>
                 <div class="form-group yesNoRadio">
                   <div>
-                    <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                    <input class="inputRadio" type="radio" formControlName="outsideArea" value="false"
                       required>
                   </div>
                   <div class="textYesNo">
@@ -393,7 +395,7 @@
                 <div>
                   <div class="form-group yesNoRadio">
                     <div>
-                      <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                      <input class="inputRadio" type="radio" formControlName="pathologies" value="true"
                         required>
                     </div>
                     <div class="textYesNo">
@@ -404,7 +406,7 @@
                 <div>
                   <div class="form-group yesNoRadio">
                     <div>
-                      <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                      <input class="inputRadio" type="radio" formControlName="pathologies" value="false"
                         required>
                     </div>
                     <div class="textYesNo">
@@ -423,7 +425,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                  <input class="inputRadio" type="radio" formControlName="treatment" value="true"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -434,7 +436,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                  <input class="inputRadio" type="radio" formControlName="treatment" value="false"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -451,7 +453,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                  <input class="inputRadio" type="radio" formControlName="supplement" value="true"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -462,7 +464,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                  <input class="inputRadio" type="radio" formControlName="supplement" value="false"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -479,7 +481,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="true"
+                  <input class="inputRadio" type="radio" formControlName="pregnant" value="true"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -490,7 +492,7 @@
             <div>
               <div class="form-group yesNoRadio">
                 <div>
-                  <input (click)="validateDM2()" class="inputRadio" type="radio" formControlName="DM2" value="false"
+                  <input class="inputRadio" type="radio" formControlName="pregnant" value="false"
                     required>
                 </div>
                 <div class="textYesNo">
@@ -503,8 +505,12 @@
     </div>
 
     </form>
+    <button type="button" (click)="registerSubject()" class="buttonPop btn btn-success">ACEPTAR</button>
+    <button type="button" (click)="showContainerOff()" class="buttonPop btn btn-danger">CANCELAR</button>
 
   </div>
   </div>
+</span>  
+  <!-- -->
 
 </body>
