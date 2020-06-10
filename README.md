@@ -1,4 +1,3 @@
-
 <p align="center">
   TRABAJO DE FIN DE GRADO 2019/2020. UCM. Facultad de Informática 
 </p>
@@ -23,10 +22,10 @@
   1. Abrir el proyecto en el IDE seleccionado y abrir una terminal de comandos para el mismo (Normalmente haciendo click derecho sobre la carpeta raiz del proyecto y "abrir en terminal").
 
   2. Ejecutar los comandos:  
-    - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.
+    - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.  
     - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardara unos segundos y se quedara corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
      
-    <img src="imgs/angularCompilation.png">
+    ![Angular compilation](imgs/angularCompilation.PNG)
 
     
   3. Como se observa en la figura anterior el proyecto se a quedado escuchando en el puerto 4200. Para poder ver la web solo se debe abrir un navegador (Chrome recomendado) y navegar a la url "http://localhost:4200/".
