@@ -24,7 +24,6 @@
 
   2. Ejecutar los comandos:  
     - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.
-
     - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardara unos segundos y se quedara corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
      
     <img src="imgs/angularCompilation.png">
