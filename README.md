@@ -25,8 +25,9 @@
     - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.  
     - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardara unos segundos y se quedara corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
      
-    ![Angular compilation](imgs/angularCompilation.PNG)
-
+<p align="center">
+  <img src="imgs/angularCompilation.jpg">
+</p>
     
   3. Como se observa en la figura anterior el proyecto se a quedado escuchando en el puerto 4200. Para poder ver la web solo se debe abrir un navegador (Chrome recomendado) y navegar a la url "http://localhost:4200/".
 
