@@ -20,10 +20,10 @@
   
 **-Pasos a seguir para inicializar el proyecto:**
 
-  1.Abrir el proyecto en el IDE seleccionado y abrir una terminal de comandos para el mismo (Normalmente haciendo click derecho sobre la carpeta raiz del proyecto y "abrir en terminal").
+  1. Abrir el proyecto en el IDE seleccionado y abrir una terminal de comandos para el mismo (Normalmente haciendo click derecho sobre la carpeta raiz del proyecto y "abrir en terminal").
 
   2. Ejecutar los comandos:  
-                                                          
+
     - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.
 
     - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardara unos segundos y se quedara corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
