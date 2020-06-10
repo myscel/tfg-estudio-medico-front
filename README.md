@@ -14,20 +14,21 @@
 **-Proyecto Frontend:** Este repositorio contiene el proyecto en Angular el cual comprende los componentes y comportamientos web del proyecto.
 
 **-Requisitos para ejecutar la aplicación:**
-  - Tener instalada la interfaz de linea de comandos de Angular (Angular Cli).
+  - Tener instalada la interfaz de línea de comandos de Angular (Angular Cli).
+  - Tener instalado Node.js, necesario para instalar y utilizar el gestor de paquetes npm.
   - IDE capaz de ejecutar proyectos Angular (En nuestro caso Visual Studio Code).
   
 **-Pasos a seguir para inicializar el proyecto:**
 
-  1. Abrir el proyecto en el IDE seleccionado y abrir una terminal de comandos para el mismo (Normalmente haciendo click derecho sobre la carpeta raiz del proyecto y "abrir en terminal").
+  1. Abrir el proyecto en el IDE seleccionado y abrir una terminal de comandos para el mismo (normalmente haciendo click derecho sobre la carpeta raiz del proyecto y "abrir en terminal").
 
   2. Ejecutar los comandos:  
     - ``` npm install ``` : En el terminal para descargar todos los paquetes y dependencias necesarios.  
-    - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardara unos segundos y se quedara corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
+    - ``` ng serve ``` : En el terminal para lanzar el proyecto de Angular. Esta operación tardará unos segundos y se quedará corriendo una vez terminada. A veces el terminal puede no reconocer los comandos de Angular, en cuyo caso probar  ``` npm run ng serve ``` .
      
 <p align="center">
   <img src="imgs/angularCompilation.jpg">
 </p>
     
-  3. Como se observa en la figura anterior el proyecto se a quedado escuchando en el puerto 4200. Para poder ver la web solo se debe abrir un navegador (Chrome recomendado) y navegar a la url "http://localhost:4200/".
+  3. Como se observa en la figura anterior el proyecto se ha quedado escuchando por defecto en el puerto 4200 (Se puede modificar en caso de tener este puerto ocupado añadiendo al comando ``` ng serve ``` un ``` --port XXXX``` donde XXXX es el nuevo puerto). Para poder ver la web solo se debe abrir un navegador (Chrome recomendado) y navegar a la url "http://localhost:4200/".
 
